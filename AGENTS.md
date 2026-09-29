@@ -26,7 +26,14 @@ No Tailwind, no UI kits, no animation libraries unless explicitly approved.
 - All user-facing text goes through next-intl messages (en/uk/de). No hardcoded copy.
 - Semantic HTML, keyboard support, visible focus, accessible names, alt text.
 - No new dependencies without explaining why and asking first.
-- Never commit. At the end of each task, propose a Conventional Commit message and list changed files.
+
+## Git workflow
+- Never commit to main. For each task, create a branch: feat/, fix/, chore/, docs/, refactor/ + short kebab-case name.
+- Commit in small logical steps using Conventional Commits (e.g. "feat: add overlay scroll-spy navigation"). English, lowercase, no trailing period.
+- Before each commit, show a short summary of the changes.
+- Push the branch and open a pull request with `gh pr create`, using .github/pull_request_template.md when it exists.
+- Never force push, never merge, never rewrite history, never delete branches. Merging is done by the repository owner.
+- Never commit secrets, .env files, or anything from reference/.
 
 ## Validation
 Before finishing, run: npm run lint, npm run typecheck, npm run build. Report results.
