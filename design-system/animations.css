@@ -1,0 +1,89 @@
+/*
+ * Motion: keyframes + utility classes.
+ * Durations and easings come from design-tokens.css (--motion-*).
+ * Distances come from dimension tokens.
+ */
+
+/* ---------- Keyframes ---------- */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(var(--dimension-2)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-slide-down {
+  from { opacity: 0; transform: translateY(calc(var(--dimension-2) * -1)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(var(--dimension-4)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Utility classes ---------- */
+
+/* Overlay backdrop (overlay-me, overlay-works) */
+.animate-overlay {
+  animation: fade-in var(--motion-duration-fast) var(--motion-easing-standard) both;
+}
+
+/* Overlay content (overlay-me, overlay-works) */
+.animate-modal {
+  animation: scale-in var(--motion-duration-base) var(--motion-easing-emphasized) both;
+}
+
+/* Captions, secondary text appearing inside overlays */
+.animate-caption {
+  animation: fade-slide-up var(--motion-duration-base) var(--motion-easing-standard) both;
+}
+
+/* Close buttons */
+.animate-close {
+  animation: fade-slide-down var(--motion-duration-base) var(--motion-easing-standard) both;
+}
+
+/* Book / music shelf items. Stagger: set style={{ '--i': index }} on each item */
+.animate-shelf-item {
+  animation: fade-slide-up var(--motion-duration-slow) var(--motion-easing-standard) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* Work / project cards, hero */
+.animate-card {
+  animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) both;
+}
+
+/* On-scroll section reveal: JS adds .is-visible (IntersectionObserver) */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--dimension-6));
+  transition:
+    opacity var(--motion-duration-slower) var(--motion-easing-standard),
+    transform var(--motion-duration-slower) var(--motion-easing-standard);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
