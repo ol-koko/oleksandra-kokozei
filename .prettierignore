@@ -1,0 +1,10 @@
+.next/
+out/
+build/
+node_modules/
+package-lock.json
+next-env.d.ts
+reference/
+design-system/
+AGENTS.md
+CLAUDE.md

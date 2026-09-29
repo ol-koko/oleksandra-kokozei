@@ -1,0 +1,739 @@
+{
+  "primitive": {
+    "color": {
+      "gray": {
+        "0": {
+          "$type": "color",
+          "$value": "#ffffff"
+        },
+        "50": {
+          "$type": "color",
+          "$value": "#efeff1"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#d9d9d9"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#d0d0d4"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#c1c1c1"
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#b8b8bf"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#a1a1aa"
+        },
+        "550": {
+          "$type": "color",
+          "$value": "#9f9faa"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#71717c"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#393939"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#1e1e1e"
+        },
+        "1000": {
+          "$type": "color",
+          "$value": "#000000"
+        }
+      },
+      "pink": {
+        "100": {
+          "$type": "color",
+          "$value": "#fdcbf1"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#ffc7ff"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#e6a3cc"
+        }
+      },
+      "purple": {
+        "100": {
+          "$type": "color",
+          "$value": "#e6dee9"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#251851"
+        }
+      },
+      "white": {
+        "80": {
+          "$type": "color",
+          "$value": "#ffffffcc"
+        }
+      },
+      "black": {
+        "10": {
+          "$type": "color",
+          "$value": "#0000001a"
+        }
+      }
+    },
+    "dimension": {
+      "dimension-0": {
+        "$type": "dimension",
+        "$value": "0"
+      },
+      "dimension-0-25": {
+        "$type": "dimension",
+        "$value": "1"
+      },
+      "dimension-0-5": {
+        "$type": "dimension",
+        "$value": "2"
+      },
+      "dimension-1": {
+        "$type": "dimension",
+        "$value": "4"
+      },
+      "dimension-1-5": {
+        "$type": "dimension",
+        "$value": "6"
+      },
+      "dimension-2": {
+        "$type": "dimension",
+        "$value": "8"
+      },
+      "dimension-2-5": {
+        "$type": "dimension",
+        "$value": "10"
+      },
+      "dimension-3": {
+        "$type": "dimension",
+        "$value": "12"
+      },
+      "dimension-3-5": {
+        "$type": "dimension",
+        "$value": "14"
+      },
+      "dimension-4": {
+        "$type": "dimension",
+        "$value": "16"
+      },
+      "dimension-4-5": {
+        "$type": "dimension",
+        "$value": "18"
+      },
+      "dimension-5": {
+        "$type": "dimension",
+        "$value": "20"
+      },
+      "dimension-5-5": {
+        "$type": "dimension",
+        "$value": "22"
+      },
+      "dimension-6": {
+        "$type": "dimension",
+        "$value": "24"
+      },
+      "dimension-7": {
+        "$type": "dimension",
+        "$value": "28"
+      },
+      "dimension-8": {
+        "$type": "dimension",
+        "$value": "32"
+      },
+      "dimension-9": {
+        "$type": "dimension",
+        "$value": "36"
+      },
+      "dimension-10": {
+        "$type": "dimension",
+        "$value": "40"
+      },
+      "dimension-11": {
+        "$type": "dimension",
+        "$value": "44"
+      },
+      "dimension-12": {
+        "$type": "dimension",
+        "$value": "48"
+      },
+      "dimension-13": {
+        "$type": "dimension",
+        "$value": "52"
+      },
+      "dimension-14": {
+        "$type": "dimension",
+        "$value": "56"
+      },
+      "dimension-15": {
+        "$type": "dimension",
+        "$value": "60"
+      },
+      "dimension-16": {
+        "$type": "dimension",
+        "$value": "64"
+      },
+      "dimension-18": {
+        "$type": "dimension",
+        "$value": "72"
+      },
+      "dimension-20": {
+        "$type": "dimension",
+        "$value": "80"
+      },
+      "dimension-22": {
+        "$type": "dimension",
+        "$value": "88"
+      },
+      "dimension-24": {
+        "$type": "dimension",
+        "$value": "96"
+      },
+      "dimension-30": {
+        "$type": "dimension",
+        "$value": "120"
+      },
+      "dimension-999": {
+        "$type": "dimension",
+        "$value": "999"
+      }
+    },
+    "fontFamily": {
+      "figtree": {
+        "$type": "fontFamily",
+        "$value": "Figtree"
+      }
+    },
+    "fontWeight": {
+      "light": {
+        "$type": "fontWeight",
+        "$value": "300"
+      },
+      "regular": {
+        "$type": "fontWeight",
+        "$value": "400"
+      }
+    },
+    "lineHeight": {
+      "auto": {
+        "$type": "lineHeight",
+        "$value": "normal"
+      },
+      "tight": {
+        "$type": "lineHeight",
+        "$value": "1.2"
+      },
+      "relaxed": {
+        "$type": "lineHeight",
+        "$value": "1.5"
+      }
+    },
+    "fontSize": {
+      "font-size-14": {
+        "$type": "fontSize",
+        "$value": "14"
+      },
+      "font-size-16": {
+        "$type": "fontSize",
+        "$value": "16"
+      },
+      "font-size-18": {
+        "$type": "fontSize",
+        "$value": "18"
+      },
+      "font-size-24": {
+        "$type": "fontSize",
+        "$value": "24"
+      }
+    },
+    "duration": {
+      "duration-200": {
+        "$type": "duration",
+        "$value": "200ms"
+      },
+      "duration-250": {
+        "$type": "duration",
+        "$value": "250ms"
+      },
+      "duration-300": {
+        "$type": "duration",
+        "$value": "300ms"
+      },
+      "duration-400": {
+        "$type": "duration",
+        "$value": "400ms"
+      },
+      "duration-500": {
+        "$type": "duration",
+        "$value": "500ms"
+      }
+    },
+    "easing": {
+      "ease-out": {
+        "$type": "cubicBezier",
+        "$value": [
+          0,
+          0,
+          0.58,
+          1
+        ]
+      },
+      "ease-out-expo": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.16,
+          1,
+          0.3,
+          1
+        ]
+      },
+      "ease-out-quad": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.25,
+          0.46,
+          0.45,
+          0.94
+        ]
+      }
+    }
+  },
+  "semantic": {
+    "color": {
+      "background": {
+        "page": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.0}"
+        }
+      },
+      "surface": {
+        "raised": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.0}"
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.50}"
+        },
+        "header": {
+          "$type": "color",
+          "$value": "{primitive.color.white.80}"
+        }
+      },
+      "media": {
+        "placeholder": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.100}"
+        },
+        "gradient-start": {
+          "$type": "color",
+          "$value": "{primitive.color.pink.100}"
+        },
+        "gradient-end": {
+          "$type": "color",
+          "$value": "{primitive.color.purple.100}"
+        }
+      },
+      "icon": {
+        "decorative": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.100}"
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.1000}"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.500}"
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.400}"
+        }
+      },
+      "text": {
+        "strong": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.1000}"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.800}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.600}"
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.500}"
+        },
+        "inactive": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.550}"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.200}"
+        }
+      },
+      "border": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.50}"
+        }
+      },
+      "illustration": {
+        "ink": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.900}"
+        },
+        "shadow": {
+          "$type": "color",
+          "$value": "{primitive.color.gray.300}"
+        }
+      },
+      "accent": {
+        "book": {
+          "$type": "color",
+          "$value": "{primitive.color.pink.500}"
+        }
+      },
+      "brand": {
+        "film-budget": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.color.pink.200}"
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{primitive.color.purple.900}"
+          }
+        }
+      },
+      "overlay": {
+        "backdrop": {
+          "$type": "color",
+          "$value": "{primitive.color.black.10}"
+        }
+      }
+    },
+    "borderRadius": {
+      "border-radius-none": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-0}"
+      },
+      "border-radius-xs": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-1}"
+      },
+      "border-radius-sm": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-1-5}"
+      },
+      "border-radius-md": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-2}"
+      },
+      "border-radius-lg": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-3}"
+      },
+      "border-radius-xl": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-4}"
+      },
+      "border-radius-2xl": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-5}"
+      },
+      "border-radius-3xl": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-6}"
+      },
+      "border-radius-4xl": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-8}"
+      },
+      "border-radius-5xl": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-10}"
+      },
+      "border-radius-full": {
+        "$type": "borderRadius",
+        "$value": "{primitive.dimension.dimension-999}"
+      }
+    },
+    "spacing": {
+      "spacing-none": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-0}"
+      },
+      "spacing-xxs": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-0-5}"
+      },
+      "spacing-xs": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-1}"
+      },
+      "spacing-sm": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-1-5}"
+      },
+      "spacing-md": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-2}"
+      },
+      "spacing-lg": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-3}"
+      },
+      "spacing-xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-4}"
+      },
+      "spacing-2xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-5}"
+      },
+      "spacing-3xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-6}"
+      },
+      "spacing-4xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-8}"
+      },
+      "spacing-5xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-10}"
+      },
+      "spacing-6xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-12}"
+      },
+      "spacing-7xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-14}"
+      },
+      "spacing-8xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-15}"
+      },
+      "spacing-9xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-20}"
+      },
+      "spacing-10xl": {
+        "$type": "spacing",
+        "$value": "{primitive.dimension.dimension-30}"
+      }
+    },
+    "borderWidth": {
+      "border-none": {
+        "$type": "borderWidth",
+        "$value": "{primitive.dimension.dimension-0}"
+      },
+      "border-thin": {
+        "$type": "borderWidth",
+        "$value": "{primitive.dimension.dimension-0-25}"
+      },
+      "border-default": {
+        "$type": "borderWidth",
+        "$value": "{primitive.dimension.dimension-0-5}"
+      },
+      "border-thick": {
+        "$type": "borderWidth",
+        "$value": "{primitive.dimension.dimension-1}"
+      }
+    },
+    "size": {
+      "size-xs": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-3}"
+      },
+      "size-sm": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-4}"
+      },
+      "size-md": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-5}"
+      },
+      "size-lg": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-6}"
+      },
+      "size-xl": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-8}"
+      },
+      "size-2xl": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-10}"
+      },
+      "size-3xl": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-12}"
+      },
+      "size-4xl": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-14}"
+      },
+      "size-5xl": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-16}"
+      },
+      "size-6xl": {
+        "$type": "sizing",
+        "$value": "{primitive.dimension.dimension-30}"
+      }
+    },
+    "typography": {
+      "body": {
+        "body-2xs": {
+          "$type": "typography",
+          "$description": "Use for the quietest footer metadata and low-emphasis legal or copyright text.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.light}",
+            "fontSize": "{primitive.fontSize.font-size-14}",
+            "lineHeight": "{primitive.lineHeight.auto}",
+            "letterSpacing": "0"
+          }
+        },
+        "body-xs": {
+          "$type": "typography",
+          "$description": "Use for compact metadata, dates, copyright text, and small supporting captions.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.regular}",
+            "fontSize": "{primitive.fontSize.font-size-14}",
+            "lineHeight": "{primitive.lineHeight.auto}",
+            "letterSpacing": "0"
+          }
+        },
+        "body-s": {
+          "$type": "typography",
+          "$description": "Use for secondary information such as locations, dates, authors, roles, and supporting labels.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.light}",
+            "fontSize": "{primitive.fontSize.font-size-16}",
+            "lineHeight": "{primitive.lineHeight.auto}",
+            "letterSpacing": "0"
+          }
+        },
+        "body-m": {
+          "$type": "typography",
+          "$description": "Use for navigation, short labels, links, controls, and concise interface copy.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.regular}",
+            "fontSize": "{primitive.fontSize.font-size-16}",
+            "lineHeight": "{primitive.lineHeight.tight}",
+            "letterSpacing": "0"
+          }
+        },
+        "body-l": {
+          "$type": "typography",
+          "$description": "Use for paragraphs and longer-form body copy where extra line spacing improves readability.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.regular}",
+            "fontSize": "{primitive.fontSize.font-size-16}",
+            "lineHeight": "{primitive.lineHeight.relaxed}",
+            "letterSpacing": "0"
+          }
+        }
+      },
+      "title": {
+        "title-s": {
+          "$type": "typography",
+          "$description": "Use for card titles, item names, overlay navigation anchors, and compact subsection headings.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.regular}",
+            "fontSize": "{primitive.fontSize.font-size-18}",
+            "lineHeight": "{primitive.lineHeight.auto}",
+            "letterSpacing": "0"
+          }
+        },
+        "title-m": {
+          "$type": "typography",
+          "$description": "Use for structured detail labels and small headings that need a more open vertical rhythm.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.regular}",
+            "fontSize": "{primitive.fontSize.font-size-18}",
+            "lineHeight": "{primitive.lineHeight.relaxed}",
+            "letterSpacing": "0"
+          }
+        },
+        "title-l": {
+          "$type": "typography",
+          "$description": "Use for primary section headings and prominent overlay or content titles.",
+          "$value": {
+            "fontFamily": "{primitive.fontFamily.figtree}",
+            "fontWeight": "{primitive.fontWeight.regular}",
+            "fontSize": "{primitive.fontSize.font-size-24}",
+            "lineHeight": "{primitive.lineHeight.auto}",
+            "letterSpacing": "0"
+          }
+        }
+      }
+    },
+    "motion": {
+      "duration": {
+        "fast": {
+          "$type": "duration",
+          "$value": "{primitive.duration.duration-200}"
+        },
+        "moderate": {
+          "$type": "duration",
+          "$value": "{primitive.duration.duration-250}"
+        },
+        "base": {
+          "$type": "duration",
+          "$value": "{primitive.duration.duration-300}"
+        },
+        "slow": {
+          "$type": "duration",
+          "$value": "{primitive.duration.duration-400}"
+        },
+        "slower": {
+          "$type": "duration",
+          "$value": "{primitive.duration.duration-500}"
+        }
+      },
+      "easing": {
+        "standard": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.easing.ease-out}"
+        },
+        "emphasized": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.easing.ease-out-expo}"
+        },
+        "gentle": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.easing.ease-out-quad}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,236 @@
+/* Design tokens: exported from Figma (Design Website). Colors, dimensions, typography. */
+:root {
+  /* Primitive: color */
+  --gray-0: #ffffff;
+  --gray-50: #efeff1;
+  --gray-100: #d9d9d9;
+  --gray-200: #d0d0d4;
+  --gray-300: #c1c1c1;
+  --gray-400: #b8b8bf;
+  --gray-500: #a1a1aa;
+  --gray-550: #9f9faa;
+  --gray-600: #71717c;
+  --gray-800: #393939;
+  --gray-900: #1e1e1e;
+  --gray-1000: #000000;
+  --pink-200: #ffc7ff;
+  --pink-500: #e6a3cc;
+  --purple-900: #251851;
+  --pink-100: #fdcbf1;
+  --purple-100: #e6dee9;
+  --white-80: rgb(255 255 255 / 0.8);
+  --black-10: rgb(0 0 0 / 0.1);
+
+  /* Primitive: dimension */
+  --dimension-0: 0px;
+  --dimension-0-25: 1px;
+  --dimension-0-5: 2px;
+  --dimension-1: 4px;
+  --dimension-1-5: 6px;
+  --dimension-2: 8px;
+  --dimension-2-5: 10px;
+  --dimension-3: 12px;
+  --dimension-3-5: 14px;
+  --dimension-4: 16px;
+  --dimension-4-5: 18px;
+  --dimension-5: 20px;
+  --dimension-5-5: 22px;
+  --dimension-6: 24px;
+  --dimension-7: 28px;
+  --dimension-8: 32px;
+  --dimension-9: 36px;
+  --dimension-10: 40px;
+  --dimension-11: 44px;
+  --dimension-12: 48px;
+  --dimension-13: 52px;
+  --dimension-14: 56px;
+  --dimension-15: 60px;
+  --dimension-16: 64px;
+  --dimension-18: 72px;
+  --dimension-20: 80px;
+  --dimension-22: 88px;
+  --dimension-24: 96px;
+  --dimension-30: 120px;
+  --dimension-999: 999px;
+
+  /* Primitive: typography */
+  --font-family-figtree: 'Figtree', system-ui, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-24: 24px;
+  --line-height-auto: normal;
+  --line-height-tight: 1.2;
+  --line-height-relaxed: 1.5;
+
+  /* Semantic: color */
+  --color-background-page: var(--gray-0);
+  --color-surface-raised: var(--gray-0);
+  --color-surface-subtle: var(--gray-50);
+  --color-media-placeholder: var(--gray-100);
+  --color-icon-decorative: var(--gray-100);
+  --color-text-strong: var(--gray-1000);
+  --color-text-primary: var(--gray-800);
+  --color-text-secondary: var(--gray-600);
+  --color-text-muted: var(--gray-500);
+  --color-text-inactive: var(--gray-550);
+  --color-text-disabled: var(--gray-200);
+  --color-border-subtle: var(--gray-50);
+  --color-icon-strong: var(--gray-1000);
+  --color-icon-muted: var(--gray-500);
+  --color-icon-subtle: var(--gray-400);
+  --color-illustration-ink: var(--gray-900);
+  --color-illustration-shadow: var(--gray-300);
+  --color-accent-book: var(--pink-500);
+  --color-brand-film-budget-background: var(--pink-200);
+  --color-brand-film-budget-foreground: var(--purple-900);
+  --color-surface-header: var(--white-80);
+  --color-media-gradient-start: var(--pink-100);
+  --color-media-gradient-end: var(--purple-100);
+  --color-overlay-backdrop: var(--black-10);
+
+  /* Semantic: spacing */
+  --spacing-none: var(--dimension-0);
+  --spacing-xxs: var(--dimension-0-5);
+  --spacing-xs: var(--dimension-1);
+  --spacing-sm: var(--dimension-1-5);
+  --spacing-md: var(--dimension-2);
+  --spacing-lg: var(--dimension-3);
+  --spacing-xl: var(--dimension-4);
+  --spacing-2xl: var(--dimension-5);
+  --spacing-3xl: var(--dimension-6);
+  --spacing-4xl: var(--dimension-8);
+  --spacing-5xl: var(--dimension-10);
+  --spacing-6xl: var(--dimension-12);
+  --spacing-7xl: var(--dimension-14);
+  --spacing-8xl: var(--dimension-15);
+  --spacing-9xl: var(--dimension-20);
+  --spacing-10xl: var(--dimension-30);
+
+  /* Semantic: border radius */
+  --border-radius-none: var(--dimension-0);
+  --border-radius-xs: var(--dimension-1);
+  --border-radius-sm: var(--dimension-1-5);
+  --border-radius-md: var(--dimension-2);
+  --border-radius-lg: var(--dimension-3);
+  --border-radius-xl: var(--dimension-4);
+  --border-radius-2xl: var(--dimension-5);
+  --border-radius-3xl: var(--dimension-6);
+  --border-radius-4xl: var(--dimension-8);
+  --border-radius-5xl: var(--dimension-10);
+  --border-radius-full: var(--dimension-999);
+
+  /* Semantic: border width */
+  --border-none: var(--dimension-0);
+  --border-thin: var(--dimension-0-25);
+  --border-default: var(--dimension-0-5);
+  --border-thick: var(--dimension-1);
+
+  /* Semantic: size */
+  --size-xs: var(--dimension-3);
+  --size-sm: var(--dimension-4);
+  --size-md: var(--dimension-5);
+  --size-lg: var(--dimension-6);
+  --size-xl: var(--dimension-8);
+  --size-2xl: var(--dimension-10);
+  --size-3xl: var(--dimension-12);
+  --size-4xl: var(--dimension-14);
+  --size-5xl: var(--dimension-16);
+  --size-6xl: var(--dimension-30);
+
+  /* Primitive: motion */
+  --duration-200: 200ms;
+  --duration-250: 250ms;
+  --duration-300: 300ms;
+  --duration-400: 400ms;
+  --duration-500: 500ms;
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Semantic: motion */
+  --motion-duration-fast: var(--duration-200);
+  --motion-duration-moderate: var(--duration-250);
+  --motion-duration-base: var(--duration-300);
+  --motion-duration-slow: var(--duration-400);
+  --motion-duration-slower: var(--duration-500);
+  --motion-easing-standard: var(--ease-out);
+  --motion-easing-emphasized: var(--ease-out-expo);
+  --motion-easing-gentle: var(--ease-out-quad);
+}
+
+
+/* Semantic: typography */
+/* Use for the quietest footer metadata and low-emphasis legal or copyright text. */
+.text-body-2xs {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-auto);
+  letter-spacing: 0;
+}
+
+/* Use for compact metadata, dates, copyright text, and small supporting captions. */
+.text-body-xs {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-auto);
+  letter-spacing: 0;
+}
+
+/* Use for secondary information such as locations, dates, authors, roles, and supporting labels. */
+.text-body-s {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-auto);
+  letter-spacing: 0;
+}
+
+/* Use for navigation, short labels, links, controls, and concise interface copy. */
+.text-body-m {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0;
+}
+
+/* Use for paragraphs and longer-form body copy where extra line spacing improves readability. */
+.text-body-l {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: 0;
+}
+
+/* Use for card titles, item names, overlay navigation anchors, and compact subsection headings. */
+.text-title-s {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-auto);
+  letter-spacing: 0;
+}
+
+/* Use for structured detail labels and small headings that need a more open vertical rhythm. */
+.text-title-m {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: 0;
+}
+
+/* Use for primary section headings and prominent overlay or content titles. */
+.text-title-l {
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-24);
+  line-height: var(--line-height-auto);
+  letter-spacing: 0;
+}

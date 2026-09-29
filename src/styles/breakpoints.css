@@ -1,0 +1,25 @@
+/*
+ * Breakpoints: shared convention for responsive layouts.
+ *
+ * Mobile-first: base styles target the smallest viewport, then enhance with
+ * `min-width` queries. CSS custom properties cannot be used inside @media, so
+ * media queries repeat the literal values below. Keep them in sync with
+ * docs/design-system.md.
+ *
+ *   sm   480px   large phones
+ *   md   768px   tablets
+ *   lg   1024px  small laptops (desktop layout starts here)
+ *   xl   1440px  Figma desktop frame width
+ *
+ * Usage in a CSS Module:
+ *   @media (min-width: 768px) { ... }   // md and up
+ *
+ * The custom properties are exposed for JS reads (e.g. matchMedia helpers)
+ * and as the single documented source of the values.
+ */
+:root {
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+}

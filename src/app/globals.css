@@ -1,0 +1,76 @@
+@import '../../design-system/design-tokens.css';
+@import '../../design-system/animations.css';
+@import '../styles/breakpoints.css';
+
+/*
+ * Map the next/font family onto the token. The token's own fallback stack is
+ * kept for environments where the font variable is not set.
+ */
+:root {
+  --font-family-figtree: var(--font-figtree, 'Figtree'), system-ui, sans-serif;
+}
+
+/* Minimal reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-block-size: 100dvh;
+  background-color: var(--color-background-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--border-default) solid var(--color-text-strong);
+  outline-offset: var(--spacing-xxs);
+}
+
+/* Hides content visually while keeping it available to screen readers. */
+.visually-hidden {
+  position: absolute;
+  inline-size: var(--dimension-0-25);
+  block-size: var(--dimension-0-25);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

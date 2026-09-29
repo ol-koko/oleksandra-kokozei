@@ -1,0 +1,25 @@
+{
+  "Metadata": {
+    "title": "TODO",
+    "description": "TODO"
+  },
+  "HomePlaceholder": {
+    "name": "TODO",
+    "role": "TODO",
+    "status": "TODO",
+    "socialNavLabel": "TODO"
+  },
+  "Links": {
+    "social": {
+      "linkedin": "TODO",
+      "behance": "TODO",
+      "notion": "TODO",
+      "github": "TODO"
+    },
+    "projects": {
+      "filmBudget": "TODO",
+      "blowStressAway": "TODO"
+    },
+    "opensInNewTab": "TODO"
+  }
+}
