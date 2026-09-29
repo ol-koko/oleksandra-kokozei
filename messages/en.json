@@ -2,5 +2,24 @@
   "Metadata": {
     "title": "Oleksandra Kokozei | UI/UX Designer & AI Engineer",
     "description": "Portfolio of Oleksandra Kokozei, a UI/UX designer and AI engineer based in Stuttgart, Germany."
+  },
+  "HomePlaceholder": {
+    "name": "Oleksandra Kokozei",
+    "role": "UI/UX Designer & AI Engineer",
+    "status": "The portfolio is being built. Check back soon.",
+    "socialNavLabel": "Social profiles"
+  },
+  "Links": {
+    "social": {
+      "linkedin": "LinkedIn",
+      "behance": "Behance",
+      "notion": "Notion",
+      "github": "GitHub"
+    },
+    "projects": {
+      "filmBudget": "Film Budget",
+      "blowStressAway": "Blow Stress Away"
+    },
+    "opensInNewTab": "(opens in a new tab)"
   }
 }

@@ -1,0 +1,30 @@
+/* Temporary placeholder layout. Fluid: no fixed widths, spacing from tokens only. */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding-block: var(--spacing-9xl);
+  padding-inline: var(--spacing-3xl);
+}
+
+@media (min-width: 1024px) {
+  .main {
+    padding-inline: var(--spacing-10xl);
+  }
+}
+
+.role {
+  color: var(--color-text-secondary);
+}
+
+.status {
+  color: var(--color-text-muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3xl);
+  padding: var(--spacing-none);
+  list-style: none;
+}
