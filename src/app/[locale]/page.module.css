@@ -1,12 +1,27 @@
-/* Content column: 996 at 1440 (side margin 222), fluid below with the page gutter. */
+/*
+ * Content column: 996 at 1440 (side margin 222), fluid below with the page gutter.
+ * Section rhythm: the space above and below each divider and before the footer
+ * (Figma: 48 on mobile, 80 on desktop). The hero starts right under the header
+ * on mobile and 48 below it on desktop.
+ */
 .main {
+  --section-rhythm: var(--spacing-6xl);
+
   inline-size: 100%;
   max-inline-size: calc(var(--size-content-max) + var(--page-gutter) * 2);
   margin-inline: auto;
+  padding-block-end: var(--section-rhythm);
   padding-inline: var(--page-gutter);
 }
 
-/* TODO: remove once the sections have content. Gives scroll-spy something to observe. */
-.section {
-  min-block-size: 100dvh;
+.divider {
+  margin-block: var(--section-rhythm);
+}
+
+@media (min-width: 1024px) {
+  .main {
+    --section-rhythm: var(--spacing-9xl);
+
+    padding-block-start: var(--spacing-6xl);
+  }
 }

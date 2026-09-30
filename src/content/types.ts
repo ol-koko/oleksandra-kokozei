@@ -11,3 +11,40 @@ export type ExternalLink<Id extends string> = {
   id: Id;
   href: `https://${string}`;
 };
+
+/** A local image in `public/`, with its intrinsic size in pixels. */
+export type ImageAsset = {
+  src: `/media/${string}`;
+  width: number;
+  height: number;
+};
+
+/** Works on the main page. Title and description live in messages (`Works.items.*`). */
+export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget';
+
+export type WorkCover = {
+  image: ImageAsset;
+  /** `photo` fills the cover; `mockup` is a device frame centered at 90 % of the cover height. */
+  fit: 'photo' | 'mockup';
+  /** Surface behind the image: grey placeholder or the pink media gradient. */
+  background?: 'placeholder' | 'gradient';
+  /** Logo on top of the image, at its intrinsic size. */
+  logo?: ImageAsset & { placement: 'center' | 'top-end' };
+};
+
+export type Work = {
+  slug: WorkSlug;
+  year: number;
+  cover: WorkCover;
+};
+
+/** Paragraph keys of a multi-paragraph message group, in reading order. */
+export type ParagraphKey = 'p1' | 'p2' | 'p3';
+
+/** Roles in the Experience section. Copy lives in messages (`Experience.roles.*`). */
+export type RoleId = 'independent';
+
+export type Role = {
+  id: RoleId;
+  paragraphs: readonly ParagraphKey[];
+};

@@ -1,0 +1,42 @@
+/*
+ * Geometry is local to the component (plan §3, #11): a 384 × 483 stage with
+ * the polaroid centered and the signature's center 93.5 / 134.2 px from the
+ * stage center, rotated −4.1°.
+ *
+ * Below the 358 px mobile column the whole stage scales down (D7, safety net
+ * down to 320). `tan(atan2(a, b))` turns the length ratio a / b into a number
+ * that `scale` accepts. Browsers without CSS trigonometry keep scale 1.
+ */
+.root {
+  container-type: inline-size;
+  inline-size: 100%;
+}
+
+.slot {
+  --polaroid-sign-scale: min(1, tan(atan2(100cqi, 358px)));
+
+  position: relative;
+  block-size: calc(483px * var(--polaroid-sign-scale));
+}
+
+.stage {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  display: grid;
+  place-items: center;
+  inline-size: 384px;
+  block-size: 483px;
+  translate: -50% 0;
+  scale: var(--polaroid-sign-scale);
+  transform-origin: top center;
+}
+
+.signature {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  color: var(--color-illustration-ink);
+  translate: calc(-50% + 93.5px) calc(-50% + 134.2px);
+  rotate: -4.1deg;
+}

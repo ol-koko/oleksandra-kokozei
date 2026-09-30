@@ -1,0 +1,78 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Desktop 486 × 253 and mobile 358 × 186 share one ratio (plan §3, #14). */
+.cover {
+  position: relative;
+  aspect-ratio: 486 / 253;
+  overflow: hidden;
+  border-radius: var(--border-radius-3xl);
+}
+
+.placeholder {
+  background-color: var(--color-media-placeholder);
+}
+
+.gradient {
+  background: var(--gradient-media-cover);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+/* Phone mockup: 228 of 253 px tall in Figma (90 %), centered. */
+.mockup {
+  position: absolute;
+  inset: 0;
+  inline-size: auto;
+  block-size: 90%;
+  margin: auto;
+}
+
+.logo {
+  position: absolute;
+}
+
+.center {
+  inset: 0;
+  margin: auto;
+}
+
+/* FilmBudget logo: anchored top right, so it stays inside the card on mobile. */
+.top-end {
+  inset-block-start: var(--spacing-lg);
+  inset-inline-end: var(--spacing-lg);
+}
+
+.pill {
+  position: absolute;
+  inset-block-end: var(--spacing-lg);
+  inset-inline-start: var(--spacing-lg);
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-lg);
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-surface-raised);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.description {
+  padding-inline: var(--spacing-md);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 1024px) {
+  .top-end {
+    inset-block-start: var(--spacing-xl);
+    inset-inline-end: var(--spacing-xl);
+  }
+
+  /* Figma text boxes run past the card's right edge; no end padding keeps every description on one line at 1440. */
+  .description {
+    padding-inline: var(--spacing-lg) var(--spacing-none);
+  }
+}

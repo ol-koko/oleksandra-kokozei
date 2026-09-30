@@ -1,0 +1,47 @@
+/* Mobile (245:670): polaroid, then text, gap 24. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-4xl);
+}
+
+.text > :first-child {
+  align-self: stretch;
+}
+
+.more {
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius-full);
+  background: none;
+  color: var(--color-text-muted);
+}
+
+/*
+ * Desktop row (84:328), bottom-aligned: 384 polaroid slot + 24 + text column.
+ * The text column (486 in Figma) is half the content column minus the gap,
+ * the same width as a works card.
+ */
+@media (min-width: 1024px) {
+  .hero {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .portrait {
+    flex: none;
+    inline-size: 384px;
+  }
+
+  .text {
+    flex: 0 1 calc((var(--size-content-max) - var(--spacing-3xl)) / 2);
+  }
+}
