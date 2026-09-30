@@ -1,0 +1,11 @@
+.location {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  color: var(--color-text-muted);
+}
+
+.icon {
+  flex: none;
+  color: var(--color-icon-muted);
+}

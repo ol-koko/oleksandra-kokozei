@@ -1,0 +1,4 @@
+.divider {
+  border: none;
+  border-block-start: var(--border-thin) solid var(--color-border-subtle);
+}

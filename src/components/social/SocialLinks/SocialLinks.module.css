@@ -1,13 +1,34 @@
-/* Figma 76:669: 24 px icons, gap 16, decorative gray. */
 .list {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xl);
   padding: var(--spacing-none);
   list-style: none;
 }
 
 .link {
   display: block;
+}
+
+/* Footer (76:669): 24 px icons, gap 16, decorative gray. */
+.inline {
+  gap: var(--spacing-xl);
+}
+
+.inline .link {
   color: var(--color-icon-decorative);
+}
+
+/* Experience (21:306): 64 px tiles, 24 px icon centered, gap 24. */
+.tile {
+  gap: var(--spacing-3xl);
+}
+
+.tile .link {
+  display: grid;
+  place-items: center;
+  inline-size: var(--size-5xl);
+  block-size: var(--size-5xl);
+  border-radius: var(--border-radius-2xl);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-icon-strong);
 }

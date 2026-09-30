@@ -1,0 +1,27 @@
+/*
+ * Frame geometry is local to the component (plan §3, #10): 260 × 382 with a
+ * 20 / 16 / 60 inset, which leaves a 228 × 302 photo.
+ */
+.polaroid {
+  display: flex;
+  inline-size: 260px;
+  block-size: 382px;
+  padding-block: var(--spacing-2xl) var(--spacing-8xl);
+  padding-inline: var(--spacing-xl);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-polaroid);
+  rotate: var(--polaroid-rotation, 0deg);
+}
+
+.photo {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+  border-radius: var(--border-radius-xs);
+  background-color: var(--color-surface-subtle);
+}
+
+.image {
+  object-fit: cover;
+}
