@@ -38,19 +38,19 @@ Figtree is self-hosted through `next/font/google` (`src/styles/fonts.ts`) with w
 
 The Figma tokens do not define breakpoints, so this project sets the convention below. The values live in [`src/styles/breakpoints.css`](../src/styles/breakpoints.css) as `--breakpoint-*` custom properties.
 
-| Name | Min width | Target                                        |
-| ---- | --------- | --------------------------------------------- |
-| `sm` | `480px`   | Large phones                                  |
-| `md` | `768px`   | Tablets                                       |
-| `lg` | `1024px`  | Small laptops; the desktop layout starts here |
-| `xl` | `1440px`  | The Figma desktop frame width                 |
+| Name   | Min width | Target                                           |
+| ------ | --------- | ------------------------------------------------ |
+| (base) | `0`       | Phones: designed at 390 px, fluid down to 320 px |
+| `md`   | `768px`   | Tablets                                          |
+| `lg`   | `1024px`  | Small laptops; the desktop layout starts here    |
+| `xl`   | `1440px`  | The Figma desktop frame width                    |
 
 Conventions:
 
 - **Mobile-first.** Base styles target the smallest viewport; enhance with `@media (min-width: …)`.
 - CSS custom properties are not allowed inside media queries, so queries repeat the literal value, for example `@media (min-width: 1024px)`. Use only the values in the table.
 - **Fluid layouts.** No fixed page widths. Use `max-inline-size` with token-based padding, flex and grid with token gaps, and intrinsic sizing.
-- The desktop implementation must match Figma at `xl`; the mobile design will be added in a later stage.
+- The desktop implementation must match Figma at `xl`, and the mobile implementation at 390 px. Tablet widths are not designed yet.
 
 ## Utilities
 
