@@ -1,0 +1,31 @@
+/*
+ * Mobile (245:686): heading → list 40, one column. Figma mixes 24 and 32
+ * between cards; one gap is used, 32, the larger one, because each card
+ * ends in a two-line description.
+ */
+.works {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5xl);
+}
+
+.grid {
+  display: grid;
+  gap: var(--spacing-4xl);
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+/* Two columns from tablet up; desktop (21:247): heading → grid 48, gaps 24. */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-3xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .works {
+    gap: var(--spacing-6xl);
+  }
+}

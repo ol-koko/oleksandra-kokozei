@@ -1,0 +1,39 @@
+/* Figma 21:311: heading → role 16, role → period 8, header → text 24, text → tiles 32. */
+.experience {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4xl);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+}
+
+.roleHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.roleTitle {
+  color: var(--color-text-strong);
+}
+
+.period {
+  color: var(--color-text-inactive);
+}
+
+.paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+  max-inline-size: var(--size-measure);
+}
