@@ -31,9 +31,14 @@ export default async function LocaleLayout({ children }: LocaleLayoutProps) {
     notFound();
   }
 
+  const t = await getTranslations('Header');
+
   return (
     <html lang={locale} className={figtree.variable}>
       <body>
+        <a className="skip-link text-body-m" href="#content">
+          {t('skipToContent')}
+        </a>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

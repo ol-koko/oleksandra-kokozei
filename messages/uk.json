@@ -3,23 +3,54 @@
     "title": "TODO",
     "description": "TODO"
   },
-  "HomePlaceholder": {
-    "name": "TODO",
-    "role": "TODO",
-    "status": "TODO",
-    "socialNavLabel": "TODO"
+  "Nav": {
+    "me": "Me",
+    "works": "Works",
+    "experience": "Experience"
+  },
+  "Sections": {
+    "me": "Про мене",
+    "works": "Роботи",
+    "experience": "Досвід"
+  },
+  "Header": {
+    "skipToContent": "Перейти до вмісту",
+    "mainNav": "Основна навігація",
+    "openMenu": "Відкрити меню",
+    "closeMenu": "Закрити меню",
+    "menu": "Меню",
+    "languageNav": "Мова"
+  },
+  "Languages": {
+    "uk": {
+      "label": "ua",
+      "name": "Українська"
+    },
+    "en": {
+      "label": "en",
+      "name": "English"
+    },
+    "de": {
+      "label": "de",
+      "name": "Deutsch"
+    }
+  },
+  "Footer": {
+    "localTime": "<time></time>, Stuttgart, Germany",
+    "nav": "Навігація у футері",
+    "socialNav": "Профілі в соцмережах",
+    "copyright": "© {year} Oleksandra Kokozei"
   },
   "Links": {
     "social": {
-      "linkedin": "TODO",
-      "behance": "TODO",
-      "notion": "TODO",
-      "github": "TODO"
+      "linkedin": "LinkedIn",
+      "behance": "Behance",
+      "github": "GitHub"
     },
     "projects": {
       "filmBudget": "TODO",
       "blowStressAway": "TODO"
     },
-    "opensInNewTab": "TODO"
+    "opensInNewTab": "(відкривається в новій вкладці)"
   }
 }
