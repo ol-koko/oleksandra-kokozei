@@ -22,6 +22,19 @@
   gap: var(--spacing-3xl);
 }
 
+.responsive {
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .responsive {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-4xl);
+  }
+}
+
 .link {
   display: block;
   color: var(--color-text-inactive);

@@ -8,7 +8,8 @@ import styles from './SectionNav.module.css';
 type SectionNavProps = {
   label: string;
   activeId?: SectionId;
-  orientation: 'row' | 'column';
+  /** `responsive`: a column below 1024 px, a row from 1024 px (footer). */
+  orientation: 'row' | 'column' | 'responsive';
   size: 'm' | 'l';
   onNavigate?: () => void;
   className?: string;

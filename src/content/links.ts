@@ -6,6 +6,13 @@ export const socialLinks = [
   { id: 'github', href: 'https://github.com/ol-koko' },
 ] as const satisfies readonly ExternalLink<SocialLinkId>[];
 
+/** Footer icon order, as in Figma (76:669): Behance, LinkedIn, GitHub. */
+export const footerSocialOrder = [
+  'behance',
+  'linkedin',
+  'github',
+] as const satisfies readonly SocialLinkId[];
+
 export const projectSites = [
   { id: 'filmBudget', href: 'https://www.filmbudget.dk/en/' },
   { id: 'blowStressAway', href: 'https://blowstressaway.figma.site/' },

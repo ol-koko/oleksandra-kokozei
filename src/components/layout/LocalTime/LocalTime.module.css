@@ -1,0 +1,8 @@
+/* Equal-width digits: every time is as wide as the placeholder, so nothing shifts. */
+.time {
+  font-variant-numeric: tabular-nums;
+}
+
+.pending {
+  visibility: hidden;
+}

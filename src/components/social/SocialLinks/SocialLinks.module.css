@@ -1,0 +1,13 @@
+/* Figma 76:669: 24 px icons, gap 16, decorative gray. */
+.list {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+.link {
+  display: block;
+  color: var(--color-icon-decorative);
+}

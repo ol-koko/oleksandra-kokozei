@@ -1,0 +1,70 @@
+.footer {
+  padding-block: var(--spacing-4xl);
+  padding-inline: var(--page-gutter);
+}
+
+/* The top rule, then the content (Figma: 40 below the line on mobile, 56 on desktop). */
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-7xl);
+  padding-block-start: var(--spacing-5xl);
+  border-block-start: var(--border-thin) solid var(--color-border-subtle);
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5xl);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+}
+
+.localTime {
+  color: var(--color-text-inactive);
+}
+
+.email {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.copyright {
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/*
+ * Desktop row (Figma 76:653): outer columns share the space, nav in the middle.
+ * Figma's 122 px gap has no token; --spacing-10xl (120) puts the email column
+ * 2 px left of Figma at 1440. Starts at 1024 like the desktop header, so the
+ * email address never wraps.
+ */
+@media (min-width: 1024px) {
+  .inner {
+    padding-block-start: var(--spacing-7xl);
+  }
+
+  .columns {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--spacing-5xl);
+  }
+
+  .column {
+    flex: 1 1 0;
+    min-inline-size: 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .columns {
+    gap: var(--spacing-10xl);
+  }
+}
