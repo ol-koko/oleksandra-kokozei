@@ -24,6 +24,7 @@ No Tailwind, no UI kits, no animation libraries unless explicitly approved.
 - Inspect relevant files before editing. Make the smallest safe change. No unrelated refactors.
 - Small, focused, typed components. No `any`. Content lives in typed data files, never inline in JSX.
 - All user-facing text goes through next-intl messages (en/uk/de). No hardcoded copy.
+- If Latin text in Figma contains Cyrillic look-alike characters or obvious typos, use the correct Latin text in code without asking, and list the fix in the summary.
 - Semantic HTML, keyboard support, visible focus, accessible names, alt text.
 - No new dependencies without explaining why and asking first.
 
