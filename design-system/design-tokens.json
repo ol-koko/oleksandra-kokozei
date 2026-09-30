@@ -353,7 +353,7 @@
         },
         "strong": {
           "$type": "color",
-          "$value": "{primitive.color.gray.1000}"
+          "$value": "{primitive.color.gray.900}"
         },
         "muted": {
           "$type": "color",
@@ -601,6 +601,79 @@
       "size-6xl": {
         "$type": "sizing",
         "$value": "{primitive.dimension.dimension-30}"
+      },
+      "size-content-max": {
+        "$type": "sizing",
+        "$value": "996px"
+      },
+      "size-overlay-content": {
+        "$type": "sizing",
+        "$value": "894px"
+      },
+      "size-overlay-max": {
+        "$type": "sizing",
+        "$value": "1200px"
+      },
+      "size-measure": {
+        "$type": "sizing",
+        "$value": "585px"
+      }
+    },
+    "shadow": {
+      "shadow-polaroid": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "3.15px",
+          "spread": "0px",
+          "color": "{primitive.color.black.10}"
+        }
+      }
+    },
+    "blur": {
+      "blur-header": {
+        "$type": "dimension",
+        "$value": "6px"
+      }
+    },
+    "gradient": {
+      "gradient-media-cover": {
+        "$type": "gradient",
+        "$description": "Linear 149.34deg over {semantic.color.surface.subtle}; stops at 40% alpha.",
+        "$value": [
+          {
+            "color": "{semantic.color.media.gradient-start}",
+            "alpha": 0.4,
+            "position": 0.0274
+          },
+          {
+            "color": "{semantic.color.media.gradient-start}",
+            "alpha": 0.4,
+            "position": 0.0337
+          },
+          {
+            "color": "{semantic.color.media.gradient-end}",
+            "alpha": 0.4,
+            "position": 0.6593
+          }
+        ]
+      },
+      "gradient-media-detail": {
+        "$type": "gradient",
+        "$description": "Linear 171.82deg over {semantic.color.surface.subtle}; stops at 20% alpha.",
+        "$value": [
+          {
+            "color": "{semantic.color.media.gradient-start}",
+            "alpha": 0.2,
+            "position": 0.098
+          },
+          {
+            "color": "{semantic.color.media.gradient-end}",
+            "alpha": 0.2,
+            "position": 0.886
+          }
+        ]
       }
     },
     "typography": {
