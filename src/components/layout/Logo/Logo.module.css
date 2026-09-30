@@ -1,0 +1,18 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+/* Reserved slot for the logo mark: 16 × one line (Figma 16 × 19). */
+.mark {
+  flex-shrink: 0;
+  inline-size: var(--size-sm);
+  block-size: 1lh;
+}
+
+.name {
+  white-space: nowrap;
+}

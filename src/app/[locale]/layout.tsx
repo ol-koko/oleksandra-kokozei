@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locale as getLocaleParam } from 'next/root-params';
 import type { ReactNode } from 'react';
+import { SiteHeader } from '@/components/layout/SiteHeader/SiteHeader';
 import { routing } from '@/features/i18n/routing';
 import { figtree } from '@/styles/fonts';
 import '../globals.css';
@@ -39,7 +40,10 @@ export default async function LocaleLayout({ children }: LocaleLayoutProps) {
         <a className="skip-link text-body-m" href="#content">
           {t('skipToContent')}
         </a>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <SiteHeader />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

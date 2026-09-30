@@ -1,0 +1,36 @@
+.list {
+  display: flex;
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+.row {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-4xl);
+}
+
+.column {
+  flex-direction: column;
+}
+
+.column.size-m {
+  gap: var(--spacing-lg);
+}
+
+.column.size-l {
+  gap: var(--spacing-3xl);
+}
+
+.link {
+  display: block;
+  color: var(--color-text-inactive);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+/* Active item: design system primary text (decision D11). */
+.link[aria-current='true'] {
+  color: var(--color-text-primary);
+}
