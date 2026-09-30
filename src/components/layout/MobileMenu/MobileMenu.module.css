@@ -1,0 +1,67 @@
+/* 24 px icon with a larger hit area; the negative margin keeps the Figma geometry. */
+.iconButton {
+  display: grid;
+  place-items: center;
+  margin: calc(var(--spacing-md) * -1);
+  padding: var(--spacing-md);
+  border: var(--border-none);
+  background: none;
+  color: var(--color-icon-strong);
+  cursor: pointer;
+}
+
+/* The menu is for viewports below 1024 px; the desktop header shows the nav inline. */
+@media (min-width: 1024px) {
+  .trigger {
+    display: none;
+  }
+}
+
+/* Figma 233:666: full screen, white. */
+.dialog {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background-color: var(--color-background-page);
+  color: var(--color-text-primary);
+}
+
+.dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog::backdrop {
+  background: none;
+}
+
+/* Figma 233:527: close button at the end, padding 32 / 16. */
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+  padding-block: var(--spacing-4xl);
+  padding-inline: var(--page-gutter);
+}
+
+/* Figma 233:526: links vertically centered in the remaining space. */
+.nav {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: var(--page-gutter);
+}
+
+/* Figma 233:559: chips centered at the bottom, padding 32 / 16. */
+.languages {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--spacing-4xl);
+  padding-inline: var(--page-gutter);
+}
