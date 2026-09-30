@@ -10,6 +10,30 @@
   --font-family-figtree: var(--font-figtree, 'Figtree'), system-ui, sans-serif;
 }
 
+/*
+ * Page layout values derived from tokens.
+ * --header-block-size: header padding (32 × 2) + language chip (4 × 2 + 16 × 1.2) = 91.2px, Figma 91.
+ * --page-gutter: side padding of header, main and footer (Figma: 16 on mobile, 120 at 1440).
+ */
+:root {
+  --header-block-size: calc(
+    var(--spacing-4xl) * 2 + var(--spacing-xs) * 2 + var(--font-size-16) * var(--line-height-tight)
+  );
+  --page-gutter: var(--spacing-xl);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-gutter: var(--spacing-5xl);
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --page-gutter: var(--spacing-10xl);
+  }
+}
+
 /* Minimal reset */
 *,
 *::before,
@@ -24,6 +48,16 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Keeps the scrollbar space when scrolling is locked (mobile menu), so nothing shifts. */
+  scrollbar-gutter: stable;
+  /* Anchor targets land below the sticky header. */
+  scroll-padding-block-start: var(--header-block-size);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -64,6 +98,29 @@ a {
   position: absolute;
   inline-size: var(--dimension-0-25);
   block-size: var(--dimension-0-25);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* "Skip to content": hidden until it receives keyboard focus. */
+.skip-link {
+  position: fixed;
+  inset-block-start: var(--spacing-md);
+  inset-inline-start: var(--spacing-md);
+  z-index: 3;
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-lg);
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.skip-link:not(:focus) {
+  inline-size: var(--dimension-0-25);
+  block-size: var(--dimension-0-25);
+  padding: var(--spacing-none);
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;

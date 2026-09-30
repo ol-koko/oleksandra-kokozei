@@ -78,7 +78,7 @@
   --color-text-inactive: var(--gray-550);
   --color-text-disabled: var(--gray-200);
   --color-border-subtle: var(--gray-50);
-  --color-icon-strong: var(--gray-1000);
+  --color-icon-strong: var(--gray-900);
   --color-icon-muted: var(--gray-500);
   --color-icon-subtle: var(--gray-400);
   --color-illustration-ink: var(--gray-900);
@@ -139,6 +139,35 @@
   --size-4xl: var(--dimension-14);
   --size-5xl: var(--dimension-16);
   --size-6xl: var(--dimension-30);
+
+  /* Semantic: layout size */
+  --size-content-max: 996px;
+  --size-overlay-content: 894px;
+  --size-overlay-max: 1200px;
+  --size-measure: 585px;
+
+  /* Semantic: shadow */
+  --shadow-polaroid: 0 2px 3.15px var(--black-10);
+
+  /* Semantic: blur */
+  --blur-header: 6px;
+
+  /* Semantic: gradient (media covers, drawn over the subtle surface) */
+  --gradient-media-cover:
+    linear-gradient(
+      149.34deg,
+      color-mix(in srgb, var(--color-media-gradient-start) 40%, transparent) 2.74%,
+      color-mix(in srgb, var(--color-media-gradient-start) 40%, transparent) 3.37%,
+      color-mix(in srgb, var(--color-media-gradient-end) 40%, transparent) 65.93%
+    ),
+    linear-gradient(var(--color-surface-subtle), var(--color-surface-subtle));
+  --gradient-media-detail:
+    linear-gradient(
+      171.82deg,
+      color-mix(in srgb, var(--color-media-gradient-start) 20%, transparent) 9.8%,
+      color-mix(in srgb, var(--color-media-gradient-end) 20%, transparent) 88.6%
+    ),
+    linear-gradient(var(--color-surface-subtle), var(--color-surface-subtle));
 
   /* Primitive: motion */
   --duration-200: 200ms;

@@ -6,7 +6,7 @@
  * media queries repeat the literal values below. Keep them in sync with
  * docs/design-system.md.
  *
- *   sm   480px   large phones
+ *   base         phones; designed at 390px, fluid down to 320px
  *   md   768px   tablets
  *   lg   1024px  small laptops (desktop layout starts here)
  *   xl   1440px  Figma desktop frame width
@@ -18,7 +18,6 @@
  * and as the single documented source of the values.
  */
 :root {
-  --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1440px;

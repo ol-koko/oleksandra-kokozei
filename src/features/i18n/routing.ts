@@ -8,6 +8,8 @@ export const routing = defineRouting({
   // Detection (saved choice > Vercel geo > en) is planned for a later stage.
   // Until then, never infer the locale from Accept-Language.
   localeDetection: false,
+  // No locale cookie until detection is implemented; the URL is the only source.
+  localeCookie: false,
 });
 
 export type Locale = (typeof routing.locales)[number];

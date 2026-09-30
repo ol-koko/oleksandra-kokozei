@@ -4,6 +4,8 @@ import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locale as getLocaleParam } from 'next/root-params';
 import type { ReactNode } from 'react';
+import { SiteFooter } from '@/components/layout/SiteFooter/SiteFooter';
+import { SiteHeader } from '@/components/layout/SiteHeader/SiteHeader';
 import { routing } from '@/features/i18n/routing';
 import { figtree } from '@/styles/fonts';
 import '../globals.css';
@@ -31,10 +33,19 @@ export default async function LocaleLayout({ children }: LocaleLayoutProps) {
     notFound();
   }
 
+  const t = await getTranslations('Header');
+
   return (
     <html lang={locale} className={figtree.variable}>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <a className="skip-link text-body-m" href="#content">
+          {t('skipToContent')}
+        </a>
+        <NextIntlClientProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
