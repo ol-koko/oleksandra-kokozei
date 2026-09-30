@@ -11,10 +11,51 @@
     "works": "Works",
     "experience": "Experience"
   },
-  "Sections": {
-    "me": "Про мене",
-    "works": "Роботи",
-    "experience": "Досвід"
+  "Me": {
+    "greeting": "HI, I’m Oleksandra",
+    "location": "Stuttgart, Germany",
+    "bio": {
+      "p1": "I’m a UI/UX designer who loves the space where aesthetics, logic, and technology meet. I’m naturally curious and detail-obsessed, and I enjoy turning messy ideas into clear, intuitive experiences that feel effortless to use.",
+      "p2": "I love not only designing ideas, but bringing them to life which led me to explore AI engineering and turn concepts into functional digital experiences. I learn by making, experimenting, and asking too many “what if?” questions.",
+      "p3": "At heart, I’m equal parts visual thinker, problem-solver, and curious builder with a soft spot for thoughtful details."
+    },
+    "more": "more",
+    "portraitAlt": "Портрет Олександри Кокозей"
+  },
+  "Works": {
+    "heading": "Works",
+    "pill": "{title}・{year}",
+    "items": {
+      "ces": {
+        "title": "CES",
+        "description": "Admin platform for a complex maritime service ecosystem"
+      },
+      "juJutsu": {
+        "title": "Ju-Jutsu⁺",
+        "description": "AI-assisted school platform for classes, schedules, and school life"
+      },
+      "blowStressAway": {
+        "title": "Blow Stress Away",
+        "description": "Breath-controlled stress relief experiment powered by MediaPipe"
+      },
+      "filmBudget": {
+        "title": "FilmBudget",
+        "description": "Film budgeting services into a clear web experience"
+      }
+    }
+  },
+  "Experience": {
+    "heading": "Experience",
+    "profilesNav": "Профілі з роботами",
+    "roles": {
+      "independent": {
+        "title": "Independent Designer",
+        "period": "2024 – Present",
+        "p1": "Since 2024, I’ve worked independently with international clients on projects across film production, education, logistics, sports, wellness, and service-based businesses.",
+        "p2": "My experience includes corporate websites, conversion-focused landing pages, multi-screen web applications, CRM-style interfaces, dashboards.",
+        "p3": "Depending on the project, I work across information architecture, user flows, wireframes, responsive UI, design systems, reusable components, multilingual interfaces, developer handoff, and Webflow/Framer implementation. I also collaborate directly with clients and developers, adapt existing brand systems, and use AI-assisted development to turn selected concepts into functional prototypes."
+      }
+    }
   },
   "Header": {
     "skipToContent": "Перейти до вмісту",
