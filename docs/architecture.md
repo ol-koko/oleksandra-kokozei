@@ -48,7 +48,17 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 
 ### Rendering
 
-- Pages are Server Components by default. Client Components are introduced only where interactivity is needed (overlays, scroll-spy, language switcher, signature animation).
+- Pages are Server Components by default. Client Components are introduced only where interactivity is needed (overlays, scroll-spy, language switcher).
+
+### Signature animation
+
+The Hero signature writes itself once on page load with CSS only. There is no JS and no animation library, and it stays a Server Component.
+
+- **Technique.** The SVG (`src/features/signature/`) is a single stroke path exported from Figma in writing order. `pathLength="1"` normalizes its length, so `stroke-dasharray: 1 2` with `stroke-dashoffset` going from 1 to 0 reveals it from start to end. No JS measuring is needed.
+- **Timing.** The keyframe stops copy the "End" keyframes of the Lottie reference's Stroke effect (a steady start, the fastest stretch mid-path, then a long slow finish), linear between stops. The 3.57 s reference is scaled to 2 s. The draw waits for the polaroid's `.animate-card` entrance (`--motion-duration-slow`) plus a short pause (`--motion-duration-fast`).
+- **Exact final frame.** The dash pattern exists only inside the keyframes (`animation-fill-mode: backwards`). After the animation the path falls back to its static style, so the last frame is pixel-identical to the static signature even though browsers estimate `pathLength` with slight error.
+- **Reduced motion.** `animation: none`, so the finished signature shows immediately.
+- **Scope.** `PolaroidSign` opts in with `animateEntrance`. Only the stroke is animated, so there is no layout shift. The SVG stays `aria-hidden`.
 
 ## Quality gates
 
