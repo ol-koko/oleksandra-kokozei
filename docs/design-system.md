@@ -7,8 +7,11 @@ Design tokens are exported from the Figma file and live in [`design-system/`](..
 | `design-system/design-tokens.css`  | CSS custom properties (primitive + semantic) and typography classes    |
 | `design-system/design-tokens.json` | The same tokens as JSON                                                |
 | `design-system/animations.css`     | Keyframes and animation utility classes, with reduced-motion fallbacks |
+| `design-system/hover.css`          | Hover and focus-visible state classes (fine pointers only)             |
 
-Both CSS files are imported globally in `src/app/globals.css`.
+All three CSS files are imported globally in `src/app/globals.css`.
+
+When syncing a new Figma export, merge it instead of overwriting. The repository keeps tokens that the export does not contain yet: `--size-content-max`, `--size-overlay-content`, `--size-overlay-max`, `--size-measure`, `--shadow-polaroid`, `--blur-header`, `--gradient-media-cover`, `--gradient-media-detail`. `--color-icon-strong` stays `gray-900` (#1e1e1e, as bound in Figma) even though the export maps it to `gray-1000`.
 
 ## Rules
 

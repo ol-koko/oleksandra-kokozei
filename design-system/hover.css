@@ -1,0 +1,168 @@
+/*
+ * Hover & interactive states.
+ * Uses only tokens from design-tokens.css (--motion-*, --color-*, --spacing-*).
+ * Hover effects apply only on devices with a real pointer (no "sticky" hover on touch).
+ * :focus-visible mirrors hover for keyboard users.
+ * prefers-reduced-motion is handled globally in animations.css.
+ */
+
+/* ---------- Shared transition presets ---------- */
+
+.hover-color {
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.hover-scale {
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+/* ---------- 1. Text links & navigation ---------- */
+/* Inactive items (Works, Experience, ua, de) move toward a stronger gray on hover.
+   text/inactive (gray/550) -> text/secondary (gray/600): between primary and muted. */
+
+.nav-link {
+  color: var(--color-text-inactive);
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+.nav-link[aria-current="page"] {
+  color: var(--color-text-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:not([aria-current="page"]):hover {
+    color: var(--color-text-secondary);
+  }
+}
+.nav-link:focus-visible {
+  color: var(--color-text-secondary);
+}
+
+/* ---------- 2. Polaroid cards ---------- */
+
+.polaroid {
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+@media (hover: hover) and (pointer: fine) {
+  .polaroid:hover {
+    transform: scale(var(--motion-scale-hover));
+  }
+}
+.polaroid:focus-visible {
+  transform: scale(var(--motion-scale-hover));
+}
+
+/* ---------- 3. Work cards (cover-works) ---------- */
+
+.work-card {
+  transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-card:hover {
+    transform: scale(var(--motion-scale-hover));
+  }
+}
+.work-card:focus-visible {
+  transform: scale(var(--motion-scale-hover));
+}
+
+/* ---------- 4. Experience icons ---------- */
+/* Frame stays still and clips; only the content inside grows. */
+
+.experience-icon {
+  overflow: hidden;
+  border-radius: var(--border-radius-3xl);
+  background: var(--color-surface-subtle);
+}
+.experience-icon > * {
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+@media (hover: hover) and (pointer: fine) {
+  .experience-item:hover .experience-icon > * {
+    transform: scale(var(--motion-scale-hover-media));
+  }
+}
+.experience-item:focus-visible .experience-icon > * {
+  transform: scale(var(--motion-scale-hover-media));
+}
+
+/* ---------- 5. Footer social icons: label above + color ---------- */
+/* Footer contacts, 24px icons, 16px gap (desktop + mobile).
+   Markup: <a class="social-link" aria-label="LinkedIn"><Icon/><span class="social-label">LinkedIn</span></a> */
+
+.social-link {
+  position: relative;
+  color: var(--color-icon-decorative);
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+.social-label {
+  /* Tooltip: dark bubble 2px above the icon */
+  position: absolute;
+  bottom: calc(100% + var(--spacing-xxs));
+  left: 50%;
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  border-radius: var(--border-radius-xs);
+  background: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+  /* text-body-xs */
+  font-family: var(--font-family-figtree);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-auto);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, var(--dimension-1));
+  transition:
+    opacity var(--motion-duration-fast) var(--motion-easing-standard),
+    transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+@media (hover: hover) and (pointer: fine) {
+  .social-link:hover { color: var(--color-icon-strong); }
+  .social-link:hover .social-label {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.social-link:focus-visible { color: var(--color-icon-strong); }
+.social-link:focus-visible .social-label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- 6. Language pills: sliding indicator ---------- */
+/* One indicator moves under the active pill.
+   JS sets --pill-x (offsetLeft) and --pill-w (offsetWidth) of the active pill on .lang-switch. */
+
+.lang-switch {
+  position: relative;
+  display: flex;
+}
+.lang-switch__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--pill-w, 0px);
+  transform: translateX(var(--pill-x, 0px));
+  border-radius: var(--border-radius-full);
+  background: var(--color-surface-subtle);
+  transition:
+    transform var(--motion-duration-base) var(--motion-easing-emphasized),
+    width var(--motion-duration-base) var(--motion-easing-emphasized);
+}
+.lang-pill {
+  position: relative; /* above the indicator */
+  color: var(--color-text-disabled);
+  transition: color var(--motion-duration-base) var(--motion-easing-standard);
+}
+.lang-pill[aria-pressed="true"] {
+  color: var(--color-text-primary);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lang-pill:not([aria-pressed="true"]):hover {
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ---------- 7. Mobile menu: burger -> cross ---------- */
+/* Lives with the component: src/components/icons/MenuToggleIcon (CSS-only morph, no dependency). */
