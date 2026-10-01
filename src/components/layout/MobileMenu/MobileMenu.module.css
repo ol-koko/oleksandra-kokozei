@@ -5,6 +5,8 @@
   margin: calc(var(--spacing-md) * -1);
   padding: var(--spacing-md);
   border: var(--border-none);
+  /* Round hit area, so the focus ring circles the icon. */
+  border-radius: var(--border-radius-full);
   background: none;
   color: var(--color-icon-strong);
   cursor: pointer;
@@ -41,10 +43,16 @@
   background: none;
 }
 
-/* Figma 233:527: close button at the end, padding 32 / 16. */
+/*
+ * Figma 233:527: close button at the end, padding 32 / 16. Same height and
+ * centering as the header, so the close button sits exactly over the menu
+ * button and the burger → cross morph reads as one icon.
+ */
 .topBar {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  min-block-size: var(--header-block-size);
   padding-block: var(--spacing-4xl);
   padding-inline: var(--page-gutter);
 }

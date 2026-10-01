@@ -1,5 +1,6 @@
 @import '../../design-system/design-tokens.css';
 @import '../../design-system/animations.css';
+@import '../../design-system/hover.css';
 @import '../styles/breakpoints.css';
 
 /*
@@ -88,9 +89,35 @@ a {
   color: inherit;
 }
 
+/*
+ * One focus ring for every interactive element, keyboard only (:focus-visible).
+ * The outline follows border-radius: components with their own radius (chips,
+ * pills, tiles) keep it, the rest get a soft default. :where() keeps that
+ * default at zero specificity so any component radius wins.
+ */
+:root {
+  --focus-ring-width: var(--border-default);
+  --focus-ring-color: var(--color-text-primary);
+  --focus-ring-offset: var(--spacing-xxs);
+}
+
+:where(a, button, summary, [tabindex]) {
+  border-radius: var(--border-radius-xs);
+}
+
 :focus-visible {
-  outline: var(--border-default) solid var(--color-text-strong);
-  outline-offset: var(--spacing-xxs);
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/*
+ * Focus moved by script right after a tap or click (see features/focus/moveFocus).
+ * Browsers can only guess the input for script focus, and Safari guesses
+ * keyboard. The attribute is removed on the next key press, so keyboard users
+ * always get the ring.
+ */
+[data-pointer-focus]:focus-visible {
+  outline: none;
 }
 
 /* Hides content visually while keeping it available to screen readers. */

@@ -1,0 +1,44 @@
+/*
+ * Burger lines sit at y 9 and 15 (6 apart). For the cross, each line moves
+ * 3 px to the center (12, 12), rotates ±45° and scales from 18 to 12√2 px,
+ * the length of the Lucide "x" diagonals.
+ * Reduced motion: the global rule in animations.css makes the swap instant.
+ */
+.icon {
+  --menu-toggle-cross-scale: 0.9428; /* 12√2 / 18 */
+}
+
+.line {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--motion-duration-base) var(--motion-easing-emphasized);
+}
+
+.icon[data-open='true'] .top {
+  transform: translateY(3px) rotate(45deg) scaleX(var(--menu-toggle-cross-scale));
+}
+
+.icon[data-open='true'] .bottom {
+  transform: translateY(-3px) rotate(-45deg) scaleX(var(--menu-toggle-cross-scale));
+}
+
+/* Runs whenever the icon starts rendering, e.g. each time its dialog opens. */
+.morphIn .top {
+  animation: menu-toggle-top-in var(--motion-duration-base) var(--motion-easing-emphasized);
+}
+
+.morphIn .bottom {
+  animation: menu-toggle-bottom-in var(--motion-duration-base) var(--motion-easing-emphasized);
+}
+
+@keyframes menu-toggle-top-in {
+  from {
+    transform: none;
+  }
+}
+
+@keyframes menu-toggle-bottom-in {
+  from {
+    transform: none;
+  }
+}
