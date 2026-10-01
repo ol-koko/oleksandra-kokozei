@@ -1,0 +1,66 @@
+/*
+ * Handwriting draw-on. `pathLength="1"` normalizes the path, so the dash
+ * values below are fractions of the stroke and need no JS measuring.
+ *
+ * The dash pattern lives only in the keyframes, with `backwards` fill: it
+ * hides the stroke during the delay, and once the animation ends the path
+ * falls back to its plain static style. Browsers estimate `pathLength` with
+ * slight error, so a dash of exactly 1 can stop short of the path end; not
+ * keeping it after the end guarantees the final frame is the static signature.
+ */
+.drawn {
+  /* Lottie reference: 107 frames (3.57 s at 29.97 fps), scaled to 2 s with the same speed profile. */
+  --signature-draw-duration: 2s;
+  /* Waits for the polaroid's `.animate-card` entrance (`--motion-duration-slow`), then a short pause. */
+  --signature-draw-delay: calc(var(--motion-duration-slow) + var(--motion-duration-fast));
+
+  animation: signature-draw var(--signature-draw-duration) linear var(--signature-draw-delay)
+    backwards;
+}
+
+/*
+ * Stops are the Lottie Stroke effect's "End" keyframes (frames 0, 54, 62, 70,
+ * 80, 95, 107), as time / 107 and offset = 1 − progress. Linear between stops,
+ * like the reference's near-linear AE easing: a steady start, the fastest
+ * stretch on the main downstroke, then a long slow finish.
+ *
+ * Dash pattern `1 2`: at offset 1 the whole path sits in the gap, so no
+ * round-cap dot shows at either end before the pen starts.
+ */
+@keyframes signature-draw {
+  0% {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+  }
+
+  50.47% {
+    stroke-dashoffset: 0.5828;
+  }
+
+  57.94% {
+    stroke-dashoffset: 0.4675;
+  }
+
+  65.42% {
+    stroke-dashoffset: 0.2544;
+  }
+
+  74.77% {
+    stroke-dashoffset: 0.1418;
+  }
+
+  88.79% {
+    stroke-dashoffset: 0.0543;
+  }
+
+  100% {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawn {
+    animation: none;
+  }
+}

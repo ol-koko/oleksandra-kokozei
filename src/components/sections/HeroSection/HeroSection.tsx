@@ -13,7 +13,7 @@ export function HeroSection() {
   return (
     <section id="me" aria-labelledby={HEADING_ID} className={styles.hero}>
       <div className={styles.portrait}>
-        <PolaroidSign image={portrait} alt={t('portraitAlt')} preload />
+        <PolaroidSign image={portrait} alt={t('portraitAlt')} preload animateEntrance />
       </div>
 
       <div className={styles.text}>
