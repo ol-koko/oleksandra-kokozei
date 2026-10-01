@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { SunIcon } from '@/components/icons/SunIcon';
 import { Link } from '@/features/i18n/navigation';
 import styles from './Logo.module.css';
 
@@ -12,8 +13,7 @@ export function Logo({ className }: LogoProps) {
 
   return (
     <Link href="/" className={[styles.logo, 'text-body-m', className].filter(Boolean).join(' ')}>
-      {/* TODO: replace with the SVG logo mark once a vector node exists in Figma (emoji 112:339 is a placeholder there). */}
-      <span className={styles.mark} aria-hidden="true" />
+      <SunIcon className={styles.mark} />
       <span className={styles.name}>{t('name')}</span>
     </Link>
   );
