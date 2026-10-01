@@ -5,6 +5,8 @@
   margin: calc(var(--spacing-md) * -1);
   padding: var(--spacing-md);
   border: var(--border-none);
+  /* Round hit area, so the focus ring circles the icon. */
+  border-radius: var(--border-radius-full);
   background: none;
   color: var(--color-icon-strong);
   cursor: pointer;

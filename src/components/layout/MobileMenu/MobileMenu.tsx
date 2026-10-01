@@ -6,6 +6,7 @@ import { MenuToggleIcon } from '@/components/icons/MenuToggleIcon';
 import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher/LanguageSwitcher';
 import { SectionNav } from '@/components/navigation/SectionNav/SectionNav';
 import type { SectionId } from '@/content/types';
+import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
 import styles from './MobileMenu.module.css';
 
 const DESKTOP_QUERY = '(min-width: 1024px)';
@@ -32,20 +33,23 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
     document.documentElement.style.overflow = locked ? 'hidden' : '';
   };
 
-  const openMenu = () => {
+  const openMenu = (fromPointer: boolean) => {
     dialogRef.current?.showModal();
-    closeButtonRef.current?.focus();
+    moveFocus(closeButtonRef.current, { fromPointer });
     lockScroll(true);
     setOpen(true);
   };
 
-  /** Closes the menu. Focus returns to the menu button unless a link is being followed. */
-  const closeMenu = useCallback((restoreFocus: boolean) => {
+  /**
+   * Closes the menu. Focus returns to the menu button unless a link is being
+   * followed; it shows a ring only when the menu was closed from the keyboard.
+   */
+  const closeMenu = useCallback((restoreFocus: boolean, fromPointer = false) => {
     const dialog = dialogRef.current;
     if (dialog?.open) dialog.close();
     lockScroll(false);
     setOpen(false);
-    if (restoreFocus) triggerRef.current?.focus({ preventScroll: true });
+    if (restoreFocus) moveFocus(triggerRef.current, { fromPointer, preventScroll: true });
   }, []);
 
   // Close when the viewport grows into the desktop layout.
@@ -85,7 +89,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
         aria-label={t('openMenu')}
         aria-expanded={open}
         aria-controls={dialogId}
-        onClick={openMenu}
+        onClick={(event) => openMenu(isPointerClick(event))}
       >
         {/* Under the open dialog this turns into the cross, so closing morphs it back to the burger. */}
         <MenuToggleIcon open={open} />
@@ -109,7 +113,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
             type="button"
             className={styles.iconButton}
             aria-label={t('closeMenu')}
-            onClick={() => closeMenu(true)}
+            onClick={(event) => closeMenu(true, isPointerClick(event))}
           >
             {/* Sits where the menu button is, so opening reads as one burger → cross morph. */}
             <MenuToggleIcon open morphIn />
