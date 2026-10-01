@@ -90,6 +90,8 @@
   --color-media-gradient-start: var(--pink-100);
   --color-media-gradient-end: var(--purple-100);
   --color-overlay-backdrop: var(--black-10);
+  --color-surface-inverse: var(--gray-900);
+  --color-text-inverse: var(--gray-0);
 
   /* Semantic: spacing */
   --spacing-none: var(--dimension-0);
@@ -188,6 +190,8 @@
   --motion-easing-standard: var(--ease-out);
   --motion-easing-emphasized: var(--ease-out-expo);
   --motion-easing-gentle: var(--ease-out-quad);
+  --motion-scale-hover: 1.03;
+  --motion-scale-hover-media: 1.06;
 }
 
 
