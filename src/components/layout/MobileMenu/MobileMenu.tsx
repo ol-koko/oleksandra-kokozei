@@ -2,8 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
-import { CloseIcon } from '@/components/icons/CloseIcon';
-import { MenuIcon } from '@/components/icons/MenuIcon';
+import { MenuToggleIcon } from '@/components/icons/MenuToggleIcon';
 import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher/LanguageSwitcher';
 import { SectionNav } from '@/components/navigation/SectionNav/SectionNav';
 import type { SectionId } from '@/content/types';
@@ -88,7 +87,8 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
         aria-controls={dialogId}
         onClick={openMenu}
       >
-        <MenuIcon />
+        {/* Under the open dialog this turns into the cross, so closing morphs it back to the burger. */}
+        <MenuToggleIcon open={open} />
       </button>
 
       <dialog
@@ -111,7 +111,8 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
             aria-label={t('closeMenu')}
             onClick={() => closeMenu(true)}
           >
-            <CloseIcon />
+            {/* Sits where the menu button is, so opening reads as one burger → cross morph. */}
+            <MenuToggleIcon open morphIn />
           </button>
         </div>
 
