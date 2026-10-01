@@ -20,6 +20,7 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 | `src/features/i18n/`      | `routing.ts` (locales, prefix strategy), `request.ts` (messages per request), `navigation.ts` (locale-aware `Link`, `useRouter`) |
 | `src/features/overlay/`   | Modal overlays: open/close state, focus trap, sticky nav, scroll-spy                                                             |
 | `src/features/signature/` | Animated handwritten signature for the Hero Polaroid                                                                             |
+| `src/features/focus/`     | `moveFocus`: script focus for dialogs that shows a focus ring only after keyboard input                                          |
 | `src/content/`            | Typed content data (links now; works and experience later)                                                                       |
 | `src/styles/`             | Shared style modules: `breakpoints.css`, `fonts.ts`                                                                              |
 | `messages/`               | Translations. `en.json` is the source of truth for keys                                                                          |
@@ -49,6 +50,11 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 ### Rendering
 
 - Pages are Server Components by default. Client Components are introduced only where interactivity is needed (overlays, scroll-spy, language switcher).
+
+### Focus
+
+- **One focus ring for the whole site.** It is defined in `globals.css`: `:focus-visible` gets an outline of `--border-default` in `--color-text-primary`, offset `--spacing-xxs`. The outline follows each element's border-radius. Elements without their own radius get `--border-radius-xs` through a zero-specificity `:where()` rule. Never remove it for keyboard users.
+- **Script focus (dialogs) goes through `moveFocus`.** Browsers guess `:focus-visible` for focus moved by script. Safari never focuses a clicked or tapped button, so it guesses "keyboard" and shows the ring after a tap. `moveFocus` passes the real input: a `click` from Enter or Space has `detail` 0, a mouse or touch click has `detail` 1 or more. It uses `focusVisible` where supported. Otherwise it adds `data-pointer-focus`, which hides the ring until the next key press or blur.
 
 ### Signature animation
 
