@@ -6,11 +6,12 @@
   text-decoration: none;
 }
 
-/* Reserved slot for the logo mark: 16 × one line (Figma 16 × 19). */
+/* Logo mark: 16 px, centered on the name's line (Figma slot 16 × 19). */
 .mark {
   flex-shrink: 0;
   inline-size: var(--size-sm);
-  block-size: 1lh;
+  block-size: var(--size-sm);
+  color: var(--color-icon-strong);
 }
 
 .name {
