@@ -85,7 +85,7 @@
   }
 }
 .work-card:focus-visible .work-cover-media,
-.work-card:focus-within .work-cover-media {
+.work-card:has(:focus-visible) .work-cover-media {
   transform: scale(var(--motion-scale-hover-media));
 }
 
@@ -213,7 +213,7 @@
   .polaroid-group:has(.polaroid:hover),
   .work-card:hover .work-cover-media,
   .work-card:focus-visible .work-cover-media,
-  .work-card:focus-within .work-cover-media,
+  .work-card:has(:focus-visible) .work-cover-media,
   .social-tile:hover,
   .social-tile:focus-visible,
   .experience-item:hover .experience-icon > *,
