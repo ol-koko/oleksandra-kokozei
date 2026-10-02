@@ -39,7 +39,8 @@ export function useScrollSpy<Id extends string>(
       const line = Math.max(headerBottom, window.innerHeight * ACTIVATION_RATIO);
       const { scrollHeight } = document.documentElement;
       const nearBottom =
-        window.scrollY > 0 && window.scrollY + window.innerHeight >= scrollHeight - BOTTOM_THRESHOLD;
+        window.scrollY > 0 &&
+        window.scrollY + window.innerHeight >= scrollHeight - BOTTOM_THRESHOLD;
 
       if (nearBottom) return ids.at(-1);
 
