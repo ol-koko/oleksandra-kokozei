@@ -12,6 +12,8 @@ import styles from './MobileMenu.module.css';
 const DESKTOP_QUERY = '(min-width: 1024px)';
 const FOCUSABLE = 'a[href], button:not([disabled])';
 
+type Phase = 'closed' | 'open' | 'closing';
+
 type MobileMenuProps = {
   activeId?: SectionId;
 };
@@ -20,10 +22,17 @@ type MobileMenuProps = {
  * Menu button + full-screen menu (Figma 233:666) for viewports below 1024 px.
  * A modal <dialog> makes the rest of the page inert; Tab is kept inside,
  * Esc closes it, and page scroll is locked while it is open.
+ *
+ * The menu slides down on open and back up on close; the dialog is closed
+ * (and focus restored) only when the closing animation has finished. The
+ * menu button's icon morphs back to the burger over the same duration.
  */
 export function MobileMenu({ activeId }: MobileMenuProps) {
   const t = useTranslations('Header');
-  const [open, setOpen] = useState(false);
+  const [phase, setPhase] = useState<Phase>('closed');
+  const open = phase === 'open';
+  /** Set while closing: where focus goes once the dialog has closed. */
+  const pendingClose = useRef<{ restoreFocus: boolean; fromPointer: boolean } | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -37,20 +46,46 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
     dialogRef.current?.showModal();
     moveFocus(closeButtonRef.current, { fromPointer });
     lockScroll(true);
-    setOpen(true);
+    setPhase('open');
   };
 
   /**
-   * Closes the menu. Focus returns to the menu button unless a link is being
-   * followed; it shows a ring only when the menu was closed from the keyboard.
+   * Starts closing the menu. Scroll unlocks at once, so a followed link can
+   * scroll the page while the menu slides away. Focus returns to the menu
+   * button unless a link is being followed; it shows a ring only when the
+   * menu was closed from the keyboard.
    */
   const closeMenu = useCallback((restoreFocus: boolean, fromPointer = false) => {
-    const dialog = dialogRef.current;
-    if (dialog?.open) dialog.close();
+    if (!dialogRef.current?.open || pendingClose.current) return;
+    pendingClose.current = { restoreFocus, fromPointer };
     lockScroll(false);
-    setOpen(false);
-    if (restoreFocus) moveFocus(triggerRef.current, { fromPointer, preventScroll: true });
+    setPhase('closing');
   }, []);
+
+  // Closes the dialog when the slide-up ends (at once if no animation runs).
+  useEffect(() => {
+    if (phase !== 'closing') return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    let cancelled = false;
+
+    const finish = () => {
+      if (cancelled) return;
+      const pending = pendingClose.current;
+      pendingClose.current = null;
+      dialog.close();
+      setPhase('closed');
+      if (pending?.restoreFocus) {
+        moveFocus(triggerRef.current, { fromPointer: pending.fromPointer, preventScroll: true });
+      }
+    };
+
+    Promise.all(dialog.getAnimations().map((animation) => animation.finished)).then(finish, finish);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [phase]);
 
   // Close when the viewport grows into the desktop layout.
   useEffect(() => {
@@ -99,7 +134,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
         ref={dialogRef}
         id={dialogId}
         aria-label={t('menu')}
-        className={`${styles.dialog} ${open ? 'animate-overlay' : ''}`}
+        className={`${styles.dialog} ${phase === 'closing' ? styles.closing : ''}`}
         onKeyDown={onKeyDown}
         onCancel={(event) => {
           // Esc: close through the same path so scroll and focus are restored.

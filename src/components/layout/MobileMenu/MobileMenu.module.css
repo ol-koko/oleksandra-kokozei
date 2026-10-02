@@ -37,6 +37,41 @@
 .dialog[open] {
   display: flex;
   flex-direction: column;
+  animation: menu-slide-in var(--motion-duration-base) var(--motion-easing-emphasized);
+}
+
+/* Same duration and easing as the menu icon morph, so the cross turns back into the burger as the menu leaves. */
+.dialog.closing {
+  animation: menu-slide-out var(--motion-duration-base) var(--motion-easing-emphasized) forwards;
+}
+
+@keyframes menu-slide-in {
+  from {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes menu-slide-out {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes menu-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: no sliding; a fade, which the global rule makes instant. */
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open] {
+    animation-name: fade-in;
+  }
+
+  .dialog.closing {
+    animation-name: menu-fade-out;
+  }
 }
 
 .dialog::backdrop {
