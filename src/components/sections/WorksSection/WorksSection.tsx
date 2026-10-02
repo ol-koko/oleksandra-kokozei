@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import type { CSSProperties } from 'react';
 import { WorkCard } from '@/components/sections/WorkCard/WorkCard';
 import { works } from '@/content/works';
 import styles from './WorksSection.module.css';
@@ -16,8 +17,8 @@ export function WorksSection() {
       </h2>
 
       <ul className={styles.grid}>
-        {works.map((work) => (
-          <li key={work.slug}>
+        {works.map((work, index) => (
+          <li key={work.slug} className="animate-card" style={{ '--i': index } as CSSProperties}>
             <WorkCard work={work} />
           </li>
         ))}
