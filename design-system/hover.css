@@ -67,17 +67,26 @@
 }
 
 /* ---------- 3. Work cards (cover-works) ---------- */
+/* Like the experience icons: the cover frame stays still and clips (rounded corners);
+   only the media inside it grows, so the card size and layout never change.
+   Markup: <article class="work-card"><div class="work-cover"><img class="work-cover-media"/>... */
 
-.work-card {
-  transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+.work-cover {
+  overflow: hidden;
+  /* Keeps the rounded clip while the media is transformed (Safari). */
+  isolation: isolate;
+}
+.work-cover-media {
+  transition: transform var(--motion-duration-base) var(--motion-easing-gentle);
 }
 @media (hover: hover) and (pointer: fine) {
-  .work-card:hover {
-    transform: scale(var(--motion-scale-hover));
+  .work-card:hover .work-cover-media {
+    transform: scale(var(--motion-scale-hover-media));
   }
 }
-.work-card:focus-visible {
-  transform: scale(var(--motion-scale-hover));
+.work-card:focus-visible .work-cover-media,
+.work-card:focus-within .work-cover-media {
+  transform: scale(var(--motion-scale-hover-media));
 }
 
 /* ---------- 4. Experience icons ---------- */
@@ -202,8 +211,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .polaroid-group:has(.polaroid:hover),
-  .work-card:hover,
-  .work-card:focus-visible,
+  .work-card:hover .work-cover-media,
+  .work-card:focus-visible .work-cover-media,
+  .work-card:focus-within .work-cover-media,
   .social-tile:hover,
   .social-tile:focus-visible,
   .experience-item:hover .experience-icon > *,
