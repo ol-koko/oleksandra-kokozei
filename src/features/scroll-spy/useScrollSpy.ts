@@ -2,18 +2,25 @@
 
 import { useEffect, useState, type RefObject } from 'react';
 
+/** Activation line: a third of the way down the viewport (never above the header). */
+const ACTIVATION_RATIO = 1 / 3;
+/** Within this many px of the page end, the last section is active. */
+const BOTTOM_THRESHOLD = 24;
+/** Keys that scroll the page; any of them ends a click lock. */
+const SCROLL_KEYS = new Set(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ']);
+
 /**
  * Returns the id of the section currently in view.
  *
  * The active section is the last one, in document order, whose top edge has
- * reached the bottom edge of `offsetRef` (the sticky header), which is where
- * anchor links land. Before any section gets there, the first one is active.
- * At the bottom of a scrollable page the last section is active, because a
- * short final section can never reach the header.
+ * passed the activation line: a third of the way down the viewport, or the
+ * bottom of `offsetRef` (the sticky header) when that is lower. Near the end of
+ * the page the last section is active, because a short final section may
+ * never reach the line.
  *
- * The line is fixed to the header, not to a share of the viewport: sections
- * are shorter than tall viewports, so a viewport-relative line would pass
- * several section tops at once and pick a section further down the page.
+ * A click on an in-page link to one of the sections (from any nav) makes that
+ * section active at once and keeps it active while the browser scrolls there,
+ * until the user scrolls manually (wheel, touch, scroll keys, scrollbar).
  */
 export function useScrollSpy<Id extends string>(
   ids: readonly Id[],
@@ -23,40 +30,80 @@ export function useScrollSpy<Id extends string>(
 
   useEffect(() => {
     let frame = 0;
+    let lockedId: Id | undefined;
 
-    const update = () => {
-      frame = 0;
-      // 1 px tolerance for the fractional header height after an anchor jump.
-      const line = (offsetRef?.current?.getBoundingClientRect().bottom ?? 0) + 1;
+    const isSectionId = (value: string): value is Id => (ids as readonly string[]).includes(value);
+
+    const sectionInView = (): Id | undefined => {
+      const headerBottom = offsetRef?.current?.getBoundingClientRect().bottom ?? 0;
+      const line = Math.max(headerBottom, window.innerHeight * ACTIVATION_RATIO);
       const { scrollHeight } = document.documentElement;
-      const atBottom =
-        window.scrollY > 0 && window.scrollY + window.innerHeight >= scrollHeight - 1;
+      const nearBottom =
+        window.scrollY > 0 &&
+        window.scrollY + window.innerHeight >= scrollHeight - BOTTOM_THRESHOLD;
 
-      if (atBottom) {
-        setActiveId(ids.at(-1));
-        return;
-      }
+      if (nearBottom) return ids.at(-1);
 
       let current = ids[0];
       for (const id of ids) {
         const top = document.getElementById(id)?.getBoundingClientRect().top;
         if (top !== undefined && top <= line) current = id;
       }
-      setActiveId(current);
+      return current;
+    };
+
+    const update = () => {
+      frame = 0;
+      setActiveId(lockedId ?? sectionInView());
     };
 
     const schedule = () => {
       if (frame === 0) frame = requestAnimationFrame(update);
     };
 
+    const onClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || !(event.target instanceof Element)) return;
+      const id = event.target.closest('a[href^="#"]')?.getAttribute('href')?.slice(1);
+      if (!id || !isSectionId(id)) return;
+      lockedId = id;
+      setActiveId(id);
+    };
+
+    const release = () => {
+      if (lockedId === undefined) return;
+      lockedId = undefined;
+      schedule();
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (SCROLL_KEYS.has(event.key)) release();
+    };
+
+    // A press on the page scrollbar targets the root element.
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.target === document.documentElement) release();
+    };
+
+    const passive = { passive: true } as const;
+
     schedule();
-    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('scroll', schedule, passive);
     window.addEventListener('resize', schedule);
+    window.addEventListener('wheel', release, passive);
+    window.addEventListener('touchmove', release, passive);
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('click', onClick);
 
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
+      window.removeEventListener('wheel', release);
+      window.removeEventListener('touchmove', release);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('click', onClick);
     };
   }, [ids, offsetRef]);
 

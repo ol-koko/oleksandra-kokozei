@@ -13,7 +13,7 @@ export function ExperienceSection() {
 
   return (
     <section id="experience" aria-labelledby={HEADING_ID} className={styles.experience}>
-      <div className={styles.content}>
+      <div className={`${styles.content} reveal`}>
         <h2 id={HEADING_ID} className="text-title-l">
           {t('heading')}
         </h2>
@@ -36,7 +36,7 @@ export function ExperienceSection() {
         ))}
       </div>
 
-      <SocialLinks label={t('profilesNav')} order={tileOrder} variant="tile" />
+      <SocialLinks label={t('profilesNav')} order={tileOrder} variant="tile" className="reveal" />
     </section>
   );
 }

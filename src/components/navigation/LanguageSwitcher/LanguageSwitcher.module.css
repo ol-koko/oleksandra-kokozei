@@ -11,14 +11,9 @@
   padding-block: var(--spacing-xs);
   padding-inline: var(--spacing-lg);
   border-radius: var(--border-radius-full);
-  color: var(--color-text-disabled);
   text-decoration: none;
-  transition:
-    color var(--motion-duration-fast) var(--motion-easing-standard),
-    background-color var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .chip[aria-current='true'] {
   background-color: var(--color-surface-subtle);
-  color: var(--color-text-primary);
 }

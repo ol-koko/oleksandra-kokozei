@@ -23,8 +23,6 @@
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 50%;
-  display: grid;
-  place-items: center;
   inline-size: 384px;
   block-size: 483px;
   translate: -50% 0;
@@ -32,8 +30,17 @@
   transform-origin: top center;
 }
 
+/* Frame and signature scale together on hover (the .polaroid-group class); it keeps its own center as origin. */
+.unit {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
 .signature {
   position: absolute;
+  pointer-events: none;
   inset-block-start: 50%;
   inset-inline-start: 50%;
   color: var(--color-illustration-ink);
