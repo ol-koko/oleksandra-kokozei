@@ -67,17 +67,20 @@
 }
 
 /* ---------- 3. Work cards (cover-works) ---------- */
-/* The whole card scales, like the polaroid; its content (covers, later videos) is never transformed. */
+/* Hovering the card scales its cover block as one unit (rounded cover with image, logo and pill),
+   like the polaroid. The text below stays still, and nothing inside the cover (later videos)
+   is transformed on its own. A transform never changes layout.
+   Markup: <article class="work-card"><div class="work-cover">...</div><p>...</p></article> */
 
-.work-card {
+.work-cover {
   transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
 }
 @media (hover: hover) and (pointer: fine) {
-  .work-card:hover {
+  .work-card:hover .work-cover {
     transform: scale(var(--motion-scale-hover));
   }
 }
-.work-card:focus-visible {
+.work-card:focus-visible .work-cover {
   transform: scale(var(--motion-scale-hover));
 }
 
@@ -203,8 +206,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .polaroid-group:has(.polaroid:hover),
-  .work-card:hover,
-  .work-card:focus-visible,
+  .work-card:hover .work-cover,
+  .work-card:focus-visible .work-cover,
   .social-tile:hover,
   .social-tile:focus-visible,
   .experience-item:hover .experience-icon > *,

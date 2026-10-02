@@ -12,6 +12,7 @@ export function WorkCard({ work }: WorkCardProps) {
   const t = useTranslations('Works');
   const { cover } = work;
   const coverClass = [
+    'work-cover',
     styles.cover,
     cover.background === 'placeholder' && styles.placeholder,
     cover.background === 'gradient' && styles.gradient,
