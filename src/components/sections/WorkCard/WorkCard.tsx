@@ -20,7 +20,8 @@ export function WorkCard({ work }: WorkCardProps) {
     .join(' ');
 
   return (
-    // TODO(overlay stage): make the card a button that opens the work overlay.
+    // TODO(overlay stage): make the card a button that opens the work overlay, then add the
+    // `work-card` class (hover.css) so hover and focus-visible scale it.
     <article className={styles.card}>
       <div className={coverClass}>
         {cover.fit === 'photo' ? (

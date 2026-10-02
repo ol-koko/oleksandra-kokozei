@@ -25,7 +25,7 @@ export async function SiteFooter() {
           <SectionNav label={t('nav')} orientation="responsive" size="m" />
 
           <div className={styles.column}>
-            <a className={`${styles.email} text-body-m`} href={`mailto:${contactEmail}`}>
+            <a className={`hover-link ${styles.email} text-body-m`} href={`mailto:${contactEmail}`}>
               {contactEmail}
             </a>
             <SocialLinks label={t('socialNav')} order={footerSocialOrder} />

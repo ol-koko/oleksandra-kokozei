@@ -12,7 +12,10 @@ export function Logo({ className }: LogoProps) {
   const t = useTranslations('Common');
 
   return (
-    <Link href="/" className={[styles.logo, 'text-body-m', className].filter(Boolean).join(' ')}>
+    <Link
+      href="/"
+      className={['hover-link', styles.logo, 'text-body-m', className].filter(Boolean).join(' ')}
+    >
       <SunIcon className={styles.mark} />
       <span className={styles.name}>{t('name')}</span>
     </Link>

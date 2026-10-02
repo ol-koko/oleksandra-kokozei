@@ -18,7 +18,8 @@ export function HeroSection() {
 
       <div className={styles.text}>
         <AboutIntro headingLevel={1} headingId={HEADING_ID} />
-        {/* TODO(overlay stage): opens overlay-me (`?overlay=me`). Disabled until the overlay exists. */}
+        {/* TODO(overlay stage): opens overlay-me (`?overlay=me`). Disabled until the overlay exists;
+            add its hover state (hover.css) when it becomes clickable. */}
         <button type="button" className={`${styles.more} text-body-m`} disabled>
           {t('more')}
         </button>

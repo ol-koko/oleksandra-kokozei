@@ -37,7 +37,7 @@ export function LanguageSwitcher({
             <a
               href={`${getPathname({ locale, href: pathname })}${activeId ? `#${activeId}` : ''}`}
               hrefLang={locale}
-              className={`${styles.chip} text-body-m`}
+              className={`lang-pill ${styles.chip} text-body-m`}
               aria-current={locale === currentLocale ? 'true' : undefined}
               onClick={onNavigate}
             >
