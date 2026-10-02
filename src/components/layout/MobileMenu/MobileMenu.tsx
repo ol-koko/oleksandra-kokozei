@@ -23,9 +23,11 @@ type MobileMenuProps = {
  * A modal <dialog> makes the rest of the page inert; Tab is kept inside,
  * Esc closes it, and page scroll is locked while it is open.
  *
- * The menu slides down on open and back up on close; the dialog is closed
- * (and focus restored) only when the closing animation has finished. The
- * menu button's icon morphs back to the burger over the same duration.
+ * Motion: a white panel slides down behind the menu content, then the links
+ * and the language bar fade in (styles in the module). The close button never
+ * moves: it sits over the menu button, so the burger ↔ cross morph stays
+ * visible both ways. Closing plays a quicker reverse; the dialog closes and
+ * focus returns only when it has finished.
  */
 export function MobileMenu({ activeId }: MobileMenuProps) {
   const t = useTranslations('Header');
@@ -50,10 +52,9 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
   };
 
   /**
-   * Starts closing the menu. Scroll unlocks at once, so a followed link can
-   * scroll the page while the menu slides away. Focus returns to the menu
-   * button unless a link is being followed; it shows a ring only when the
-   * menu was closed from the keyboard.
+   * Starts closing the menu: scroll unlocks and both icons morph back to the
+   * burger at once. Focus returns to the menu button unless a link is being
+   * followed; it shows a ring only when the menu was closed from the keyboard.
    */
   const closeMenu = useCallback((restoreFocus: boolean, fromPointer = false) => {
     if (!dialogRef.current?.open || pendingClose.current) return;
@@ -62,7 +63,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
     setPhase('closing');
   }, []);
 
-  // Closes the dialog when the slide-up ends (at once if no animation runs).
+  // Closes the dialog once the closing animations (panel, items, icon) have finished.
   useEffect(() => {
     if (phase !== 'closing') return;
     const dialog = dialogRef.current;
@@ -80,7 +81,8 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
       }
     };
 
-    Promise.all(dialog.getAnimations().map((animation) => animation.finished)).then(finish, finish);
+    const animations = dialog.getAnimations({ subtree: true });
+    Promise.all(animations.map((animation) => animation.finished)).then(finish, finish);
 
     return () => {
       cancelled = true;
@@ -142,6 +144,8 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
           closeMenu(true);
         }}
       >
+        <div className={styles.panel} aria-hidden="true" />
+
         <div className={styles.topBar}>
           <button
             ref={closeButtonRef}
@@ -150,8 +154,11 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
             aria-label={t('closeMenu')}
             onClick={(event) => closeMenu(true, isPointerClick(event))}
           >
-            {/* Sits where the menu button is, so opening reads as one burger → cross morph. */}
-            <MenuToggleIcon open morphIn />
+            {/*
+             * Sits where the menu button is, so opening reads as one burger → cross morph,
+             * and turns back into the burger together with it while the menu closes.
+             */}
+            <MenuToggleIcon open={phase !== 'closing'} morphIn />
           </button>
         </div>
 
