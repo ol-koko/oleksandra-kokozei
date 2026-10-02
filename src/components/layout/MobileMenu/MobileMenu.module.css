@@ -57,6 +57,12 @@
   }
 }
 
+@keyframes menu-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
 @keyframes menu-fade-out {
   to {
     opacity: 0;
@@ -66,7 +72,7 @@
 /* Reduced motion: no sliding; a fade, which the global rule makes instant. */
 @media (prefers-reduced-motion: reduce) {
   .dialog[open] {
-    animation-name: fade-in;
+    animation-name: menu-fade-in;
   }
 
   .dialog.closing {
