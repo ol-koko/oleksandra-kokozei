@@ -20,7 +20,7 @@ When syncing a new Figma export, merge it instead of overwriting. The repository
 - Never hardcode a value that exists as a token. If a Figma value has no token, flag it and propose a new token instead of hardcoding it.
 - Use the animation utility classes from `animations.css`. Every animation must respect `prefers-reduced-motion`.
 
-> **`animations.css` and `hover.css` are maintained in this repo.** They have been adapted to the project (for example `aria-current="true"` instead of `"page"`, the scroll-reveal scoping, `.animate-card` fill mode). Merge future updates from Figma by comparison, never by overwriting these two files.
+> **`animations.css` and `hover.css` are maintained in this repo.** They have been adapted to the project (for example `aria-current="true"` instead of `"page"`, the scroll-driven `.reveal`, `.animate-card` fill mode). Merge future updates from Figma by comparison, never by overwriting these two files.
 
 ## Typography
 

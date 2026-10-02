@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl';
-import type { CSSProperties } from 'react';
 import { WorkCard } from '@/components/sections/WorkCard/WorkCard';
 import { works } from '@/content/works';
 import styles from './WorksSection.module.css';
@@ -12,13 +11,13 @@ export function WorksSection() {
 
   return (
     <section id="works" aria-labelledby={HEADING_ID} className={styles.works}>
-      <h2 id={HEADING_ID} className="text-title-l">
+      <h2 id={HEADING_ID} className="text-title-l reveal">
         {t('heading')}
       </h2>
 
       <ul className={styles.grid}>
-        {works.map((work, index) => (
-          <li key={work.slug} className="animate-card" style={{ '--i': index } as CSSProperties}>
+        {works.map((work) => (
+          <li key={work.slug} className={`${styles.item} reveal`}>
             <WorkCard work={work} />
           </li>
         ))}

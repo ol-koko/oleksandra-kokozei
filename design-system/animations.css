@@ -67,38 +67,22 @@
   animation-delay: calc(var(--i, 0) * 60ms);
 }
 
-/* On-scroll section reveal: JS adds .js-reveal to <html> and .is-visible (IntersectionObserver)
-   to each .reveal. Content stays visible without JS. Sections in view when the page opens at a
-   hash or restores its scroll get .is-instant (no animation); sections in view on a normal load
-   get .is-delayed (they animate in after the hero). */
-.reveal {
-  /* Sections already visible on a normal load wait for the hero entrance (text ends at ~700ms). */
-  --reveal-after-hero-delay: calc(var(--motion-duration-slow) * 2);
-
-  transition:
-    opacity var(--motion-duration-slower) var(--motion-easing-standard),
-    transform var(--motion-duration-slower) var(--motion-easing-standard);
-}
-.js-reveal .reveal:not(.is-visible) {
-  opacity: 0;
-  transform: translateY(var(--dimension-6));
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-.reveal.is-delayed {
-  transition-delay: var(--reveal-after-hero-delay);
+/* Scroll-driven reveal: the progress follows the scroll position while the element enters the
+   viewport (from its top edge at the viewport bottom to --reveal-range-end of the entry).
+   Browsers without scroll-driven animations, and reduced motion, show the content as is.
+   Stagger side-by-side items by offsetting --reveal-range-start / --reveal-range-end. */
+@keyframes reveal-in {
+  from { opacity: 0; translate: 0 var(--dimension-6); }
 }
 
-/* Entrance animations inside a .reveal wait for the reveal, are skipped for .is-instant
-   sections, and follow the hero delay for .is-delayed ones. */
-.reveal:not(.is-visible) .animate-card,
-.reveal.is-instant .animate-card {
-  animation: none;
-}
-.reveal.is-delayed .animate-card {
-  animation-delay: calc(var(--reveal-after-hero-delay) + var(--i, 0) * 60ms);
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in auto var(--motion-easing-standard) both;
+      animation-timeline: view();
+      animation-range: entry var(--reveal-range-start, 0%) entry var(--reveal-range-end, 40%);
+    }
+  }
 }
 
 /* ---------- Accessibility ---------- */
@@ -109,5 +93,4 @@
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
-  .js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; }
 }

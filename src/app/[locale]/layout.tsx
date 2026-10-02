@@ -7,7 +7,6 @@ import type { ReactNode } from 'react';
 import { SiteFooter } from '@/components/layout/SiteFooter/SiteFooter';
 import { SiteHeader } from '@/components/layout/SiteHeader/SiteHeader';
 import { routing } from '@/features/i18n/routing';
-import { revealInitScript } from '@/features/reveal/revealInitScript';
 import { figtree } from '@/styles/fonts';
 import '../globals.css';
 
@@ -37,11 +36,7 @@ export default async function LocaleLayout({ children }: LocaleLayoutProps) {
   const t = await getTranslations('Header');
 
   return (
-    // suppressHydrationWarning: revealInitScript adds a class to <html> before hydration.
-    <html lang={locale} className={figtree.variable} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: revealInitScript }} />
-      </head>
+    <html lang={locale} className={figtree.variable}>
       <body>
         <a className="skip-link text-body-m" href="#content">
           {t('skipToContent')}
