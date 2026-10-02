@@ -59,22 +59,35 @@
   animation-delay: calc(var(--i, 0) * 60ms);
 }
 
-/* Work / project cards, hero */
+/* Work / project cards, hero. Stagger: set style={{ '--i': index }} on each card.
+   Fill is "backwards" on purpose: the end keyframe is not kept, so after the entrance the
+   element returns to its static style and its own transform (hover, rotation) applies. */
 .animate-card {
-  animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) both;
+  animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
 }
 
-/* On-scroll section reveal: JS adds .is-visible (IntersectionObserver) */
+/* On-scroll section reveal: JS adds .js-reveal to <html> and .is-visible (IntersectionObserver)
+   to each .reveal. Content stays visible without JS and for sections already in view on load. */
 .reveal {
-  opacity: 0;
-  transform: translateY(var(--dimension-6));
   transition:
     opacity var(--motion-duration-slower) var(--motion-easing-standard),
     transform var(--motion-duration-slower) var(--motion-easing-standard);
 }
+.js-reveal .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(var(--dimension-6));
+}
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+/* Entrance animations inside a .reveal wait for the reveal and are skipped when the section
+   was already in view on load (.is-instant). */
+.reveal:not(.is-visible) .animate-card,
+.reveal.is-instant .animate-card {
+  animation: none;
 }
 
 /* ---------- Accessibility ---------- */
@@ -85,5 +98,5 @@
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; }
 }

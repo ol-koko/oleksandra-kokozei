@@ -16,6 +16,8 @@
   transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
+/* aria-current="true" marks the active in-page link or language (not a page, not a toggle). */
+
 /* ---------- 1. Text links & navigation ---------- */
 /* Inactive items (Works, Experience, ua, de) move toward a stronger gray on hover.
    text/inactive (gray/550) -> text/secondary (gray/600): between primary and muted. */
@@ -24,12 +26,12 @@
   color: var(--color-text-inactive);
   transition: color var(--motion-duration-fast) var(--motion-easing-standard);
 }
-.nav-link[aria-current="page"] {
-  color: var(--color-text-strong);
+.nav-link[aria-current="true"] {
+  color: var(--color-text-primary);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .nav-link:not([aria-current="page"]):hover {
+  .nav-link:not([aria-current="true"]):hover {
     color: var(--color-text-secondary);
   }
 }
@@ -37,18 +39,31 @@
   color: var(--color-text-secondary);
 }
 
-/* ---------- 2. Polaroid cards ---------- */
+/* Single links that are not part of a nav list (logo, footer email): primary -> secondary. */
+.hover-link {
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hover-link:hover {
+    color: var(--color-text-secondary);
+  }
+}
+.hover-link:focus-visible {
+  color: var(--color-text-secondary);
+}
 
-.polaroid {
+/* ---------- 2. Polaroid ---------- */
+/* Decorative. The hover target is the polaroid frame; the whole group (frame, photo and
+   signature) scales as one unit, so the signature stays aligned with the photo.
+   Markup: <div class="polaroid-group"><div class="polaroid">...</div><svg signature/></div> */
+
+.polaroid-group {
   transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
 }
 @media (hover: hover) and (pointer: fine) {
-  .polaroid:hover {
+  .polaroid-group:has(.polaroid:hover) {
     transform: scale(var(--motion-scale-hover));
   }
-}
-.polaroid:focus-visible {
-  transform: scale(var(--motion-scale-hover));
 }
 
 /* ---------- 3. Work cards (cover-works) ---------- */
@@ -129,8 +144,24 @@
   transform: translate(-50%, 0);
 }
 
-/* ---------- 6. Language pills: sliding indicator ---------- */
-/* One indicator moves under the active pill.
+/* Social tiles (Experience): 64px tiles, the whole tile grows. */
+.social-tile {
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+@media (hover: hover) and (pointer: fine) {
+  .social-tile:hover {
+    transform: scale(var(--motion-scale-hover));
+  }
+}
+.social-tile:focus-visible {
+  transform: scale(var(--motion-scale-hover));
+}
+
+/* ---------- 6. Language pills ---------- */
+/* The project does not use the sliding indicator: a language switch is a full page
+   navigation, so the indicator would never animate. The active pill keeps its own background.
+   Kept below for reference; unused.
+   Sliding indicator: one indicator moves under the active pill.
    JS sets --pill-x (offsetLeft) and --pill-w (offsetWidth) of the active pill on .lang-switch. */
 
 .lang-switch {
@@ -155,12 +186,29 @@
   color: var(--color-text-disabled);
   transition: color var(--motion-duration-base) var(--motion-easing-standard);
 }
-.lang-pill[aria-pressed="true"] {
+.lang-pill[aria-current="true"] {
   color: var(--color-text-primary);
 }
 @media (hover: hover) and (pointer: fine) {
-  .lang-pill:not([aria-pressed="true"]):hover {
+  .lang-pill:not([aria-current="true"]):hover {
     color: var(--color-text-secondary);
+  }
+}
+.lang-pill:not([aria-current="true"]):focus-visible {
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Reduced motion: no scale or movement, color changes only ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-group:has(.polaroid:hover),
+  .work-card:hover,
+  .work-card:focus-visible,
+  .social-tile:hover,
+  .social-tile:focus-visible,
+  .experience-item:hover .experience-icon > *,
+  .experience-item:focus-visible .experience-icon > * {
+    transform: none;
   }
 }
 
