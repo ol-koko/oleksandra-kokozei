@@ -13,7 +13,6 @@ export function WorkCard({ work }: WorkCardProps) {
   const { cover } = work;
   const coverClass = [
     styles.cover,
-    'work-cover',
     cover.background === 'placeholder' && styles.placeholder,
     cover.background === 'gradient' && styles.gradient,
   ]
@@ -22,12 +21,12 @@ export function WorkCard({ work }: WorkCardProps) {
 
   return (
     // TODO(overlay stage): make the card a button that opens the work overlay; the
-    // `work-card` hover (hover.css) then also covers its focus-visible state.
+    // `work-card` focus-visible state in hover.css then applies to it.
     <article className={`work-card ${styles.card}`}>
       <div className={coverClass}>
         {cover.fit === 'photo' ? (
           <Image
-            className={`work-cover-media ${styles.photo}`}
+            className={styles.photo}
             src={cover.image.src}
             alt=""
             fill
@@ -35,7 +34,7 @@ export function WorkCard({ work }: WorkCardProps) {
           />
         ) : (
           <Image
-            className={`work-cover-media ${styles.mockup}`}
+            className={styles.mockup}
             src={cover.image.src}
             alt=""
             width={cover.image.width}
