@@ -25,8 +25,8 @@
 
   /* Scroll reveal (animations.css): the right-hand card of a row follows the left one. */
   .item:nth-child(even) {
-    --reveal-range-start: 8%;
-    --reveal-range-end: 48%;
+    --reveal-range-start: 6svh;
+    --reveal-range-end: 56svh;
   }
 }
 

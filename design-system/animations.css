@@ -68,7 +68,8 @@
 }
 
 /* Scroll-driven reveal: the progress follows the scroll position while the element enters the
-   viewport (from its top edge at the viewport bottom to --reveal-range-end of the entry).
+   viewport: it starts when the element's top edge enters the bottom of the viewport and finishes
+   once that edge has travelled to about the middle of the viewport (--reveal-range-end).
    Browsers without scroll-driven animations, and reduced motion, show the content as is.
    Stagger side-by-side items by offsetting --reveal-range-start / --reveal-range-end. */
 @keyframes reveal-in {
@@ -78,9 +79,13 @@
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal {
+      /* Scroll distance in svh measured from the entry start, so it does not depend on the
+         element's height (a heading and a tall block both finish around mid-screen). */
+      --reveal-range-start: 0svh;
+      --reveal-range-end: 50svh;
       animation: reveal-in auto var(--motion-easing-standard) both;
       animation-timeline: view();
-      animation-range: entry var(--reveal-range-start, 0%) entry var(--reveal-range-end, 40%);
+      animation-range: entry var(--reveal-range-start) entry var(--reveal-range-end);
     }
   }
 }
