@@ -39,8 +39,18 @@ export function SocialLinks({ label, order, variant = 'inline', className }: Soc
 
           return (
             <li key={id}>
-              <a className={styles.link} href={link.href} target="_blank" rel="noopener noreferrer">
+              <a
+                className={`${variant === 'inline' ? 'social-link' : 'social-tile'} ${styles.link}`}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Icon />
+                {variant === 'inline' && (
+                  <span className="social-label" aria-hidden="true">
+                    {t(`social.${id}`)}
+                  </span>
+                )}
                 <span className="visually-hidden">
                   {t(`social.${id}`)} {t('opensInNewTab')}
                 </span>

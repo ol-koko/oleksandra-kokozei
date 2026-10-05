@@ -11,13 +11,13 @@ export function WorksSection() {
 
   return (
     <section id="works" aria-labelledby={HEADING_ID} className={styles.works}>
-      <h2 id={HEADING_ID} className="text-title-l">
+      <h2 id={HEADING_ID} className="text-title-l reveal">
         {t('heading')}
       </h2>
 
       <ul className={styles.grid}>
         {works.map((work) => (
-          <li key={work.slug}>
+          <li key={work.slug} className={`${styles.item} reveal`}>
             <WorkCard work={work} />
           </li>
         ))}

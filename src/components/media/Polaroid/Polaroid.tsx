@@ -17,7 +17,7 @@ type PolaroidProps = {
 export function Polaroid({ image, alt, rotation, preload = false, className }: PolaroidProps) {
   return (
     <div
-      className={[styles.polaroid, className].filter(Boolean).join(' ')}
+      className={['polaroid', styles.polaroid, className].filter(Boolean).join(' ')}
       style={{ '--polaroid-rotation': `${rotation}deg` } as CSSProperties}
     >
       <div className={styles.photo}>

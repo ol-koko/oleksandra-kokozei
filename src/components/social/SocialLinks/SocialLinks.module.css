@@ -14,10 +14,6 @@
   gap: var(--spacing-xl);
 }
 
-.inline .link {
-  color: var(--color-icon-decorative);
-}
-
 /* Experience (21:306): 64 px tiles, 24 px icon centered, gap 24. */
 .tile {
   gap: var(--spacing-3xl);

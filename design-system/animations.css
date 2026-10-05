@@ -59,22 +59,35 @@
   animation-delay: calc(var(--i, 0) * 60ms);
 }
 
-/* Work / project cards, hero */
+/* Work / project cards, hero. Stagger: set style={{ '--i': index }} on each card.
+   Fill is "backwards" on purpose: the end keyframe is not kept, so after the entrance the
+   element returns to its static style and its own transform (hover, rotation) applies. */
 .animate-card {
-  animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) both;
+  animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
 }
 
-/* On-scroll section reveal: JS adds .is-visible (IntersectionObserver) */
-.reveal {
-  opacity: 0;
-  transform: translateY(var(--dimension-6));
-  transition:
-    opacity var(--motion-duration-slower) var(--motion-easing-standard),
-    transform var(--motion-duration-slower) var(--motion-easing-standard);
+/* Scroll-driven reveal: the progress follows the scroll position while the element enters the
+   viewport: it starts when the element's top edge enters the bottom of the viewport and finishes
+   once that edge has travelled to about the middle of the viewport (--reveal-range-end).
+   Browsers without scroll-driven animations, and reduced motion, show the content as is.
+   Stagger side-by-side items by offsetting --reveal-range-start / --reveal-range-end. */
+@keyframes reveal-in {
+  from { opacity: 0; translate: 0 var(--dimension-6); }
 }
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      /* Scroll distance in svh measured from the entry start, so it does not depend on the
+         element's height (a heading and a tall block both finish around mid-screen). */
+      --reveal-range-start: 0svh;
+      --reveal-range-end: 50svh;
+      animation: reveal-in auto var(--motion-easing-standard) both;
+      animation-timeline: view();
+      animation-range: entry var(--reveal-range-start) entry var(--reveal-range-end);
+    }
+  }
 }
 
 /* ---------- Accessibility ---------- */
@@ -85,5 +98,4 @@
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
 }

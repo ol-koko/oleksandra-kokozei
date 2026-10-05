@@ -34,7 +34,7 @@ export function SectionNav({
           <li key={id}>
             <a
               href={`#${id}`}
-              className={`${styles.link} ${textClass}`}
+              className={`nav-link ${styles.link} ${textClass}`}
               aria-current={id === activeId ? 'true' : undefined}
               onClick={onNavigate}
             >

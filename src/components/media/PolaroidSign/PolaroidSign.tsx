@@ -24,14 +24,16 @@ export function PolaroidSign({ image, alt, preload, animateEntrance = false }: P
     <div className={styles.root}>
       <div className={styles.slot}>
         <div className={styles.stage}>
-          <Polaroid
-            image={image}
-            alt={alt}
-            rotation={PORTRAIT_ROTATION}
-            preload={preload}
-            className={animateEntrance ? 'animate-card' : undefined}
-          />
-          <Signature className={styles.signature} animated={animateEntrance} />
+          <div className={`polaroid-group ${styles.unit}`}>
+            <Polaroid
+              image={image}
+              alt={alt}
+              rotation={PORTRAIT_ROTATION}
+              preload={preload}
+              className={animateEntrance ? 'animate-card' : undefined}
+            />
+            <Signature className={styles.signature} animated={animateEntrance} />
+          </div>
         </div>
       </div>
     </div>

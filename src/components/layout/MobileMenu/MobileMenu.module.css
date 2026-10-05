@@ -19,7 +19,7 @@
   }
 }
 
-/* Figma 233:666: full screen, white. */
+/* Figma 233:666: full screen, white. The white comes from .panel, which slides in behind the content. */
 .dialog {
   position: fixed;
   inset: 0;
@@ -30,8 +30,15 @@
   margin: var(--spacing-none);
   padding: var(--spacing-none);
   border: var(--border-none);
-  background-color: var(--color-background-page);
+  background: none;
   color: var(--color-text-primary);
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--color-background-page);
 }
 
 .dialog[open] {
@@ -72,4 +79,85 @@
   justify-content: center;
   padding-block: var(--spacing-4xl);
   padding-inline: var(--page-gutter);
+}
+
+/*
+ * Open: the panel slides down (slower, emphasized), then the links and the
+ * language bar fade in with a small downward move, 60 ms apart, starting as
+ * the panel settles. Close: a quicker reverse (base, standard). The top bar
+ * never moves, so the icon morph (base duration) stays visible throughout.
+ */
+.nav li:nth-child(2) {
+  --menu-item-index: 1;
+}
+
+.nav li:nth-child(3) {
+  --menu-item-index: 2;
+}
+
+.languages {
+  --menu-item-index: 3;
+}
+
+.dialog[open] .panel {
+  animation: menu-panel-in var(--motion-duration-slower) var(--motion-easing-emphasized);
+}
+
+.dialog[open] .nav li,
+.dialog[open] .languages {
+  animation: menu-item-in var(--motion-duration-base) var(--motion-easing-standard) backwards;
+  animation-delay: calc(var(--motion-duration-fast) + var(--menu-item-index, 0) * 60ms);
+}
+
+.dialog.closing .panel {
+  animation: menu-panel-out var(--motion-duration-base) var(--motion-easing-standard) forwards;
+}
+
+.dialog.closing .nav li,
+.dialog.closing .languages {
+  animation: menu-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+@keyframes menu-panel-in {
+  from {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes menu-panel-out {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--dimension-2) * -1));
+  }
+}
+
+@keyframes menu-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes menu-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: fade only, no sliding or movement (the global rule also makes it instant). */
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open] .panel,
+  .dialog[open] .nav li,
+  .dialog[open] .languages {
+    animation-name: menu-fade-in;
+  }
+
+  .dialog.closing .panel {
+    animation-name: menu-fade-out;
+  }
 }
