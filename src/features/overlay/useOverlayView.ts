@@ -6,6 +6,12 @@ import { meOverlay, workOverlay } from '@/content/overlays';
 import type { OverlayRoute, SectionId } from '@/content/types';
 import { overlayKey, type OverlayKey } from './overlayRoute';
 
+/** What a section renders below its heading; new content plugs in as a new kind. */
+export type OverlaySectionBody =
+  | { kind: 'about-intro' } // overlay-me: greeting, location and bio with the polaroid
+  | { kind: 'hometown' } // overlay-me: hometown photos
+  | { kind: 'placeholder' }; // not built yet
+
 export type OverlaySectionView = {
   id: string;
   /** Element id inside the overlay, unique across overlays (`overlay-me-home`). */
@@ -13,6 +19,7 @@ export type OverlaySectionView = {
   navLabel: string;
   heading: string;
   caption?: { kind: 'location' | 'text'; text: string };
+  body: OverlaySectionBody;
 };
 
 export type OverlayView = {
@@ -29,7 +36,7 @@ export type OverlayView = {
 
 /**
  * Resolves an overlay's content data into the labels its shared component tree
- * renders. Section bodies are placeholders until the content stages.
+ * renders. Sections without content yet get a placeholder body.
  */
 export function useOverlayView(route: OverlayRoute): OverlayView {
   const t = useTranslations('Overlay');
@@ -59,15 +66,21 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
                 ...base,
                 heading: tMe('greeting'),
                 caption: { kind: 'location', text: tMe('location') },
+                body: { kind: 'about-intro' },
               };
             case 'home':
               return {
                 ...base,
                 heading: t('me.sections.home.heading'),
                 caption: { kind: 'location', text: t('me.sections.home.caption') },
+                body: { kind: 'hometown' },
               };
             default:
-              return { ...base, heading: t(`me.sections.${id}.heading`) };
+              return {
+                ...base,
+                heading: t(`me.sections.${id}.heading`),
+                body: { kind: 'placeholder' },
+              };
           }
         }),
       };
@@ -86,8 +99,13 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
               ...base,
               heading: title,
               caption: { kind: 'text', text: tWorks(`items.${route.slug}.description`) },
+              body: { kind: 'placeholder' },
             }
-          : { ...base, heading: t(`work.sections.${id}.heading`) };
+          : {
+              ...base,
+              heading: t(`work.sections.${id}.heading`),
+              body: { kind: 'placeholder' },
+            };
       }),
     };
   }, [route, t, tMe, tWorks, tNav]);
