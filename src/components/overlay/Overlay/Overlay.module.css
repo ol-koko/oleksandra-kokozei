@@ -112,11 +112,12 @@
 /*
  * Desktop scrollbar (Figma "scrollbar" 356:1571, 356:1573): a native
  * scrollbar styled as an 8 px pill in --color-media-placeholder with no
- * track, 40 from the panel's top and bottom (track margins) and 8 from its
- * right edge, so the 40 px corner radius never clips it. Scrolling stays
- * native (wheel, keys, touchpad, thumb drag).
+ * track, 40 from the panel's top and bottom (track margins) and 4 from its
+ * right edge, which puts its center line at 8 as in Figma. The 40 px corner
+ * radius never clips it. Scrolling stays native (wheel, keys, touchpad, thumb
+ * drag).
  *
- * The scroller is inset by the scrollbar size on both sides, and the gutter is
+ * The scroller is inset by the same 4 on both sides, and the gutter is
  * reserved on both edges too, so the content column stays centered in the
  * panel (102 at 1200) with the scrollbar in the right padding.
  */
@@ -124,7 +125,7 @@
   .scroller {
     --overlay-scrollbar-size: var(--spacing-md);
 
-    margin-inline: var(--overlay-scrollbar-size);
+    margin-inline: var(--spacing-xs);
     scrollbar-gutter: stable both-edges;
   }
 
