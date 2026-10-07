@@ -41,6 +41,13 @@
   background-color: var(--color-background-page);
 }
 
+/* Mobile: sections scrolled to by script land below the sticky header, 12 under it as the breadcrumbs do. */
+@media (max-width: 767px) {
+  .panel {
+    --overlay-scroll-margin: calc(var(--header-block-size) + var(--spacing-lg));
+  }
+}
+
 /* The only scrolling element: the panel never grows with its content. */
 .scroller {
   block-size: 100%;
