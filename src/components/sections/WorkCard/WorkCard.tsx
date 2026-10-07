@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { OverlayTrigger } from '@/components/overlay/OverlayTrigger/OverlayTrigger';
 import type { Work } from '@/content/types';
 import styles from './WorkCard.module.css';
 
@@ -7,10 +8,15 @@ type WorkCardProps = {
   work: Work;
 };
 
-/** Cover with a "Title・Year" pill, then a one-line description (Figma 57:496). */
+/**
+ * Cover with a "Title・Year" pill, then a one-line description (Figma 57:496).
+ * The pill text is the card heading and holds the button that opens the work
+ * overlay; the button's hit area stretches over the whole card.
+ */
 export function WorkCard({ work }: WorkCardProps) {
   const t = useTranslations('Works');
   const { cover } = work;
+  const descriptionId = `work-${work.slug}-description`;
   const coverClass = [
     'work-cover',
     styles.cover,
@@ -21,8 +27,6 @@ export function WorkCard({ work }: WorkCardProps) {
     .join(' ');
 
   return (
-    // TODO(overlay stage): make the card a button that opens the work overlay; the
-    // `work-card` focus-visible state in hover.css then applies to it.
     <article className={`work-card ${styles.card}`}>
       <div className={coverClass}>
         {cover.fit === 'photo' ? (
@@ -53,13 +57,23 @@ export function WorkCard({ work }: WorkCardProps) {
             height={cover.logo.height}
           />
         )}
-
-        <h3 className={`${styles.pill} text-body-xs`}>
-          {t('pill', { title: t(`items.${work.slug}.title`), year: work.year })}
-        </h3>
       </div>
 
-      <p className={`${styles.description} text-body-s`}>{t(`items.${work.slug}.description`)}</p>
+      <h3 className={styles.title}>
+        <OverlayTrigger
+          route={{ kind: 'work', slug: work.slug }}
+          className={styles.button}
+          aria-describedby={descriptionId}
+        >
+          <span className={`${styles.pill} text-body-xs`}>
+            {t('pill', { title: t(`items.${work.slug}.title`), year: work.year })}
+          </span>
+        </OverlayTrigger>
+      </h3>
+
+      <p id={descriptionId} className={`${styles.description} text-body-s`}>
+        {t(`items.${work.slug}.description`)}
+      </p>
     </article>
   );
 }
