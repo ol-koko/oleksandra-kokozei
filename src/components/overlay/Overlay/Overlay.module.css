@@ -109,6 +109,59 @@
   }
 }
 
+/*
+ * Desktop scrollbar (Figma "scrollbar" 356:1571, 356:1573): a native
+ * scrollbar styled as an 8 px pill in --color-media-placeholder with no
+ * track, 40 from the panel's top and bottom (track margins) and 8 from its
+ * right edge, so the 40 px corner radius never clips it. Scrolling stays
+ * native (wheel, keys, touchpad, thumb drag).
+ *
+ * The scroller is inset by the scrollbar size on both sides, and the gutter is
+ * reserved on both edges too, so the content column stays centered in the
+ * panel (102 at 1200) with the scrollbar in the right padding.
+ */
+@media (min-width: 768px) {
+  .scroller {
+    --overlay-scrollbar-size: var(--spacing-md);
+
+    margin-inline: var(--overlay-scrollbar-size);
+    scrollbar-gutter: stable both-edges;
+  }
+
+  .scroller::-webkit-scrollbar {
+    width: var(--overlay-scrollbar-size);
+  }
+
+  .scroller::-webkit-scrollbar-track {
+    margin-block: var(--spacing-5xl);
+    background: transparent;
+  }
+
+  .scroller::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-full);
+    background-color: var(--color-media-placeholder);
+  }
+
+  /*
+   * Firefox has no ::-webkit-scrollbar and no track margins: a thin scrollbar
+   * in the same colors, and the scroller itself starts and ends 40 inside the
+   * panel so the corners cannot clip it. The padding shrinks by the same
+   * amount, so the content starts where it does elsewhere. Gated, because
+   * Chromium ignores ::-webkit-scrollbar once scrollbar-color is set.
+   */
+  @supports not selector(::-webkit-scrollbar) {
+    .scroller {
+      --overlay-scroll-margin: calc(var(--overlay-padding-block) - var(--spacing-5xl));
+
+      block-size: calc(100% - var(--spacing-5xl) * 2);
+      margin-block: var(--spacing-5xl);
+      padding-block: var(--overlay-scroll-margin);
+      scrollbar-color: var(--color-media-placeholder) transparent;
+      scrollbar-width: thin;
+    }
+  }
+}
+
 /* ---------- Motion ---------- */
 
 /*
