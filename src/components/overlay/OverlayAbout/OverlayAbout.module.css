@@ -1,0 +1,26 @@
+/* Mobile (275:965): polaroid, then text, gap 24, as in the hero. */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+}
+
+/*
+ * Desktop row (84:319): 384 polaroid slot + 24 + text column, the text
+ * vertically centered next to the polaroid (the hero bottom-aligns it).
+ */
+@media (min-width: 1024px) {
+  .about {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .portrait {
+    flex: none;
+    inline-size: 384px;
+  }
+
+  .about > :last-child {
+    flex: 1 1 0;
+  }
+}

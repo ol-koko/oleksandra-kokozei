@@ -72,7 +72,17 @@
         "home": {
           "nav": "Home",
           "heading": "My hometown",
-          "caption": "Odesa, Ukraine"
+          "caption": "Odesa, Ukraine",
+          "more": "more",
+          "close": "close",
+          "photosLabel": "hometown photos",
+          "openPhoto": "Open photo: {alt}",
+          "photos": {
+            "port": "Odesa seaport cranes across the sea at sunset, seen from a table set with glasses",
+            "opera": "Hand holding an instant photo of the Odesa Opera House in front of the building itself",
+            "beach": "Pebble beach and calm sea under an orange dusk sky",
+            "street": "Evening street café in Odesa with string lights, parasols and a large tree"
+          }
         },
         "music": {
           "nav": "Music",
@@ -103,6 +113,9 @@
         }
       }
     }
+  },
+  "Lightbox": {
+    "close": "Close photo"
   },
   "Header": {
     "skipToContent": "Skip to content",

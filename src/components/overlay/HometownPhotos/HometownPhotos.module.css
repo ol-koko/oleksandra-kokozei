@@ -1,0 +1,151 @@
+/*
+ * Geometry is local to the component (plan §3, #12–13): areas, positions and
+ * rotations come from Figma as data (src/content/hometown.ts). Each item is
+ * placed by the center of its rotated frame.
+ *
+ * Mobile and tablet (322:560, 334:1201): 220 px polaroids in a column. The
+ * first photo fills a 361 area; "more" grows it to 1236 and the other three
+ * rise in one after another. Button 16 below, at the end.
+ */
+.root {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-xl);
+}
+
+.stage {
+  position: relative;
+  align-self: stretch;
+  block-size: 361px;
+}
+
+.root[data-expanded='true'] .stage {
+  block-size: 1236px;
+}
+
+.photos {
+  --polaroid-width: 220px;
+
+  position: absolute;
+  inset: 0;
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+.item {
+  position: absolute;
+  inset-block-start: var(--mobile-y);
+  inset-inline-start: calc(50% + var(--mobile-x));
+  translate: -50% -50%;
+}
+
+.extra {
+  display: none;
+}
+
+.root[data-expanded='true'] .extra {
+  display: block;
+}
+
+/* Folding away: the extra photos fade out in place, about as long as the glide back up. */
+.leaving {
+  animation: hometown-fade-out var(--motion-duration-slower) var(--motion-easing-standard) forwards;
+}
+
+@keyframes hometown-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/*
+ * Photo buttons: the hover scale comes from .polaroid-group (hover.css);
+ * keyboard focus mirrors it. The ring follows the rotated frame instead of
+ * the button's upright box.
+ */
+.photoButton {
+  display: block;
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background: none;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .photoButton {
+    cursor: zoom-in;
+  }
+}
+
+.photoButton:focus-visible {
+  outline: none;
+}
+
+.photoButton:focus-visible:not([data-pointer-focus]) {
+  transform: scale(var(--motion-scale-hover));
+}
+
+.photoButton:focus-visible:not([data-pointer-focus]) .frame {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoButton:focus-visible:not([data-pointer-focus]) {
+    transform: none;
+  }
+}
+
+/* Same pill as the hero's "more" (322:533). */
+.toggle {
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius-full);
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+/*
+ * Desktop collage (84:91): 260 px polaroids in an 894 × 470 area, the first
+ * one overflowing the column by 54 on the left. Narrower columns (1024–1439)
+ * scale the whole collage down, like PolaroidSign; `tan(atan2(a, b))` turns
+ * the length ratio into a number. All photos show; there is no button.
+ */
+@media (min-width: 1024px) {
+  .stage,
+  .root[data-expanded='true'] .stage {
+    --hometown-scale: min(1, tan(atan2(100cqi, 894px)));
+
+    block-size: calc(470px * var(--hometown-scale));
+  }
+
+  .photos {
+    --polaroid-width: 260px;
+
+    inset: auto;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 894px;
+    block-size: 470px;
+    scale: var(--hometown-scale);
+    transform-origin: top left;
+  }
+
+  .item {
+    z-index: var(--desktop-z);
+    inset-block-start: var(--desktop-y);
+    inset-inline-start: var(--desktop-x);
+  }
+
+  .extra {
+    display: block;
+  }
+
+  .toggle {
+    display: none;
+  }
+}

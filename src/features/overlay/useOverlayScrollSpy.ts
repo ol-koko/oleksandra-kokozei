@@ -15,7 +15,7 @@ import {
  * way down the scroller; when the end sentinel is in view, the last section is
  * active. `lock(id)` keeps a clicked item active while the scroller glides
  * there, until the visitor scrolls by hand (wheel, touch, scroll keys, a press
- * on the scrollbar).
+ * on the scrollbar) or `release()` is called.
  */
 export function useOverlayScrollSpy<Id extends string>(
   ids: readonly Id[],
@@ -24,6 +24,9 @@ export function useOverlayScrollSpy<Id extends string>(
 ) {
   const [activeId, setActiveId] = useState<Id | undefined>(ids[0]);
   const lockedId = useRef<Id | undefined>(undefined);
+  const releaseRef = useRef<() => void>(() => {
+    lockedId.current = undefined;
+  });
 
   useEffect(() => {
     const scroller = scrollerRef.current;
@@ -74,6 +77,7 @@ export function useOverlayScrollSpy<Id extends string>(
       lockedId.current = undefined;
       schedule();
     };
+    releaseRef.current = release;
     const onKeyDown = (event: KeyboardEvent) => {
       if (SCROLL_KEYS.has(event.key)) release();
     };
@@ -104,5 +108,7 @@ export function useOverlayScrollSpy<Id extends string>(
     setActiveId(id);
   }, []);
 
-  return { activeId, lock };
+  const release = useCallback(() => releaseRef.current(), []);
+
+  return { activeId, lock, release };
 }

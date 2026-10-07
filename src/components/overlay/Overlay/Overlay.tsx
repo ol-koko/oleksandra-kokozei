@@ -21,6 +21,8 @@ import { moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
 import { closeOverlay, findTrigger, getOpener } from '@/features/overlay/overlayRoute';
+import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
+import { useInitialSectionScroll } from '@/features/overlay/useInitialSectionScroll';
 import { useOverlayScrollSpy } from '@/features/overlay/useOverlayScrollSpy';
 import { useOverlayView } from '@/features/overlay/useOverlayView';
 import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
@@ -68,7 +70,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
   const lockedRef = useRef(false);
 
   const anchorIds = useMemo(() => view.sections.map((section) => section.anchorId), [view]);
-  const { activeId, lock } = useOverlayScrollSpy(anchorIds, scrollerRef, sentinelRef);
+  const { activeId, lock, release } = useOverlayScrollSpy(anchorIds, scrollerRef, sentinelRef);
 
   // Open on mount. Focus goes to the scroller, so arrow keys scroll at once and Tab reaches the nav.
   useEffect(() => {
@@ -87,6 +89,14 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
       }
     };
   }, []);
+
+  useInitialSectionScroll({
+    scrollerRef,
+    anchorId: view.initialAnchorId,
+    enabled: open,
+    lock,
+    release,
+  });
 
   // Closing: wait for the closing motion, then close the dialog and hand focus back.
   useEffect(() => {
@@ -137,10 +147,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
     const section = document.getElementById(anchorId);
     if (!scroller || !section) return;
     lock(anchorId);
-    const margin = parseFloat(getComputedStyle(section).scrollMarginBlockStart) || 0;
-    const offset =
-      section.getBoundingClientRect().top - scroller.getBoundingClientRect().top - margin;
-    scroller.scrollTo({ top: scroller.scrollTop + offset, behavior: scrollBehavior() });
+    scroller.scrollTo({ top: sectionScrollTop(scroller, section), behavior: scrollBehavior() });
     moveFocus(section, { fromPointer, preventScroll: true });
   };
 

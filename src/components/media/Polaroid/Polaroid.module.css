@@ -1,17 +1,24 @@
 /*
  * Frame geometry is local to the component (plan §3, #10): 260 × 382 with a
- * 20 / 16 / 60 inset, which leaves a 228 × 302 photo.
+ * 20 / 16 / 60 inset, which leaves a 228 × 302 photo. Other sizes (hometown
+ * 220, lightbox 358) keep the inset and the 260 : 382 outer ratio, as in Figma
+ * (322:560, 322:950); set them with --polaroid-width.
  */
 .polaroid {
   display: flex;
-  inline-size: 260px;
-  block-size: 382px;
+  inline-size: var(--polaroid-width, 260px);
+  aspect-ratio: 260 / 382;
   padding-block: var(--spacing-2xl) var(--spacing-8xl);
   padding-inline: var(--spacing-xl);
   border-radius: var(--border-radius-sm);
   background-color: var(--color-surface-raised);
   box-shadow: var(--shadow-sm);
   rotate: var(--polaroid-rotation, 0deg);
+}
+
+/* Lightbox (322:950): the photo lifts off the page. */
+.elevated {
+  box-shadow: var(--shadow-lg);
 }
 
 .photo {

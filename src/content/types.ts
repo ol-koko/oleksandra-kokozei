@@ -52,6 +52,23 @@ export type Role = {
 /** Sections of overlay-me. Nav labels and headings live in messages (`Overlay.me.sections.*`). */
 export type MeOverlaySectionId = 'about' | 'home' | 'music' | 'books';
 
+/** Hometown photos in overlay-me. Alt text lives in messages (`Overlay.me.sections.home.photos.*`). */
+export type HometownPhotoId = 'port' | 'opera' | 'beach' | 'street';
+
+/** Center of a photo's rotated box inside its area, in px (Figma geometry, stored as data). */
+export type PhotoPlacement = { x: number; y: number };
+
+export type HometownPhoto = {
+  id: HometownPhotoId;
+  image: ImageAsset;
+  /** Rotation in degrees, the same on desktop and mobile. */
+  rotation: number;
+  /** Collage (84:91): `x` from the area's left edge; `z` is the stacking order. */
+  desktop: PhotoPlacement & { z: number };
+  /** Column (334:1201): `x` from the column's center, so it holds below 390. */
+  mobile: PhotoPlacement;
+};
+
 /** Sections of every work overlay. Labels live in messages (`Overlay.work.sections.*`). */
 export type WorkOverlaySectionId = 'about' | 'goal' | 'problem' | 'result';
 
@@ -68,6 +85,8 @@ export type OverlayContent =
       /** Page section the overlay belongs to: first breadcrumb, active mobile menu item. */
       parentSection: SectionId;
       sections: readonly MeOverlaySectionId[];
+      /** Section the overlay glides to right after opening. */
+      initialSection?: MeOverlaySectionId;
     }
   | {
       kind: 'work';
