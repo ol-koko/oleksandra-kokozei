@@ -70,7 +70,11 @@
 /* Hovering the card scales its cover block as one unit (rounded cover with image, logo and pill),
    like the polaroid. The text below stays still, and nothing inside the cover (later videos)
    is transformed on its own. A transform never changes layout.
-   Markup: <article class="work-card"><div class="work-cover">...</div><p>...</p></article> */
+   The card holds a stretched button (in its heading), so keyboard focus is inside the card:
+   :has(:focus-visible) mirrors hover. Focus moved by script after a click (data-pointer-focus)
+   does not count.
+   Markup: <article class="work-card"><div class="work-cover">...</div>
+           <h3><button>...</button></h3><p>...</p></article> */
 
 .work-cover {
   transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
@@ -80,7 +84,8 @@
     transform: scale(var(--motion-scale-hover));
   }
 }
-.work-card:focus-visible .work-cover {
+.work-card:focus-visible .work-cover,
+.work-card:has(:focus-visible:not([data-pointer-focus])) .work-cover {
   transform: scale(var(--motion-scale-hover));
 }
 
@@ -208,6 +213,7 @@
   .polaroid-group:has(.polaroid:hover),
   .work-card:hover .work-cover,
   .work-card:focus-visible .work-cover,
+  .work-card:has(:focus-visible:not([data-pointer-focus])) .work-cover,
   .social-tile:hover,
   .social-tile:focus-visible,
   .experience-item:hover .experience-icon > *,

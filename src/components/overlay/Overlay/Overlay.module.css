@@ -1,0 +1,245 @@
+/*
+ * Figma: desktop overlay-me 76:686 and overlay-works 42:429, shown over the
+ * page in Frame 77 (188:993); mobile 275:815 and 334:1390.
+ *
+ * The <dialog> covers the viewport and stays transparent. The backdrop and the
+ * panel are its children, so each gets its own motion utility
+ * (.animate-overlay, .animate-modal) and the closing motion can reverse both.
+ */
+.dialog {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  overflow: hidden;
+  border: var(--border-none);
+  background: none;
+  color: var(--color-text-primary);
+}
+
+.dialog::backdrop {
+  background: none;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-overlay-backdrop);
+}
+
+/* Mobile: full screen, like the mobile menu. */
+.panel {
+  --overlay-padding-block: var(--spacing-none);
+
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--color-background-page);
+}
+
+/* The only scrolling element: the panel never grows with its content. */
+.scroller {
+  block-size: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-block: var(--overlay-padding-block);
+}
+
+/* Focus lands here on open so the keyboard scrolls the content; it is not a control. */
+.scroller:focus-visible {
+  outline: none;
+}
+
+/* Mobile: content 12 below the breadcrumbs (275:815), 48 before the footer, as on the page. */
+.layout {
+  padding-block: var(--spacing-lg) var(--spacing-6xl);
+  padding-inline: var(--page-gutter);
+}
+
+/* Mobile section rhythm: 48 above and below each divider. */
+.divider {
+  margin-block: var(--spacing-6xl);
+}
+
+/*
+ * Desktop panel. At 1440 (Frame 77): inset 80 / 120, padding 80, and a 996
+ * column centered in the 1200 panel, which leaves the 102 side padding.
+ * Tablet (768–1439, not designed): the same structure with smaller insets
+ * and padding from the spacing scale, and a fluid column.
+ */
+@media (min-width: 768px) {
+  .mobileOnly {
+    display: none;
+  }
+
+  .panel {
+    --overlay-padding-block: var(--spacing-7xl);
+    --overlay-inset-inline: max(var(--page-gutter), var(--spacing-5xl));
+
+    inset-block: var(--spacing-5xl);
+    inline-size: min(100% - var(--overlay-inset-inline) * 2, var(--size-overlay-max));
+    margin-inline: auto;
+    border-radius: var(--border-radius-5xl);
+  }
+
+  /* Content (894 at 1440) + 24 gap + nav; normalized from 26 in 112:337. */
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--spacing-3xl);
+    inline-size: min(100% - var(--spacing-5xl) * 2, var(--size-content-max));
+    margin-inline: auto;
+    padding: var(--spacing-none);
+  }
+
+  .divider {
+    margin-block: var(--spacing-9xl);
+  }
+}
+
+@media (min-width: 1440px) {
+  .panel {
+    --overlay-padding-block: var(--spacing-9xl);
+
+    inset-block: var(--spacing-9xl);
+  }
+}
+
+/*
+ * Desktop scrollbar (Figma "scrollbar" 356:1571, 356:1573): a native
+ * scrollbar styled as an 8 px pill in --color-media-placeholder with no
+ * track, 40 from the panel's top and bottom (track margins) and 4 from its
+ * right edge, which puts its center line at 8 as in Figma. The 40 px corner
+ * radius never clips it. Scrolling stays native (wheel, keys, touchpad, thumb
+ * drag).
+ *
+ * The scroller is inset by the same 4 on both sides, and the gutter is
+ * reserved on both edges too, so the content column stays centered in the
+ * panel (102 at 1200) with the scrollbar in the right padding.
+ */
+@media (min-width: 768px) {
+  .scroller {
+    --overlay-scrollbar-size: var(--spacing-md);
+
+    margin-inline: var(--spacing-xs);
+    scrollbar-gutter: stable both-edges;
+  }
+
+  .scroller::-webkit-scrollbar {
+    width: var(--overlay-scrollbar-size);
+  }
+
+  .scroller::-webkit-scrollbar-track {
+    margin-block: var(--spacing-5xl);
+    background: transparent;
+  }
+
+  .scroller::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-full);
+    background-color: var(--color-media-placeholder);
+  }
+
+  /*
+   * Firefox has no ::-webkit-scrollbar and no track margins: a thin scrollbar
+   * in the same colors, and the scroller itself starts and ends 40 inside the
+   * panel so the corners cannot clip it. The padding shrinks by the same
+   * amount, so the content starts where it does elsewhere. Gated, because
+   * Chromium ignores ::-webkit-scrollbar once scrollbar-color is set.
+   */
+  @supports not selector(::-webkit-scrollbar) {
+    .scroller {
+      --overlay-scroll-margin: calc(var(--overlay-padding-block) - var(--spacing-5xl));
+
+      block-size: calc(100% - var(--spacing-5xl) * 2);
+      margin-block: var(--spacing-5xl);
+      padding-block: var(--overlay-scroll-margin);
+      scrollbar-color: var(--color-media-placeholder) transparent;
+      scrollbar-width: thin;
+    }
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/*
+ * Desktop open: .animate-overlay fades the backdrop in, .animate-modal scales
+ * the panel in, captions and nav items use .animate-caption.
+ * Close: a quicker reverse; the dialog closes once it has finished.
+ */
+.closing .backdrop {
+  animation: overlay-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+.closing .panel {
+  animation: overlay-scale-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+/*
+ * Mobile open, consistent with the mobile menu: the page-colored panel slides
+ * down (slower, emphasized), then the content fades in as it settles.
+ * Close: the panel slides back up (base, standard).
+ */
+@media (max-width: 767px) {
+  .dialog .panel {
+    animation: overlay-slide-in var(--motion-duration-slower) var(--motion-easing-emphasized) both;
+  }
+
+  .dialog .scroller {
+    animation: overlay-fade-in var(--motion-duration-base) var(--motion-easing-standard) backwards;
+    animation-delay: var(--motion-duration-fast);
+  }
+
+  .closing .panel {
+    animation: overlay-slide-out var(--motion-duration-base) var(--motion-easing-standard) forwards;
+  }
+
+  .closing .scroller {
+    animation: overlay-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  }
+}
+
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes overlay-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes overlay-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes overlay-slide-in {
+  from {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes overlay-slide-out {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Reduced motion: fades only, no scaling or sliding (the global rule also makes them instant). */
+@media (prefers-reduced-motion: reduce) {
+  .dialog .panel {
+    animation-name: overlay-fade-in;
+  }
+
+  .closing .panel {
+    animation-name: overlay-fade-out;
+  }
+}

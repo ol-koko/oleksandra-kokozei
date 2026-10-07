@@ -57,6 +57,53 @@
       }
     }
   },
+  "Overlay": {
+    "hint": "Press Escape to close.",
+    "sectionsNav": "Sections",
+    "breadcrumbs": "Breadcrumbs",
+    "backToPage": ", back to the page",
+    "me": {
+      "title": "More about me",
+      "crumb": "More",
+      "sections": {
+        "about": {
+          "nav": "About"
+        },
+        "home": {
+          "nav": "Home",
+          "heading": "My hometown",
+          "caption": "Odesa, Ukraine"
+        },
+        "music": {
+          "nav": "Music",
+          "heading": "Fav songs"
+        },
+        "books": {
+          "nav": "Books",
+          "heading": "Books"
+        }
+      }
+    },
+    "work": {
+      "sections": {
+        "about": {
+          "nav": "About"
+        },
+        "goal": {
+          "nav": "Goal",
+          "heading": "Goal"
+        },
+        "problem": {
+          "nav": "Problem",
+          "heading": "Problem"
+        },
+        "result": {
+          "nav": "Result",
+          "heading": "Result"
+        }
+      }
+    }
+  },
   "Header": {
     "skipToContent": "Skip to content",
     "mainNav": "Main",

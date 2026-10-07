@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import type { CSSProperties } from 'react';
 import { PolaroidSign } from '@/components/media/PolaroidSign/PolaroidSign';
+import { OverlayTrigger } from '@/components/overlay/OverlayTrigger/OverlayTrigger';
 import { ABOUT_INTRO_ENTRANCE_END, AboutIntro } from '@/components/sections/AboutIntro/AboutIntro';
 import { portrait } from '@/content/me';
 import styles from './HeroSection.module.css';
@@ -19,16 +20,13 @@ export function HeroSection() {
 
       <div className={styles.text}>
         <AboutIntro headingLevel={1} headingId={HEADING_ID} animateEntrance />
-        {/* TODO(overlay stage): opens overlay-me (`?overlay=me`). Disabled until the overlay exists;
-            add its hover state (hover.css) when it becomes clickable. */}
-        <button
-          type="button"
-          className={`${styles.more} text-body-m animate-card`}
+        <OverlayTrigger
+          route={{ kind: 'me' }}
+          className={`hover-link ${styles.more} text-body-m animate-card`}
           style={{ '--i': ABOUT_INTRO_ENTRANCE_END } as CSSProperties}
-          disabled
         >
           {t('more')}
-        </button>
+        </OverlayTrigger>
       </div>
     </section>
   );

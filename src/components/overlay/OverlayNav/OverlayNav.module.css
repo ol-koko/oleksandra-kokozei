@@ -1,0 +1,32 @@
+.nav {
+  display: none;
+}
+
+.link {
+  text-decoration: none;
+}
+
+/*
+ * Figma 76:687: right-aligned, 16 px apart, vertically centered next to the
+ * content. The list sticks at the middle of the overlay scroller while the
+ * content scrolls; the nav column itself spans the full content height.
+ */
+@media (min-width: 768px) {
+  .nav {
+    display: block;
+  }
+
+  .list {
+    position: sticky;
+    inset-block-start: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-xl);
+    margin: var(--spacing-none);
+    padding: var(--spacing-none);
+    list-style: none;
+    text-align: end;
+    translate: 0 -50%;
+  }
+}

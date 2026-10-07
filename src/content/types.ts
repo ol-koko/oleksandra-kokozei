@@ -48,3 +48,29 @@ export type Role = {
   id: RoleId;
   paragraphs: readonly ParagraphKey[];
 };
+
+/** Sections of overlay-me. Nav labels and headings live in messages (`Overlay.me.sections.*`). */
+export type MeOverlaySectionId = 'about' | 'home' | 'music' | 'books';
+
+/** Sections of every work overlay. Labels live in messages (`Overlay.work.sections.*`). */
+export type WorkOverlaySectionId = 'about' | 'goal' | 'problem' | 'result';
+
+/** Which overlay is open: `?overlay=me` or `?work=<url slug>`. */
+export type OverlayRoute = { kind: 'me' } | { kind: 'work'; slug: WorkSlug };
+
+/**
+ * One overlay as data (D5). Every overlay renders through the same component
+ * tree; only these fields differ.
+ */
+export type OverlayContent =
+  | {
+      kind: 'me';
+      /** Page section the overlay belongs to: first breadcrumb, active mobile menu item. */
+      parentSection: SectionId;
+      sections: readonly MeOverlaySectionId[];
+    }
+  | {
+      kind: 'work';
+      parentSection: SectionId;
+      sections: readonly WorkOverlaySectionId[];
+    };

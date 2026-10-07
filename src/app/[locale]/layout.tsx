@@ -37,7 +37,13 @@ export default async function LocaleLayout({ children }: LocaleLayoutProps) {
 
   return (
     <html lang={locale} className={figtree.variable}>
-      <body>
+      {/*
+       * Browser extensions add attributes to <body> before React hydrates
+       * (ColorZilla: `cz-shortcut-listen`), which React reports as a hydration
+       * mismatch. This silences attribute mismatches on <body> itself only;
+       * mismatches in the page content are still reported.
+       */}
+      <body suppressHydrationWarning>
         <a className="skip-link text-body-m" href="#content">
           {t('skipToContent')}
         </a>

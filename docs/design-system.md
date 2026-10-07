@@ -13,6 +13,8 @@ All three CSS files are imported globally in `src/app/globals.css`.
 
 When syncing a new Figma export, merge it instead of overwriting. The repository keeps tokens that the export does not contain yet: `--size-content-max`, `--size-overlay-content`, `--size-overlay-max`, `--size-measure`, `--shadow-polaroid`, `--blur-header`, `--gradient-media-cover`, `--gradient-media-detail`. `--color-icon-strong` stays `gray-900` (#1e1e1e, as bound in Figma) even though the export maps it to `gray-1000`.
 
+`--shadow-polaroid` is kept but no longer used: polaroids use `--shadow-sm` (blur 6), and the Figma effect is being updated to match. Remove it once Figma no longer has the 3.15 blur.
+
 ## Rules
 
 - Use **semantic** tokens in components: `--color-*`, `--spacing-*`, `--border-radius-*`, `--border-*`, `--size-*`, `--motion-*`. Primitive tokens (`--gray-*`, `--dimension-*`) are building blocks for the semantic layer.

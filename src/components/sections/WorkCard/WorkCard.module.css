@@ -1,12 +1,19 @@
+/*
+ * The card is the positioned box the button's hit area stretches over, and the
+ * size container the pill uses to follow the cover's hover scale.
+ */
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--spacing-lg);
+  container-type: inline-size;
 }
 
 /* Desktop 486 × 253 and mobile 358 × 186 share one ratio (plan §3, #14). */
 .cover {
   position: relative;
+  grid-area: 1 / 1;
   aspect-ratio: 486 / 253;
   overflow: hidden;
   border-radius: var(--border-radius-3xl);
@@ -48,10 +55,56 @@
   inset-inline-end: var(--spacing-lg);
 }
 
-.pill {
+/*
+ * The heading sits on the cover's grid cell, bottom left, without being
+ * positioned itself: the button's ::after then resolves against the card, not
+ * the cover (which clips and transforms). z-index lifts it above the cover.
+ */
+.title {
+  z-index: 1;
+  display: flex;
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: start;
+  margin: var(--spacing-lg);
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* The pill is a visual tag: the button inside it carries no styling of its own. */
+.button {
+  display: flex;
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.button::after {
+  content: '';
   position: absolute;
-  inset-block-end: var(--spacing-lg);
-  inset-inline-start: var(--spacing-lg);
+  inset: 0;
+  border-radius: var(--border-radius-3xl);
+}
+
+/*
+ * The focus ring outlines the whole card. It is drawn by the stretched ::after,
+ * which sits above the cover, so the cover's focus scale cannot hide it.
+ */
+.button:focus-visible {
+  outline: none;
+}
+
+.button:focus-visible:not([data-pointer-focus])::after {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.pill {
+  display: block;
   padding-block: var(--spacing-xs);
   padding-inline: var(--spacing-lg);
   border-radius: var(--border-radius-full);
@@ -61,6 +114,7 @@
 }
 
 .description {
+  grid-row: 2;
   padding-inline: var(--spacing-md);
   color: var(--color-text-muted);
 }
@@ -74,5 +128,29 @@
   /* Figma text boxes run past the card's right edge; no end padding keeps every description on one line at 1440. */
   .description {
     padding-inline: var(--spacing-lg) var(--spacing-none);
+  }
+}
+
+/*
+ * The pill is outside the cover, so it follows the cover's hover scale on its
+ * own: same scale, same timing, origin at the cover center. Seen from the pill,
+ * the center is half the card width minus the inset across, and half the cover
+ * height (486 × 253 ratio) above the pill's bottom inset.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .pill {
+    transform-origin: calc(50cqi - var(--spacing-lg))
+      calc(100% + var(--spacing-lg) - 50cqi * 253 / 486);
+    transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+  }
+
+  .card:has(.button:focus-visible:not([data-pointer-focus])) .pill {
+    transform: scale(var(--motion-scale-hover));
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover .pill {
+      transform: scale(var(--motion-scale-hover));
+    }
   }
 }

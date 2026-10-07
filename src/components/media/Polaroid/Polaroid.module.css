@@ -10,7 +10,7 @@
   padding-inline: var(--spacing-xl);
   border-radius: var(--border-radius-sm);
   background-color: var(--color-surface-raised);
-  box-shadow: var(--shadow-polaroid);
+  box-shadow: var(--shadow-sm);
   rotate: var(--polaroid-rotation, 0deg);
 }
 

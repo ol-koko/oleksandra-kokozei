@@ -57,6 +57,53 @@
       }
     }
   },
+  "Overlay": {
+    "hint": "Натисніть Escape, щоб закрити.",
+    "sectionsNav": "Розділи",
+    "breadcrumbs": "Навігаційний ланцюжок",
+    "backToPage": ", назад до сторінки",
+    "me": {
+      "title": "Більше про мене",
+      "crumb": "More",
+      "sections": {
+        "about": {
+          "nav": "About"
+        },
+        "home": {
+          "nav": "Home",
+          "heading": "My hometown",
+          "caption": "Odesa, Ukraine"
+        },
+        "music": {
+          "nav": "Music",
+          "heading": "Fav songs"
+        },
+        "books": {
+          "nav": "Books",
+          "heading": "Books"
+        }
+      }
+    },
+    "work": {
+      "sections": {
+        "about": {
+          "nav": "About"
+        },
+        "goal": {
+          "nav": "Goal",
+          "heading": "Goal"
+        },
+        "problem": {
+          "nav": "Problem",
+          "heading": "Problem"
+        },
+        "result": {
+          "nav": "Result",
+          "heading": "Result"
+        }
+      }
+    }
+  },
   "Header": {
     "skipToContent": "Перейти до вмісту",
     "mainNav": "Основна навігація",

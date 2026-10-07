@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect, useState, type RefObject } from 'react';
-
-/** Activation line: a third of the way down the viewport (never above the header). */
-const ACTIVATION_RATIO = 1 / 3;
-/** Within this many px of the page end, the last section is active. */
-const BOTTOM_THRESHOLD = 24;
-/** Keys that scroll the page; any of them ends a click lock. */
-const SCROLL_KEYS = new Set(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ']);
+import {
+  ACTIVATION_RATIO,
+  BOTTOM_THRESHOLD,
+  SCROLL_KEYS,
+  pickActiveSection,
+} from './activeSection';
 
 /**
  * Returns the id of the section currently in view.
@@ -42,14 +41,11 @@ export function useScrollSpy<Id extends string>(
         window.scrollY > 0 &&
         window.scrollY + window.innerHeight >= scrollHeight - BOTTOM_THRESHOLD;
 
-      if (nearBottom) return ids.at(-1);
-
-      let current = ids[0];
-      for (const id of ids) {
-        const top = document.getElementById(id)?.getBoundingClientRect().top;
-        if (top !== undefined && top <= line) current = id;
-      }
-      return current;
+      return pickActiveSection(ids, {
+        line,
+        nearBottom,
+        topOf: (id) => document.getElementById(id)?.getBoundingClientRect().top,
+      });
     };
 
     const update = () => {
