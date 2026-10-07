@@ -1,3 +1,4 @@
+import { HometownPhotos } from '@/components/overlay/HometownPhotos/HometownPhotos';
 import { OverlayAbout } from '@/components/overlay/OverlayAbout/OverlayAbout';
 import { LocationLabel } from '@/components/ui/LocationLabel/LocationLabel';
 import type { OverlaySectionView } from '@/features/overlay/useOverlayView';
@@ -39,7 +40,8 @@ export function OverlaySection({ section }: OverlaySectionProps) {
             )}
           </div>
 
-          <div className={styles.placeholder} aria-hidden="true" />
+          {body.kind === 'hometown' && <HometownPhotos />}
+          {body.kind === 'placeholder' && <div className={styles.placeholder} aria-hidden="true" />}
         </>
       )}
     </section>
