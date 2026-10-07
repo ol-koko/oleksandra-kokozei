@@ -1,0 +1,34 @@
+/* Figma 275:997: 6 px between crumbs and caret, 16 px side padding, 12 px below the header. */
+.list {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-none);
+  padding-block-start: var(--spacing-lg);
+  padding-inline: var(--page-gutter);
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Text button: the crumb keeps the title-s type and the nav-link colors (inactive → secondary). */
+.exit {
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.caret {
+  flex: none;
+  color: var(--color-icon-muted);
+}
+
+.current {
+  color: var(--color-text-primary);
+}

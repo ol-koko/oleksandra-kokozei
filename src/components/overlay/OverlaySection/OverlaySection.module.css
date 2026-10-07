@@ -1,0 +1,37 @@
+/* Heading → body: 40 on mobile (275:815), 48 on desktop (76:686). */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5xl);
+  /* Nav targets land where the first section starts. */
+  scroll-margin-block-start: var(--overlay-padding-block);
+}
+
+/* A scroll target for the nav, not a control: no focus ring. */
+.section:focus-visible {
+  outline: none;
+}
+
+/* Heading → caption: 16 (Figma 84:100). */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.caption {
+  max-inline-size: var(--size-measure);
+}
+
+/* Placeholder body: the 894 × 435 detail cover ratio (overlay-works 42:429). */
+.placeholder {
+  aspect-ratio: 894 / 435;
+  border-radius: var(--border-radius-4xl);
+  background-color: var(--color-surface-subtle);
+}
+
+@media (min-width: 768px) {
+  .section {
+    gap: var(--spacing-6xl);
+  }
+}

@@ -1,4 +1,4 @@
-import type { OverlayContent, OverlayRoute, WorkSlug } from './types';
+import type { OverlayContent, WorkSlug } from './types';
 
 /** overlay-me (desktop 76:686, mobile 275:815), in nav order. */
 export const meOverlay = {
@@ -21,7 +21,3 @@ export const workUrlSlugs = {
   blowStressAway: 'blow-stress-away',
   filmBudget: 'film-budget',
 } as const satisfies Record<WorkSlug, string>;
-
-export function getOverlayContent(route: OverlayRoute): OverlayContent {
-  return route.kind === 'me' ? meOverlay : workOverlay;
-}
