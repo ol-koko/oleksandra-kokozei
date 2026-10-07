@@ -79,12 +79,24 @@
         "80": {
           "$type": "color",
           "$value": "#ffffffcc"
+        },
+        "40": {
+          "$type": "color",
+          "$value": "#ffffff66"
         }
       },
       "black": {
         "10": {
           "$type": "color",
           "$value": "#0000001a"
+        },
+        "15": {
+          "$type": "color",
+          "$value": "#00000026"
+        },
+        "20": {
+          "$type": "color",
+          "$value": "#00000033"
         }
       }
     },
@@ -436,6 +448,24 @@
         "backdrop": {
           "$type": "color",
           "$value": "{primitive.color.black.10}"
+        },
+        "lightbox": {
+          "$type": "color",
+          "$value": "{primitive.color.white.40}"
+        }
+      },
+      "shadow": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{primitive.color.black.10}"
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{primitive.color.black.15}"
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{primitive.color.black.20}"
         }
       }
     },
@@ -637,12 +667,53 @@
           "spread": "0px",
           "color": "{primitive.color.black.10}"
         }
+      },
+      "shadow-sm": {
+        "$type": "shadow",
+        "$description": "Polaroid cards on the page.",
+        "$value": {
+          "color": "{semantic.color.shadow.subtle}",
+          "offsetX": "0",
+          "offsetY": "2",
+          "blur": "6",
+          "spread": "0"
+        }
+      },
+      "shadow-md": {
+        "$type": "shadow",
+        "$description": "Floating controls: carousel arrow buttons.",
+        "$value": {
+          "color": "{semantic.color.shadow.default}",
+          "offsetX": "0",
+          "offsetY": "1",
+          "blur": "10",
+          "spread": "0"
+        }
+      },
+      "shadow-lg": {
+        "$type": "shadow",
+        "$description": "Elevated content in the lightbox overlay.",
+        "$value": {
+          "color": "{semantic.color.shadow.strong}",
+          "offsetX": "0",
+          "offsetY": "1",
+          "blur": "20",
+          "spread": "0"
+        }
       }
     },
     "blur": {
       "blur-header": {
         "$type": "dimension",
         "$value": "6px"
+      },
+      "blur-sm": {
+        "$type": "dimension",
+        "$value": "{primitive.dimension.dimension-1}"
+      },
+      "blur-md": {
+        "$type": "dimension",
+        "$value": "{primitive.dimension.dimension-3}"
       }
     },
     "gradient": {
