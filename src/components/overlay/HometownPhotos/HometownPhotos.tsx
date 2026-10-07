@@ -1,9 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useId, useRef, useState, type CSSProperties } from 'react';
+import { useCallback, useId, useRef, useState, type CSSProperties } from 'react';
+import { Lightbox } from '@/components/media/Lightbox/Lightbox';
 import { Polaroid } from '@/components/media/Polaroid/Polaroid';
 import { hometownPhotos } from '@/content/hometown';
+import type { HometownPhoto } from '@/content/types';
+import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
 import styles from './HometownPhotos.module.css';
 
@@ -15,12 +18,23 @@ const PHOTO_SIZES = '(min-width: 1024px) 228px, 188px';
  * in one collage. Mobile and tablet (322:560, 334:1226): a column that shows
  * the first photo and reveals the rest inline with "more"; the same button
  * then reads "close" and folds them away again.
+ *
+ * Every photo is a button that opens it full screen in a lightbox; focus
+ * returns to that photo when the lightbox closes.
  */
 export function HometownPhotos() {
   const t = useTranslations('Overlay.me.sections.home');
   const [expanded, setExpanded] = useState(false);
   const listId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const [shown, setShown] = useState<{ photo: HometownPhoto; fromPointer: boolean } | null>(null);
+  /** The photo button that opened the lightbox. */
+  const openerRef = useRef<HTMLButtonElement | null>(null);
+
+  const onLightboxClosed = useCallback((fromPointer: boolean) => {
+    setShown(null);
+    moveFocus(openerRef.current, { fromPointer, preventScroll: true });
+  }, []);
 
   const toggle = () => {
     setExpanded(!expanded);
@@ -59,12 +73,24 @@ export function HometownPhotos() {
                   } as CSSProperties
                 }
               >
-                <Polaroid
-                  image={photo.image}
-                  alt={t(`photos.${photo.id}`)}
-                  rotation={photo.rotation}
-                  sizes={PHOTO_SIZES}
-                />
+                <button
+                  type="button"
+                  className={`polaroid-group ${styles.photoButton}`}
+                  aria-label={t('openPhoto', { alt: t(`photos.${photo.id}`) })}
+                  onClick={(event) => {
+                    openerRef.current = event.currentTarget;
+                    setShown({ photo, fromPointer: isPointerClick(event) });
+                  }}
+                >
+                  {/* The button names the photo; the image itself stays unnamed. */}
+                  <Polaroid
+                    image={photo.image}
+                    alt=""
+                    rotation={photo.rotation}
+                    sizes={PHOTO_SIZES}
+                    className={styles.frame}
+                  />
+                </button>
               </li>
             );
           })}
@@ -82,6 +108,15 @@ export function HometownPhotos() {
         {expanded ? t('close') : t('more')}
         <span className="visually-hidden"> {t('photosLabel')}</span>
       </button>
+
+      {shown && (
+        <Lightbox
+          image={shown.photo.image}
+          alt={t(`photos.${shown.photo.id}`)}
+          fromPointer={shown.fromPointer}
+          onClosed={onLightboxClosed}
+        />
+      )}
     </div>
   );
 }

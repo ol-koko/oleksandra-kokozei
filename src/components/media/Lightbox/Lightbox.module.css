@@ -1,0 +1,147 @@
+/*
+ * Figma 322:950 (mobile): a light, blurred backdrop over everything and a
+ * 358 × 526 upright polaroid in the middle, with a close button at the top
+ * end in the same spot as the mobile menu's. Desktop is not designed: the
+ * polaroid fills the viewport height minus 80 above and below.
+ */
+.dialog {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  overflow: hidden;
+  overscroll-behavior: contain;
+  border: var(--border-none);
+  background: none;
+  color: var(--color-text-primary);
+}
+
+.dialog:not([open]) {
+  display: none;
+}
+
+.dialog::backdrop {
+  background: none;
+}
+
+/* Figma's background blur radius is twice the CSS one: blur-sm in Figma renders as half of it. */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-overlay-lightbox);
+  -webkit-backdrop-filter: blur(calc(var(--blur-sm) / 2));
+  backdrop-filter: blur(calc(var(--blur-sm) / 2));
+}
+
+/* Same height, padding and placement as the mobile menu's top bar (233:527). */
+.topBar {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-block-size: var(--header-block-size);
+  padding-block: var(--spacing-4xl);
+  padding-inline: var(--page-gutter);
+  pointer-events: none;
+}
+
+/* 24 px icon with a larger hit area; the negative margin keeps the Figma geometry. */
+.closeButton {
+  display: grid;
+  place-items: center;
+  margin: calc(var(--spacing-md) * -1);
+  padding: var(--spacing-md);
+  border: var(--border-none);
+  border-radius: var(--border-radius-full);
+  background: none;
+  color: var(--color-icon-strong);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/*
+ * The polaroid keeps its 260 : 382 ratio and fits both ways: at most 358 wide
+ * on a phone, and never taller than the space between the top bar and an
+ * equal margin below it.
+ */
+.frame {
+  --lightbox-block-space: calc(100dvh - var(--header-block-size) * 2);
+  --polaroid-width: min(
+    358px,
+    100vw - var(--page-gutter) * 2,
+    var(--lightbox-block-space) * 260 / 382
+  );
+
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .frame {
+    --lightbox-block-space: calc(100dvh - var(--spacing-9xl) * 2);
+    --polaroid-width: min(100vw - var(--page-gutter) * 2, var(--lightbox-block-space) * 260 / 382);
+  }
+}
+
+/* Over the photo on desktop the cursor says "click to close". */
+@media (hover: hover) and (pointer: fine) {
+  .dialog {
+    cursor: zoom-out;
+  }
+
+  .frame {
+    cursor: auto;
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/* Open: .animate-overlay fades the backdrop in, .animate-modal scales the photo in. Close: a quicker reverse. */
+.closing .backdrop {
+  animation: lightbox-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+.closing .frame {
+  animation: lightbox-scale-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+.closing .topBar {
+  animation: lightbox-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+@keyframes lightbox-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes lightbox-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes lightbox-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+/* Reduced motion: fades only, no scaling (the global rule also makes them instant). */
+@media (prefers-reduced-motion: reduce) {
+  .dialog .frame {
+    animation-name: lightbox-fade-in;
+  }
+
+  .closing .frame {
+    animation-name: lightbox-fade-out;
+  }
+}

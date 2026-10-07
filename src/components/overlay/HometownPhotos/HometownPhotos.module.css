@@ -49,6 +49,44 @@
   display: block;
 }
 
+/*
+ * Photo buttons: the hover scale comes from .polaroid-group (hover.css);
+ * keyboard focus mirrors it. The ring follows the rotated frame instead of
+ * the button's upright box.
+ */
+.photoButton {
+  display: block;
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background: none;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .photoButton {
+    cursor: zoom-in;
+  }
+}
+
+.photoButton:focus-visible {
+  outline: none;
+}
+
+.photoButton:focus-visible:not([data-pointer-focus]) {
+  transform: scale(var(--motion-scale-hover));
+}
+
+.photoButton:focus-visible:not([data-pointer-focus]) .frame {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoButton:focus-visible:not([data-pointer-focus]) {
+    transform: none;
+  }
+}
+
 /* Same pill as the hero's "more" (322:533). */
 .toggle {
   padding-block: var(--spacing-xs);
