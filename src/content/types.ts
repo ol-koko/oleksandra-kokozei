@@ -85,6 +85,8 @@ export type OverlayContent =
       /** Page section the overlay belongs to: first breadcrumb, active mobile menu item. */
       parentSection: SectionId;
       sections: readonly MeOverlaySectionId[];
+      /** Section the overlay glides to right after opening. */
+      initialSection?: MeOverlaySectionId;
     }
   | {
       kind: 'work';

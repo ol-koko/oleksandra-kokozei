@@ -32,6 +32,8 @@ export type OverlayView = {
   /** First breadcrumb: the page section the overlay closes back to. */
   parentLabel: string;
   sections: readonly OverlaySectionView[];
+  /** Anchor the overlay glides to right after opening, if any. */
+  initialAnchorId?: string;
 };
 
 /**
@@ -58,6 +60,7 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
         title: t('me.title'),
         crumb: t('me.crumb'),
         ...parentOf(meOverlay.parentSection),
+        initialAnchorId: anchorId(meOverlay.initialSection),
         sections: meOverlay.sections.map((id): OverlaySectionView => {
           const base = { id, anchorId: anchorId(id), navLabel: t(`me.sections.${id}.nav`) };
           switch (id) {
