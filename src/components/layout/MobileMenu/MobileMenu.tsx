@@ -1,16 +1,17 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { MenuToggleIcon } from '@/components/icons/MenuToggleIcon';
 import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher/LanguageSwitcher';
 import { SectionNav } from '@/components/navigation/SectionNav/SectionNav';
 import type { SectionId } from '@/content/types';
 import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
+import { trapTab } from '@/features/focus/trapTab';
+import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
 import styles from './MobileMenu.module.css';
 
 const DESKTOP_QUERY = '(min-width: 1024px)';
-const FOCUSABLE = 'a[href], button:not([disabled])';
 
 type Phase = 'closed' | 'open' | 'closing';
 
@@ -39,15 +40,14 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogId = useId();
-
-  const lockScroll = (locked: boolean) => {
-    document.documentElement.style.overflow = locked ? 'hidden' : '';
-  };
+  /** Whether this menu holds a page scroll lock. */
+  const lockedRef = useRef(false);
 
   const openMenu = (fromPointer: boolean) => {
     dialogRef.current?.showModal();
     moveFocus(closeButtonRef.current, { fromPointer });
-    lockScroll(true);
+    lockScroll();
+    lockedRef.current = true;
     setPhase('open');
   };
 
@@ -59,7 +59,8 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
   const closeMenu = useCallback((restoreFocus: boolean, fromPointer = false) => {
     if (!dialogRef.current?.open || pendingClose.current) return;
     pendingClose.current = { restoreFocus, fromPointer };
-    lockScroll(false);
+    unlockScroll();
+    lockedRef.current = false;
     setPhase('closing');
   }, []);
 
@@ -100,22 +101,12 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
   }, [closeMenu]);
 
   // Never leave the page locked if the component unmounts while open.
-  useEffect(() => () => lockScroll(false), []);
-
-  const onKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
-    if (event.key !== 'Tab') return;
-    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
-    if (!focusable || focusable.length === 0) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last?.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first?.focus();
-    }
-  };
+  useEffect(
+    () => () => {
+      if (lockedRef.current) unlockScroll();
+    },
+    [],
+  );
 
   return (
     <>
@@ -137,7 +128,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
         id={dialogId}
         aria-label={t('menu')}
         className={`${styles.dialog} ${phase === 'closing' ? styles.closing : ''}`}
-        onKeyDown={onKeyDown}
+        onKeyDown={(event) => trapTab(event, dialogRef.current)}
         onCancel={(event) => {
           // Esc: close through the same path so scroll and focus are restored.
           event.preventDefault();
