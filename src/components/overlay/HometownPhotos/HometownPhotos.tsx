@@ -11,8 +11,8 @@ import { scrollBehavior } from '@/features/motion/scrollBehavior';
 import { scrollToSection } from '@/features/overlay/sectionScrollTop';
 import styles from './HometownPhotos.module.css';
 
-/** `folding`: gliding back to the section start; `fading`: extra photos fading out. */
-type Phase = 'collapsed' | 'expanded' | 'folding' | 'fading';
+/** `folding`: gliding back to the section start while the extra photos fade out. */
+type Phase = 'collapsed' | 'expanded' | 'folding';
 
 /** Photo widths inside the frame: 188 in the 220 mobile polaroid, 228 in the 260 desktop one. */
 const PHOTO_SIZES = '(min-width: 1024px) 228px, 188px';
@@ -21,9 +21,10 @@ const PHOTO_SIZES = '(min-width: 1024px) 228px, 188px';
  * "My hometown" photos. Desktop (84:91): four overlapping, rotated polaroids
  * in one collage. Mobile and tablet (322:560, 334:1226): a column that shows
  * the first photo and reveals the rest inline with "more"; the same button
- * then reads "close" and folds them away again. Folding first glides back to
- * the start of the section with the photos still in place, then fades the
- * extra photos out and only then removes them, so nothing in view jumps.
+ * then reads "close" and folds them away again. Folding glides back to the
+ * start of the section while the extra photos fade out in place (opacity
+ * only, they keep their space); they leave the layout once both are done and
+ * they are out of view, so nothing in view jumps.
  *
  * Every photo is a button that opens it full screen in a lightbox; focus
  * returns to that photo when the lightbox closes.
@@ -34,6 +35,8 @@ export function HometownPhotos() {
   const expanded = phase !== 'collapsed';
   const listId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
+  /** Resolves the fade-out of the extra photos while folding. */
+  const fadeEndRef = useRef<(() => void) | null>(null);
   const [shown, setShown] = useState<{ photo: HometownPhoto; fromPointer: boolean } | null>(null);
   /** The photo button that opened the lightbox. */
   const openerRef = useRef<HTMLButtonElement | null>(null);
@@ -58,9 +61,13 @@ export function HometownPhotos() {
       });
       return;
     }
-    // Glide back while the photos still hold the layout, then fade them out. Focus stays put.
+    // Glide back and fade the photos out at the same time; they keep their space until both
+    // are done, then leave the layout out of view. Focus stays put.
+    const faded = new Promise<void>((resolve) => {
+      fadeEndRef.current = resolve;
+    });
     setPhase('folding');
-    scrollToSection(section, 'smooth').then(() => setPhase('fading'));
+    Promise.all([scrollToSection(section, 'smooth'), faded]).then(() => setPhase('collapsed'));
   };
 
   return (
@@ -76,7 +83,7 @@ export function HometownPhotos() {
                   styles.item,
                   extra && styles.extra,
                   extra && phase === 'expanded' && 'animate-shelf-item',
-                  extra && phase === 'fading' && styles.leaving,
+                  extra && phase === 'folding' && styles.leaving,
                 ]
                   .filter(Boolean)
                   .join(' ')}
@@ -91,8 +98,8 @@ export function HometownPhotos() {
                   } as CSSProperties
                 }
                 onAnimationEnd={
-                  index === hometownPhotos.length - 1 && phase === 'fading'
-                    ? () => setPhase('collapsed')
+                  index === hometownPhotos.length - 1 && phase === 'folding'
+                    ? () => fadeEndRef.current?.()
                     : undefined
                 }
               >
