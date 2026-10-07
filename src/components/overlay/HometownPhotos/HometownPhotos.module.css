@@ -49,6 +49,17 @@
   display: block;
 }
 
+/* Folding away: the extra photos fade out in place before they are removed. */
+.leaving {
+  animation: hometown-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+@keyframes hometown-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
 /*
  * Photo buttons: the hover scale comes from .polaroid-group (hover.css);
  * keyboard focus mirrors it. The ring follows the rotated frame instead of
