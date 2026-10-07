@@ -8,6 +8,7 @@ import { hometownPhotos } from '@/content/hometown';
 import type { HometownPhoto } from '@/content/types';
 import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
+import { scrollToSection } from '@/features/overlay/sectionScrollTop';
 import styles from './HometownPhotos.module.css';
 
 /** Photo widths inside the frame: 188 in the 220 mobile polaroid, 228 in the 260 desktop one. */
@@ -38,11 +39,13 @@ export function HometownPhotos() {
 
   const toggle = () => {
     setExpanded(!expanded);
-    // Folding away moves the button up by three photos: bring it back into view.
+    // Folding away pulls everything below up by three photos: go back to the start of the
+    // section (heading, first photo, button) just below the sticky header. Focus stays put.
     if (expanded) {
-      requestAnimationFrame(() =>
-        toggleRef.current?.scrollIntoView({ block: 'nearest', behavior: scrollBehavior() }),
-      );
+      requestAnimationFrame(() => {
+        const section = toggleRef.current?.closest('section');
+        if (section) scrollToSection(section, scrollBehavior());
+      });
     }
   };
 
