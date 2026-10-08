@@ -23,6 +23,8 @@
   grid-column: 2;
   justify-self: center;
   display: flex;
+  /* Items start on one line; a two-line byline grows down and sets the row's height. */
+  align-items: flex-start;
   gap: calc(var(--shelf-bleed) * 2);
   inline-size: calc(min(100%, var(--shelf-item)) + var(--shelf-bleed) * 2);
   margin: calc(var(--shelf-bleed) * -1);
@@ -109,8 +111,9 @@
 
 /*
  * Desktop (130:10, 84:122): always the whole row, no arrows. Items side by
- * side from the start of the column, 24 apart and centered on each other (a
- * two-line artist makes one taller), captions left-aligned. Nothing scrolls,
+ * side from the start of the column, 24 apart and top-aligned, so media,
+ * titles and bylines line up (a two-line artist just runs longer), captions
+ * left-aligned. Nothing scrolls,
  * so nothing clips and the row needs no bleed. Where the column is narrower
  * than the row (1024 to about 1200), the row zooms down as a whole, like the
  * hometown collage; `tan(atan2(a, b))` turns the length ratio into a number.
@@ -130,7 +133,6 @@
       var(--shelf-item) * var(--shelf-count) + var(--spacing-3xl) * (var(--shelf-count) - 1)
     );
 
-    align-items: center;
     gap: var(--spacing-3xl);
     inline-size: var(--shelf-row);
     margin: var(--spacing-none);
