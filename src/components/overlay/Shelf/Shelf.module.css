@@ -113,10 +113,10 @@
  * Desktop (130:10, 84:122): always the whole row, no arrows. Items side by
  * side from the start of the column, 24 apart and top-aligned, so media,
  * titles and bylines line up (a two-line artist just runs longer), captions
- * left-aligned. Nothing scrolls,
- * so nothing clips and the row needs no bleed. Where the column is narrower
- * than the row (1024 to about 1200), the row zooms down as a whole, like the
- * hometown collage; `tan(atan2(a, b))` turns the length ratio into a number.
+ * left-aligned. Nothing scrolls, so nothing clips and the row needs no
+ * bleed. Where the column is narrower than the row (1024 to about 1200), the
+ * row zooms down as a whole, like the hometown collage; `tan(atan2(a, b))`
+ * turns the length ratio into a number.
  */
 @media (min-width: 1024px) {
   .root {
