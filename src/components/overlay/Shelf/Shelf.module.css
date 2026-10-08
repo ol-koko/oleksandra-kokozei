@@ -3,15 +3,15 @@
  * scroll-snap row, centered between two arrow buttons at the column edges.
  * At 358 that leaves the Figma 15 px from arrow to item without a fixed gap.
  *
- * The row scrolls on both axes, so it clips. Its padding (the bleed) keeps
- * the items' shadows, the lifted book and its ribbon in view; a matching
- * negative margin keeps the layout where Figma puts it.
+ * The row scrolls, so it clips on both axes. Its padding (the bleed) is room
+ * on every side for the shadows, the lifted book and its ribbon; a matching
+ * negative margin keeps the items where Figma puts them. Items sit at least
+ * one bleed apart, so a neighbor never peeks into that room.
  */
 .root {
   /* Figma item width (130:32, 84:230). */
   --shelf-item: 280px;
-  --shelf-bleed-inline: var(--spacing-md);
-  --shelf-bleed-block: var(--spacing-3xl);
+  --shelf-bleed: var(--spacing-5xl);
 
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -23,15 +23,14 @@
   grid-column: 2;
   justify-self: center;
   display: flex;
-  gap: var(--spacing-3xl);
-  inline-size: min(100%, calc(var(--shelf-item) + var(--shelf-bleed-inline) * 2));
-  margin-block: calc(var(--shelf-bleed-block) * -1);
-  padding-block: var(--shelf-bleed-block);
-  padding-inline: var(--shelf-bleed-inline);
+  gap: var(--shelf-bleed);
+  inline-size: calc(min(100%, var(--shelf-item)) + var(--shelf-bleed) * 2);
+  margin: calc(var(--shelf-bleed) * -1);
+  padding: var(--shelf-bleed);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--shelf-bleed-inline);
+  scroll-padding-inline: var(--shelf-bleed);
   scrollbar-width: none;
   list-style: none;
 }
@@ -66,8 +65,10 @@
 }
 
 /* Arrow buttons (322:238): 24 px white circle with the md shadow, 16 px caret. */
+/* Above the row, whose bleed reaches under the arrows. */
 .arrow {
   position: relative;
+  z-index: 1;
   grid-row: 1;
   display: grid;
   place-items: center;
@@ -109,7 +110,7 @@
 /*
  * Desktop (130:10, 84:122): items side by side from the start of the column,
  * 24 apart and centered on each other (a two-line artist makes one taller),
- * captions left-aligned. The bleed reaches past the column on both sides.
+ * captions left-aligned. The bleed reaches past the column on every side.
  * Where the column is narrower than the row (1024 to about 1200), the row
  * scrolls and snaps, with the arrows beside it.
  */
@@ -126,8 +127,8 @@
   .row {
     justify-self: stretch;
     align-items: center;
+    gap: var(--spacing-3xl);
     inline-size: auto;
-    margin-inline: calc(var(--shelf-bleed-inline) * -1);
   }
 
   .item {
