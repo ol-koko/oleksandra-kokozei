@@ -86,11 +86,45 @@
         },
         "music": {
           "nav": "Music",
-          "heading": "Fav songs"
+          "heading": "Fav songs",
+          "coverAlt": "Cover of {title} by {artist}",
+          "previous": "Previous song",
+          "next": "Next song",
+          "items": {
+            "wickedGame": {
+              "title": "Wicked Game",
+              "artist": "Chris Isaak"
+            },
+            "raindance": {
+              "title": "Raindance",
+              "artist": "Dave, Tems"
+            },
+            "trance": {
+              "title": "Trance",
+              "artist": "Metro Boomin, Travis Scott, Young Thug"
+            }
+          }
         },
         "books": {
           "nav": "Books",
-          "heading": "Books"
+          "heading": "Books",
+          "coverAlt": "Cover of {title} by {author}",
+          "previous": "Previous book",
+          "next": "Next book",
+          "items": {
+            "goodNightMrHolmes": {
+              "title": "Good Night, Mr. Holmes",
+              "author": "Carole Nelson Douglas"
+            },
+            "likeSwitch": {
+              "title": "The Like Switch",
+              "author": "Jack Schafer & Marvin Karlins"
+            },
+            "designOfEverydayThings": {
+              "title": "The Design of Everyday Things",
+              "author": "Don Norman"
+            }
+          }
         }
       }
     },

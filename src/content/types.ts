@@ -69,6 +69,18 @@ export type HometownPhoto = {
   mobile: PhotoPlacement;
 };
 
+/** Songs in overlay-me. Title and artist live in messages (`Overlay.me.sections.music.items.*`). */
+export type SongId = 'wickedGame' | 'raindance' | 'trance';
+
+/** Books in overlay-me. Title and author live in messages (`Overlay.me.sections.books.items.*`). */
+export type BookId = 'goodNightMrHolmes' | 'likeSwitch' | 'designOfEverydayThings';
+
+/** One item on a shelf (Fav songs, Books): its id and cover art. */
+export type ShelfItem<Id extends string> = {
+  id: Id;
+  cover: ImageAsset;
+};
+
 /** Sections of every work overlay. Labels live in messages (`Overlay.work.sections.*`). */
 export type WorkOverlaySectionId = 'about' | 'goal' | 'problem' | 'result';
 
