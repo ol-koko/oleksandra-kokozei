@@ -66,6 +66,11 @@
   color: var(--color-text-secondary);
 }
 
+/* One artist or author: wraps only between names. */
+.name {
+  white-space: nowrap;
+}
+
 /* Arrow buttons (322:238): 24 px white circle with the md shadow, 16 px caret. */
 /* Above the row, whose bleed reaches under the arrows. */
 .arrow {

@@ -66,7 +66,9 @@ export function Shelf({ entries, previousLabel, nextLabel }: ShelfProps) {
             })}
             <div className={styles.caption}>
               <p className={`${styles.title} text-title-s`}>{entry.title}</p>
-              <p className={`${styles.byline} text-body-s`}>{entry.byline}</p>
+              <p className={`${styles.byline} text-body-s`}>
+                <BylineNames byline={entry.byline} />
+              </p>
             </div>
           </li>
         ))}
@@ -79,6 +81,27 @@ export function Shelf({ entries, previousLabel, nextLabel }: ShelfProps) {
         onClick={() => scrollByItem(1)}
       />
     </div>
+  );
+}
+
+/** Separators between names in a byline ("Dave, Tems", "Jack Schafer & Marvin Karlins"). */
+const NAME_SEPARATOR = /(,\s+|\s+&\s+)/;
+
+/**
+ * A byline as names that never break inside ("Young Thug" stays on one
+ * line); the separators between them stay plain text, so a line can only
+ * wrap between names.
+ */
+function BylineNames({ byline }: { byline: string }) {
+  // split() with a capture group alternates names (even indexes) and separators (odd).
+  return byline.split(NAME_SEPARATOR).map((part, index) =>
+    index % 2 === 1 ? (
+      part
+    ) : (
+      <span key={index} className={styles.name}>
+        {part}
+      </span>
+    ),
   );
 }
 
