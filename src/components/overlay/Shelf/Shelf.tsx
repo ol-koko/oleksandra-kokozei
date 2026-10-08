@@ -27,20 +27,24 @@ type ShelfProps = {
 };
 
 /**
- * A row of songs or books (overlay-me). Desktop (130:10, 84:122): the items
- * side by side. Mobile and tablet (322:249, 322:302): one item at a time in a
- * scroll-snap row between two arrow buttons; the arrows also show on desktop
- * whenever the row does not fit. At most one item is open; see
- * `useShelfAutoplay` for taps and the touch autoplay.
+ * A row of songs or books (overlay-me). Desktop (130:10, 84:122): all items
+ * side by side, scaled down as one when the column is narrower. Mobile and
+ * tablet (322:249, 322:302): one item at a time in a scroll-snap row between
+ * two arrow buttons. At most one item is open; see `useShelfAutoplay` for
+ * taps and the touch autoplay.
  */
 export function Shelf({ entries, previousLabel, nextLabel }: ShelfProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLUListElement>(null);
   const { openId, toggle } = useShelfAutoplay(rootRef, scrollerRef);
-  const { atStart, atEnd, overflowing, scrollByItem } = useShelfScroll(scrollerRef);
+  const { atStart, atEnd, scrollByItem } = useShelfScroll(scrollerRef);
 
   return (
-    <div ref={rootRef} className={styles.root} data-overflowing={overflowing}>
+    <div
+      ref={rootRef}
+      className={styles.root}
+      style={{ '--shelf-count': entries.length } as CSSProperties}
+    >
       <ArrowButton
         label={previousLabel}
         className={styles.previous}

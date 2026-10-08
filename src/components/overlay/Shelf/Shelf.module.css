@@ -108,31 +108,36 @@
 }
 
 /*
- * Desktop (130:10, 84:122): items side by side from the start of the column,
- * 24 apart and centered on each other (a two-line artist makes one taller),
- * captions left-aligned. The bleed reaches past the column on every side.
- * Where the column is narrower than the row (1024 to about 1200), the row
- * scrolls and snaps, with the arrows beside it.
+ * Desktop (130:10, 84:122): always the whole row, no arrows. Items side by
+ * side from the start of the column, 24 apart and centered on each other (a
+ * two-line artist makes one taller), captions left-aligned. Nothing scrolls,
+ * so nothing clips and the row needs no bleed. Where the column is narrower
+ * than the row (1024 to about 1200), the row zooms down as a whole, like the
+ * hometown collage; `tan(atan2(a, b))` turns the length ratio into a number.
  */
 @media (min-width: 1024px) {
   .root {
-    column-gap: var(--spacing-md);
+    container-type: inline-size;
+    display: block;
   }
 
-  /* Arrows only when the row overflows; one item at a time below 1024 always does. */
-  .root:not([data-overflowing='true']) .arrow {
+  .arrow {
     display: none;
   }
 
   .row {
-    justify-self: stretch;
+    --shelf-row: calc(
+      var(--shelf-item) * var(--shelf-count) + var(--spacing-3xl) * (var(--shelf-count) - 1)
+    );
+
     align-items: center;
     gap: var(--spacing-3xl);
-    inline-size: auto;
-  }
-
-  .item {
-    scroll-snap-align: start;
+    inline-size: var(--shelf-row);
+    margin: var(--spacing-none);
+    padding: var(--spacing-none);
+    overflow: visible;
+    scroll-snap-type: none;
+    zoom: min(1, tan(atan2(100cqi, var(--shelf-row))));
   }
 
   .caption {

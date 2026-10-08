@@ -5,9 +5,9 @@ import { scrollBehavior } from '@/features/motion/scrollBehavior';
 
 /**
  * Arrow controls for a horizontal scroll-snap row: whether it sits at its
- * start or end, whether it overflows at all, and a step of one item (item
- * width plus the row gap; smooth, instant with reduced motion). Native
- * swiping keeps working; the edges follow every scroll and resize.
+ * start or end, and a step of one item (item width plus the row gap; smooth,
+ * instant with reduced motion). Native swiping keeps working; the edges
+ * follow every scroll and resize.
  */
 export function useShelfScroll(scrollerRef: RefObject<HTMLElement | null>) {
   const [edges, setEdges] = useState({ atStart: true, atEnd: true });
@@ -50,5 +50,5 @@ export function useShelfScroll(scrollerRef: RefObject<HTMLElement | null>) {
     [scrollerRef],
   );
 
-  return { ...edges, overflowing: !(edges.atStart && edges.atEnd), scrollByItem };
+  return { ...edges, scrollByItem };
 }
