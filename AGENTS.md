@@ -1,7 +1,7 @@
 # AGENTS.md — Project rules for AI coding agents
 
 ## Project
-One-page personal portfolio of Oleksandra Kokozei (UI/UX Designer & AI Engineer).
+One-page personal portfolio of Oleksandra Kokozei (UI/UX Designer & Design Engineer).
 Public repository reviewed by recruiters: code quality, structure, and history matter.
 
 ## Stack

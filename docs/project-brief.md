@@ -2,7 +2,7 @@
 
 ## Product
 
-A one-page personal portfolio for **Oleksandra Kokozei**, UI/UX Designer & AI Engineer, based in Stuttgart, Germany. The site presents who she is, selected works, and professional experience. The repository itself is public and part of the portfolio: recruiters review its code quality, structure, and commit history.
+A one-page personal portfolio for **Oleksandra Kokozei**, UI/UX Designer & Design Engineer, based in Stuttgart, Germany. The site presents who she is, selected works, and professional experience. The repository itself is public and part of the portfolio: recruiters review its code quality, structure, and commit history.
 
 - Live URL: https://oleksandra-kokozei.com
 - Design source: Figma file `vJCOCkFcnVJ9Pn4TFuRHV9`, node `107-329` ("Design Website")

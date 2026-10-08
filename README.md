@@ -1,6 +1,6 @@
 # Oleksandra Kokozei — Portfolio
 
-One-page portfolio of Oleksandra Kokozei, UI/UX Designer & AI Engineer. Designed in Figma and implemented 1:1 in Next.js with a token-based design system and three languages (English, Ukrainian, German).
+One-page portfolio of Oleksandra Kokozei, UI/UX Designer & Design Engineer. Designed in Figma and implemented 1:1 in Next.js with a token-based design system and three languages (English, Ukrainian, German).
 
 **Live:** [oleksandra-kokozei.com](https://oleksandra-kokozei.com)
 

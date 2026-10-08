@@ -10,3 +10,7 @@ trim_trailing_whitespace = true
 
 [*.md]
 trim_trailing_whitespace = false
+
+# Next.js copies alt text verbatim into og:image:alt, including a final newline.
+[*.alt.txt]
+insert_final_newline = false

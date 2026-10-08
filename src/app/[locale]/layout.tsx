@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -6,6 +6,8 @@ import { locale as getLocaleParam } from 'next/root-params';
 import type { ReactNode } from 'react';
 import { SiteFooter } from '@/components/layout/SiteFooter/SiteFooter';
 import { SiteHeader } from '@/components/layout/SiteHeader/SiteHeader';
+import { openGraphLocales, siteUrl, themeColor } from '@/content/site';
+import { getPathname } from '@/features/i18n/navigation';
 import { routing } from '@/features/i18n/routing';
 import { figtree } from '@/styles/fonts';
 import '../globals.css';
@@ -15,13 +17,54 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('Metadata');
+  const locale = await getLocaleParam();
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
 
+  const t = await getTranslations('Metadata');
+  const title = t('title');
+  const description = t('description');
+  const url = getPathname({ href: '/', locale });
+
+  // Images (og:image, twitter:image, icons) come from the file conventions in `src/app`.
   return {
-    title: t('title'),
-    description: t('description'),
+    metadataBase: new URL(siteUrl),
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        ...Object.fromEntries(
+          routing.locales.map((alternate) => [
+            alternate,
+            getPathname({ href: '/', locale: alternate }),
+          ]),
+        ),
+        'x-default': getPathname({ href: '/', locale: routing.defaultLocale }),
+      },
+    },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url,
+      locale: openGraphLocales[locale],
+      alternateLocale: routing.locales
+        .filter((alternate) => alternate !== locale)
+        .map((alternate) => openGraphLocales[alternate]),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
   };
 }
+
+export const viewport: Viewport = {
+  themeColor,
+};
 
 type LocaleLayoutProps = {
   children: ReactNode;
