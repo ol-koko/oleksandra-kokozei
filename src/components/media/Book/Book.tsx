@@ -1,9 +1,12 @@
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import type { ImageAsset } from '@/content/types';
 import styles from './Book.module.css';
 
 type BookProps = {
   cover: ImageAsset;
+  /** Back cover color. */
+  backColor: string;
   /** Names the button: "Cover of <title> by <author>". */
   alt: string;
   /** Open: lifted, cover open, pages fanned out, ribbon down. */
@@ -23,9 +26,15 @@ const LEAVES = ['leaf3', 'leaf2', 'leaf1'] as const;
  * ribbon slides down. A toggle button: hover and keyboard focus preview the
  * open state, a press keeps it (aria-pressed).
  */
-export function Book({ cover, alt, pressed, onToggle }: BookProps) {
+export function Book({ cover, backColor, alt, pressed, onToggle }: BookProps) {
   return (
-    <button type="button" className={styles.slot} aria-pressed={pressed} onClick={onToggle}>
+    <button
+      type="button"
+      className={styles.slot}
+      style={{ '--back': backColor } as CSSProperties}
+      aria-pressed={pressed}
+      onClick={onToggle}
+    >
       <span className={styles.book}>
         <span className={styles.shadow} />
         <span className={styles.body}>

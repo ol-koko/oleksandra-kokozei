@@ -3,7 +3,7 @@
  * angles, timing and easing are the template's own, kept as local values.
  *
  * --w / --h   cover size; the template's 2:3 at Figma's book width (84:232, 149.33 × 224)
- * --back      back cover color
+ * --back      back cover color; set per book from its cover (src/content/books.ts)
  * --ribbon    bookmark ribbon color
  * --open      how far the cover swings open
  * --ease / --t  the template's easing and duration (shared with the vinyl record)
@@ -11,7 +11,7 @@
 .slot {
   --w: 150px;
   --h: 225px;
-  --back: #bdbdbd;
+  --back: #bdbdbd; /* template default, replaced per book */
   --ribbon: #b8434f;
   --open: -38deg;
   --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
@@ -77,10 +77,14 @@
   transition: block-size var(--t) var(--ease);
 }
 
-/* Back cover. */
+/*
+ * Back cover, seen as the book's thickness: 9 right and 6 below the cover
+ * (template: 14 and 8, which read as a separate board), just past the page
+ * block (7 and 4) so the pages sit inside it.
+ */
 .back {
   position: absolute;
-  inset: 8px -14px -8px 0;
+  inset: 4px -9px -6px 0;
   border-radius: 0 4px 4px 0;
   background: var(--back);
 }

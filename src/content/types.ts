@@ -81,6 +81,12 @@ export type ShelfItem<Id extends string> = {
   cover: ImageAsset;
 };
 
+/** A book on the shelf: its cover and the color of its back cover. */
+export type ShelfBook = ShelfItem<BookId> & {
+  /** Back cover, seen as the book's thickness. The cover's dominant color unless set by hand. */
+  backColor: `#${string}`;
+};
+
 /** Sections of every work overlay. Labels live in messages (`Overlay.work.sections.*`). */
 export type WorkOverlaySectionId = 'about' | 'goal' | 'problem' | 'result';
 

@@ -19,6 +19,7 @@ export function OverlayBooks() {
       renderMedia: ({ pressed, onToggle }) => (
         <Book
           cover={book.cover}
+          backColor={book.backColor}
           alt={t('coverAlt', { title, author })}
           pressed={pressed}
           onToggle={onToggle}
