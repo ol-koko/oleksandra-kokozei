@@ -52,14 +52,18 @@
   transition: transform var(--t) var(--ease);
 }
 
-/* Shadow on the "floor". */
+/*
+ * Shadow on the "floor": its own shape, so it stays local, at the site's soft
+ * shadow strength. Taller than the template's 22 for a wider blur, with the
+ * same center line.
+ */
 .shadow {
   position: absolute;
-  inset-block-end: -26px;
+  inset-block-end: -29px;
   inset-inline: 2% -10%;
-  block-size: 22px;
+  block-size: 28px;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(0 0 0 / 28%), transparent);
+  background: radial-gradient(closest-side, var(--color-shadow-default), transparent);
   transition:
     transform var(--t) var(--ease),
     opacity var(--t) var(--ease);
@@ -135,13 +139,13 @@
   transition: transform var(--t) var(--ease);
 }
 
-/* Cover with its inner shadow. */
+/* Cover with its inner shadow; the drop shadow is the site's (template: 4px 6px 14px at 18 %). */
 .cover {
   position: absolute;
   inset: 0;
   overflow: hidden;
   border-radius: 0 3px 3px 0;
-  box-shadow: 4px 6px 14px rgb(0 0 0 / 18%);
+  box-shadow: var(--shadow-md);
   transform-origin: 0 50%;
   transform: perspective(2000px) rotateY(0deg);
   transition:
@@ -192,7 +196,7 @@
 
 .slot[aria-pressed='true'] .cover,
 .slot:focus-visible .cover {
-  box-shadow: 16px 12px 30px rgb(0 0 0 / 26%);
+  box-shadow: var(--shadow-lg);
   transform: perspective(2000px) rotateY(var(--open));
 }
 
@@ -213,7 +217,7 @@
   }
 
   .slot:hover .cover {
-    box-shadow: 16px 12px 30px rgb(0 0 0 / 26%);
+    box-shadow: var(--shadow-lg);
     transform: perspective(2000px) rotateY(var(--open));
   }
 
