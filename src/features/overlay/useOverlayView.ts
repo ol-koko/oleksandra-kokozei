@@ -10,6 +10,8 @@ import { overlayKey, type OverlayKey } from './overlayRoute';
 export type OverlaySectionBody =
   | { kind: 'about-intro' } // overlay-me: greeting, location and bio with the polaroid
   | { kind: 'hometown' } // overlay-me: hometown photos
+  | { kind: 'songs' } // overlay-me: fav songs as vinyl records
+  | { kind: 'books' } // overlay-me: books
   | { kind: 'placeholder' }; // not built yet
 
 export type OverlaySectionView = {
@@ -38,7 +40,7 @@ export type OverlayView = {
 
 /**
  * Resolves an overlay's content data into the labels its shared component tree
- * renders. Sections without content yet get a placeholder body.
+ * renders. Work sections without content yet get a placeholder body.
  */
 export function useOverlayView(route: OverlayRoute): OverlayView {
   const t = useTranslations('Overlay');
@@ -78,11 +80,17 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
                 caption: { kind: 'location', text: t('me.sections.home.caption') },
                 body: { kind: 'hometown' },
               };
-            default:
+            case 'music':
               return {
                 ...base,
-                heading: t(`me.sections.${id}.heading`),
-                body: { kind: 'placeholder' },
+                heading: t('me.sections.music.heading'),
+                body: { kind: 'songs' },
+              };
+            case 'books':
+              return {
+                ...base,
+                heading: t('me.sections.books.heading'),
+                body: { kind: 'books' },
               };
           }
         }),
