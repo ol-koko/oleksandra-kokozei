@@ -5,8 +5,8 @@
  *
  * The row scrolls, so it clips on both axes. Its padding (the bleed) is room
  * on every side for the shadows, the lifted book and its ribbon; a matching
- * negative margin keeps the items where Figma puts them. Items sit at least
- * one bleed apart, so a neighbor never peeks into that room.
+ * negative margin keeps the items where Figma puts them. Items sit two
+ * bleeds apart, so neither a neighbor nor its shadow peeks into that room.
  */
 .root {
   /* Figma item width (130:32, 84:230). */
@@ -23,7 +23,7 @@
   grid-column: 2;
   justify-self: center;
   display: flex;
-  gap: var(--shelf-bleed);
+  gap: calc(var(--shelf-bleed) * 2);
   inline-size: calc(min(100%, var(--shelf-item)) + var(--shelf-bleed) * 2);
   margin: calc(var(--shelf-bleed) * -1);
   padding: var(--shelf-bleed);
