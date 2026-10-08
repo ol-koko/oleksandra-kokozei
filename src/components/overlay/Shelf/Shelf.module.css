@@ -1,0 +1,140 @@
+/*
+ * Mobile and tablet (322:249, 322:302): one 280 px item at a time in a
+ * scroll-snap row, centered between two arrow buttons at the column edges.
+ * At 358 that leaves the Figma 15 px from arrow to item without a fixed gap.
+ *
+ * The row scrolls on both axes, so it clips. Its padding (the bleed) keeps
+ * the items' shadows, the lifted book and its ribbon in view; a matching
+ * negative margin keeps the layout where Figma puts it.
+ */
+.root {
+  /* Figma item width (130:32, 84:230). */
+  --shelf-item: 280px;
+  --shelf-bleed-inline: var(--spacing-md);
+  --shelf-bleed-block: var(--spacing-3xl);
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.row {
+  grid-row: 1;
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  gap: var(--spacing-3xl);
+  inline-size: min(100%, calc(var(--shelf-item) + var(--shelf-bleed-inline) * 2));
+  margin-block: calc(var(--shelf-bleed-block) * -1);
+  padding-block: var(--shelf-bleed-block);
+  padding-inline: var(--shelf-bleed-inline);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--shelf-bleed-inline);
+  scrollbar-width: none;
+  list-style: none;
+}
+
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Media, then 16 to the caption (130:32). */
+.item {
+  display: flex;
+  flex: 0 0 var(--shelf-item);
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  scroll-snap-align: center;
+}
+
+/* Title, then 8 to the artist or author (130:34); centered on mobile (322:246). */
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  text-align: center;
+}
+
+.title {
+  color: var(--color-text-strong);
+}
+
+.byline {
+  color: var(--color-text-secondary);
+}
+
+/* Arrow buttons (322:238): 24 px white circle with the md shadow, 16 px caret. */
+.arrow {
+  position: relative;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  inline-size: var(--size-lg);
+  block-size: var(--size-lg);
+  padding: var(--spacing-xs);
+  border: var(--border-none);
+  border-radius: var(--border-radius-full);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-md);
+  color: var(--color-icon-strong);
+  cursor: pointer;
+}
+
+/* A 40 px touch target around the 24 px circle. */
+.arrow::after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--spacing-md) * -1);
+}
+
+.arrow[aria-disabled='true'] {
+  color: var(--color-text-disabled);
+  cursor: default;
+}
+
+.previous {
+  grid-column: 1;
+}
+
+.previous svg {
+  scale: -1 1;
+}
+
+.next {
+  grid-column: 3;
+}
+
+/*
+ * Desktop (130:10, 84:122): items side by side from the start of the column,
+ * 24 apart and centered on each other (a two-line artist makes one taller),
+ * captions left-aligned. The bleed reaches past the column on both sides.
+ * Where the column is narrower than the row (1024 to about 1200), the row
+ * scrolls and snaps, with the arrows beside it.
+ */
+@media (min-width: 1024px) {
+  .root {
+    column-gap: var(--spacing-md);
+  }
+
+  /* Arrows only when the row overflows; one item at a time below 1024 always does. */
+  .root:not([data-overflowing='true']) .arrow {
+    display: none;
+  }
+
+  .row {
+    justify-self: stretch;
+    align-items: center;
+    inline-size: auto;
+    margin-inline: calc(var(--shelf-bleed-inline) * -1);
+  }
+
+  .item {
+    scroll-snap-align: start;
+  }
+
+  .caption {
+    text-align: start;
+  }
+}
