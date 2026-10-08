@@ -82,21 +82,25 @@
 }
 
 /*
- * Back cover, seen as the book's thickness: 9 right and 6 below the cover
- * (template: 14 and 8, which read as a separate board), just past the page
- * block (7 and 4) so the pages sit inside it.
+ * Back cover, seen as the book's thickness: the cover's height, 9 to the
+ * right only (template: 14 right and 8 below, which read as a separate
+ * board), just past the page block so the pages sit inside it.
  */
 .back {
   position: absolute;
-  inset: 4px -9px -6px 0;
+  inset: 0 -9px 0 0;
   border-radius: 0 4px 4px 0;
   background: var(--back);
 }
 
-/* Page block with lines of text, and the page edges on the right. Template paper colors. */
+/*
+ * Page block with lines of text, and the page edges on the right. Template
+ * paper colors. 2 shorter than the covers at top and bottom, as in a real
+ * book, so nothing shows below the front cover (template: 4 down, 4 below).
+ */
 .pages {
   position: absolute;
-  inset: 4px -7px -4px 0;
+  inset: 2px -7px 2px 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -127,10 +131,10 @@
   background: repeating-linear-gradient(90deg, #fff 0 1px, #e2e2e2 1px 2px);
 }
 
-/* Loose pages that fan out. */
+/* Loose pages that fan out; the same height as the page block. */
 .leaf {
   position: absolute;
-  inset: 4px -3px -4px 0;
+  inset: 2px -3px 2px 0;
   border-radius: 0 3px 3px 0;
   background: linear-gradient(90deg, #ececec 0, #fff 10%, #fafafa 100%);
   box-shadow: 1px 0 2px rgb(0 0 0 / 8%);
