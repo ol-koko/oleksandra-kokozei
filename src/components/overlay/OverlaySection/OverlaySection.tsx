@@ -1,5 +1,7 @@
 import { HometownPhotos } from '@/components/overlay/HometownPhotos/HometownPhotos';
 import { OverlayAbout } from '@/components/overlay/OverlayAbout/OverlayAbout';
+import { OverlayBooks } from '@/components/overlay/OverlayBooks/OverlayBooks';
+import { OverlaySongs } from '@/components/overlay/OverlaySongs/OverlaySongs';
 import { LocationLabel } from '@/components/ui/LocationLabel/LocationLabel';
 import type { OverlaySectionView } from '@/features/overlay/useOverlayView';
 import styles from './OverlaySection.module.css';
@@ -41,6 +43,8 @@ export function OverlaySection({ section }: OverlaySectionProps) {
           </div>
 
           {body.kind === 'hometown' && <HometownPhotos />}
+          {body.kind === 'songs' && <OverlaySongs />}
+          {body.kind === 'books' && <OverlayBooks />}
           {body.kind === 'placeholder' && <div className={styles.placeholder} aria-hidden="true" />}
         </>
       )}
