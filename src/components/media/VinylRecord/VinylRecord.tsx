@@ -36,13 +36,7 @@ export function VinylRecord({ cover, href, label, open }: VinylRecordProps) {
         </span>
         <span className={styles.sleeve}>
           {/* The link's aria-label names the song; the cover itself is decorative. */}
-          <Image
-            src={cover.src}
-            alt=""
-            width={cover.width}
-            height={cover.height}
-            sizes="186px"
-          />
+          <Image src={cover.src} alt="" width={cover.width} height={cover.height} sizes="186px" />
         </span>
       </span>
     </a>
