@@ -6,7 +6,10 @@ import { useShelfAutoplay } from '@/features/shelf/useShelfAutoplay';
 import { useShelfScroll } from '@/features/shelf/useShelfScroll';
 import styles from './Shelf.module.css';
 
-/** Open state handed to an item's media (a toggle button). */
+/**
+ * Open state handed to an item's media: a toggle button (books), or a link
+ * that only shows the open state and ignores `onToggle` (songs).
+ */
 export type ShelfMediaState = {
   pressed: boolean;
   onToggle: () => void;

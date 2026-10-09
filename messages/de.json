@@ -87,7 +87,7 @@
         "music": {
           "nav": "Music",
           "heading": "Fav songs",
-          "coverAlt": "Cover of {title} by {artist}",
+          "listenOnSpotify": "{title} von {artist} auf Spotify anhören (öffnet in neuem Tab)",
           "previous": "Previous song",
           "next": "Next song",
           "items": {
