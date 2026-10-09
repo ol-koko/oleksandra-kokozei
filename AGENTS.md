@@ -38,4 +38,4 @@ No Tailwind, no UI kits, no animation libraries unless explicitly approved.
 - Never commit secrets, .env files, or anything from reference/.
 
 ## Validation
-Before finishing, run: npm run lint, npm run typecheck, npm run build. Report results.
+Before finishing, run: npm run lint, npm run typecheck, npm run build, npm run format:check. Report results.
