@@ -72,6 +72,11 @@ export type HometownPhoto = {
 /** Songs in overlay-me. Title and artist live in messages (`Overlay.me.sections.music.items.*`). */
 export type SongId = 'wickedGame' | 'raindance' | 'trance';
 
+/** A song on the shelf: its cover and its track on Spotify (no `?si=` tracking parameter). */
+export type ShelfSong = ShelfItem<SongId> & {
+  spotifyUrl: `https://open.spotify.com/track/${string}`;
+};
+
 /** Books in overlay-me. Title and author live in messages (`Overlay.me.sections.books.items.*`). */
 export type BookId = 'goodNightMrHolmes' | 'likeSwitch' | 'designOfEverydayThings';
 
