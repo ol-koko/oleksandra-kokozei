@@ -3,7 +3,7 @@
  * paper colors, shadows, timing and easing are the template's own, kept as
  * local values.
  *
- * --w / --h      album size (358 wide: the 390 column)
+ * --w / --h      album size (358 wide: the 390 column; --album-width on the wrapper)
  * --pad          white cover margin around the page
  * --gap          page's distance from the spine
  * --turn         page turn duration (TURN_MS in the component follows it)
@@ -13,22 +13,39 @@
 
 /*
  * A turned page lies to the left of the album, past its edge (the template
- * needs an unclipped parent). The wrapper reaches out to the screen edges,
- * so the page shows in the side gutter, and clips it there instead of letting
- * the overlay scroll sideways. Below 358 the album zooms down as a whole.
+ * needs an unclipped parent). The wrapper reaches past the column's side
+ * padding to the screen edges (to the panel's padding on tablets), and a
+ * mask fades the turned page out across the whole space left of the album
+ * (Figma 443:516), instead of a hard clip. Overflow on the left never
+ * becomes scrollable, so nothing scrolls sideways. The block padding is room
+ * for the shadow and the turning page, which the mask would cut otherwise.
+ * Below 358 the album zooms down as a whole.
+ *
+ * --bleed        how far the wrapper reaches past the column
+ * --album-start  the album's left edge inside the wrapper
  */
 .wrap {
+  --bleed: var(--page-gutter);
+  --album-start: max(var(--bleed), 50% - var(--album-width) / 2);
+  --album-width: 358px;
+
   container-type: inline-size;
   display: flex;
   justify-content: center;
-  margin-inline: calc(var(--page-gutter) * -1);
-  padding-inline: var(--page-gutter);
-  overflow-x: clip;
+  margin: calc(var(--spacing-5xl) * -1) calc(var(--bleed) * -1);
+  padding: var(--spacing-5xl) var(--bleed);
+  mask-image: linear-gradient(to right, transparent, #000 var(--album-start));
   touch-action: pan-y;
 }
 
+@media (min-width: 768px) {
+  .wrap {
+    --bleed: var(--spacing-5xl);
+  }
+}
+
 .album {
-  --w: 358px;
+  --w: var(--album-width);
   --h: 436px;
   --pad: 24px;
   --gap: 14px;
