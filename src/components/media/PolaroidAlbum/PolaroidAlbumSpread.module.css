@@ -1,7 +1,8 @@
 /*
  * Port of reference/claude-design/polaroid-album-desktop.html. Geometry,
- * paper colors, shadows, timing and easing are the template's own, kept as
- * local values.
+ * paper colors, inner shading, timing and easing are the template's own,
+ * kept as local values. Drop shadows are the site's (--shadow-sm, --shadow-lg)
+ * and the cover color comes from Figma.
  *
  * --pw / --ph   page size
  * --pad         white cover margin around the pages
@@ -70,9 +71,8 @@
   inline-size: var(--half);
   border-radius: 0 26px 26px 0;
   background: var(--album-cover);
-  box-shadow:
-    0 2px 3px rgb(0 0 0 / 20%),
-    0 40px 70px -30px rgb(0 0 0 / 60%);
+  /* The site's soft shadow (template: up to 60 % with a long drop). */
+  box-shadow: var(--shadow-lg);
 }
 
 .backcover::before {
@@ -195,9 +195,8 @@
   border-radius: 0 26px 26px 0;
   /* The template's shading toward the corner (#fff → #f3f3f3), over the cover color. */
   background: linear-gradient(135deg, transparent 60%, rgb(0 0 0 / 5%)), var(--album-cover);
-  box-shadow:
-    0 2px 3px rgb(0 0 0 / 18%),
-    0 40px 70px -30px rgb(0 0 0 / 55%);
+  /* The site's soft shadow (template: up to 60 % with a long drop). */
+  box-shadow: var(--shadow-lg);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -255,8 +254,7 @@
   border-radius: 5px;
   background: linear-gradient(160deg, #fdfdfc, #f1f0ec);
   box-shadow:
-    0 1px 1px rgb(0 0 0 / 8%),
-    0 3px 6px -2px rgb(0 0 0 / 14%),
+    var(--shadow-sm),
     inset 0 1px 0 #fff,
     inset 0 -2px 3px rgb(0 0 0 / 5%);
 }
@@ -349,9 +347,7 @@
   padding: 10px 10px 51px;
   border-radius: 2px;
   background: linear-gradient(170deg, #fff, #f6f6f3);
-  box-shadow:
-    0 1px 2px rgb(0 0 0 / 18%),
-    0 4px 8px -4px rgb(0 0 0 / 15%);
+  box-shadow: var(--shadow-sm);
 }
 
 .photo img,
