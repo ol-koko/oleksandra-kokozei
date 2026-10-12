@@ -143,6 +143,17 @@
               "title": "The Gentlemen"
             }
           }
+        },
+        "album": {
+          "nav": "Album",
+          "heading": "Album",
+          "label": "Photo album",
+          "open": "Open album",
+          "close": "Close album",
+          "previous": "Previous page",
+          "next": "Next page",
+          "pageStatus": "Page {current} of {total}",
+          "photos": {}
         }
       }
     },

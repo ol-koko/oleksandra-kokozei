@@ -1,0 +1,389 @@
+/*
+ * Port of reference/claude-design/polariod-album-mobile.html. Geometry,
+ * paper colors, shadows, timing and easing are the template's own, kept as
+ * local values.
+ *
+ * --w / --h      album size (358 wide: the 390 column)
+ * --pad          white cover margin around the page
+ * --gap          page's distance from the spine
+ * --turn         page turn duration (TURN_MS in the component follows it)
+ * --ease         the template's page-turn easing
+ * --op           a leaf's opacity, set per leaf by the component
+ */
+
+/*
+ * A turned page lies to the left of the album, past its edge (the template
+ * needs an unclipped parent). The wrapper reaches out to the screen edges,
+ * so the page shows in the side gutter, and clips it there instead of letting
+ * the overlay scroll sideways. Below 358 the album zooms down as a whole.
+ */
+.wrap {
+  container-type: inline-size;
+  display: flex;
+  justify-content: center;
+  margin-inline: calc(var(--page-gutter) * -1);
+  padding-inline: var(--page-gutter);
+  overflow-x: clip;
+  touch-action: pan-y;
+}
+
+.album {
+  --w: 358px;
+  --h: 436px;
+  --pad: 24px;
+  --gap: 14px;
+  --turn: 1s;
+  --ease: cubic-bezier(0.45, 0.05, 0.2, 1);
+
+  position: relative;
+  flex: none;
+  inline-size: var(--w);
+  block-size: var(--h);
+  perspective: 1600px;
+  zoom: min(1, tan(atan2(100cqi, var(--w))));
+}
+
+/* Back cover: the album's base. */
+.back {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 20px 20px 4px;
+  background: #fff;
+  box-shadow:
+    0 2px 3px rgb(0 0 0 / 20%),
+    0 30px 50px -24px rgb(0 0 0 / 60%);
+}
+
+.back::before {
+  content: '';
+  position: absolute;
+  inset: 11px 11px 11px 6px;
+  border: 1.5px dashed #dcdcdc;
+  border-radius: 3px 13px 13px 3px;
+  pointer-events: none;
+}
+
+.back::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 16px;
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(90deg, rgb(0 0 0 / 14%), transparent);
+  pointer-events: none;
+}
+
+/* A leaf (page or cover), hinged at the spine. */
+.leaf {
+  position: absolute;
+  inset: var(--pad) var(--pad) var(--pad) var(--gap);
+  transform-origin: calc(var(--gap) * -1) 50%;
+  transform-style: preserve-3d;
+  transition: transform var(--turn) var(--ease);
+}
+
+.flipped {
+  transform: rotateY(-180deg);
+}
+
+.leafCover {
+  inset: 0;
+  transform-origin: 0 50%;
+}
+
+/* Opacity goes on the sides, not the leaf, so the 3D stays intact. */
+.leaf .face,
+.leaf .cover {
+  opacity: var(--op, 1);
+  transition: opacity 0.3s ease;
+}
+
+.ghost .face,
+.ghost .cover {
+  transition: opacity 1.6s ease 0.35s;
+}
+
+/* Page: grey dotted paper, a dashed seam and a film sheen. */
+.face {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 18px 20px;
+  overflow: hidden;
+  background-color: #eee;
+  background-image:
+    radial-gradient(circle, #e0e0e0 1px, transparent 1.4px),
+    radial-gradient(circle, #e4e4e4 1px, transparent 1.4px);
+  background-position:
+    0 0,
+    6px 6px;
+  background-size: 12px 12px;
+  box-shadow:
+    inset 14px 0 18px -14px rgb(0 0 0 / 28%),
+    0 0 0 1px rgb(0 0 0 / 5%);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.face::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1.2px dashed #d2d2d2;
+  pointer-events: none;
+}
+
+.face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    rgb(255 255 255 / 35%) 0,
+    transparent 28%,
+    transparent 62%,
+    rgb(255 255 255 / 18%) 74%,
+    transparent 84%
+  );
+}
+
+.faceBack {
+  transform: rotateY(180deg);
+  box-shadow:
+    inset -14px 0 18px -14px rgb(0 0 0 / 28%),
+    0 0 0 1px rgb(0 0 0 / 5%);
+}
+
+/* 2 × 2 pockets with Instax mini photos. */
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 14px 22px;
+  place-items: center;
+  block-size: 100%;
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 106px;
+  block-size: 169px;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 0 1px rgb(0 0 0 / 5%),
+    inset 0 1px 3px rgb(0 0 0 / 6%);
+}
+
+.photo {
+  box-sizing: border-box;
+  inline-size: 106px;
+  block-size: 169px;
+  margin: var(--spacing-none);
+  padding: 8px 8px 39px;
+  border-radius: 2px;
+  background: linear-gradient(170deg, #fff, #f6f6f3);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 18%),
+    0 3px 6px -3px rgb(0 0 0 / 15%);
+}
+
+.photo img,
+.placeholder {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* A photo not added yet: the site's media placeholder fills the frame. */
+.placeholder {
+  background-color: var(--color-media-placeholder);
+}
+
+.slot:nth-child(1) .photo {
+  transform: rotate(-0.6deg);
+}
+
+.slot:nth-child(2) .photo {
+  transform: rotate(0.4deg);
+}
+
+.slot:nth-child(3) .photo {
+  transform: rotate(0.3deg);
+}
+
+.slot:nth-child(4) .photo {
+  transform: rotate(-0.5deg);
+}
+
+/* Cover. */
+.cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px 20px 20px 4px;
+  background: linear-gradient(135deg, #fff 0, #fafafa 60%, #f3f3f3 100%);
+  box-shadow:
+    0 2px 3px rgb(0 0 0 / 18%),
+    0 30px 50px -24px rgb(0 0 0 / 55%);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 20px 20px 4px;
+  box-shadow:
+    inset 0 0 0 1px rgb(0 0 0 / 6%),
+    inset 0 3px 2px -2px rgb(255 255 255 / 90%),
+    inset -3px -4px 6px -3px rgb(0 0 0 / 12%),
+    inset 0 0 0 4px rgb(255 255 255 / 50%);
+  pointer-events: none;
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 20px;
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(90deg, rgb(0 0 0 / 10%), rgb(255 255 255 / 60%) 55%, rgb(0 0 0 / 6%));
+  pointer-events: none;
+}
+
+.coverInside {
+  border-radius: 20px 4px 4px 20px;
+  background: #fff;
+  transform: rotateY(180deg);
+}
+
+.coverInside::before {
+  inset: 11px 6px 11px 11px;
+  border: 1.5px dashed #dcdcdc;
+  border-radius: 13px 3px 3px 13px;
+  box-shadow: none;
+}
+
+.coverInside::after {
+  inset-inline: auto 0;
+  background: linear-gradient(270deg, rgb(0 0 0 / 12%), transparent);
+}
+
+/* Window frame on the cover, with a double seam. */
+.window {
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 172px;
+  block-size: 254px;
+  padding: 17px;
+  border-radius: 4px;
+  background: linear-gradient(160deg, #fdfdfc, #f1f0ec);
+  box-shadow:
+    0 1px 1px rgb(0 0 0 / 8%),
+    0 3px 6px -2px rgb(0 0 0 / 14%),
+    inset 0 1px 0 #fff,
+    inset 0 -2px 3px rgb(0 0 0 / 5%);
+}
+
+.window::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1.1px dashed rgb(140 134 124 / 55%);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.sleeve {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+  padding-block-end: 10px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #e9e8e4, #f2f1ee);
+  box-shadow:
+    inset 0 2px 4px rgb(0 0 0 / 18%),
+    0 0 0 1px rgb(0 0 0 / 6%);
+}
+
+.sleeve::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1.1px dashed rgb(140 134 124 / 55%);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.sleeve::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 2px;
+  background: linear-gradient(
+    120deg,
+    rgb(255 255 255 / 40%) 0,
+    rgb(255 255 255 / 8%) 30%,
+    transparent 45%,
+    transparent 70%,
+    rgb(255 255 255 / 22%) 82%,
+    transparent 92%
+  );
+  pointer-events: none;
+}
+
+.sleeve .photo {
+  transform: rotate(-0.5deg);
+}
+
+/* Tap zones: back on the left 38 %, forward on the rest; the closed cover is all forward. */
+.zone {
+  position: absolute;
+  inset-block-start: 0;
+  z-index: 500;
+  block-size: 100%;
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zone[aria-disabled='true'] {
+  cursor: default;
+}
+
+.zonePrevious {
+  inset-inline-start: 0;
+  inline-size: 38%;
+}
+
+.zoneNext {
+  inset-inline-end: 0;
+  inline-size: 62%;
+}
+
+.closed .zonePrevious {
+  display: none;
+}
+
+.closed .zoneNext {
+  inline-size: 100%;
+}

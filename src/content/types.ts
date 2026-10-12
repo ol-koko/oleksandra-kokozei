@@ -1,3 +1,5 @@
+import type messages from '../../messages/en.json';
+
 /** Identifiers for social profiles. Display labels live in messages (`Links.social.*`). */
 export type SocialLinkId = 'linkedin' | 'behance' | 'github';
 
@@ -50,7 +52,7 @@ export type Role = {
 };
 
 /** Sections of overlay-me. Nav labels and headings live in messages (`Overlay.me.sections.*`). */
-export type MeOverlaySectionId = 'about' | 'home' | 'music' | 'books' | 'films';
+export type MeOverlaySectionId = 'about' | 'home' | 'music' | 'books' | 'films' | 'album';
 
 /** Hometown photos in overlay-me. Alt text lives in messages (`Overlay.me.sections.home.photos.*`). */
 export type HometownPhotoId = 'port' | 'opera' | 'beach' | 'street';
@@ -98,6 +100,30 @@ export type FilmId = 'focus' | 'nowYouSeeMe' | 'theGentlemen';
 /** A film on the shelf: its poster (`cover`) and release year, shown as its byline. */
 export type ShelfFilm = ShelfItem<FilmId> & {
   year: number;
+};
+
+/**
+ * Photos in the overlay-me album. Each id needs its alt text in messages
+ * (`Overlay.me.sections.album.photos.<id>`), so the ids come from there.
+ */
+export type AlbumPhotoId = keyof (typeof messages)['Overlay']['me']['sections']['album']['photos'];
+
+/**
+ * One pocket of an album page: a photo, a neutral placeholder frame (no
+ * photo yet), or `null` for an empty pocket.
+ */
+export type AlbumSlot = { photo: AlbumPhotoId; image: ImageAsset } | { placeholder: true } | null;
+
+/** One album page: four pockets in a 2 × 2 grid, left to right, top to bottom. */
+export type AlbumPage = readonly [AlbumSlot, AlbumSlot, AlbumSlot, AlbumSlot];
+
+export type Album = {
+  /** Shown in production only when true; development and Vercel previews always show it. */
+  published: boolean;
+  /** The photo in the cover window. */
+  cover: Exclude<AlbumSlot, null>;
+  /** Pages in reading order: two per leaf on desktop, one per leaf on mobile. */
+  pages: readonly AlbumPage[];
 };
 
 /** Sections of every work overlay. Labels live in messages (`Overlay.work.sections.*`). */
