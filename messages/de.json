@@ -152,6 +152,7 @@
           "close": "Close album",
           "previous": "Previous page",
           "next": "Next page",
+          "toCover": "Back to the cover",
           "pageStatus": "Page {current} of {total}",
           "photos": {}
         }

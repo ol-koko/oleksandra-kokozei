@@ -1,6 +1,6 @@
 'use client';
 
-import type { CSSProperties } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import type { Album } from '@/content/types';
 import { useAlbumFlip } from '@/features/album/useAlbumFlip';
 import { useAlbumInput } from '@/features/album/useAlbumInput';
@@ -31,17 +31,28 @@ const PHOTO_SIZES = '90px';
  * reference/claude-design/polariod-album-mobile.html). A tap on the cover
  * opens it; a tap on the right part of the page turns forward, on the left
  * part (38 %) back. A turned page lies to the left of the album and fades,
- * the cover and the last page only partly; the last page stays on the right.
+ * the cover and the last page only partly. Like the desktop spread, the last
+ * page turns too and leaves the back cover; a tap on it turns every page back
+ * to the cover. Swipes and arrow keys always step one page.
  */
 export function PolaroidAlbumBook({ album, labels, className }: PolaroidAlbumBookProps) {
   // The cover is leaf 0, then one leaf per page.
   const leafCount = album.pages.length + 1;
-  const { flipped, canNext, canPrevious, next, previous, leaf } = useAlbumFlip({
+  const { flipped, canNext, canPrevious, next, previous, rewind, leaf } = useAlbumFlip({
     leafCount,
-    maxFlipped: leafCount - 1,
+    maxFlipped: leafCount,
     turnMs: TURN_MS,
   });
   const input = useAlbumInput(next, previous);
+  const closed = flipped === 0;
+  const atEnd = !canNext;
+
+  // On the closed cover the back zone hides and the other covers the album: keep keyboard focus.
+  const previousRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (closed && document.activeElement === previousRef.current) nextRef.current?.focus();
+  }, [closed]);
 
   const leafProps = (index: number, extra = '') => {
     const state = leaf(index);
@@ -76,7 +87,7 @@ export function PolaroidAlbumBook({ album, labels, className }: PolaroidAlbumBoo
       className={[styles.wrap, className].filter(Boolean).join(' ')}
       {...input}
     >
-      <div className={`${styles.album} ${flipped === 0 ? styles.closed : ''}`}>
+      <div className={[styles.album, closed && styles.closed].filter(Boolean).join(' ')}>
         <div className={styles.back} />
 
         <div {...leafProps(0, styles.leafCover)}>
@@ -100,6 +111,7 @@ export function PolaroidAlbumBook({ album, labels, className }: PolaroidAlbumBoo
         ))}
 
         <button
+          ref={previousRef}
           type="button"
           className={`${styles.zone} ${styles.zonePrevious}`}
           aria-label={flipped === 1 ? labels.close : labels.previous}
@@ -107,16 +119,16 @@ export function PolaroidAlbumBook({ album, labels, className }: PolaroidAlbumBoo
           onClick={previous}
         />
         <button
+          ref={nextRef}
           type="button"
           className={`${styles.zone} ${styles.zoneNext}`}
-          aria-label={flipped === 0 ? labels.open : labels.next}
-          aria-disabled={!canNext}
-          onClick={next}
+          aria-label={closed ? labels.open : atEnd ? labels.toCover : labels.next}
+          onClick={atEnd ? rewind : next}
         />
       </div>
 
       <p className="visually-hidden" aria-live="polite">
-        {labels.pageStatus(flipped + 1, leafCount)}
+        {labels.pageStatus(flipped + 1, leafCount + 1)}
       </p>
     </div>
   );

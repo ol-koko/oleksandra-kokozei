@@ -5,6 +5,9 @@ import { useMediaQuery } from '@/features/motion/useMediaQuery';
 
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 
+/** Share of a page turn after which the next page follows when the album rewinds. */
+const REWIND_STAGGER = 0.25;
+
 type AlbumFlipOptions = {
   /** Leaves, the cover included (it is leaf 0). */
   leafCount: number;
@@ -29,15 +32,28 @@ export type AlbumLeafState = {
 /**
  * Page turning for the Polaroid album templates (both run the same script):
  * how many leaves lie turned, which one is turning, and each leaf's stacking
- * and state. With reduced motion a turn lands at once.
+ * and state. `rewind` turns every page back to the cover, one shortly after
+ * another. With reduced motion a turn, or the whole rewind, lands at once.
  */
 export function useAlbumFlip({ leafCount, maxFlipped, turnMs }: AlbumFlipOptions) {
   const reducedMotion = useMediaQuery(REDUCED_MOTION);
   const [flipped, setFlipped] = useState(0);
   const [turning, setTurning] = useState(-1);
   const timer = useRef(0);
+  const rewindTimers = useRef<number[]>([]);
 
-  useEffect(() => () => window.clearTimeout(timer.current), []);
+  const stopRewind = useCallback(() => {
+    rewindTimers.current.forEach((id) => window.clearTimeout(id));
+    rewindTimers.current = [];
+  }, []);
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(timer.current);
+      stopRewind();
+    },
+    [stopRewind],
+  );
 
   const turn = useCallback(
     (to: number, index: number) => {
@@ -53,12 +69,30 @@ export function useAlbumFlip({ leafCount, maxFlipped, turnMs }: AlbumFlipOptions
   const canPrevious = flipped > 0;
 
   const next = useCallback(() => {
+    stopRewind();
     if (canNext) turn(flipped + 1, flipped);
-  }, [canNext, flipped, turn]);
+  }, [canNext, flipped, turn, stopRewind]);
 
   const previous = useCallback(() => {
+    stopRewind();
     if (canPrevious) turn(flipped - 1, flipped - 1);
-  }, [canPrevious, flipped, turn]);
+  }, [canPrevious, flipped, turn, stopRewind]);
+
+  const rewind = useCallback(() => {
+    stopRewind();
+    if (!canPrevious) return;
+    if (reducedMotion) {
+      turn(0, 0);
+      return;
+    }
+    // The top page on the left goes first; each later one starts while the last is still turning.
+    for (let step = 0; step < flipped; step += 1) {
+      const index = flipped - 1 - step;
+      rewindTimers.current.push(
+        window.setTimeout(() => turn(index, index), step * turnMs * REWIND_STAGGER),
+      );
+    }
+  }, [canPrevious, flipped, reducedMotion, turn, turnMs, stopRewind]);
 
   const leaf = (index: number): AlbumLeafState => {
     const isFlipped = index < flipped;
@@ -73,5 +107,5 @@ export function useAlbumFlip({ leafCount, maxFlipped, turnMs }: AlbumFlipOptions
     };
   };
 
-  return { flipped, canNext, canPrevious, next, previous, leaf };
+  return { flipped, canNext, canPrevious, next, previous, rewind, leaf };
 }

@@ -14,6 +14,7 @@ export function OverlayAlbum() {
     close: t('close'),
     previous: t('previous'),
     next: t('next'),
+    toCover: t('toCover'),
     pageStatus: (current, total) => t('pageStatus', { current, total }),
     photoAlt: (id) => t(`photos.${id}` as const),
   };

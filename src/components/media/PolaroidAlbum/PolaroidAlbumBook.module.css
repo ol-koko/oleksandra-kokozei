@@ -369,7 +369,10 @@
   transform: rotate(-0.5deg);
 }
 
-/* Tap zones: back on the left 38 %, forward on the rest; the closed cover is all forward. */
+/*
+ * Tap zones: back on the left 38 %, forward on the rest (on the back cover:
+ * back to the cover). The closed cover is all forward.
+ */
 .zone {
   position: absolute;
   inset-block-start: 0;

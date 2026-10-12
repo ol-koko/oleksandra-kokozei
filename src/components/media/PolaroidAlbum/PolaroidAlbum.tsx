@@ -11,6 +11,8 @@ export type AlbumLabels = {
   close: string;
   previous: string;
   next: string;
+  /** Mobile, on the back cover: turns every page back to the cover. */
+  toCover: string;
   /** "Page 2 of 5": the cover is page 1. */
   pageStatus: (current: number, total: number) => string;
   photoAlt: (id: AlbumPhotoId) => string;
