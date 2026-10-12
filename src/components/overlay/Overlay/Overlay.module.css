@@ -31,6 +31,17 @@
   background-color: var(--color-overlay-backdrop);
 }
 
+/*
+ * iOS Safari only sends clicks from a non-interactive element to React's
+ * delegated listener when it has a pointer cursor. Touch screens show no
+ * cursor, so desktop keeps the default one.
+ */
+@media (hover: none) {
+  .backdrop {
+    cursor: pointer;
+  }
+}
+
 /* Mobile: full screen, like the mobile menu. */
 .panel {
   --overlay-padding-block: var(--spacing-none);
