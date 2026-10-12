@@ -1,4 +1,9 @@
-/* Same geometry and surface as the mobile SiteHeader (Figma 233:585), sticky in the overlay scroller. */
+/*
+ * Same geometry as the mobile SiteHeader (Figma 233:585), sticky in the
+ * overlay scroller. Solid instead of the page header's translucent blur:
+ * content passing under it would show through as a light band, cut off
+ * where the scroller's top fade begins. Exactly as tall as that fade offset.
+ */
 .header {
   position: sticky;
   inset-block-start: 0;
@@ -6,12 +11,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-block-size: var(--header-block-size);
+  block-size: var(--header-block-size);
   padding-block: var(--spacing-4xl);
   padding-inline: var(--page-gutter);
-  background-color: var(--color-surface-header);
-  -webkit-backdrop-filter: blur(var(--blur-header));
-  backdrop-filter: blur(var(--blur-header));
+  background-color: var(--color-background-page);
 }
 
 .brand {
