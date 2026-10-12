@@ -1,3 +1,4 @@
+import { OverlayAlbum } from '@/components/overlay/OverlayAlbum/OverlayAlbum';
 import { HometownPhotos } from '@/components/overlay/HometownPhotos/HometownPhotos';
 import { OverlayAbout } from '@/components/overlay/OverlayAbout/OverlayAbout';
 import { OverlayBooks } from '@/components/overlay/OverlayBooks/OverlayBooks';
@@ -47,6 +48,7 @@ export function OverlaySection({ section }: OverlaySectionProps) {
           {body.kind === 'songs' && <OverlaySongs />}
           {body.kind === 'books' && <OverlayBooks />}
           {body.kind === 'films' && <OverlayFilms />}
+          {body.kind === 'album' && <OverlayAlbum />}
           {body.kind === 'placeholder' && <div className={styles.placeholder} aria-hidden="true" />}
         </>
       )}
