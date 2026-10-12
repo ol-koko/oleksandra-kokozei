@@ -12,6 +12,7 @@ export type OverlaySectionBody =
   | { kind: 'hometown' } // overlay-me: hometown photos
   | { kind: 'songs' } // overlay-me: fav songs as vinyl records
   | { kind: 'books' } // overlay-me: books
+  | { kind: 'films' } // overlay-me: films on VHS
   | { kind: 'placeholder' }; // not built yet
 
 export type OverlaySectionView = {
@@ -91,6 +92,12 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
                 ...base,
                 heading: t('me.sections.books.heading'),
                 body: { kind: 'books' },
+              };
+            case 'films':
+              return {
+                ...base,
+                heading: t('me.sections.films.heading'),
+                body: { kind: 'films' },
               };
           }
         }),

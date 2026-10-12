@@ -50,7 +50,7 @@ export type Role = {
 };
 
 /** Sections of overlay-me. Nav labels and headings live in messages (`Overlay.me.sections.*`). */
-export type MeOverlaySectionId = 'about' | 'home' | 'music' | 'books';
+export type MeOverlaySectionId = 'about' | 'home' | 'music' | 'books' | 'films';
 
 /** Hometown photos in overlay-me. Alt text lives in messages (`Overlay.me.sections.home.photos.*`). */
 export type HometownPhotoId = 'port' | 'opera' | 'beach' | 'street';
@@ -90,6 +90,14 @@ export type ShelfItem<Id extends string> = {
 export type ShelfBook = ShelfItem<BookId> & {
   /** Back cover, seen as the book's thickness. The cover's dominant color unless set by hand. */
   backColor: `#${string}`;
+};
+
+/** Films in overlay-me. Titles live in messages (`Overlay.me.sections.films.items.*`). */
+export type FilmId = 'focus' | 'nowYouSeeMe' | 'theGentlemen';
+
+/** A film on the shelf: its poster (`cover`) and release year, shown as its byline. */
+export type ShelfFilm = ShelfItem<FilmId> & {
+  year: number;
 };
 
 /** Sections of every work overlay. Labels live in messages (`Overlay.work.sections.*`). */
