@@ -11,6 +11,7 @@
  * --ease / --t   the template's easing and slide duration (shared with the book and the record)
  * --speed        one reel turn
  * --slide        how far the tape slides out from under the sleeve
+ * --open-width   poster plus the slid-out tape: the item's widest state
  */
 .slot {
   --w: 200px;
@@ -20,6 +21,7 @@
   --t: 0.9s;
   --speed: 2.2s;
   --slide: 132px;
+  --open-width: calc(var(--w) + var(--slide));
   /* Figma slot (417:810): 280 × 300, the poster 36 from the top, like the books. */
   --slot-height: 300px;
   --poster-top: 36px;
@@ -36,13 +38,14 @@
 
 /*
  * The template box (poster + room for the tape), scaled from its top-left
- * corner. Mobile (421:289): the poster centered in the slot. Desktop
- * (417:811): at the start.
+ * corner. Mobile and tablet: like the vinyl record, the open state (poster
+ * plus the slid-out tape) is centered in the slot, so the open item sits in
+ * the middle of the row. Desktop (417:811): at the start.
  */
 .vhs {
   position: absolute;
   inset-block-start: var(--poster-top);
-  inset-inline-start: calc(50% - var(--w) * var(--vhs-scale) / 2);
+  inset-inline-start: calc(50% - var(--open-width) * var(--vhs-scale) / 2);
   display: block;
   inline-size: calc(var(--w) + 140px);
   block-size: var(--h);
