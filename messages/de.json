@@ -125,6 +125,36 @@
               "author": "Don Norman"
             }
           }
+        },
+        "films": {
+          "nav": "Films",
+          "heading": "Films",
+          "posterAlt": "Poster of {title} ({year})",
+          "previous": "Previous film",
+          "next": "Next film",
+          "items": {
+            "focus": {
+              "title": "Focus"
+            },
+            "nowYouSeeMe": {
+              "title": "Now You See Me"
+            },
+            "theGentlemen": {
+              "title": "The Gentlemen"
+            }
+          }
+        },
+        "album": {
+          "nav": "Album",
+          "heading": "Album",
+          "label": "Photo album",
+          "open": "Open album",
+          "close": "Close album",
+          "previous": "Previous page",
+          "next": "Next page",
+          "toCover": "Back to the cover",
+          "pageStatus": "Page {current} of {total}",
+          "photos": {}
         }
       }
     },

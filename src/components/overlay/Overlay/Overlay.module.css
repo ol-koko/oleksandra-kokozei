@@ -31,6 +31,17 @@
   background-color: var(--color-overlay-backdrop);
 }
 
+/*
+ * iOS Safari only sends clicks from a non-interactive element to React's
+ * delegated listener when it has a pointer cursor. Touch screens show no
+ * cursor, so desktop keeps the default one.
+ */
+@media (hover: none) {
+  .backdrop {
+    cursor: pointer;
+  }
+}
+
 /* Mobile: full screen, like the mobile menu. */
 .panel {
   --overlay-padding-block: var(--spacing-none);
@@ -111,9 +122,28 @@
   --overlay-fade-bottom: 0px;
 }
 
+/*
+ * Mobile: the top fade starts right at the solid header's bottom edge and
+ * eases in (slow start, eased stops instead of a linear ramp), so its start
+ * shows no line.
+ */
 @media (max-width: 767px) {
   .scroller {
     --overlay-fade-offset: var(--header-block-size);
+
+    mask-image:
+      linear-gradient(#000 0 0),
+      linear-gradient(
+        to bottom,
+        #000 var(--overlay-fade-offset),
+        transparent var(--overlay-fade-offset),
+        rgb(0 0 0 / 6%) calc(var(--overlay-fade-offset) + var(--overlay-fade-top) * 0.25),
+        rgb(0 0 0 / 30%) calc(var(--overlay-fade-offset) + var(--overlay-fade-top) * 0.5),
+        rgb(0 0 0 / 70%) calc(var(--overlay-fade-offset) + var(--overlay-fade-top) * 0.75),
+        #000 calc(var(--overlay-fade-offset) + var(--overlay-fade-top)),
+        #000 calc(100% - var(--overlay-fade-bottom)),
+        transparent
+      );
   }
 }
 

@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
+import { albumVisible } from '@/content/album';
 import { meOverlay, workOverlay } from '@/content/overlays';
 import type { OverlayRoute, SectionId } from '@/content/types';
 import { overlayKey, type OverlayKey } from './overlayRoute';
@@ -12,6 +13,8 @@ export type OverlaySectionBody =
   | { kind: 'hometown' } // overlay-me: hometown photos
   | { kind: 'songs' } // overlay-me: fav songs as vinyl records
   | { kind: 'books' } // overlay-me: books
+  | { kind: 'films' } // overlay-me: films on VHS
+  | { kind: 'album' } // overlay-me: Polaroid photo album
   | { kind: 'placeholder' }; // not built yet
 
 export type OverlaySectionView = {
@@ -63,37 +66,52 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
         crumb: t('me.crumb'),
         ...parentOf(meOverlay.parentSection),
         initialAnchorId: anchorId(meOverlay.initialSection),
-        sections: meOverlay.sections.map((id): OverlaySectionView => {
-          const base = { id, anchorId: anchorId(id), navLabel: t(`me.sections.${id}.nav`) };
-          switch (id) {
-            case 'about':
-              return {
-                ...base,
-                heading: tMe('greeting'),
-                caption: { kind: 'location', text: tMe('location') },
-                body: { kind: 'about-intro' },
-              };
-            case 'home':
-              return {
-                ...base,
-                heading: t('me.sections.home.heading'),
-                caption: { kind: 'location', text: t('me.sections.home.caption') },
-                body: { kind: 'hometown' },
-              };
-            case 'music':
-              return {
-                ...base,
-                heading: t('me.sections.music.heading'),
-                body: { kind: 'songs' },
-              };
-            case 'books':
-              return {
-                ...base,
-                heading: t('me.sections.books.heading'),
-                body: { kind: 'books' },
-              };
-          }
-        }),
+        // The album stays out of production until its photos are in (`album.published`).
+        sections: meOverlay.sections
+          .filter((id) => id !== 'album' || albumVisible)
+          .map((id): OverlaySectionView => {
+            const base = { id, anchorId: anchorId(id), navLabel: t(`me.sections.${id}.nav`) };
+            switch (id) {
+              case 'about':
+                return {
+                  ...base,
+                  heading: tMe('greeting'),
+                  caption: { kind: 'location', text: tMe('location') },
+                  body: { kind: 'about-intro' },
+                };
+              case 'home':
+                return {
+                  ...base,
+                  heading: t('me.sections.home.heading'),
+                  caption: { kind: 'location', text: t('me.sections.home.caption') },
+                  body: { kind: 'hometown' },
+                };
+              case 'music':
+                return {
+                  ...base,
+                  heading: t('me.sections.music.heading'),
+                  body: { kind: 'songs' },
+                };
+              case 'books':
+                return {
+                  ...base,
+                  heading: t('me.sections.books.heading'),
+                  body: { kind: 'books' },
+                };
+              case 'films':
+                return {
+                  ...base,
+                  heading: t('me.sections.films.heading'),
+                  body: { kind: 'films' },
+                };
+              case 'album':
+                return {
+                  ...base,
+                  heading: t('me.sections.album.heading'),
+                  body: { kind: 'album' },
+                };
+            }
+          }),
       };
     }
 

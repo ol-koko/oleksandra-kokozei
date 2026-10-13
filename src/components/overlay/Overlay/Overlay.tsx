@@ -66,6 +66,9 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  /** Whether the current press started on the backdrop. */
+  const pressedOnBackdrop = useRef(false);
   const closeRequest = useRef<CloseRequest | null>(null);
   /** Whether this overlay holds a page scroll lock. */
   const lockedRef = useRef(false);
@@ -153,8 +156,17 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
     moveFocus(section, { fromPointer, preventScroll: true });
   };
 
-  // Links to page sections (mobile menu, footer): close the overlay, then scroll the page there.
   const onDialogClick = (event: MouseEvent<HTMLDialogElement>) => {
+    // Outside the panel: only a press that starts and ends on the backdrop closes, so
+    // selecting text or dragging the scrollbar out of the panel never does.
+    const fromBackdrop = pressedOnBackdrop.current;
+    pressedOnBackdrop.current = false;
+    if (event.target === backdropRef.current) {
+      if (fromBackdrop) requestClose({ fromPointer: true });
+      return;
+    }
+
+    // Links to page sections (mobile menu, footer): close the overlay, then scroll the page there.
     if (event.defaultPrevented || !(event.target instanceof Element)) return;
     const id = event.target.closest('a[href^="#"]')?.getAttribute('href')?.slice(1);
     if (!id || !isSectionId(id)) return;
@@ -173,6 +185,9 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
       aria-describedby={hintId}
       className={`${styles.dialog} ${open ? '' : styles.closing}`}
       onKeyDown={(event) => trapTab(event, dialogRef.current)}
+      onPointerDown={(event) => {
+        pressedOnBackdrop.current = event.isPrimary && event.target === backdropRef.current;
+      }}
       onClick={onDialogClick}
       onCancel={(event) => {
         // Esc: close through the URL like every other path.
@@ -187,11 +202,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
         }
       }}
     >
-      <div
-        className={`${styles.backdrop} animate-overlay`}
-        aria-hidden="true"
-        onClick={() => requestClose({ fromPointer: true })}
-      />
+      <div ref={backdropRef} className={`${styles.backdrop} animate-overlay`} aria-hidden="true" />
 
       <div className={`${styles.panel} animate-modal`}>
         <div ref={scrollerRef} className={styles.scroller} tabIndex={-1}>

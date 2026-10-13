@@ -2,6 +2,7 @@
 @import '../../design-system/animations.css';
 @import '../../design-system/hover.css';
 @import '../styles/breakpoints.css';
+@import '../styles/shelf-media.css';
 
 /*
  * Map the next/font family onto the token. The token's own fallback stack is
