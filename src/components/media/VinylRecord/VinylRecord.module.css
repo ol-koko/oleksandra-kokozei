@@ -6,15 +6,17 @@
  * --peek   share of the record visible at rest
  * --out    how far the record slides out when open (share of --size)
  * --speed  one turn
- * --ease / --t  the template's slide easing and duration (shared with the book)
+ * --ease / --t  slide easing and duration
+ * Peek, out, speed, easing and duration are the shelf media motion system
+ * (src/styles/shelf-media.css), shared with the VHS tape.
  */
 .record {
   --size: 186px;
-  --peek: 0.14;
-  --out: 0.5;
-  --speed: 2.4s;
-  --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
-  --t: 0.9s;
+  --peek: var(--shelf-media-peek);
+  --out: var(--shelf-media-out);
+  --speed: var(--shelf-media-spin);
+  --ease: var(--shelf-media-easing);
+  --t: var(--shelf-media-duration);
   /* Figma slot height for the record (130:33, 280 × 206); the record is centered in it. */
   --slot-height: 206px;
 

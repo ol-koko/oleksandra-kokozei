@@ -1,0 +1,20 @@
+/*
+ * One motion system for the shelf media that slide out of a sleeve: the
+ * vinyl record (Fav songs) and the VHS tape (Films). Values are the vinyl
+ * record template's (reference/claude-design/vinyl-record-template.html).
+ *
+ *   --shelf-media-duration  slide in and out
+ *   --shelf-media-easing    slide easing
+ *   --shelf-media-peek      how far the media shows past the sleeve at rest, as a share of the sleeve width
+ *   --shelf-media-out       how far it slides out when open, as a share of the sleeve width
+ *   --shelf-media-spin      one turn of the record or the reels
+ *
+ * Reduced motion: no spin, and the slide is instant (global rule in animations.css).
+ */
+:root {
+  --shelf-media-duration: 0.9s;
+  --shelf-media-easing: cubic-bezier(0.22, 0.9, 0.28, 1);
+  --shelf-media-peek: 0.14;
+  --shelf-media-out: 0.5;
+  --shelf-media-spin: 2.4s;
+}

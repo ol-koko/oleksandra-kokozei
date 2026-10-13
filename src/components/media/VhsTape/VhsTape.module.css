@@ -8,20 +8,26 @@
  *
  * --w / --h      template poster size, before scaling
  * --vhs-scale    Figma poster height / template poster height
- * --ease / --t   the template's easing and slide duration (shared with the book and the record)
+ * --ease / --t   slide easing and duration
  * --speed        one reel turn
- * --slide        how far the tape slides out from under the sleeve
+ * --peek / --out how far the tape shows past the sleeve at rest and when open, as shares of --w
  * --open-width   poster plus the slid-out tape: the item's widest state
+ *
+ * The motion follows the vinyl record: easing, duration, peek, slide-out and
+ * spin come from the shelf media motion system (src/styles/shelf-media.css),
+ * and the sleeve and tape cast the site's soft shadow like the sleeve and
+ * the disc.
  */
 .slot {
   --w: 200px;
   --h: 300px;
   --vhs-scale: calc(224 / 300);
-  --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
-  --t: 0.9s;
-  --speed: 2.2s;
-  --slide: 132px;
-  --open-width: calc(var(--w) + var(--slide));
+  --ease: var(--shelf-media-easing);
+  --t: var(--shelf-media-duration);
+  --speed: var(--shelf-media-spin);
+  --peek: var(--shelf-media-peek);
+  --out: var(--shelf-media-out);
+  --open-width: calc(var(--w) * (1 + var(--out)));
   /* Figma slot (417:810): 280 × 300, the poster 36 from the top, like the books. */
   --slot-height: 300px;
   --poster-top: 36px;
@@ -59,7 +65,7 @@
   }
 }
 
-/* Poster sleeve: the fold on the left and the inner shadow. */
+/* Poster sleeve: the fold on the left and the inner shadow; the site's soft shadow (template: up to 40 %). */
 .sleeve {
   position: absolute;
   inset-block-start: 0;
@@ -70,9 +76,7 @@
   block-size: var(--h);
   overflow: hidden;
   border-radius: 3px;
-  box-shadow:
-    0 1px 2px rgb(0 0 0 / 12%),
-    0 14px 28px -10px rgb(0 0 0 / 40%);
+  box-shadow: var(--shadow-md);
 }
 
 .sleeve img {
@@ -96,7 +100,7 @@
     inset -8px 0 14px -8px rgb(0 0 0 / 40%);
 }
 
-/* Tape body, tucked 14 out from under the sleeve. */
+/* Tape body, peeking out from under the sleeve like the record; the site's soft shadow (template: 0 12px 22px at 45 %). */
 .tape {
   position: absolute;
   inset-block-start: 5px;
@@ -110,9 +114,9 @@
   background: linear-gradient(90deg, #2a2a2d, #161618 30%, #1c1c1f 70%, #2b2b2f), #1b1b1d;
   box-shadow:
     inset 0 0 0 1px rgb(255 255 255 / 6%),
-    inset 0 2px 0 rgb(255 255 255 / 8%),
-    0 12px 22px -8px rgb(0 0 0 / 45%);
-  transform: translateX(14px);
+    inset 0 2px 0 rgb(255 255 255 / 8%);
+  filter: drop-shadow(var(--shadow-md));
+  transform: translateX(calc(var(--w) * var(--peek)));
   transition: transform var(--t) var(--ease);
 }
 
@@ -232,7 +236,7 @@
  */
 .slot[aria-pressed='true'] .tape,
 .slot:focus-visible .tape {
-  transform: translateX(var(--slide));
+  transform: translateX(calc(var(--w) * var(--out)));
 }
 
 .slot[aria-pressed='true'] .reel,
@@ -242,7 +246,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .slot:hover .tape {
-    transform: translateX(var(--slide));
+    transform: translateX(calc(var(--w) * var(--out)));
   }
 
   .slot:hover .reel {
