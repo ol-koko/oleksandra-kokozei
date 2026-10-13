@@ -24,15 +24,21 @@
  * space left of the album (Figma 443:516), instead of a hard clip. Overflow
  * on the left never becomes scrollable, so nothing scrolls sideways. The
  * block padding is room for the shadow and the turning page, which the mask
- * would cut otherwise. In a narrower column the album zooms down as a whole.
+ * would cut otherwise.
  *
+ * Size: 302 tall as in Figma (443:511), the 452 × 564 board zoomed by
+ * 302 / 564 (242 wide, like Figma's board); smaller only in a column
+ * narrower than that.
+ *
+ * --album-scale  Figma height / template height
  * --bleed        how far the wrapper reaches past the column
  * --album-start  the album's left edge inside the wrapper
  */
 .wrap {
   --album-width: 452px;
+  --album-scale: calc(302 / 564);
   --bleed: var(--page-gutter);
-  --album-start: max(var(--bleed), 50% - var(--album-width) / 2);
+  --album-start: max(var(--bleed), 50% - var(--album-width) * var(--album-scale) / 2);
 
   container-type: inline-size;
   display: flex;
@@ -65,7 +71,7 @@
   inline-size: var(--album-width);
   block-size: calc(var(--ph) + var(--pad) * 2);
   perspective: 1600px;
-  zoom: min(1, tan(atan2(100cqi, var(--album-width))));
+  zoom: min(var(--album-scale), tan(atan2(100cqi, var(--album-width))));
 }
 
 /* Back cover: the album's base, rounded on the outer side. */

@@ -23,10 +23,17 @@
 }
 
 /*
- * The template scales the spread to fit with a script; here the same fit is
- * CSS: never larger than designed, zoomed down as a whole when the column is
- * narrower. `tan(atan2(a, b))` turns the length ratio into a number, as in
- * the Shelf.
+ * Size: the open spread is 728 wide in Figma (441:476, without its
+ * background), the template's 904 zoomed by 728 / 904. It also zooms down to
+ * fit a narrower column, and to fit the viewport height, so the heading and
+ * the whole album show on one screen of the overlay without scrolling. The
+ * template does this fit with a script; here it is CSS. `tan(atan2(a, b))`
+ * turns a length ratio into a number, as in the Shelf.
+ *
+ * --album-scale   Figma width / template width
+ * --fit-block     room for the album on one screen: the viewport minus the
+ *                 panel insets (2 × 80), its top padding (80), the bottom
+ *                 fade (40) and the heading with its gap (29 + 48), rounded up
  */
 .album {
   --pw: 420px;
@@ -36,6 +43,9 @@
   --turn: 1.1s;
   --ease: cubic-bezier(0.45, 0.05, 0.2, 1);
   --spread-width: calc(var(--half) * 2);
+  --album-height: calc(var(--ph) + var(--pad) * 2);
+  --album-scale: calc(728 / 904);
+  --fit-block: calc(100dvh - 360px);
   --board: var(--gray-100);
   --board-stitch: #b9b9b9;
   --page: var(--gray-0);
@@ -43,8 +53,12 @@
 
   position: relative;
   inline-size: var(--spread-width);
-  block-size: calc(var(--ph) + var(--pad) * 2);
-  zoom: min(1, tan(atan2(100cqi, var(--spread-width))));
+  block-size: var(--album-height);
+  zoom: min(
+    var(--album-scale),
+    tan(atan2(100cqi, var(--spread-width))),
+    tan(atan2(var(--fit-block), var(--album-height)))
+  );
 }
 
 /* Closed, the cover stands in the middle; open, the spread does. */
