@@ -14,7 +14,7 @@ type PolaroidAlbumBookProps = {
   className?: string;
 };
 
-/** The template's page turn (1s) plus a little, as in its script. */
+/** The mobile template's page turn (1s) plus a little, as in its script. */
 const TURN_MS = 1050;
 
 /** How visible the open cover stays on the left. */
@@ -23,12 +23,13 @@ const COVER_OPACITY = 0.7;
 /** How visible the last turned page stays on the left. */
 const PAGE_OPACITY = 0.55;
 
-/** Rendered photo width inside a pocket (106 minus the 8 px frame on each side). */
-const PHOTO_SIZES = '90px';
+/** Rendered photo width inside a pocket (138 minus the 10 px frame on each side), before zoom. */
+const PHOTO_SIZES = '118px';
 
 /**
- * The album one page at a time (template:
- * reference/claude-design/polariod-album-mobile.html). A tap on the cover
+ * The album one page at a time: the behavior of
+ * reference/claude-design/polariod-album-mobile.html in the look of
+ * reference/claude-design/polaroid-album-new.html. A tap on the cover
  * opens it; a tap on the right part of the page turns forward, on the left
  * part (38 %) back. A turned page lies to the left of the album and fades,
  * the cover and the last page only partly. Like the desktop spread, the last
@@ -38,7 +39,7 @@ const PHOTO_SIZES = '90px';
 export function PolaroidAlbumBook({ album, labels, className }: PolaroidAlbumBookProps) {
   // The cover is leaf 0, then one leaf per page.
   const leafCount = album.pages.length + 1;
-  const { flipped, canNext, canPrevious, next, previous, rewind, leaf } = useAlbumFlip({
+  const { flipped, atRest, canNext, canPrevious, next, previous, rewind, leaf } = useAlbumFlip({
     leafCount,
     maxFlipped: leafCount,
     turnMs: TURN_MS,
@@ -109,6 +110,8 @@ export function PolaroidAlbumBook({ album, labels, className }: PolaroidAlbumBoo
             <div className={`${styles.face} ${styles.faceBack}`} />
           </div>
         ))}
+
+        <div className={`${styles.seam} ${flipped > 0 && atRest ? styles.seamOn : ''}`} />
 
         <button
           ref={previousRef}

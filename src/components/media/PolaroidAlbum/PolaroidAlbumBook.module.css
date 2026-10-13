@@ -1,34 +1,38 @@
 /*
- * Port of reference/claude-design/polariod-album-mobile.html. Geometry,
- * paper colors, inner shading, timing and easing are the template's own,
- * kept as local values. Drop shadows are the site's (--shadow-sm, --shadow-lg)
- * and the cover color comes from Figma.
+ * The album one page at a time: the behavior of
+ * reference/claude-design/polariod-album-mobile.html in the look of
+ * reference/claude-design/polaroid-album-new.html (the desktop template; its
+ * colors, page, cover and seam). The board is one half of the new spread: the
+ * page hinged at the spine on the left, the cover margin around the others.
  *
- * --w / --h      album size (358 wide: the 390 column; --album-width on the wrapper)
- * --pad          white cover margin around the page
- * --gap          page's distance from the spine
- * --turn         page turn duration (TURN_MS in the component follows it)
- * --ease         the template's page-turn easing
- * --op           a leaf's opacity, set per leaf by the component
+ * --pw / --ph      page size (the new template's)
+ * --pad            cover margin around the page
+ * --album-width    board width: --pw + --pad (also used by the wrapper's fade)
+ * --turn           page turn duration (TURN_MS in the component follows it)
+ * --ease           the templates' page-turn easing
+ * --board          cover board (template #d9d9d9)
+ * --board-stitch   stitching on the board (template #b9b9b9, no token)
+ * --page           page paper (template #fff)
+ * --page-stitch    dashed edge on the pages (template #e2e2e2, no token)
+ * --op             a leaf's opacity, set per leaf by the component
  */
 
 /*
- * A turned page lies to the left of the album, past its edge (the template
- * needs an unclipped parent). The wrapper reaches past the column's side
- * padding to the screen edges (to the panel's padding on tablets), and a
- * mask fades the turned page out across the whole space left of the album
- * (Figma 443:516), instead of a hard clip. Overflow on the left never
- * becomes scrollable, so nothing scrolls sideways. The block padding is room
- * for the shadow and the turning page, which the mask would cut otherwise.
- * Below 358 the album zooms down as a whole.
+ * A turned page lies to the left of the album, past its edge. The wrapper
+ * reaches past the column's side padding to the screen edges (to the panel's
+ * padding on tablets), and a mask fades the turned page out across the whole
+ * space left of the album (Figma 443:516), instead of a hard clip. Overflow
+ * on the left never becomes scrollable, so nothing scrolls sideways. The
+ * block padding is room for the shadow and the turning page, which the mask
+ * would cut otherwise. In a narrower column the album zooms down as a whole.
  *
  * --bleed        how far the wrapper reaches past the column
  * --album-start  the album's left edge inside the wrapper
  */
 .wrap {
+  --album-width: 452px;
   --bleed: var(--page-gutter);
   --album-start: max(var(--bleed), 50% - var(--album-width) / 2);
-  --album-width: 358px;
 
   container-type: inline-size;
   display: flex;
@@ -46,40 +50,42 @@
 }
 
 .album {
-  --w: var(--album-width);
-  --h: 436px;
-  --pad: 24px;
-  --gap: 14px;
+  --pw: 420px;
+  --ph: 500px;
+  --pad: 32px;
   --turn: 1s;
   --ease: cubic-bezier(0.45, 0.05, 0.2, 1);
-  /* Cover color and its seams (Figma 441:482): --pink-100, white stitching. */
-  --album-cover: var(--pink-100);
-  --album-seam: var(--gray-0);
+  --board: var(--gray-100);
+  --board-stitch: #b9b9b9;
+  --page: var(--gray-0);
+  --page-stitch: #e2e2e2;
 
   position: relative;
   flex: none;
-  inline-size: var(--w);
-  block-size: var(--h);
+  inline-size: var(--album-width);
+  block-size: calc(var(--ph) + var(--pad) * 2);
   perspective: 1600px;
-  zoom: min(1, tan(atan2(100cqi, var(--w))));
+  zoom: min(1, tan(atan2(100cqi, var(--album-width))));
 }
 
-/* Back cover: the album's base. */
+/* Back cover: the album's base, rounded on the outer side. */
 .back {
   position: absolute;
   inset: 0;
-  border-radius: 4px 20px 20px 4px;
-  background: var(--album-cover);
-  /* The site's soft shadow (template: up to 60 % with a long drop). */
-  box-shadow: var(--shadow-lg);
+  border-radius: 0 26px 26px 0;
+  background: var(--board);
+  box-shadow:
+    0 1px 2px var(--color-shadow-subtle),
+    0 18px 36px -14px var(--color-shadow-default);
 }
 
 .back::before {
   content: '';
   position: absolute;
-  inset: 11px 11px 11px 6px;
-  border: 1.5px dashed var(--album-seam);
-  border-radius: 3px 13px 13px 3px;
+  inset: 14px 14px 14px 0;
+  border: 2px dashed var(--board-stitch);
+  border-inline-start: 0;
+  border-radius: 0 16px 16px 0;
   pointer-events: none;
 }
 
@@ -88,17 +94,19 @@
   position: absolute;
   inset-block: 0;
   inset-inline-start: 0;
-  inline-size: 16px;
-  border-radius: 4px 0 0 4px;
-  background: linear-gradient(90deg, rgb(0 0 0 / 14%), transparent);
+  inline-size: 14px;
+  background: linear-gradient(90deg, var(--color-shadow-subtle), transparent);
   pointer-events: none;
 }
 
 /* A leaf (page or cover), hinged at the spine. */
 .leaf {
   position: absolute;
-  inset: var(--pad) var(--pad) var(--pad) var(--gap);
-  transform-origin: calc(var(--gap) * -1) 50%;
+  inset-block-start: var(--pad);
+  inset-inline-start: 0;
+  inline-size: var(--pw);
+  block-size: var(--ph);
+  transform-origin: 0 50%;
   transform-style: preserve-3d;
   transition: transform var(--turn) var(--ease);
 }
@@ -109,7 +117,8 @@
 
 .leafCover {
   inset: 0;
-  transform-origin: 0 50%;
+  inline-size: auto;
+  block-size: auto;
 }
 
 /* Opacity goes on the sides, not the leaf, so the 3D stays intact. */
@@ -124,24 +133,17 @@
   transition: opacity 1.6s ease 0.35s;
 }
 
-/* Page: grey dotted paper, a dashed seam and a film sheen. */
+/* Page: plain white paper, a dashed edge and a soft shadow at the spine. */
 .face {
   position: absolute;
   inset: 0;
   box-sizing: border-box;
-  padding: 18px 20px;
+  padding: 30px 34px;
   overflow: hidden;
-  background-color: #eee;
-  background-image:
-    radial-gradient(circle, #e0e0e0 1px, transparent 1.4px),
-    radial-gradient(circle, #e4e4e4 1px, transparent 1.4px);
-  background-position:
-    0 0,
-    6px 6px;
-  background-size: 12px 12px;
+  background: var(--page);
   box-shadow:
-    inset 14px 0 18px -14px rgb(0 0 0 / 28%),
-    0 0 0 1px rgb(0 0 0 / 5%);
+    inset 16px 0 18px -16px var(--color-shadow-default),
+    inset 0 0 0 1px rgb(0 0 0 / 4%);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -149,31 +151,53 @@
 .face::before {
   content: '';
   position: absolute;
-  inset: 8px;
-  border: 1.2px dashed #d2d2d2;
+  inset: 10px;
+  border: 1.5px dashed var(--page-stitch);
   pointer-events: none;
-}
-
-.face::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    115deg,
-    rgb(255 255 255 / 35%) 0,
-    transparent 28%,
-    transparent 62%,
-    rgb(255 255 255 / 18%) 74%,
-    transparent 84%
-  );
 }
 
 .faceBack {
   transform: rotateY(180deg);
   box-shadow:
-    inset -14px 0 18px -14px rgb(0 0 0 / 28%),
-    0 0 0 1px rgb(0 0 0 / 5%);
+    inset -16px 0 18px -16px var(--color-shadow-default),
+    inset 0 0 0 1px rgb(0 0 0 / 4%);
+}
+
+/* Seam at the spine: a soft fold with stitching, once the turn has landed. */
+.seam {
+  position: absolute;
+  inset-block-start: var(--pad);
+  inset-inline-start: 0;
+  z-index: 450;
+  inline-size: 10px;
+  block-size: var(--ph);
+  margin-inline-start: -5px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-shadow-subtle) 45%,
+    var(--color-shadow-default) 50%,
+    var(--color-shadow-subtle) 55%,
+    transparent
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.seam::before {
+  content: '';
+  position: absolute;
+  inset-block: 8px;
+  inset-inline-start: 50%;
+  inline-size: 1.5px;
+  margin-inline-start: -0.75px;
+  background: repeating-linear-gradient(180deg, #c9c7c2 0 7px, transparent 7px 12px);
+}
+
+.seamOn {
+  opacity: 1;
+  transition-delay: 0.6s;
 }
 
 /* 2 × 2 pockets with Instax mini photos. */
@@ -183,7 +207,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 14px 22px;
+  gap: 20px 48px;
   place-items: center;
   block-size: 100%;
 }
@@ -192,9 +216,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  inline-size: 106px;
-  block-size: 169px;
-  border-radius: 2px;
+  inline-size: 138px;
+  block-size: 220px;
+  border-radius: 3px;
   box-shadow:
     inset 0 0 0 1px rgb(0 0 0 / 5%),
     inset 0 1px 3px rgb(0 0 0 / 6%);
@@ -202,13 +226,15 @@
 
 .photo {
   box-sizing: border-box;
-  inline-size: 106px;
-  block-size: 169px;
+  inline-size: 138px;
+  block-size: 220px;
   margin: var(--spacing-none);
-  padding: 8px 8px 39px;
+  padding: 10px 10px 51px;
   border-radius: 2px;
   background: linear-gradient(170deg, #fff, #f6f6f3);
-  box-shadow: var(--shadow-sm);
+  box-shadow:
+    0 1px 2px var(--color-shadow-subtle),
+    0 3px 8px -4px var(--color-shadow-default);
 }
 
 .photo img,
@@ -247,11 +273,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px 20px 20px 4px;
-  /* The template's shading toward the corner (#fff → #f3f3f3), over the cover color. */
-  background: linear-gradient(135deg, transparent 60%, rgb(0 0 0 / 5%)), var(--album-cover);
-  /* The site's soft shadow (template: up to 60 % with a long drop). */
-  box-shadow: var(--shadow-lg);
+  border-radius: 0 26px 26px 0;
+  background: linear-gradient(135deg, #dfdfdf 0, var(--board) 55%, #d2d2d2 100%);
+  box-shadow:
+    0 1px 2px var(--color-shadow-subtle),
+    0 18px 36px -14px var(--color-shadow-default);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -260,12 +286,10 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 4px 20px 20px 4px;
+  border-radius: 0 26px 26px 0;
   box-shadow:
     inset 0 0 0 1px rgb(0 0 0 / 6%),
-    inset 0 3px 2px -2px rgb(255 255 255 / 90%),
-    inset -3px -4px 6px -3px rgb(0 0 0 / 12%),
-    inset 0 0 0 4px rgb(255 255 255 / 50%);
+    inset -3px -4px 6px -3px var(--color-shadow-subtle);
   pointer-events: none;
 }
 
@@ -274,50 +298,52 @@
   position: absolute;
   inset-block: 0;
   inset-inline-start: 0;
-  inline-size: 20px;
-  border-radius: 4px 0 0 4px;
-  background: linear-gradient(90deg, rgb(0 0 0 / 10%), rgb(255 255 255 / 60%) 55%, rgb(0 0 0 / 6%));
+  inline-size: 26px;
+  background: linear-gradient(90deg, rgb(0 0 0 / 10%), rgb(255 255 255 / 35%) 55%, rgb(0 0 0 / 6%));
   pointer-events: none;
 }
 
 .coverInside {
-  border-radius: 20px 4px 4px 20px;
-  background: var(--album-cover);
+  border-radius: 26px 0 0 26px;
+  background: var(--board);
   transform: rotateY(180deg);
 }
 
 .coverInside::before {
-  inset: 11px 6px 11px 11px;
-  border: 1.5px dashed var(--album-seam);
-  border-radius: 13px 3px 3px 13px;
+  inset: 14px 0 14px 14px;
+  border: 2px dashed var(--board-stitch);
+  border-inline-end: 0;
+  border-radius: 16px 0 0 16px;
   box-shadow: none;
 }
 
 .coverInside::after {
   inset-inline: auto 0;
-  background: linear-gradient(270deg, rgb(0 0 0 / 12%), transparent);
+  inline-size: 14px;
+  background: linear-gradient(270deg, var(--color-shadow-subtle), transparent);
 }
 
-/* Window frame on the cover, with a double seam. */
+/* Window frame on the cover, with a double seam and a plastic pocket. */
 .window {
   position: relative;
   box-sizing: border-box;
-  inline-size: 172px;
-  block-size: 254px;
-  padding: 17px;
-  border-radius: 4px;
-  background: linear-gradient(160deg, #fdfdfc, #f1f0ec);
+  inline-size: 222px;
+  block-size: 330px;
+  padding: 22px;
+  border-radius: 5px;
+  background: linear-gradient(160deg, #e3e3e3, #d3d3d3);
   box-shadow:
-    var(--shadow-sm),
-    inset 0 1px 0 #fff,
+    0 1px 1px var(--color-shadow-subtle),
+    0 3px 6px -2px var(--color-shadow-subtle),
+    inset 0 1px 0 rgb(255 255 255 / 60%),
     inset 0 -2px 3px rgb(0 0 0 / 5%);
 }
 
 .window::before {
   content: '';
   position: absolute;
-  inset: 5px;
-  border: 1.1px dashed rgb(140 134 124 / 55%);
+  inset: 6px;
+  border: 1.3px dashed var(--board-stitch);
   border-radius: 3px;
   pointer-events: none;
 }
@@ -326,23 +352,22 @@
   position: relative;
   box-sizing: border-box;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   inline-size: 100%;
   block-size: 100%;
-  padding-block-end: 10px;
   border-radius: 2px;
-  background: linear-gradient(180deg, #e9e8e4, #f2f1ee);
+  background: linear-gradient(180deg, #e7e7e7, #efefef);
   box-shadow:
-    inset 0 2px 4px rgb(0 0 0 / 18%),
-    0 0 0 1px rgb(0 0 0 / 6%);
+    inset 0 2px 4px var(--color-shadow-default),
+    0 0 0 1px rgb(0 0 0 / 5%);
 }
 
 .sleeve::before {
   content: '';
   position: absolute;
-  inset: -6px;
-  border: 1.1px dashed rgb(140 134 124 / 55%);
+  inset: -7px;
+  border: 1.3px dashed var(--board-stitch);
   border-radius: 3px;
   pointer-events: none;
 }
@@ -381,6 +406,7 @@
   margin: var(--spacing-none);
   padding: var(--spacing-none);
   border: var(--border-none);
+  border-radius: 26px;
   background: transparent;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

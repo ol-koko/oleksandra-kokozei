@@ -22,10 +22,11 @@ const PHOTO_SIZES = '118px';
 
 /**
  * The album as a two-page spread (template:
- * reference/claude-design/polaroid-album-desktop.html). Closed, the cover
- * sits in the middle; a click on the right half turns forward, on the left
- * half back. Each leaf holds two pages: the right page, and on its back the
- * left page of the next spread.
+ * reference/claude-design/polaroid-album-new.html). Closed, the cover sits in
+ * the middle; a click on the right half turns forward, on the left half back.
+ * Each leaf holds two pages: the right page, and on its back the left page of
+ * the next spread. Open and at rest, a stitched seam shows between the pages.
+ * On the back cover, the right half turns every page back to the cover.
  */
 export function PolaroidAlbumSpread({ album, labels, className }: PolaroidAlbumSpreadProps) {
   const leaves = Array.from({ length: Math.ceil(album.pages.length / 2) }, (_, index) => ({
@@ -34,12 +35,13 @@ export function PolaroidAlbumSpread({ album, labels, className }: PolaroidAlbumS
   }));
   // The cover is leaf 0; every leaf can be turned, which leaves the back cover.
   const leafCount = leaves.length + 1;
-  const { flipped, canNext, canPrevious, next, previous, leaf } = useAlbumFlip({
+  const { flipped, atRest, canNext, canPrevious, next, previous, rewind, leaf } = useAlbumFlip({
     leafCount,
     maxFlipped: leafCount,
     turnMs: TURN_MS,
   });
   const input = useAlbumInput(next, previous);
+  const atEnd = !canNext;
 
   const leafProps = (index: number, extra = '') => {
     const state = leaf(index);
@@ -75,7 +77,7 @@ export function PolaroidAlbumSpread({ album, labels, className }: PolaroidAlbumS
       className={[styles.wrap, className].filter(Boolean).join(' ')}
       {...input}
     >
-      <div className={`${styles.album} ${flipped > 0 ? styles.open : ''}`}>
+      <div className={`${styles.album} ${flipped === 0 ? styles.closed : ''}`}>
         <div className={styles.stage}>
           <div className={styles.board}>
             <div className={styles.backcover} />
@@ -102,6 +104,8 @@ export function PolaroidAlbumSpread({ album, labels, className }: PolaroidAlbumS
               </div>
             ))}
 
+            <div className={`${styles.seam} ${flipped > 0 && atRest ? styles.seamOn : ''}`} />
+
             <button
               type="button"
               className={`${styles.zone} ${styles.zonePrevious}`}
@@ -112,9 +116,8 @@ export function PolaroidAlbumSpread({ album, labels, className }: PolaroidAlbumS
             <button
               type="button"
               className={`${styles.zone} ${styles.zoneNext}`}
-              aria-label={flipped === 0 ? labels.open : labels.next}
-              aria-disabled={!canNext}
-              onClick={next}
+              aria-label={flipped === 0 ? labels.open : atEnd ? labels.toCover : labels.next}
+              onClick={atEnd ? rewind : next}
             />
           </div>
         </div>

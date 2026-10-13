@@ -11,7 +11,7 @@ export type AlbumLabels = {
   close: string;
   previous: string;
   next: string;
-  /** Mobile, on the back cover: turns every page back to the cover. */
+  /** On the back cover: turns every page back to the cover. */
   toCover: string;
   /** "Page 2 of 5": the cover is page 1. */
   pageStatus: (current: number, total: number) => string;
@@ -25,9 +25,10 @@ type PolaroidAlbumProps = {
 
 /**
  * A Polaroid photo album that turns its pages like a real one. From 1024 it
- * is the two-page spread (polaroid-album-desktop.html); below, one page at a
- * time (polariod-album-mobile.html). Both are rendered and CSS shows one, so
- * nothing jumps on hydration; the hidden one loads no images and stays silent.
+ * is the two-page spread (polaroid-album-new.html); below, one page at a time
+ * (the behavior of polariod-album-mobile.html in the new design). Both are
+ * rendered and CSS shows one, so nothing jumps on hydration; the hidden one
+ * loads no images and stays silent.
  */
 export function PolaroidAlbum({ album, labels }: PolaroidAlbumProps) {
   return (

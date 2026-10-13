@@ -107,5 +107,8 @@ export function useAlbumFlip({ leafCount, maxFlipped, turnMs }: AlbumFlipOptions
     };
   };
 
-  return { flipped, canNext, canPrevious, next, previous, rewind, leaf };
+  /** No page is turning (the seam between the pages shows only then). */
+  const atRest = turning < 0;
+
+  return { flipped, atRest, canNext, canPrevious, next, previous, rewind, leaf };
 }
