@@ -16,7 +16,7 @@ export async function SiteFooter() {
       <div className={styles.inner}>
         <div className={styles.columns}>
           <div className={styles.column}>
-            <Logo />
+            <Logo animation="footer" />
             <p className={`${styles.localTime} text-body-s`}>
               {t.rich('localTime', { time: () => <LocalTime /> })}
             </p>

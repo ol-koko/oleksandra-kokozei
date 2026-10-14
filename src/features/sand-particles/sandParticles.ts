@@ -132,7 +132,8 @@ export class SandParticles {
   /** The text's size or position changed: resample before the next play. */
   invalidate() {
     this.dirty = true;
-    this.stop();
+    // A play waiting on fonts is kept: it samples the new layout anyway.
+    if (this.playing) this.stop();
   }
 
   /** Pointer over the text, in client coordinates. Starts a play. */

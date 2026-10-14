@@ -8,19 +8,25 @@ import styles from './SandText.module.css';
 const FINE_POINTER = '(hover: hover) and (pointer: fine)';
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 
-export type SandPlacement = 'header';
+export type SandPlacement = 'header' | 'footer';
 
 type SandTextProps = {
   text: string;
   placement: SandPlacement;
 };
 
+/** Header: hover devices only. Footer: also autoplays, and plays once in view on touch. */
+function sandMode(placement: SandPlacement, finePointer: boolean): SandMode | null {
+  if (placement === 'header') return finePointer ? 'pointer' : null;
+  return finePointer ? 'pointer-autoplay' : 'in-view';
+}
+
 /**
  * Text that can turn into sand (see features/sand-particles). The real text
  * stays in the DOM; the canvas is decorative, sits over it and ignores the
  * pointer, so the size, position and link behavior never change.
  */
-export function SandText({ text }: SandTextProps) {
+export function SandText({ text, placement }: SandTextProps) {
   const host = useRef<HTMLSpanElement>(null);
   const label = useRef<HTMLSpanElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -28,7 +34,7 @@ export function SandText({ text }: SandTextProps) {
 
   const finePointer = useMediaQuery(FINE_POINTER);
   const reducedMotion = useMediaQuery(REDUCED_MOTION);
-  const mode: SandMode | null = !reducedMotion && finePointer ? 'pointer' : null;
+  const mode = reducedMotion ? null : sandMode(placement, finePointer);
 
   useSandParticles(refs, mode, text);
 
