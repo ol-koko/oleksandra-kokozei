@@ -1,0 +1,21 @@
+/*
+ * Mobile 358 × 186 (520:908) and desktop 894 × 435 (448:565) differ in ratio:
+ * the image fills the frame and is cropped at the sides on mobile.
+ */
+.frame {
+  position: relative;
+  aspect-ratio: 358 / 186;
+  overflow: hidden;
+  border-radius: var(--border-radius-4xl);
+  background-color: var(--color-surface-subtle);
+}
+
+.image {
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .frame {
+    aspect-ratio: 894 / 435;
+  }
+}

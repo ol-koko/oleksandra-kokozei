@@ -1,0 +1,99 @@
+/*
+ * Header → divider → cover: 32 on mobile (520:1036), 40 on desktop (448:534).
+ * Then 48 / 80 to the private note and the About blocks (484:771).
+ */
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4xl);
+}
+
+/* Icon → text: 24, text → facts: 32 on mobile (520:880); 40 and 40 on desktop (448:536). */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4xl);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.icon {
+  /* 100 × 100 tile (448:539): no size token, flagged in the PR. */
+  inline-size: 100px;
+  block-size: auto;
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-2xl);
+}
+
+.link {
+  display: flex;
+  color: var(--color-icon-subtle);
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: var(--color-icon-strong);
+  }
+}
+
+.link:focus-visible {
+  color: var(--color-icon-strong);
+}
+
+/* Title → description: 16. */
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.description {
+  max-inline-size: var(--size-measure);
+  color: var(--color-text-strong);
+}
+
+.more {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6xl);
+  margin-block-start: var(--spacing-xl);
+}
+
+/* The private note's target: lands below the mobile header like a section. Not a control. */
+.about {
+  scroll-margin-block-start: var(--overlay-scroll-margin, var(--overlay-padding-block));
+}
+
+.about:focus-visible {
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .intro {
+    gap: var(--spacing-5xl);
+  }
+
+  .header {
+    gap: var(--spacing-5xl);
+  }
+
+  .more {
+    gap: var(--spacing-9xl);
+    margin-block-start: var(--spacing-5xl);
+  }
+
+  /*
+   * Desktop: the link sits at the top right of the overlay, above the section
+   * nav (439:441), so it is placed against the overlay layout, not the column.
+   */
+  .link {
+    position: absolute;
+    inset-block-start: var(--spacing-none);
+    inset-inline-end: var(--spacing-none);
+  }
+}

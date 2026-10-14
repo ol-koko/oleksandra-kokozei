@@ -115,8 +115,11 @@ type WorkCopy = (typeof messages)['WorkCases'];
 export type WorkCopyKey = MessageKeys<WorkCopy, NestedKeyOf<WorkCopy>>;
 
 /** A message group under `WorkCases` that holds `Field` (`ces.overview` holds `label`). */
-export type WorkCopyGroup<Field extends string> =
-  WorkCopyKey extends infer Key ? (Key extends `${infer Group}.${Field}` ? Group : never) : never;
+export type WorkCopyGroup<Field extends string> = WorkCopyKey extends infer Key
+  ? Key extends `${infer Group}.${Field}`
+    ? Group
+    : never
+  : never;
 
 /**
  * A text block of a case study: label and lead on the left, then either one
@@ -141,7 +144,8 @@ export type WorkPhotoBlock = {
 export type WorkBlock = WorkStoryBlock | WorkPhotoBlock;
 
 /** Facts in the case header. Labels live in `Overlay.work.facts.*`; the year comes from the work. */
-export type WorkFact = { id: 'year' } | { id: 'role' | 'productType' | 'projectType' | 'team'; value: WorkCopyKey };
+export type WorkFact =
+  { id: 'year' } | { id: 'role' | 'productType' | 'projectType' | 'team'; value: WorkCopyKey };
 
 /** A case study section after About: its nav label and blocks. */
 export type WorkCaseSection = {

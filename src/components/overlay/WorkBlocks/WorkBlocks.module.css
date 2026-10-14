@@ -1,0 +1,12 @@
+/* Block → block: 48 on mobile (520:957), 80 on desktop (467:662). */
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6xl);
+}
+
+@media (min-width: 768px) {
+  .blocks {
+    gap: var(--spacing-9xl);
+  }
+}

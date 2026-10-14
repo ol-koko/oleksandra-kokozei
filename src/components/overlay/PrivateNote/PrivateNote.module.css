@@ -1,0 +1,40 @@
+/* Grey card, 32 padding, 12 between icon, text and arrow (484:753). */
+.note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  inline-size: 100%;
+  padding: var(--spacing-4xl);
+  border: var(--border-none);
+  border-radius: var(--border-radius-4xl);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text-primary);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.lock {
+  color: var(--color-icon-strong);
+}
+
+/* Title → line: 8. */
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.hint {
+  color: var(--color-text-secondary);
+  /* Figma's body-s is 1.5 here (484:747); the .text-body-s token is auto. */
+  line-height: var(--line-height-relaxed);
+}
+
+/* 18 in Figma, snapped to --size-md (20). */
+.arrow {
+  inline-size: var(--size-md);
+  block-size: var(--size-md);
+  color: var(--color-icon-subtle);
+}
