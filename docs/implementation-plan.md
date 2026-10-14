@@ -131,7 +131,6 @@ Overlay (shell: dialog, backdrop, panel, scroller, URL sync)
 | `OverlaySongs`     | Built (stage 4.3): `OverlaySongs`, a `Shelf` of `VinylRecord`s from the user’s template; one item at a time with arrows on mobile, touch autoplay                                                                                                                                              | none                                                     | overlay-me         |
 | `OverlayBooks`     | Built (stage 4.3): `OverlayBooks`, a `Shelf` of `Book`s from the user’s template; same row, arrows and autoplay as songs                                                                                                                                                                       | none                                                     | overlay-me         |
 | `OverlayFilms`     | Built: `OverlayFilms`, a `Shelf` of `VhsTape`s from the user’s template; same row, arrows and autoplay as books, year as the byline                                                                                                                                                            | none                                                     | overlay-me         |
-| `OverlayAlbum`     | Built: `PolaroidAlbum` from the user’s new template: a two-page spread from 1024, one page at a time below; turns by click, arrows and swipe; rewinds from the back cover. Hidden in production until `album.published`                                                                        | none                                                     | overlay-me         |
 | `WorkDetailHeader` | 120 px icon tile, title, one-line description, facts, and an external link icon **only when `liveUrl` is set** (not for CES, D4)                                                                                                                                                               | `work: Work`                                             | Work overlays      |
 | `WorkFacts`        | 4 label/value columns: Year, Role, Project type, Team                                                                                                                                                                                                                                          | `facts: WorkFacts`                                       | `WorkDetailHeader` |
 | `WorkStorySection` | **Later stage (D12).** Heading, subheading and photo                                                                                                                                                                                                                                           | `section: WorkStory`                                     | Work overlays      |
@@ -147,7 +146,6 @@ type OverlaySectionData =
   | { kind: 'songs' } // overlay-me, built in stage 4.3 (OverlaySongs)
   | { kind: 'books' } // overlay-me, built in stage 4.3 (OverlayBooks)
   | { kind: 'films' } // overlay-me (OverlayFilms)
-  | { kind: 'album' } // overlay-me (OverlayAlbum), behind `album.published` in production
   | { kind: 'work-header'; workSlug: WorkSlug } // work overlays
   | { kind: 'work-story'; headingKey: string; subheadingKey: string; image: ImageData }; // later stage
 
@@ -390,11 +388,8 @@ Shared geometry (desktop): panel 1200 wide, top padding 80, inner column 996 cen
 | 3     | `music`    | Music     | "Fav songs"                               | **Slot for ready-made Fav Songs block**                 | 894 × 367 (heading 29 + gap 48 + content 290); starts at y 822 in `Frame 69`  |
 | 4     | `books`    | Books     | "Books"                                   | **Slot for ready-made Books block**                     | 894 × 442 (heading 29 + gap 48 + content 365); starts at y 1349 in `Frame 69` |
 | 5     | `films`    | Films     | "Films"                                   | `OverlayFilms` (VHS tapes, `417:771`)                   | 894 × 442 (heading 29 + gap 48 + content 365)                                 |
-| 6     | `album`    | Album     | "Album"                                   | `OverlayAlbum` (Polaroid album, `428:349`)              | 728 × 454 (441:476; the template’s 904 × 564 spread, zoomed), fits one screen |
 
 Nav labels differ from the headings ("Home" vs "My hometown", "Music" vs "Fav songs"). Both go into messages separately.
-
-The album's photos are added later. Until then every pocket is a placeholder frame and the section (with its nav item) only shows in development and Vercel previews. To publish it: put the photos in `public/media/me/album/`, add each photo's alt text to `Overlay.me.sections.album.photos.<id>` (en, uk, de), replace the placeholders in `src/content/album.ts` with `{ photo: '<id>', image: { src, width, height } }`, and set `published: true`.
 
 ### Work overlays (`42:429`), `?work=<slug>`
 
