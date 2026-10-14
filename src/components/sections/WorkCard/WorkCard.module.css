@@ -149,7 +149,7 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .card:hover .pill {
+    .card:has(.button):hover .pill {
       transform: scale(var(--motion-scale-hover));
     }
   }

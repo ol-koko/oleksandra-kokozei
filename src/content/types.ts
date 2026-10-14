@@ -38,6 +38,11 @@ export type Work = {
   slug: WorkSlug;
   year: number;
   cover: WorkCover;
+  /**
+   * Whether the case study is ready. An unpublished work keeps its card on the
+   * page, but the card opens nothing and its `?work=` link is ignored.
+   */
+  published: boolean;
 };
 
 /** Paragraph keys of a multi-paragraph message group, in reading order. */
