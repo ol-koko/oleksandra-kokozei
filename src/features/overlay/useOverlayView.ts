@@ -3,7 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { meOverlay, workOverlay } from '@/content/overlays';
-import type { OverlayRoute, SectionId } from '@/content/types';
+import type { OverlayRoute, SectionId, WorkBlock, WorkCase, WorkSlug } from '@/content/types';
+import { getWorkCase } from '@/content/workCases';
 import { overlayKey, type OverlayKey } from './overlayRoute';
 
 /** What a section renders below its heading; new content plugs in as a new kind. */
@@ -13,7 +14,8 @@ export type OverlaySectionBody =
   | { kind: 'songs' } // overlay-me: fav songs as vinyl records
   | { kind: 'books' } // overlay-me: books
   | { kind: 'films' } // overlay-me: films on VHS
-  | { kind: 'placeholder' }; // not built yet
+  | { kind: 'work-intro'; slug: WorkSlug; workCase: WorkCase } // work: header, cover, About blocks
+  | { kind: 'work-blocks'; blocks: readonly WorkBlock[] }; // work: story and photo blocks
 
 export type OverlaySectionView = {
   id: string;
@@ -41,13 +43,14 @@ export type OverlayView = {
 
 /**
  * Resolves an overlay's content data into the labels its shared component tree
- * renders. Work sections without content yet get a placeholder body.
+ * renders. A work overlay takes its sections from the work's case study.
  */
 export function useOverlayView(route: OverlayRoute): OverlayView {
   const t = useTranslations('Overlay');
   const tMe = useTranslations('Me');
   const tWorks = useTranslations('Works');
   const tNav = useTranslations('Nav');
+  const tCases = useTranslations('WorkCases');
 
   return useMemo(() => {
     const key = overlayKey(route);
@@ -105,26 +108,35 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
     }
 
     const title = tWorks(`items.${route.slug}.title`);
+    const workCase = getWorkCase(route.slug);
     return {
       key,
       title,
       crumb: title,
       ...parentOf(workOverlay.parentSection),
-      sections: workOverlay.sections.map((id): OverlaySectionView => {
-        const base = { id, anchorId: anchorId(id), navLabel: t(`work.sections.${id}.nav`) };
-        return id === 'about'
-          ? {
-              ...base,
+      sections: workCase
+        ? [
+            {
+              id: 'about',
+              anchorId: anchorId('about'),
+              navLabel: t('work.aboutNav'),
               heading: title,
-              caption: { kind: 'text', text: tWorks(`items.${route.slug}.description`) },
-              body: { kind: 'placeholder' },
-            }
-          : {
-              ...base,
-              heading: t(`work.sections.${id}.heading`),
-              body: { kind: 'placeholder' },
-            };
-      }),
+              body: { kind: 'work-intro', slug: route.slug, workCase },
+            },
+            ...workCase.sections.map((section): OverlaySectionView => {
+              // The section's first story label is its heading.
+              const story = section.blocks.find((block) => block.kind !== 'photo');
+              const navLabel = tCases(section.nav);
+              return {
+                id: section.id,
+                anchorId: anchorId(section.id),
+                navLabel,
+                heading: story ? tCases(`${story.copy}.label`) : navLabel,
+                body: { kind: 'work-blocks', blocks: section.blocks },
+              };
+            }),
+          ]
+        : [],
     };
-  }, [route, t, tMe, tWorks, tNav]);
+  }, [route, t, tMe, tWorks, tNav, tCases]);
 }

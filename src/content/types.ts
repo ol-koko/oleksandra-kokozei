@@ -1,3 +1,4 @@
+import type { MessageKeys, NestedKeyOf } from 'next-intl';
 import type messages from '../../messages/en.json';
 
 /** Identifiers for social profiles. Display labels live in messages (`Links.social.*`). */
@@ -38,6 +39,11 @@ export type Work = {
   slug: WorkSlug;
   year: number;
   cover: WorkCover;
+  /**
+   * Whether the case study is ready. An unpublished work keeps its card on the
+   * page, but the card opens nothing and its `?work=` link is ignored.
+   */
+  published: boolean;
 };
 
 /** Paragraph keys of a multi-paragraph message group, in reading order. */
@@ -102,8 +108,70 @@ export type ShelfFilm = ShelfItem<FilmId> & {
   year: number;
 };
 
-/** Sections of every work overlay. Labels live in messages (`Overlay.work.sections.*`). */
-export type WorkOverlaySectionId = 'about' | 'goal' | 'problem' | 'result';
+/** Case study copy (`WorkCases.*` in messages). */
+type WorkCopy = (typeof messages)['WorkCases'];
+
+/** A message key under `WorkCases`, such as `ces.overview.label`. */
+export type WorkCopyKey = MessageKeys<WorkCopy, NestedKeyOf<WorkCopy>>;
+
+/** A message group under `WorkCases` that holds `Field` (`ces.overview` holds `label`). */
+export type WorkCopyGroup<Field extends string> = WorkCopyKey extends infer Key
+  ? Key extends `${infer Group}.${Field}`
+    ? Group
+    : never
+  : never;
+
+/**
+ * A text block of a case study: label and lead on the left, then either one
+ * body (`<group>.body`) or titled topics, each with its own body. In a body,
+ * a line break starts a new paragraph and an empty line adds a gap.
+ */
+export type WorkStoryBlock =
+  | { kind: 'story'; copy: WorkCopyGroup<'label'> & WorkCopyGroup<'lead'> & WorkCopyGroup<'body'> }
+  | {
+      kind: 'topics';
+      copy: WorkCopyGroup<'label'> & WorkCopyGroup<'lead'>;
+      topics: readonly (WorkCopyGroup<'title'> & WorkCopyGroup<'body'>)[];
+    };
+
+/** A captioned photo of a case study. Alt text and caption live in `<copy>.alt` and `<copy>.caption`. */
+export type WorkPhotoBlock = {
+  kind: 'photo';
+  copy: WorkCopyGroup<'alt'> & WorkCopyGroup<'caption'>;
+  image: ImageAsset;
+};
+
+export type WorkBlock = WorkStoryBlock | WorkPhotoBlock;
+
+/** Facts in the case header. Labels live in `Overlay.work.facts.*`; the year comes from the work. */
+export type WorkFact =
+  { id: 'year' } | { id: 'role' | 'productType' | 'projectType' | 'team'; value: WorkCopyKey };
+
+/** A case study section after About: its nav label and blocks. */
+export type WorkCaseSection = {
+  /** Anchor part, unique within the case (`overlay-work-ces-scope`). */
+  id: string;
+  nav: WorkCopyKey;
+  blocks: readonly WorkBlock[];
+};
+
+/**
+ * One work overlay as data. Every case renders through the same components:
+ * About (header, cover, optional private note, its blocks), then `sections`.
+ */
+export type WorkCase = {
+  description: WorkCopyKey;
+  /** 100 × 100 tile next to the title. Decorative: the title follows. */
+  icon: ImageAsset;
+  cover: { image: ImageAsset; alt: WorkCopyKey };
+  facts: readonly WorkFact[];
+  /** Live site, linked from the header. CES has none (D4). */
+  liveSite?: ProjectSiteId;
+  /** Shows the "Private project overview" card, which leads to the About blocks. */
+  privateNote?: boolean;
+  about: readonly WorkBlock[];
+  sections: readonly WorkCaseSection[];
+};
 
 /** Which overlay is open: `?overlay=me` or `?work=<url slug>`. */
 export type OverlayRoute = { kind: 'me' } | { kind: 'work'; slug: WorkSlug };
@@ -124,5 +192,4 @@ export type OverlayContent =
   | {
       kind: 'work';
       parentSection: SectionId;
-      sections: readonly WorkOverlaySectionId[];
     };

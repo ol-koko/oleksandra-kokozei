@@ -3,6 +3,8 @@ import { OverlayAbout } from '@/components/overlay/OverlayAbout/OverlayAbout';
 import { OverlayBooks } from '@/components/overlay/OverlayBooks/OverlayBooks';
 import { OverlayFilms } from '@/components/overlay/OverlayFilms/OverlayFilms';
 import { OverlaySongs } from '@/components/overlay/OverlaySongs/OverlaySongs';
+import { WorkBlocks } from '@/components/overlay/WorkBlocks/WorkBlocks';
+import { WorkIntro } from '@/components/overlay/WorkIntro/WorkIntro';
 import { LocationLabel } from '@/components/ui/LocationLabel/LocationLabel';
 import type { OverlaySectionView } from '@/features/overlay/useOverlayView';
 import styles from './OverlaySection.module.css';
@@ -13,8 +15,9 @@ type OverlaySectionProps = {
 
 /**
  * One overlay section: heading, optional caption (location or one line of
- * text), then the body its kind names. The about intro brings its own heading.
- * Focusable by script, so the overlay nav can move focus to the section.
+ * text), then the body its kind names. The about intro and the work case
+ * bodies bring their own heading. Focusable by script, so the overlay nav can
+ * move focus to the section.
  */
 export function OverlaySection({ section }: OverlaySectionProps) {
   const headingId = `${section.anchorId}-heading`;
@@ -29,6 +32,10 @@ export function OverlaySection({ section }: OverlaySectionProps) {
     >
       {body.kind === 'about-intro' ? (
         <OverlayAbout headingId={headingId} />
+      ) : body.kind === 'work-intro' ? (
+        <WorkIntro slug={body.slug} workCase={body.workCase} headingId={headingId} />
+      ) : body.kind === 'work-blocks' ? (
+        <WorkBlocks blocks={body.blocks} headingLevel={2} headingId={headingId} />
       ) : (
         <>
           <div className={styles.header}>
@@ -47,7 +54,6 @@ export function OverlaySection({ section }: OverlaySectionProps) {
           {body.kind === 'songs' && <OverlaySongs />}
           {body.kind === 'books' && <OverlayBooks />}
           {body.kind === 'films' && <OverlayFilms />}
-          {body.kind === 'placeholder' && <div className={styles.placeholder} aria-hidden="true" />}
         </>
       )}
     </section>

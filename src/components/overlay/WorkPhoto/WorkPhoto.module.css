@@ -1,0 +1,11 @@
+/* Photo → caption: 16 (472:671, 520:971). */
+.photo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.caption {
+  color: var(--color-text-secondary);
+  text-align: center;
+}

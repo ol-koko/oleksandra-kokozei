@@ -31,6 +31,11 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes nudge-down {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(var(--dimension-1)); }
+}
+
 /* ---------- Utility classes ---------- */
 
 /* Overlay backdrop (overlay-me, overlay-works) */
@@ -65,6 +70,14 @@
 .animate-card {
   animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) backwards;
   animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* Scroll hint: an arrow bobs down a few times, then rests. Add the class to replay it (first view,
+   hover, keyboard focus) and remove it on animationend. Reduced motion: no movement. */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-nudge {
+    animation: nudge-down var(--motion-duration-slower) var(--motion-easing-gentle) 3;
+  }
 }
 
 /* Scroll-driven reveal: the progress follows the scroll position while the element enters the

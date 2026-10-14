@@ -1,0 +1,70 @@
+/*
+ * Two columns, 24 apart. Figma: 128 | 206 on mobile (520:958), 382 | 488 on
+ * desktop (467:660). Kept as ratios, so the columns hold below 390 and between
+ * breakpoints.
+ */
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 128fr) minmax(0, 206fr);
+  column-gap: var(--spacing-3xl);
+  align-items: start;
+}
+
+/* Label → lead: 18 in Figma, snapped to 16. */
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.label {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.lead {
+  color: var(--color-text-primary);
+}
+
+/* Topic → topic: 40 (480:718). */
+.topics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5xl);
+}
+
+/* Topic title → body: 24 on mobile (520:980), 32 on desktop (480:719). */
+.topic {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+  color: var(--color-text-primary);
+}
+
+/* Paragraph runs are one empty line apart (24 = one line of body-s). */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+  color: var(--color-text-primary);
+}
+
+/* Figma's body-s is 1.5 here (461:631); the .text-body-s token is auto. Flagged in the PR. */
+.body p {
+  line-height: var(--line-height-relaxed);
+}
+
+@media (min-width: 768px) {
+  .story {
+    grid-template-columns: minmax(0, 382fr) minmax(0, 488fr);
+  }
+
+  /* The lead wraps at 238 inside its 382 column (467:656): local text measure. */
+  .lead {
+    max-inline-size: 238px;
+  }
+
+  .topic {
+    gap: var(--spacing-4xl);
+  }
+}

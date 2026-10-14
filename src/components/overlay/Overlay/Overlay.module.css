@@ -152,9 +152,9 @@
   outline: none;
 }
 
-/* Mobile: content 12 below the breadcrumbs (275:815), 48 before the footer, as on the page. */
+/* Mobile: content 16 below the breadcrumbs (12 in 275:815, widened), 48 before the footer, as on the page. */
 .layout {
-  padding-block: var(--spacing-lg) var(--spacing-6xl);
+  padding-block: var(--spacing-xl) var(--spacing-6xl);
   padding-inline: var(--page-gutter);
 }
 
@@ -185,7 +185,9 @@
   }
 
   /* Content (894 at 1440) + 24 gap + nav; normalized from 26 in 112:337. */
+  /* Positioned: a work overlay's live-site link sits at its top right, above the nav. */
   .layout {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: var(--spacing-3xl);
