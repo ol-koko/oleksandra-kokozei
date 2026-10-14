@@ -44,6 +44,117 @@
       }
     }
   },
+  "WorkCases": {
+    "ces": {
+      "description": "CES’s administration platform connects recruitment workflows for crewing companies with the internal management of seafarer records, documents, and services. My UX/UI scope covers both CRM environments, focusing on information structure, operational workflows, and interfaces for managing interconnected records.",
+      "facts": {
+        "role": "UI/UX Designer",
+        "productType": "Maritime Platform",
+        "projectType": "Administration System"
+      },
+      "coverAlt": "Calm sea at dusk with the white CES logo in the center",
+      "nav": {
+        "scope": "Scope",
+        "flows": "Flows"
+      },
+      "overview": {
+        "label": "Overview",
+        "lead": "Two workspaces with distinct responsibilities.",
+        "body": "My work centers on the operational interfaces used by crewing companies and the CES team. Both environments connect to the same maritime ecosystem, but each serves a different set of daily tasks.\nCrewing managers need to publish vacancies, review applications, find suitable seafarers, and manage communication. The CES team needs to maintain seafarer records, process verification and service requests, oversee crewing companies, and moderate vacancies.\n\nThe design challenge is to give each team a focused workspace while making the relationships between people, documents, vacancies, and requests clear."
+      },
+      "scope": {
+        "label": "Scope",
+        "lead": "From recruitment management to platform operations.",
+        "topics": {
+          "crewingCrm": {
+            "title": "Crewing CRM",
+            "body": "The recruitment workspace covers vacancy management, application review, seafarer search, candidate records, and messaging. Its scope also includes company information, manager administration, recruitment statistics, and notifications.\nA key consideration is the vacancy lifecycle: distinguishing listings awaiting moderation from published, closed, and archived vacancies, while keeping applications and candidate actions accessible."
+          },
+          "cesCrm": {
+            "title": "CES CRM",
+            "body": "The internal workspace covers seafarer records, document verification, service requests, crewing companies, and vacancy moderation. Supporting areas include reference data such as ranks and availability, news, statistics, and activity history.\nThe seafarer profile brings together professional information, availability, the assigned manager, documents, services, and order history. It also provides access to bonus records, invoicing, and CV generation, making it a central point for multiple operational tasks."
+          }
+        }
+      },
+      "wireframes": {
+        "caption": "Initial CRM wireframes",
+        "alt": "Grid of early wireframes for the Crewing CRM and CES CRM: record pages, data tables, filters and forms"
+      },
+      "workflows": {
+        "label": "Workflows",
+        "lead": "Designing the connections between records and actions.",
+        "topics": {
+          "vacancies": {
+            "title": "Vacancies and applications",
+            "body": "A vacancy connects a role and vessel with employment details, publication status, and applications. The interface needs to support both an overview of recruitment activity and the review of individual listings and candidates."
+          },
+          "seafarers": {
+            "title": "Seafarers and documents",
+            "body": "A seafarer record connects professional details and availability with supporting documents. Document validity and verification require distinct status information so that administrators can understand what is current, what needs review, and what requires follow-up."
+          },
+          "services": {
+            "title": "Services and orders",
+            "body": "Service requests connect a seafarer with a specific task, its progress, and related order or payment information. Administrators need enough context to continue processing a request without losing track of the person or records involved.\nAcross these workflows, my design focus is clear hierarchy, searchable and filterable lists, understandable statuses, and relevant actions within each record. The goal is to support detailed operational work while keeping the two CRM environments consistent."
+          }
+        }
+      }
+    },
+    "filmBudget": {
+      "description": "FilmBudget is a website for a Danish video production company, designed to help potential clients understand services and pricing before requesting a quote. I designed the UX and UI for desktop and mobile, focusing on transparent pricing, clear navigation, and a straightforward inquiry process.",
+      "facts": {
+        "role": "UI/UX Designer",
+        "projectType": "Marketing Website",
+        "team": "Solo"
+      },
+      "coverAlt": "MacBook Pro showing the FilmBudget website: two divers filming in open water near a wooded shore",
+      "nav": {
+        "goal": "Goal",
+        "decisions": "Decision",
+        "result": "Result"
+      },
+      "overview": {
+        "label": "Overview",
+        "lead": "Connecting business goals with the customer journey.",
+        "body": "My work covered research, site structure, wireframes, UI design, mobile adaptation, and a reusable UI kit. I applied the client’s existing brand guidelines across English and Danish layouts, organizing the experience around exploring services, understanding costs, and requesting a quote."
+      },
+      "goal": {
+        "label": "Goal",
+        "lead": "Helping clients make an informed first step.",
+        "body": "Stakeholder interviews and a user survey highlighted three priorities: early access to approximate prices, information that builds trust, and easy contact. I translated these insights into a content hierarchy that brings service options and pricing forward, while keeping the path to an inquiry clear."
+      },
+      "research": {
+        "caption": "Research & Analysis",
+        "alt": "Research board with stakeholder interview notes, a competitive analysis, a user journey map, user survey charts and an information architecture sketch"
+      },
+      "decisions": {
+        "label": "Design Decisions",
+        "lead": "Clear pricing. Focused choices. Easy contact.",
+        "topics": {
+          "pricing": {
+            "title": "Pricing with context",
+            "body": "Three example-based pricing tiers for each video type help visitors compare options and understand the likely budget."
+          },
+          "inquiry": {
+            "title": "A clear path to inquiry",
+            "body": "Prominent calls to action and a short contact form guide visitors toward requesting a quote. The confirmation page explains what happens next."
+          },
+          "devices": {
+            "title": "Consistency across devices",
+            "body": "Mobile layouts prioritize pricing and contact actions, while a reusable UI kit keeps components consistent across pages."
+          }
+        }
+      },
+      "result": {
+        "label": "Result",
+        "lead": "A complete desktop and mobile design.",
+        "body": "I delivered desktop and mobile designs, English and Danish layouts, and a reusable UI kit for developer handoff.\n\nThe scope covered service discovery, pricing, quote requests, and confirmation, alongside supporting company and editorial pages.\nI applied the client’s existing visual identity throughout and created a reusable UI kit for consistent page layouts."
+      },
+      "designFile": {
+        "caption": "Design file overview",
+        "alt": "FilmBudget design file: wireframes, desktop pages in English and Danish, mobile pages and the UI kit"
+      }
+    }
+  },
   "Experience": {
     "heading": "Experience",
     "profilesNav": "Профілі з роботами",
@@ -147,22 +258,18 @@
       }
     },
     "work": {
-      "sections": {
-        "about": {
-          "nav": "About"
-        },
-        "goal": {
-          "nav": "Goal",
-          "heading": "Goal"
-        },
-        "problem": {
-          "nav": "Problem",
-          "heading": "Problem"
-        },
-        "result": {
-          "nav": "Result",
-          "heading": "Result"
-        }
+      "aboutNav": "About",
+      "facts": {
+        "year": "Year",
+        "role": "Role",
+        "productType": "Product type",
+        "projectType": "Project type",
+        "team": "Team"
+      },
+      "openLiveSite": "Open the {title} live site (opens in a new tab)",
+      "privateNote": {
+        "title": "Private project overview",
+        "text": "Let’s explore a few project details."
       }
     }
   },

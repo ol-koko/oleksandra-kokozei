@@ -1,5 +1,6 @@
 import { workUrlSlugs } from '@/content/overlays';
 import type { OverlayRoute, WorkSlug } from '@/content/types';
+import { getWorkCase } from '@/content/workCases';
 import { isPublishedWork } from '@/content/works';
 
 /** `?overlay=me` opens overlay-me. */
@@ -20,7 +21,10 @@ export function isSameOverlay(a: OverlayRoute | null, b: OverlayRoute | null) {
   return a !== null && b !== null && overlayKey(a) === overlayKey(b);
 }
 
-/** Reads the overlay from the query string. Unknown values and unpublished works open nothing. */
+/**
+ * Reads the overlay from the query string. Unknown values, unpublished works
+ * and works without a case study open nothing.
+ */
 export function parseOverlayRoute(params: Pick<URLSearchParams, 'get'>): OverlayRoute | null {
   if (params.get(OVERLAY_PARAM) === 'me') return { kind: 'me' };
 
@@ -28,7 +32,7 @@ export function parseOverlayRoute(params: Pick<URLSearchParams, 'get'>): Overlay
   const slug = (Object.keys(workUrlSlugs) as WorkSlug[]).find(
     (key) => workUrlSlugs[key] === workParam,
   );
-  return slug && isPublishedWork(slug) ? { kind: 'work', slug } : null;
+  return slug && isPublishedWork(slug) && getWorkCase(slug) ? { kind: 'work', slug } : null;
 }
 
 function urlFor(route: OverlayRoute | null) {

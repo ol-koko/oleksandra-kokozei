@@ -47,7 +47,6 @@ export function OverlaySection({ section }: OverlaySectionProps) {
           {body.kind === 'songs' && <OverlaySongs />}
           {body.kind === 'books' && <OverlayBooks />}
           {body.kind === 'films' && <OverlayFilms />}
-          {body.kind === 'placeholder' && <div className={styles.placeholder} aria-hidden="true" />}
         </>
       )}
     </section>
