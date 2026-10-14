@@ -22,7 +22,7 @@ export function SiteHeader() {
   return (
     <header ref={headerRef} className={styles.header}>
       <div className={styles.brand}>
-        <Logo />
+        <Logo animation="header" />
       </div>
       <SectionNav
         label={t('mainNav')}

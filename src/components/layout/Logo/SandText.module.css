@@ -1,0 +1,20 @@
+.host {
+  position: relative;
+}
+
+/* Hidden by color, not visibility, so it keeps its box and stays in the accessibility tree. */
+.host[data-sand-playing] .label {
+  color: transparent;
+}
+
+/* Larger than the text so grains have room to scatter; the engine sets its size and offset. */
+.canvas {
+  position: absolute;
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.host[data-sand-playing] .canvas {
+  visibility: visible;
+}
