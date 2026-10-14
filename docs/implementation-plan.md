@@ -28,6 +28,7 @@ Made by the repository owner after the audit (2026-09-30). They take precedence 
 | D10 | Closing overlays          | Desktop overlays have no close button. They close with Esc, backdrop click and browser Back (URL sync). On mobile the overlay opens full screen like `overlay-me-mobile` (275:815): the site header (working burger), breadcrumbs, sections, footer. The first breadcrumb ("Me", "Works") is the exit control. No section nav or scroll-spy on mobile | §6, §9.3, §10              |
 | D11 | Active nav item color     | `--color-text-primary` for every nav (header, mobile menu, overlay nav). For unspecified details like this, use the design system first                                                                                                                                                                                                               | §6                         |
 | D12 | Fixed in Figma; postponed | The Cyrillic look-alike letters and the 129 px mobile footer gap are fixed in Figma. overlay-works content is postponed: it will follow a heading, subheading and photo format. Its implementation moves to a later stage                                                                                                                             | §1, §3, §7, §8, §10, order |
+| D13 | Work cases (stage 4.4)    | CES (448:532) and FilmBudget (439:414) get real cases; mobile follows the CES mobile patterns (520:879), whose body is a FilmBudget template. Sections differ per case and live in data (`workCases.ts`). Works carry a `published` flag: Ju-Jutsu⁺ and Blow Stress Away keep their cards, but open nothing until published                           | §7, §8                     |
 
 Related rule added to `AGENTS.md`: Latin text in Figma that contains Cyrillic look-alike characters or obvious typos is corrected in code without asking, and the fix is listed in the summary.
 
@@ -393,14 +394,12 @@ Nav labels differ from the headings ("Home" vs "My hometown", "Music" vs "Fav so
 
 ### Work overlays (`42:429`), `?work=<slug>`
 
-**Implementation moved to a later stage (D12).** The structure is fixed now so the shared `Overlay` supports it from the start.
+**Built in stage 4.4 (D13).** Every case renders through the same components; only `workCases.ts` and the `WorkCases.*` messages differ. The first section is always About; the others come from the case.
 
-| Order | Section id | Nav label | Content                                                                                                                                                                 |
-| ----- | ---------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1     | `about`    | About     | Designed for CES: 120 px icon tile (radius 20), title (`title-l`), description (`body-m`), 4 facts, divider, cover 894 × 435 (radius 32). Link icon only with `liveUrl` |
-| 2     | `goal`     | Goal      | Later stage: heading, subheading, photo                                                                                                                                 |
-| 3     | `problem`  | Problem   | Later stage: heading, subheading, photo                                                                                                                                 |
-| 4     | `result`   | Result    | Later stage: heading, subheading, photo                                                                                                                                 |
+| Section  | Content                                                                                                                                                                                            |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| About    | 100 px icon tile (radius 20), title (`title-l`), description (`body-l`), facts (4 × 180 on desktop, 2 × 2 on mobile), live-site link when set, divider, cover, optional private note, About blocks |
+| Per case | Story blocks (label + lead, then one body or titled topics) and captioned photos. CES: Scope, Flows. FilmBudget: Goal, Decision, Result                                                            |
 
 How the entries differ (data, not components):
 
@@ -411,7 +410,7 @@ How the entries differ (data, not components):
 | Blow Stress Away     | "Blow Stress Away・2026" | Phone mockup on pink/purple gradient (0.4 alpha)         | not designed                                | https://blowstressaway.figma.site/ | not designed                                                                       |
 | FilmBudget           | "FilmBudget・2025"       | Full-bleed swimmers photo + FilmBudget logo top right    | not designed (brand colors exist as tokens) | https://www.filmbudget.dk/en/      | not designed                                                                       |
 
-Variation points: `icon`, `cover` (type `'photo' | 'phone-mockup' | 'browser-mockup'` + assets + optional logo), optional `liveUrl`, a variable-length `projectTypeKeys[]` (multi-line values), and the list of work-story sections.
+Variation points (`WorkCase` in `src/content/types.ts`): `icon`, `cover`, `facts`, optional `liveSite`, optional `privateNote`, the About blocks and the sections. The card row above records the original audit; facts now come from the case frames.
 
 ---
 
@@ -496,20 +495,21 @@ Outdated copy in the `content-works` component set: "Mobile App & Admin Panel de
 | About section                                                                                                                                                                                                                                                                           | Reuses `me.greeting`, `me.location`, `me.bio.*`          |
 | Placeholder content (Fav songs: Wicked Game / Chris Isaak; Raindance / Dave, Tems; Trance / Metro Boomin, Travis Scott, Young Thug. Books: Good Night, Mr. Holmes / Carole Nelson Douglas; The Like Switch / Jack Schafer & Marvin Karlins; The Design of Everyday Things / Don Norman) | Owned by the ready-made code. Listed for reference only  |
 
-### Work overlays (CES, later stage)
+### Work overlays
 
-| Key                              | Text                                                    |
-| -------------------------------- | ------------------------------------------------------- |
-| `overlayWorks.nav.*`             | About · Goal · Problem · Result                         |
-| `overlayWorks.facts.year`        | Year                                                    |
-| `overlayWorks.facts.role`        | Role                                                    |
-| `overlayWorks.facts.projectType` | Project type                                            |
-| `overlayWorks.facts.team`        | Team                                                    |
-| `works.ces.title`                | CES                                                     |
-| `works.ces.description`          | Admin platform for a complex maritime service ecosystem |
-| `works.ces.facts`                | 2026 · UI/UX Designer · Admin Panel / Mobile App · Solo |
-| `overlayWorks.openLiveSite`      | (aria-label, not in Figma; works with `liveUrl` only)   |
-| Goal / Problem / Result          | Heading, subheading, photo alt per work. To be written  |
+Shared labels live in `Overlay.work.*` (About nav, fact labels, live-site link, private note). Case copy lives in `WorkCases.<slug>.*`: description, fact values, cover alt, nav labels, story blocks (`label`, `lead`, `body` or `topics.*`) and photos (`alt`, `caption`). In a `body`, a line break starts a paragraph and an empty line adds a gap.
+
+-------------------------------- | ------------------------------------------------------- |
+| `overlayWorks.nav.*` | About · Goal · Problem · Result |
+| `overlayWorks.facts.year` | Year |
+| `overlayWorks.facts.role` | Role |
+| `overlayWorks.facts.projectType` | Project type |
+| `overlayWorks.facts.team` | Team |
+| `works.ces.title` | CES |
+| `works.ces.description` | Admin platform for a complex maritime service ecosystem |
+| `works.ces.facts` | 2026 · UI/UX Designer · Admin Panel / Mobile App · Solo |
+| `overlayWorks.openLiveSite` | (aria-label, not in Figma; works with `liveUrl` only) |
+| Goal / Problem / Result | Heading, subheading, photo alt per work. To be written |
 
 ---
 
