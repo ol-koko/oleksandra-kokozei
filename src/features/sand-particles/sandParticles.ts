@@ -228,6 +228,8 @@ export class SandParticles {
     this.canvas.height = height;
     this.canvas.style.width = `${cssWidth}px`;
     this.canvas.style.height = `${cssHeight}px`;
+    this.canvas.style.left = `${-CONFIG.padX}px`;
+    this.canvas.style.top = `${-CONFIG.padY}px`;
 
     // Draw the text offscreen exactly where the label sits, then sample its pixels.
     const offscreen = document.createElement('canvas');
