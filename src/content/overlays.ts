@@ -7,7 +7,7 @@ import type { OverlayContent, WorkSlug } from './types';
 export const meOverlay = {
   kind: 'me',
   parentSection: 'me',
-  sections: ['about', 'home', 'music', 'books', 'films', 'album'],
+  sections: ['about', 'home', 'music', 'books', 'films'],
   initialSection: 'home',
 } as const satisfies OverlayContent;
 
