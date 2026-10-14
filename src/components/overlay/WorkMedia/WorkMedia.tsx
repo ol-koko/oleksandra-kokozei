@@ -2,6 +2,9 @@ import Image from 'next/image';
 import type { ImageAsset } from '@/content/types';
 import styles from './WorkMedia.module.css';
 
+/** Detailed screenshots (wireframes, boards): above the default 75, allowed in next.config.ts. */
+const WORK_MEDIA_QUALITY = 90;
+
 type WorkMediaProps = {
   image: ImageAsset;
   alt: string;
@@ -19,6 +22,7 @@ export function WorkMedia({ image, alt, eager = false }: WorkMediaProps) {
         alt={alt}
         fill
         loading={eager ? 'eager' : 'lazy'}
+        quality={WORK_MEDIA_QUALITY}
         sizes="(min-width: 1200px) 894px, (min-width: 768px) 75vw, calc(100vw - 32px)"
       />
     </div>

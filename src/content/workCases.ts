@@ -1,11 +1,12 @@
 import type { WorkCase, WorkSlug } from './types';
 
+/** Covers exported from Figma at 2× the 894 × 435 frame. */
 const DETAIL = { width: 1788, height: 870 } as const;
 
 /**
  * Case studies, keyed by work. A work opens its overlay only when it is
  * published (`works.ts`) and has an entry here. Copy lives in messages
- * (`WorkCases.*`); images are exported from Figma at 2×.
+ * (`WorkCases.*`). Images are WebP at about 2× their displayed width.
  */
 export const workCases = {
   /** Desktop 448:532, mobile patterns 520:879. */
@@ -34,7 +35,7 @@ export const workCases = {
           {
             kind: 'photo',
             copy: 'ces.wireframes',
-            image: { src: '/media/works/ces/crm-wireframes.webp', ...DETAIL },
+            image: { src: '/media/works/ces/crm-wireframes.webp', width: 1788, height: 888 },
           },
         ],
       },
@@ -81,7 +82,11 @@ export const workCases = {
           {
             kind: 'photo',
             copy: 'filmBudget.research',
-            image: { src: '/media/works/film-budget/research-analysis.webp', ...DETAIL },
+            image: {
+              src: '/media/works/film-budget/research-analysis.webp',
+              width: 1788,
+              height: 975,
+            },
           },
         ],
       },
@@ -108,7 +113,11 @@ export const workCases = {
           {
             kind: 'photo',
             copy: 'filmBudget.designFile',
-            image: { src: '/media/works/film-budget/design-file-overview.webp', ...DETAIL },
+            image: {
+              src: '/media/works/film-budget/design-file-overview.webp',
+              width: 1788,
+              height: 970,
+            },
           },
         ],
       },
