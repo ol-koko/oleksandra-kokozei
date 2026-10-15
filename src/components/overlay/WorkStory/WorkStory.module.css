@@ -1,13 +1,8 @@
-/*
- * Two columns, 24 apart. Figma: 128 | 206 on mobile (520:958), 382 | 488 on
- * desktop (467:660). Kept as ratios, so the columns hold below 390 and between
- * breakpoints.
- */
+/* Mobile: one column, label and lead 40 above the body (520:959). */
 .story {
-  display: grid;
-  grid-template-columns: minmax(0, 128fr) minmax(0, 206fr);
-  column-gap: var(--spacing-3xl);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5xl);
 }
 
 /* Label → lead: 18 in Figma, snapped to 16. */
@@ -55,8 +50,15 @@
 }
 
 @media (min-width: 768px) {
+  /*
+   * Desktop: two columns, 24 apart, 382 | 488 (467:660). Kept as ratios, so
+   * the columns hold between breakpoints.
+   */
   .story {
+    display: grid;
     grid-template-columns: minmax(0, 382fr) minmax(0, 488fr);
+    column-gap: var(--spacing-3xl);
+    align-items: start;
   }
 
   /* The lead wraps at 238 inside its 382 column (467:656): local text measure. */

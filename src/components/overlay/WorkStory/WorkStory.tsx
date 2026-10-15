@@ -12,8 +12,8 @@ type WorkStoryProps = {
 
 /**
  * A case study text block (Figma "txt-block", 467:660): label and lead on the
- * left, then one body or titled topics on the right. Two columns on mobile
- * too (520:958).
+ * left, then one body or titled topics on the right. Stacked on mobile
+ * (520:958).
  */
 export function WorkStory({ block, headingLevel, headingId }: WorkStoryProps) {
   const t = useTranslations('WorkCases');

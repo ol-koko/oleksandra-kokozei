@@ -35,33 +35,35 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
   return (
     <div className={styles.intro}>
       <div className={styles.header}>
-        <div className={styles.top}>
-          <Image
-            className={styles.icon}
-            src={workCase.icon.src}
-            alt=""
-            width={workCase.icon.width}
-            height={workCase.icon.height}
-            loading="eager"
-          />
-          {liveSite && (
-            <a
-              className={styles.link}
-              href={liveSite.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t('openLiveSite', { title })}
-            >
-              <LinkIcon />
-            </a>
-          )}
-        </div>
+        <div className={styles.identity}>
+          <div className={styles.top}>
+            <Image
+              className={styles.icon}
+              src={workCase.icon.src}
+              alt=""
+              width={workCase.icon.width}
+              height={workCase.icon.height}
+              loading="eager"
+            />
+            {liveSite && (
+              <a
+                className={styles.link}
+                href={liveSite.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('openLiveSite', { title })}
+              >
+                <LinkIcon />
+              </a>
+            )}
+          </div>
 
-        <div className={styles.text}>
-          <h2 id={headingId} className="text-title-l">
-            {title}
-          </h2>
-          <p className={`${styles.description} text-body-l`}>{tCases(workCase.description)}</p>
+          <div className={styles.text}>
+            <h2 id={headingId} className="text-title-l">
+              {title}
+            </h2>
+            <p className={`${styles.description} text-body-2xs`}>{tCases(workCase.description)}</p>
+          </div>
         </div>
 
         {year !== undefined && <WorkFacts facts={workCase.facts} year={year} />}
