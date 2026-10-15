@@ -6,18 +6,20 @@ import styles from './Logo.module.css';
 type LogoProps = {
   /** Where the sand animation runs; omitted for none (mobile menu, overlay header). */
   animation?: SandPlacement;
+  /** 16 in the headers, 18 in the footer (Figma 220:76, 233:621). */
+  typography?: 'text-body-m' | 'text-title-s';
   className?: string;
 };
 
 /** Logo (the name), linking to the top of the home page. Never a heading. */
-export function Logo({ animation, className }: LogoProps) {
+export function Logo({ animation, typography = 'text-body-m', className }: LogoProps) {
   const t = useTranslations('Common');
   const name = t('name');
 
   return (
     <Link
       href="/"
-      className={['hover-link', styles.logo, 'text-body-m', className].filter(Boolean).join(' ')}
+      className={['hover-link', styles.logo, typography, className].filter(Boolean).join(' ')}
     >
       {animation ? <SandText text={name} placement={animation} /> : name}
     </Link>

@@ -1,6 +1,7 @@
 /*
- * Header → divider → cover: 32 on mobile (520:1036), 40 on desktop (448:534).
- * Then 48 / 80 to the private note and the About blocks (484:771).
+ * Header → divider → cover: 40 then 32 on mobile (520:1038), 40 and 40 on
+ * desktop (448:534). Then 48 / 80 to the private note and the About blocks
+ * (520:1037, 484:771).
  */
 .intro {
   display: flex;
@@ -8,11 +9,26 @@
   gap: var(--spacing-4xl);
 }
 
-/* Icon → text: 24, text → facts: 32 on mobile (520:880); 40 and 40 on desktop (448:536). */
+/* Mobile: 60 above the divider closing About (520:958), not the usual 48 between sections. */
+@media (max-width: 767px) {
+  .intro {
+    padding-block-end: calc(var(--spacing-8xl) - var(--spacing-6xl));
+  }
+}
+
+/* Mobile: 40 above the divider, 32 below it (the intro gap). */
 .header {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4xl);
+  gap: var(--spacing-6xl);
+  margin-block-end: calc(var(--spacing-5xl) - var(--spacing-4xl));
+}
+
+/* Icon → text: 40 (520:881, 448:536). Then 48 to the facts on mobile (520:880), 40 on desktop. */
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5xl);
 }
 
 .top {
@@ -45,13 +61,14 @@
   color: var(--color-icon-strong);
 }
 
-/* Title → description: 16. */
+/* Title → description: 18 on mobile in Figma (520:891), snapped to 16; 16 on desktop. */
 .text {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
 }
 
+/* body-2xs on mobile (520:893), body-l on desktop (448:545). */
 .description {
   max-inline-size: var(--size-measure);
   color: var(--color-text-strong);
@@ -80,6 +97,13 @@
 
   .header {
     gap: var(--spacing-5xl);
+    margin-block-end: var(--spacing-none);
+  }
+
+  .description {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-relaxed);
   }
 
   .more {
