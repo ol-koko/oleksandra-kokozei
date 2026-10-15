@@ -68,13 +68,14 @@
 }
 
 /*
- * Soft edges: content fades out over 40 at the top and bottom of the
- * scroller instead of being cut off. The top fade appears once the content
- * has scrolled (data-scrolled); the bottom one goes away at the very end
- * (data-at-end); both come from useScrollEdges. On mobile the top fade starts
- * under the sticky header. A solid mask layer over the scrollbar gutter keeps
- * the desktop scrollbar out of the fade. The lengths are registered so the
- * fades ease in and out.
+ * Soft edges, desktop and tablet only (the floating panel): content fades
+ * out over 40 at the top and bottom of the scroller instead of being cut off.
+ * The top fade appears once the content has scrolled (data-scrolled); the
+ * bottom one goes away at the very end (data-at-end); both come from
+ * useScrollEdges. A solid mask layer over the scrollbar gutter keeps the
+ * scrollbar out of the fade. The lengths are registered so the fades ease in
+ * and out. Mobile has no fades: the overlay reads as a page, and content
+ * scrolls under the solid header.
  */
 @property --overlay-fade-top {
   syntax: '<length>';
@@ -88,62 +89,37 @@
   initial-value: 0px;
 }
 
-.scroller {
-  --overlay-fade-offset: 0px;
-  --overlay-fade-bottom: var(--spacing-5xl);
-
-  mask-image:
-    linear-gradient(#000 0 0),
-    linear-gradient(
-      to bottom,
-      #000 var(--overlay-fade-offset),
-      transparent var(--overlay-fade-offset),
-      #000 calc(var(--overlay-fade-offset) + var(--overlay-fade-top)),
-      #000 calc(100% - var(--overlay-fade-bottom)),
-      transparent
-    );
-  mask-position:
-    right top,
-    left top;
-  mask-size:
-    var(--overlay-scrollbar-size, 0px) 100%,
-    100% 100%;
-  mask-repeat: no-repeat;
-  transition:
-    --overlay-fade-top var(--motion-duration-base) var(--motion-easing-standard),
-    --overlay-fade-bottom var(--motion-duration-base) var(--motion-easing-standard);
-}
-
-.scroller[data-scrolled='true'] {
-  --overlay-fade-top: var(--spacing-5xl);
-}
-
-.scroller[data-at-end='true'] {
-  --overlay-fade-bottom: 0px;
-}
-
-/*
- * Mobile: the top fade starts right at the solid header's bottom edge and
- * eases in (slow start, eased stops instead of a linear ramp), so its start
- * shows no line.
- */
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .scroller {
-    --overlay-fade-offset: var(--header-block-size);
+    --overlay-fade-bottom: var(--spacing-5xl);
 
     mask-image:
       linear-gradient(#000 0 0),
       linear-gradient(
         to bottom,
-        #000 var(--overlay-fade-offset),
-        transparent var(--overlay-fade-offset),
-        rgb(0 0 0 / 6%) calc(var(--overlay-fade-offset) + var(--overlay-fade-top) * 0.25),
-        rgb(0 0 0 / 30%) calc(var(--overlay-fade-offset) + var(--overlay-fade-top) * 0.5),
-        rgb(0 0 0 / 70%) calc(var(--overlay-fade-offset) + var(--overlay-fade-top) * 0.75),
-        #000 calc(var(--overlay-fade-offset) + var(--overlay-fade-top)),
+        transparent,
+        #000 var(--overlay-fade-top),
         #000 calc(100% - var(--overlay-fade-bottom)),
         transparent
       );
+    mask-position:
+      right top,
+      left top;
+    mask-size:
+      var(--overlay-scrollbar-size, 0px) 100%,
+      100% 100%;
+    mask-repeat: no-repeat;
+    transition:
+      --overlay-fade-top var(--motion-duration-base) var(--motion-easing-standard),
+      --overlay-fade-bottom var(--motion-duration-base) var(--motion-easing-standard);
+  }
+
+  .scroller[data-scrolled='true'] {
+    --overlay-fade-top: var(--spacing-5xl);
+  }
+
+  .scroller[data-at-end='true'] {
+    --overlay-fade-bottom: 0px;
   }
 }
 
