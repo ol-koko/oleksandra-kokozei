@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { CaretRightIcon } from '@/components/icons/CaretRightIcon';
+import { CaretRightSmallIcon } from '@/components/icons/CaretRightSmallIcon';
 import { isPointerClick } from '@/features/focus/moveFocus';
 import styles from './Breadcrumbs.module.css';
 
@@ -13,13 +13,13 @@ type BreadcrumbsProps = {
   className?: string;
 };
 
-/** "Me › More" / "Works › CES" at the top of a mobile overlay (Figma 275:997). */
+/** "Me › More" / "Works › CES" at the top of a mobile overlay (Figma 526:1043). */
 export function Breadcrumbs({ parentLabel, current, onExit, className }: BreadcrumbsProps) {
   const t = useTranslations('Overlay');
 
   return (
     <nav aria-label={t('breadcrumbs')} className={className}>
-      <ol className={`${styles.list} text-title-s`}>
+      <ol className={`${styles.list} text-body-xs`}>
         <li className={styles.item}>
           <button
             type="button"
@@ -31,7 +31,7 @@ export function Breadcrumbs({ parentLabel, current, onExit, className }: Breadcr
           </button>
         </li>
         <li className={styles.item}>
-          <CaretRightIcon className={styles.caret} />
+          <CaretRightSmallIcon className={styles.caret} />
           <span className={styles.current} aria-current="page">
             {current}
           </span>
