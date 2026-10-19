@@ -107,24 +107,28 @@ export const workCases = {
                 copy: 'juJutsu.screens.classDiscovery',
                 image: {
                   src: '/media/works/ju-jitsu/class-discovery.webp',
-                  width: 872,
-                  height: 502,
+                  width: 1308,
+                  height: 751,
                 },
               },
               {
                 copy: 'juJutsu.screens.bookingFlow',
-                image: { src: '/media/works/ju-jitsu/booking-flow.webp', width: 872, height: 498 },
+                image: { src: '/media/works/ju-jitsu/booking-flow.webp', width: 1308, height: 746 },
               },
               {
                 copy: 'juJutsu.screens.aiAssistance',
-                image: { src: '/media/works/ju-jitsu/ai-assistance.webp', width: 872, height: 567 },
+                image: {
+                  src: '/media/works/ju-jitsu/ai-assistance.webp',
+                  width: 1308,
+                  height: 751,
+                },
               },
               {
                 copy: 'juJutsu.screens.contentStructure',
                 image: {
                   src: '/media/works/ju-jitsu/content-structure.webp',
-                  width: 872,
-                  height: 502,
+                  width: 1308,
+                  height: 752,
                 },
               },
             ],
