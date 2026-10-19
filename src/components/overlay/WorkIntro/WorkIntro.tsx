@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import { LinkIcon } from '@/components/icons/LinkIcon';
 import { PrivateNote } from '@/components/overlay/PrivateNote/PrivateNote';
 import { WorkBlocks } from '@/components/overlay/WorkBlocks/WorkBlocks';
+import { WorkEmbed } from '@/components/overlay/WorkEmbed/WorkEmbed';
 import { WorkFacts } from '@/components/overlay/WorkFacts/WorkFacts';
 import { WorkMedia } from '@/components/overlay/WorkMedia/WorkMedia';
 import { WorkPhoto } from '@/components/overlay/WorkPhoto/WorkPhoto';
@@ -22,7 +23,8 @@ type WorkIntroProps = {
 /**
  * The About section of a work overlay (Figma 448:534, mobile 520:1036): icon,
  * title, description and facts, a link to the live site when there is one,
- * the cover (captioned when it has one), the optional private note, then the About blocks.
+ * the cover (captioned when it has one, or a live app), the optional private
+ * note, then the About blocks.
  */
 export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
   const t = useTranslations('Overlay.work');
@@ -38,15 +40,17 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
     <div className={styles.intro}>
       <div className={styles.header}>
         <div className={styles.identity}>
-          <div className={styles.top}>
-            <Image
-              className={styles.icon}
-              src={workCase.icon.src}
-              alt=""
-              width={workCase.icon.width}
-              height={workCase.icon.height}
-              loading="eager"
-            />
+          <div className={workCase.icon ? styles.top : `${styles.top} ${styles.linkOnly}`}>
+            {workCase.icon && (
+              <Image
+                className={styles.icon}
+                src={workCase.icon.src}
+                alt=""
+                width={workCase.icon.width}
+                height={workCase.icon.height}
+                loading="eager"
+              />
+            )}
             {liveSite && (
               <a
                 className={styles.link}
@@ -72,7 +76,9 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
       </div>
 
       <Divider />
-      {cover.caption ? (
+      {'embed' in cover ? (
+        <WorkEmbed cover={cover} title={title} />
+      ) : cover.caption ? (
         <WorkPhoto
           media={cover.media}
           alt={tCases(cover.alt)}
@@ -83,12 +89,14 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
         <WorkMedia media={cover.media} alt={tCases(cover.alt)} eager />
       )}
 
-      <div className={styles.more}>
-        {workCase.privateNote && <PrivateNote targetId={aboutId} />}
-        <div id={aboutId} tabIndex={-1} className={styles.about}>
-          <WorkBlocks blocks={workCase.about} headingLevel={3} />
+      {workCase.about.length > 0 && (
+        <div className={styles.more}>
+          {workCase.privateNote && <PrivateNote targetId={aboutId} />}
+          <div id={aboutId} tabIndex={-1} className={styles.about}>
+            <WorkBlocks blocks={workCase.about} headingLevel={3} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

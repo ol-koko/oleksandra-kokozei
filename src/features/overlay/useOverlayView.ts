@@ -39,6 +39,11 @@ export type OverlayView = {
   sections: readonly OverlaySectionView[];
   /** Anchor the overlay glides to right after opening, if any. */
   initialAnchorId?: string;
+  /**
+   * A visible close button on desktop, for overlays that embed a live app:
+   * while focus is inside the iframe, Esc never reaches the dialog.
+   */
+  closeControl: boolean;
 };
 
 /**
@@ -67,6 +72,7 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
         crumb: t('me.crumb'),
         ...parentOf(meOverlay.parentSection),
         initialAnchorId: anchorId(meOverlay.initialSection),
+        closeControl: false,
         sections: meOverlay.sections.map((id): OverlaySectionView => {
           const base = { id, anchorId: anchorId(id), navLabel: t(`me.sections.${id}.nav`) };
           switch (id) {
@@ -114,6 +120,7 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
       title,
       crumb: title,
       ...parentOf(workOverlay.parentSection),
+      closeControl: workCase !== undefined && 'embed' in workCase.cover,
       sections: workCase
         ? [
             {

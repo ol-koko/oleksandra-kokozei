@@ -168,7 +168,16 @@ export type WorkBlock = WorkStoryBlock | WorkPhotoBlock | WorkPhotoGridBlock;
 export type WorkFact =
   | { id: 'year' }
   | {
-      id: 'role' | 'productType' | 'projectType' | 'platform' | 'team';
+      id:
+        | 'role'
+        | 'productType'
+        | 'projectType'
+        | 'platform'
+        | 'team'
+        | 'design'
+        | 'frontend'
+        | 'styling'
+        | 'ai';
       value: WorkCopyKey;
     };
 
@@ -184,12 +193,29 @@ export type WorkCaseSection = {
  * One work overlay as data. Every case renders through the same components:
  * About (header, cover, optional private note, its blocks), then `sections`.
  */
+/** The cover under the header: a still or a looping video, with an optional caption below. */
+export type WorkMediaCover = {
+  media: ImageAsset | VideoAsset;
+  alt: WorkCopyKey;
+  caption?: WorkCopyKey;
+};
+
+/**
+ * A live app in place of the cover. Desktop embeds it in an iframe titled
+ * `title`; mobile shows `fallback` and a link that opens the app in a new tab.
+ */
+export type WorkEmbedCover = {
+  embed: ProjectSiteId;
+  title: WorkCopyKey;
+  fallback: ImageAsset | VideoAsset;
+  fallbackAlt: WorkCopyKey;
+};
+
 export type WorkCase = {
   description: WorkCopyKey;
-  /** 100 × 100 tile next to the title. Decorative: the title follows. */
-  icon: ImageAsset;
-  /** The cover under the header: a still or a looping video, with an optional caption below. */
-  cover: { media: ImageAsset | VideoAsset; alt: WorkCopyKey; caption?: WorkCopyKey };
+  /** 100 × 100 tile next to the title. Decorative: the title follows. Blow Stress Away has none. */
+  icon?: ImageAsset;
+  cover: WorkMediaCover | WorkEmbedCover;
   facts: readonly WorkFact[];
   /** Live site, linked from the header. CES has none (D4). */
   liveSite?: ProjectSiteId;

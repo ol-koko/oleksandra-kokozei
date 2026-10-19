@@ -172,6 +172,17 @@
         "body": "I built and published a functional website combining a filterable training schedule, online booking, and a bilingual AI assistant. The result brings class information and booking into one experience, with a more focused structure around prospective students’ immediate needs.\n\nUsing AI-assisted development in Base44, I moved from concept to implementation within a three-day timeframe. This project demonstrates my ability to define a focused scope, prioritize useful features, and carry a website beyond static design into a working product."
       }
     },
+    "blowStressAway": {
+      "description": "A playful, MediaPipe-powered breathing experience designed to help you unwind after a demanding day. Blow away clouds representing everyday worries about work and life, making space for a moment of calm.",
+      "facts": {
+        "design": "Figma",
+        "frontend": "TypeScript\nReact\nVite",
+        "styling": "Tailwind CSS",
+        "ai": "Figma Make\nCursor\nOpus 4.5"
+      },
+      "embedTitle": "Blow Stress Away, a live breathing app that asks for microphone access",
+      "fallbackAlt": "Phone showing the first screen of Blow Stress Away: a worried girl with crossed arms under a tangle of stress clouds and storm clouds"
+    },
     "filmBudget": {
       "description": "FilmBudget is a website for a Danish video production company, designed to help potential clients understand services and pricing before requesting a quote. I designed the UX and UI for desktop and mobile, focusing on transparent pricing, clear navigation, and a straightforward inquiry process.",
       "facts": {
@@ -246,6 +257,7 @@
     "hint": "Press Escape to close.",
     "sectionsNav": "Sections",
     "breadcrumbs": "Breadcrumbs",
+    "close": "Close {title}",
     "backToPage": ", back to the page",
     "me": {
       "title": "More about me",
@@ -339,9 +351,16 @@
         "productType": "Product type",
         "projectType": "Project type",
         "platform": "Platform",
-        "team": "Team"
+        "team": "Team",
+        "design": "Design",
+        "frontend": "Frontend",
+        "styling": "Styling",
+        "ai": "AI"
       },
       "openLiveSite": "Open the {title} live site (opens in a new tab)",
+      "fullScreen": "Open {title} in full screen",
+      "openApp": "Open the app",
+      "openAppLabel": "Open {title} in a new tab",
       "privateNote": {
         "title": "Private project overview",
         "text": "Let’s explore a few project details."

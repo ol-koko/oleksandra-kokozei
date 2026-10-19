@@ -10,6 +10,7 @@ import {
   type MouseEvent,
   type ReactNode,
 } from 'react';
+import { CloseIcon } from '@/components/icons/CloseIcon';
 import { Breadcrumbs } from '@/components/overlay/Breadcrumbs/Breadcrumbs';
 import { OverlayHeader } from '@/components/overlay/OverlayHeader/OverlayHeader';
 import { OverlayNav } from '@/components/overlay/OverlayNav/OverlayNav';
@@ -17,7 +18,7 @@ import { OverlaySection } from '@/components/overlay/OverlaySection/OverlaySecti
 import { Divider } from '@/components/ui/Divider/Divider';
 import { sectionIds } from '@/content/navigation';
 import type { OverlayRoute, SectionId } from '@/content/types';
-import { moveFocus } from '@/features/focus/moveFocus';
+import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
 import { closeOverlay, findTrigger, getOpener } from '@/features/overlay/overlayRoute';
@@ -205,6 +206,17 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
       <div ref={backdropRef} className={`${styles.backdrop} animate-overlay`} aria-hidden="true" />
 
       <div className={`${styles.panel} animate-modal`}>
+        {view.closeControl && (
+          <button
+            type="button"
+            className={styles.close}
+            aria-label={t('close', { title: view.title })}
+            onClick={(event) => requestClose({ fromPointer: isPointerClick(event) })}
+          >
+            <CloseIcon />
+          </button>
+        )}
+
         <div ref={scrollerRef} className={styles.scroller} tabIndex={-1}>
           <p id={titleId} className="visually-hidden">
             {view.title}
@@ -231,11 +243,13 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
               ))}
             </div>
 
+            {/* A case with only About has no nav (600:268); the column keeps the content width. */}
             <OverlayNav
               label={t('sectionsNav')}
               items={view.sections}
               activeId={activeId}
               onSelect={selectSection}
+              className={view.sections.length > 1 ? undefined : styles.navHidden}
             />
           </div>
 
