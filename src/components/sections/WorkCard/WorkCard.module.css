@@ -21,7 +21,7 @@
 
 /*
  * Above the video, inside the cover, so it follows the cover's hover scale.
- * Logo and inset keep their Figma share of the 486 px card (60 and 12, Figma
+ * Logo and inset keep their Figma share of the 486 px card (60 and 16, Figma
  * 2:2) at every width, capped at the Figma size; 100cqi is the card width.
  */
 .logo {
@@ -36,8 +36,8 @@
 }
 
 .top-end {
-  inset-block-start: min(var(--spacing-lg), 100cqi * 12 / 486);
-  inset-inline-end: min(var(--spacing-lg), 100cqi * 12 / 486);
+  inset-block-start: min(var(--spacing-xl), 100cqi * 16 / 486);
+  inset-inline-end: min(var(--spacing-xl), 100cqi * 16 / 486);
 }
 
 /*
