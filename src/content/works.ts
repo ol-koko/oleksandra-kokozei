@@ -1,21 +1,22 @@
 import type { Work, WorkSlug } from './types';
 
-/** Works grid, in Figma order (2:2, 57:518). Covers are cropped from the Figma artwork. */
+/**
+ * Works grid, in Figma order (2:2, 57:518). Cover videos are 1280 px wide,
+ * about 2.6× the 486 px card, with backdrops baked in. Logos are layers on top.
+ */
 export const works = [
   {
     slug: 'ces',
     year: 2026,
     published: true,
     cover: {
-      image: { src: '/media/covers/ces-sea.webp', width: 1600, height: 833 },
-      fit: 'photo',
-      background: 'placeholder',
-      logo: {
-        src: '/media/covers/ces-logo.webp',
-        width: 114,
-        height: 106,
-        placement: 'center',
+      video: {
+        webm: '/media/works/ces/card.webm',
+        mp4: '/media/works/ces/card.mp4',
+        width: 1280,
+        height: 720,
       },
+      logo: { src: '/media/works/ces/logo-white.svg', width: 71, height: 71, placement: 'center' },
     },
   },
   {
@@ -23,8 +24,12 @@ export const works = [
     year: 2026,
     published: false,
     cover: {
-      image: { src: '/media/covers/ju-jutsu.webp', width: 1600, height: 900 },
-      fit: 'photo',
+      video: {
+        webm: '/media/works/ju-jitsu/card.webm',
+        mp4: '/media/works/ju-jitsu/card.mp4',
+        width: 1280,
+        height: 624,
+      },
     },
   },
   {
@@ -32,9 +37,12 @@ export const works = [
     year: 2026,
     published: false,
     cover: {
-      image: { src: '/media/covers/blow-stress-away-phone.webp', width: 568, height: 912 },
-      fit: 'mockup',
-      background: 'gradient',
+      video: {
+        webm: '/media/works/blow-stress-away/card.webm',
+        mp4: '/media/works/blow-stress-away/card.mp4',
+        width: 1280,
+        height: 720,
+      },
     },
   },
   {
@@ -42,8 +50,12 @@ export const works = [
     year: 2025,
     published: true,
     cover: {
-      image: { src: '/media/covers/filmbudget.webp', width: 1600, height: 809 },
-      fit: 'photo',
+      video: {
+        webm: '/media/works/film-budget/card.webm',
+        mp4: '/media/works/film-budget/card.mp4',
+        width: 1280,
+        height: 648,
+      },
       logo: {
         src: '/media/covers/filmbudget-logo.svg',
         width: 54,

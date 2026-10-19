@@ -36,6 +36,11 @@
   50%      { transform: translateY(var(--dimension-1)); }
 }
 
+@keyframes shimmer {
+  from { translate: -100% 0; }
+  to   { translate: 100% 0; }
+}
+
 /* ---------- Utility classes ---------- */
 
 /* Overlay backdrop (overlay-me, overlay-works) */
@@ -77,6 +82,15 @@
 @media (prefers-reduced-motion: no-preference) {
   .animate-nudge {
     animation: nudge-down var(--motion-duration-slower) var(--motion-easing-gentle) 3;
+  }
+}
+
+/* Loading skeleton: a highlight band sweeps across the media's placeholder until it is ready.
+   Put the class on the band, which rests off to the side, so reduced motion shows a plain
+   placeholder. */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-shimmer {
+    animation: shimmer var(--motion-duration-shimmer) var(--motion-easing-gentle) infinite;
   }
 }
 

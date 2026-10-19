@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { WorkPhoto } from '@/components/overlay/WorkPhoto/WorkPhoto';
 import { WorkStory } from '@/components/overlay/WorkStory/WorkStory';
 import type { WorkBlock } from '@/content/types';
@@ -13,11 +14,18 @@ type WorkBlocksProps = {
 
 /** Case study blocks in reading order: text blocks and captioned photos. */
 export function WorkBlocks({ blocks, headingLevel, headingId }: WorkBlocksProps) {
+  const t = useTranslations('WorkCases');
+
   return (
     <div className={styles.blocks}>
       {blocks.map((block, index) =>
         block.kind === 'photo' ? (
-          <WorkPhoto key={block.copy} block={block} />
+          <WorkPhoto
+            key={block.copy}
+            media={block.image}
+            alt={t(`${block.copy}.alt`)}
+            caption={t(`${block.copy}.caption`)}
+          />
         ) : (
           <WorkStory
             key={block.copy}

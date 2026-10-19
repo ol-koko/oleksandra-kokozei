@@ -7,11 +7,6 @@
   aspect-ratio: 358 / 186;
   overflow: hidden;
   border-radius: var(--border-radius-4xl);
-  background-color: var(--color-surface-subtle);
-}
-
-.image {
-  object-fit: cover;
 }
 
 @media (min-width: 768px) {

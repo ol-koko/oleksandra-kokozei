@@ -1,6 +1,6 @@
 import type { WorkCase, WorkSlug } from './types';
 
-/** Covers exported from Figma at 2× the 894 × 435 frame. */
+/** Covers at 2× the 894 × 435 frame: exported from Figma, or encoded from the screen recording. */
 const DETAIL = { width: 1788, height: 870 } as const;
 
 /**
@@ -12,8 +12,8 @@ export const workCases = {
   /** Desktop 448:532, mobile patterns 520:879. */
   ces: {
     description: 'ces.description',
-    icon: { src: '/media/works/ces/icon.webp', width: 200, height: 200 },
-    cover: { image: { src: '/media/works/ces/cover.webp', ...DETAIL }, alt: 'ces.coverAlt' },
+    icon: { src: '/media/works/ces/logo-blue.svg', width: 71, height: 71 },
+    cover: { media: { src: '/media/works/ces/cover.webp', ...DETAIL }, alt: 'ces.coverAlt' },
     facts: [
       { id: 'year' },
       { id: 'role', value: 'ces.facts.role' },
@@ -62,8 +62,13 @@ export const workCases = {
     description: 'filmBudget.description',
     icon: { src: '/media/covers/filmbudget-logo.svg', width: 54, height: 54 },
     cover: {
-      image: { src: '/media/works/film-budget/cover.webp', ...DETAIL },
+      media: {
+        webm: '/media/works/film-budget/cover.webm',
+        mp4: '/media/works/film-budget/cover.mp4',
+        ...DETAIL,
+      },
       alt: 'filmBudget.coverAlt',
+      caption: 'filmBudget.coverCaption',
     },
     facts: [
       { id: 'year' },

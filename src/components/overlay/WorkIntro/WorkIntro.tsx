@@ -5,6 +5,7 @@ import { PrivateNote } from '@/components/overlay/PrivateNote/PrivateNote';
 import { WorkBlocks } from '@/components/overlay/WorkBlocks/WorkBlocks';
 import { WorkFacts } from '@/components/overlay/WorkFacts/WorkFacts';
 import { WorkMedia } from '@/components/overlay/WorkMedia/WorkMedia';
+import { WorkPhoto } from '@/components/overlay/WorkPhoto/WorkPhoto';
 import { Divider } from '@/components/ui/Divider/Divider';
 import { projectSites } from '@/content/links';
 import type { WorkCase, WorkSlug } from '@/content/types';
@@ -21,7 +22,7 @@ type WorkIntroProps = {
 /**
  * The About section of a work overlay (Figma 448:534, mobile 520:1036): icon,
  * title, description and facts, a link to the live site when there is one,
- * the cover, the optional private note, then the About blocks.
+ * the cover (captioned when it has one), the optional private note, then the About blocks.
  */
 export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
   const t = useTranslations('Overlay.work');
@@ -31,6 +32,7 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
   const year = works.find((work) => work.slug === slug)?.year;
   const liveSite = projectSites.find((site) => site.id === workCase.liveSite);
   const aboutId = `${headingId}-about`;
+  const { cover } = workCase;
 
   return (
     <div className={styles.intro}>
@@ -70,7 +72,16 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
       </div>
 
       <Divider />
-      <WorkMedia image={workCase.cover.image} alt={tCases(workCase.cover.alt)} eager />
+      {cover.caption ? (
+        <WorkPhoto
+          media={cover.media}
+          alt={tCases(cover.alt)}
+          caption={tCases(cover.caption)}
+          eager
+        />
+      ) : (
+        <WorkMedia media={cover.media} alt={tCases(cover.alt)} eager />
+      )}
 
       <div className={styles.more}>
         {workCase.privateNote && <PrivateNote targetId={aboutId} />}

@@ -22,16 +22,27 @@ export type ImageAsset = {
   height: number;
 };
 
+/**
+ * A silent looping video in `public/`, encoded twice: AV1 WebM first, H.264
+ * MP4 as the fallback. Width and height are its intrinsic size in pixels.
+ */
+export type VideoAsset = {
+  webm: `/media/${string}.webm`;
+  mp4: `/media/${string}.mp4`;
+  width: number;
+  height: number;
+};
+
 /** Works on the main page. Title and description live in messages (`Works.items.*`). */
 export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget';
 
+/** Card cover: a looping video, with the backdrop baked in. */
 export type WorkCover = {
-  image: ImageAsset;
-  /** `photo` fills the cover; `mockup` is a device frame centered at 90 % of the cover height. */
-  fit: 'photo' | 'mockup';
-  /** Surface behind the image: grey placeholder or the pink media gradient. */
-  background?: 'placeholder' | 'gradient';
-  /** Logo on top of the image, at its intrinsic size. */
+  video: VideoAsset;
+  /**
+   * Logo drawn above the video instead of baked in, so it keeps its place and
+   * is never cropped with the video: centered, or in the top-right corner.
+   */
   logo?: ImageAsset & { placement: 'center' | 'top-end' };
 };
 
@@ -163,7 +174,8 @@ export type WorkCase = {
   description: WorkCopyKey;
   /** 100 × 100 tile next to the title. Decorative: the title follows. */
   icon: ImageAsset;
-  cover: { image: ImageAsset; alt: WorkCopyKey };
+  /** The cover under the header: a still or a looping video, with an optional caption below. */
+  cover: { media: ImageAsset | VideoAsset; alt: WorkCopyKey; caption?: WorkCopyKey };
   facts: readonly WorkFact[];
   /** Live site, linked from the header. CES has none (D4). */
   liveSite?: ProjectSiteId;
