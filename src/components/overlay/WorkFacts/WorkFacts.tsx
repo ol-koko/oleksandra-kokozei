@@ -17,7 +17,17 @@ export function WorkFacts({ facts, year }: WorkFactsProps) {
       {facts.map((fact) => (
         <div key={fact.id} className={styles.fact}>
           <dt className={`${styles.label} text-title-m`}>{t(fact.id)}</dt>
-          <dd className="text-body-l">{fact.id === 'year' ? year : tCases(fact.value)}</dd>
+          {fact.id === 'year' ? (
+            <dd className="text-body-l">{year}</dd>
+          ) : (
+            tCases(fact.value)
+              .split('\n')
+              .map((value) => (
+                <dd key={value} className="text-body-l">
+                  {value}
+                </dd>
+              ))
+          )}
         </div>
       ))}
     </dl>

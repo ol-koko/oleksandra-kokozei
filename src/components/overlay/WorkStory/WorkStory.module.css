@@ -45,8 +45,15 @@
 }
 
 /* Figma's body-s is 1.5 here (461:631); the .text-body-s token is auto. Flagged in the PR. */
-.body p {
+.body p,
+.body li {
   line-height: var(--line-height-relaxed);
+}
+
+/* Bulleted list (551:540): discs, items indented 24. */
+.list {
+  padding-inline-start: var(--spacing-3xl);
+  list-style: disc;
 }
 
 @media (min-width: 768px) {

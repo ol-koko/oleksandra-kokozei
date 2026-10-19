@@ -4,7 +4,7 @@ import type { ImageAsset, VideoAsset } from '@/content/types';
 import styles from './WorkMedia.module.css';
 
 /** Detailed screenshots (wireframes, boards): above the default 75, allowed in next.config.ts. */
-const WORK_MEDIA_QUALITY = 90;
+export const WORK_MEDIA_QUALITY = 90;
 
 type WorkMediaProps = {
   media: ImageAsset | VideoAsset;

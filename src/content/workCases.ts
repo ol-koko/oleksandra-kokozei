@@ -57,6 +57,88 @@ export const workCases = {
     ],
   },
 
+  /** Desktop 551:480; mobile follows the CES mobile patterns. */
+  juJutsu: {
+    description: 'juJutsu.description',
+    icon: { src: '/media/works/ju-jitsu/logo.webp', width: 200, height: 200 },
+    cover: {
+      media: {
+        webm: '/media/works/ju-jitsu/cover.webm',
+        mp4: '/media/works/ju-jitsu/cover.mp4',
+        ...DETAIL,
+      },
+      alt: 'juJutsu.coverAlt',
+    },
+    facts: [
+      { id: 'year' },
+      { id: 'role', value: 'juJutsu.facts.role' },
+      { id: 'productType', value: 'juJutsu.facts.productType' },
+      { id: 'platform', value: 'juJutsu.facts.platform' },
+    ],
+    liveSite: 'juJutsu',
+    about: [
+      { kind: 'story', copy: 'juJutsu.overview' },
+      {
+        kind: 'photo',
+        copy: 'juJutsu.promptToWebsite',
+        image: { src: '/media/works/ju-jitsu/from-prompt-to-website.webp', ...DETAIL },
+      },
+    ],
+    sections: [
+      { id: 'goal', nav: 'juJutsu.nav.goal', blocks: [{ kind: 'story', copy: 'juJutsu.goal' }] },
+      {
+        id: 'design',
+        nav: 'juJutsu.nav.design',
+        blocks: [
+          {
+            kind: 'topics',
+            copy: 'juJutsu.design',
+            topics: [
+              'juJutsu.design.topics.schedule',
+              'juJutsu.design.topics.booking',
+              'juJutsu.design.topics.assistant',
+              'juJutsu.design.topics.content',
+            ],
+          },
+          {
+            kind: 'photo-grid',
+            photos: [
+              {
+                copy: 'juJutsu.screens.classDiscovery',
+                image: {
+                  src: '/media/works/ju-jitsu/class-discovery.webp',
+                  width: 872,
+                  height: 502,
+                },
+              },
+              {
+                copy: 'juJutsu.screens.bookingFlow',
+                image: { src: '/media/works/ju-jitsu/booking-flow.webp', width: 872, height: 498 },
+              },
+              {
+                copy: 'juJutsu.screens.aiAssistance',
+                image: { src: '/media/works/ju-jitsu/ai-assistance.webp', width: 872, height: 567 },
+              },
+              {
+                copy: 'juJutsu.screens.contentStructure',
+                image: {
+                  src: '/media/works/ju-jitsu/content-structure.webp',
+                  width: 872,
+                  height: 502,
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'result',
+        nav: 'juJutsu.nav.result',
+        blocks: [{ kind: 'story', copy: 'juJutsu.result' }],
+      },
+    ],
+  },
+
   /** Desktop 439:414; mobile follows the CES mobile patterns. */
   filmBudget: {
     description: 'filmBudget.description',

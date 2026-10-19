@@ -125,7 +125,9 @@ export function useOverlayView(route: OverlayRoute): OverlayView {
             },
             ...workCase.sections.map((section): OverlaySectionView => {
               // The section's first story label is its heading.
-              const story = section.blocks.find((block) => block.kind !== 'photo');
+              const story = section.blocks.find(
+                (block) => block.kind === 'story' || block.kind === 'topics',
+              );
               const navLabel = tCases(section.nav);
               return {
                 id: section.id,

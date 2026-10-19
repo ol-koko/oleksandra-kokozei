@@ -22,7 +22,7 @@ export const works = [
   {
     slug: 'juJutsu',
     year: 2026,
-    published: false,
+    published: true,
     cover: {
       video: {
         webm: '/media/works/ju-jitsu/card.webm',

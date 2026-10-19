@@ -99,6 +99,79 @@
         }
       }
     },
+    "juJutsu": {
+      "description": "Website redesign for a German jujitsu school, focused on helping visitors find a suitable class and book a session online. I took the project from identifying problems in the existing website to building a functional experience in Base44 within three days.",
+      "facts": {
+        "role": "UI/UX Designer\nWebsite Development",
+        "productType": "Booking Website",
+        "platform": "Base44"
+      },
+      "coverAlt": "MacBook Pro showing the Ju-Jutsu⁺ trial lesson booking: a progress bar, an October calendar and the free time slots for the selected day, over a line drawing of a pagoda",
+      "nav": {
+        "goal": "Goal",
+        "design": "Design",
+        "result": "Result"
+      },
+      "overview": {
+        "label": "Overview",
+        "lead": "From a local business problem to a working website.",
+        "body": "I selected Ju-Jutsu⁺ after reviewing its existing website and identifying opportunities to improve class discovery and booking. The school’s offering was buried in lengthy content, while the schedule was difficult to navigate and visitors could not book a lesson online.\n\nMy work covered defining the concept, restructuring content, planning the user flow, and implementing the website in Base44. I focused on connecting the information prospective students need with the actions they want to take: explore classes, find a suitable time and location, and book a session."
+      },
+      "promptToWebsite": {
+        "caption": "From prompt to website",
+        "alt": "Base44 editor on a MacBook Pro: the prompt that describes the Ju-Jutsu⁺ website on the left, the generated homepage with the headline “Komm, wie du bist.” and two people training on the right"
+      },
+      "goal": {
+        "label": "Goal",
+        "lead": "Make the first step into training easier.",
+        "body": "The challenge was to turn an information-heavy website into a practical tool for choosing and booking classes. Visitors needed a clearer way to understand the school’s offering without reading through multiple sections or searching for relevant schedule details.\n\nI prioritized three tasks:\n- finding a class that matches the visitor’s needs\n- understanding the training options\n- and booking online.\n\nFrom a business perspective, the aim was to support new student inquiries and reduce the need for manual coordination around schedules and bookings."
+      },
+      "design": {
+        "label": "Design",
+        "lead": "Find a class. Explore the options. Book a session.",
+        "topics": {
+          "schedule": {
+            "title": "A filterable training schedule",
+            "body": "I introduced a structured timetable with filters for class category, age group, and city. This gives visitors a way to narrow down the available options and focus on sessions relevant to them."
+          },
+          "booking": {
+            "title": "Online lesson booking",
+            "body": "I added a booking flow to give visitors a direct next step after exploring classes. Bringing booking into the website connects class discovery with taking action, rather than leaving visitors to arrange everything through a separate conversation."
+          },
+          "assistant": {
+            "title": "Bilingual AI assistance",
+            "body": "I integrated an AI assistant with English and Ukrainian support, adding a conversational way to ask questions while exploring the website."
+          },
+          "content": {
+            "title": "Clearer content and visual hierarchy",
+            "body": "I shortened lengthy descriptions and reorganized information into scannable sections and cards. A clearer visual hierarchy highlights key details, helping visitors explore training options and find relevant information more easily."
+          }
+        }
+      },
+      "screens": {
+        "classDiscovery": {
+          "caption": "Class Discovery",
+          "alt": "Weekly training schedule from Monday to Friday, filtered by city and course, with one card per class showing its time and location"
+        },
+        "bookingFlow": {
+          "caption": "Booking Flow",
+          "alt": "Booking step “Termin wählen”: a progress bar, an October calendar and the available time slots for the selected day"
+        },
+        "aiAssistance": {
+          "caption": "AI Assistance",
+          "alt": "Homepage hero with two people training in a dojo and the open chat window of the Ju-Jutsu⁺ AI assistant"
+        },
+        "contentStructure": {
+          "caption": "Content Structure",
+          "alt": "Class pages as cards: a photo of children training next to the course name, age group, short description and a button to book a trial lesson"
+        }
+      },
+      "result": {
+        "label": "Result",
+        "lead": "An implemented website in three days.",
+        "body": "I built and published a functional website combining a filterable training schedule, online booking, and a bilingual AI assistant. The result brings class information and booking into one experience, with a more focused structure around prospective students’ immediate needs.\n\nUsing AI-assisted development in Base44, I moved from concept to implementation within a three-day timeframe. This project demonstrates my ability to define a focused scope, prioritize useful features, and carry a website beyond static design into a working product."
+      }
+    },
     "filmBudget": {
       "description": "FilmBudget is a website for a Danish video production company, designed to help potential clients understand services and pricing before requesting a quote. I designed the UX and UI for desktop and mobile, focusing on transparent pricing, clear navigation, and a straightforward inquiry process.",
       "facts": {
@@ -265,6 +338,7 @@
         "role": "Role",
         "productType": "Product type",
         "projectType": "Project type",
+        "platform": "Platform",
         "team": "Team"
       },
       "openLiveSite": "Open the {title} live site (opens in a new tab)",
@@ -313,6 +387,7 @@
     },
     "projects": {
       "filmBudget": "Film Budget",
+      "juJutsu": "Ju-Jutsu⁺",
       "blowStressAway": "Blow Stress Away"
     },
     "opensInNewTab": "(відкривається в новій вкладці)"
