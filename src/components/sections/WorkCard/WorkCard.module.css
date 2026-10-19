@@ -19,10 +19,14 @@
   border-radius: var(--border-radius-3xl);
 }
 
-/* Above the video, inside the cover, so it follows the cover's hover scale. */
+/*
+ * Above the video, inside the cover, so it follows the cover's hover scale.
+ * Logo and inset keep their Figma share of the 486 px card (60 and 12, Figma
+ * 2:2) at every width, capped at the Figma size; 100cqi is the card width.
+ */
 .logo {
   position: absolute;
-  inline-size: var(--size-cover-logo);
+  inline-size: min(var(--size-cover-logo), 100cqi * 60 / 486);
   block-size: auto;
 }
 
@@ -32,15 +36,8 @@
 }
 
 .top-end {
-  inset-block-start: var(--spacing-lg);
-  inset-inline-end: var(--spacing-lg);
-}
-
-/* Narrow cards: keep the desktop share of the card (71 of 486), up to the full size. About 52 px at 390. */
-@media (max-width: 767px) {
-  .logo {
-    inline-size: min(var(--size-cover-logo), 100cqi * 71 / 486);
-  }
+  inset-block-start: min(var(--spacing-lg), 100cqi * 12 / 486);
+  inset-inline-end: min(var(--spacing-lg), 100cqi * 12 / 486);
 }
 
 /*
