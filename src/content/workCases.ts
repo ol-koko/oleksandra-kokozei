@@ -114,7 +114,7 @@ export const workCases = {
               },
               {
                 copy: 'juJutsu.screens.bookingFlow',
-                image: { src: '/media/works/ju-jitsu/booking-flow.webp', width: 1308, height: 746 },
+                image: { src: '/media/works/ju-jitsu/booking-flow.webp', width: 1308, height: 745 },
               },
               {
                 copy: 'juJutsu.screens.aiAssistance',
