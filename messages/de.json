@@ -85,15 +85,15 @@
         "lead": "Designing the connections between records and actions.",
         "topics": {
           "vacancies": {
-            "title": "Vacancies and applications",
+            "title": "💼 Vacancies and applications",
             "body": "A vacancy connects a role and vessel with employment details, publication status, and applications. The interface needs to support both an overview of recruitment activity and the review of individual listings and candidates."
           },
           "seafarers": {
-            "title": "Seafarers and documents",
+            "title": "📑 Seafarers and documents",
             "body": "A seafarer record connects professional details and availability with supporting documents. Document validity and verification require distinct status information so that administrators can understand what is current, what needs review, and what requires follow-up."
           },
           "services": {
-            "title": "Services and orders",
+            "title": "👤 Services and orders",
             "body": "Service requests connect a seafarer with a specific task, its progress, and related order or payment information. Administrators need enough context to continue processing a request without losing track of the person or records involved.\nAcross these workflows, my design focus is clear hierarchy, searchable and filterable lists, understandable statuses, and relevant actions within each record. The goal is to support detailed operational work while keeping the two CRM environments consistent."
           }
         }
@@ -131,19 +131,19 @@
         "lead": "Find a class. Explore the options. Book a session.",
         "topics": {
           "schedule": {
-            "title": "A filterable training schedule",
+            "title": "🗓️ A filterable training schedule",
             "body": "I introduced a structured timetable with filters for class category, age group, and city. This gives visitors a way to narrow down the available options and focus on sessions relevant to them."
           },
           "booking": {
-            "title": "Online lesson booking",
+            "title": "🤼 Online lesson booking",
             "body": "I added a booking flow to give visitors a direct next step after exploring classes. Bringing booking into the website connects class discovery with taking action, rather than leaving visitors to arrange everything through a separate conversation."
           },
           "assistant": {
-            "title": "Bilingual AI assistance",
+            "title": "💬 Bilingual AI assistance",
             "body": "I integrated an AI assistant with English and Ukrainian support, adding a conversational way to ask questions while exploring the website."
           },
           "content": {
-            "title": "Clearer content and visual hierarchy",
+            "title": "🧹 Clearer content and visual hierarchy",
             "body": "I shortened lengthy descriptions and reorganized information into scannable sections and cards. A clearer visual hierarchy highlights key details, helping visitors explore training options and find relevant information more easily."
           }
         }
@@ -173,6 +173,7 @@
       }
     },
     "blowStressAway": {
+      "titleEmoji": "☀️",
       "description": "A playful, MediaPipe-powered breathing experience designed to help you unwind after a demanding day. Blow away clouds representing everyday worries about work and life, making space for a moment of calm.",
       "facts": {
         "design": "Figma",
@@ -216,15 +217,15 @@
         "lead": "Clear pricing. Focused choices. Easy contact.",
         "topics": {
           "pricing": {
-            "title": "Pricing with context",
+            "title": "💶 Pricing with context",
             "body": "Three example-based pricing tiers for each video type help visitors compare options and understand the likely budget."
           },
           "inquiry": {
-            "title": "A clear path to inquiry",
+            "title": "🧹 A clear path to inquiry",
             "body": "Prominent calls to action and a short contact form guide visitors toward requesting a quote. The confirmation page explains what happens next."
           },
           "devices": {
-            "title": "Consistency across devices",
+            "title": "📱 Consistency across devices",
             "body": "Mobile layouts prioritize pricing and contact actions, while a reusable UI kit keeps components consistent across pages."
           }
         }

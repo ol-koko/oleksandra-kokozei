@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { Emoji, splitLeadingEmoji } from '@/components/ui/Emoji/Emoji';
 import type { WorkStoryBlock } from '@/content/types';
 import styles from './WorkStory.module.css';
 
@@ -35,13 +36,30 @@ export function WorkStory({ block, headingLevel, headingId }: WorkStoryProps) {
         <div className={styles.topics}>
           {block.topics.map((topic) => (
             <div key={topic} className={styles.topic}>
-              <TopicHeading className="text-body-m">{t(`${topic}.title`)}</TopicHeading>
+              <TopicHeading className="text-body-m">
+                <TopicTitle text={t(`${topic}.title`)} />
+              </TopicHeading>
               <StoryBody text={t(`${topic}.body`)} />
             </div>
           ))}
         </div>
       )}
     </div>
+  );
+}
+
+/** A topic title; a leading emoji is decorative, so the title is read once. */
+function TopicTitle({ text }: { text: string }) {
+  const title = splitLeadingEmoji(text);
+  return (
+    <>
+      {title.emoji && (
+        <>
+          <Emoji symbol={title.emoji} />{' '}
+        </>
+      )}
+      {title.text}
+    </>
   );
 }
 

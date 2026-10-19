@@ -144,6 +144,7 @@ export const workCases = {
    * follows the CES mobile patterns, with the card video in place of the app.
    */
   blowStressAway: {
+    titleEmoji: 'blowStressAway.titleEmoji',
     description: 'blowStressAway.description',
     cover: {
       embed: 'blowStressAway',

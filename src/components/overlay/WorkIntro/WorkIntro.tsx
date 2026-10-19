@@ -8,6 +8,7 @@ import { WorkFacts } from '@/components/overlay/WorkFacts/WorkFacts';
 import { WorkMedia } from '@/components/overlay/WorkMedia/WorkMedia';
 import { WorkPhoto } from '@/components/overlay/WorkPhoto/WorkPhoto';
 import { Divider } from '@/components/ui/Divider/Divider';
+import { Emoji } from '@/components/ui/Emoji/Emoji';
 import { projectSites } from '@/content/links';
 import type { WorkCase, WorkSlug } from '@/content/types';
 import { works } from '@/content/works';
@@ -66,6 +67,11 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
 
           <div className={styles.text}>
             <h2 id={headingId} className="text-title-l">
+              {workCase.titleEmoji && (
+                <>
+                  <Emoji symbol={tCases(workCase.titleEmoji)} />{' '}
+                </>
+              )}
               {title}
             </h2>
             <p className={`${styles.description} text-body-2xs`}>{tCases(workCase.description)}</p>

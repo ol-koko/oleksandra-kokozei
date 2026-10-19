@@ -212,6 +212,8 @@ export type WorkEmbedCover = {
 };
 
 export type WorkCase = {
+  /** A decorative emoji before the title in the case header only (Blow Stress Away ☀️). */
+  titleEmoji?: WorkCopyKey;
   description: WorkCopyKey;
   /** 100 × 100 tile next to the title. Decorative: the title follows. Blow Stress Away has none. */
   icon?: ImageAsset;
