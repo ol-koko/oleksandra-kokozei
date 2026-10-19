@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
 import { LoopVideo } from '@/components/media/LoopVideo/LoopVideo';
 import type { ImageAsset, VideoAsset } from '@/content/types';
 import styles from './WorkMedia.module.css';
@@ -28,12 +28,10 @@ export function WorkMedia({ media, alt, eager = false }: WorkMediaProps) {
 
   return (
     <div className={styles.frame}>
-      <Image
-        className={styles.image}
-        src={media.src}
+      <LoadingImage
+        image={media}
         alt={alt}
-        fill
-        loading={eager ? 'eager' : 'lazy'}
+        eager={eager}
         quality={WORK_MEDIA_QUALITY}
         sizes="(min-width: 1200px) 894px, (min-width: 768px) 75vw, calc(100vw - 32px)"
       />
