@@ -652,6 +652,10 @@
         "$type": "sizing",
         "$value": "996px"
       },
+      "size-cover-logo": {
+        "$type": "sizing",
+        "$value": "71px"
+      },
       "size-overlay-content": {
         "$type": "sizing",
         "$value": "894px"

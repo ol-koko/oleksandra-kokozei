@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { LoopVideo } from '@/components/media/LoopVideo/LoopVideo';
 import { OverlayTrigger } from '@/components/overlay/OverlayTrigger/OverlayTrigger';
@@ -9,8 +10,8 @@ type WorkCardProps = {
 };
 
 /**
- * Cover video with a "Title・Year" pill, then a one-line description (Figma 57:496).
- * The pill text is the card heading and holds the button that opens the work
+ * Cover video, with an optional logo on top, and a "Title・Year" pill, then a
+ * one-line description (Figma 57:496). The pill text is the card heading and holds the button that opens the work
  * overlay; the button's hit area stretches over the whole card. An unpublished
  * work shows the same card without the button and without hover motion.
  */
@@ -28,6 +29,16 @@ export function WorkCard({ work }: WorkCardProps) {
     <article className={work.published ? `work-card ${styles.card}` : styles.card}>
       <div className={`work-cover ${styles.cover}`}>
         <LoopVideo video={cover.video} />
+        {cover.logo && (
+          <Image
+            className={styles.logo}
+            src={cover.logo.src}
+            alt=""
+            aria-hidden="true"
+            width={cover.logo.width}
+            height={cover.logo.height}
+          />
+        )}
       </div>
 
       <h3 className={styles.title}>

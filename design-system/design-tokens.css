@@ -152,6 +152,7 @@
 
   /* Semantic: layout size */
   --size-content-max: 996px;
+  --size-cover-logo: 71px;
   --size-overlay-content: 894px;
   --size-overlay-max: 1200px;
   --size-measure: 585px;

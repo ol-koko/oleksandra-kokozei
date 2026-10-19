@@ -36,9 +36,14 @@ export type VideoAsset = {
 /** Works on the main page. Title and description live in messages (`Works.items.*`). */
 export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget';
 
-/** Card cover: a looping video with any logo or backdrop baked in. */
+/** Card cover: a looping video, with the backdrop baked in. */
 export type WorkCover = {
   video: VideoAsset;
+  /**
+   * Logo in the top-right corner, drawn above the video instead of baked in,
+   * so it keeps its inset and is never cropped with the video.
+   */
+  logo?: ImageAsset;
 };
 
 export type Work = {

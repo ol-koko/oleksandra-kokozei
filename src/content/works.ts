@@ -2,7 +2,7 @@ import type { Work, WorkSlug } from './types';
 
 /**
  * Works grid, in Figma order (2:2, 57:518). Cover videos are 1280 px wide,
- * about 2.6× the 486 px card, with logos and backdrops baked in.
+ * about 2.6× the 486 px card, with backdrops and the CES logo baked in.
  */
 export const works = [
   {
@@ -55,6 +55,7 @@ export const works = [
         width: 1280,
         height: 648,
       },
+      logo: { src: '/media/covers/filmbudget-logo.svg', width: 54, height: 54 },
     },
   },
 ] as const satisfies readonly Work[];
