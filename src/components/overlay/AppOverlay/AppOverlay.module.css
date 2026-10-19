@@ -1,0 +1,164 @@
+/*
+ * The app overlay shell: the same size and motion as the desktop work
+ * overlay. Keep in sync with Overlay.module.css. Kept in its own module:
+ * importing that one here would reorder the CSS and break the overlay's own
+ * mobile-only rules.
+ */
+.dialog {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  overflow: hidden;
+  border: var(--border-none);
+  background: none;
+}
+
+.dialog::backdrop {
+  background: none;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-overlay-backdrop);
+}
+
+/* At 1440: inset 80 / 120 and 1200 wide, like the work overlays; smaller insets below. */
+.panel {
+  --overlay-inset-inline: max(var(--page-gutter), var(--spacing-5xl));
+
+  position: absolute;
+  inset-block: var(--spacing-5xl);
+  inset-inline: 0;
+  inline-size: min(100% - var(--overlay-inset-inline) * 2, var(--size-overlay-max));
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--border-radius-5xl);
+  background: var(--gradient-media-detail);
+}
+
+@media (min-width: 1440px) {
+  .panel {
+    inset-block: var(--spacing-9xl);
+  }
+}
+
+/* Focus lands on the panel on open so Esc works at once; it is not a control. */
+.panel:focus-visible {
+  outline: none;
+}
+
+/* The app, centered at the panel height minus 40 above and below. */
+.stage {
+  display: flex;
+  justify-content: center;
+  block-size: 100%;
+  padding-block: var(--spacing-5xl);
+}
+
+/*
+ * The app draws a 390 × 844 phone screen. The iframe keeps that native size,
+ * so the app lays out exactly as on a phone, and is scaled down to the screen
+ * height (`--app-scale`, set by script). Full screen drops the transform.
+ */
+.screen {
+  position: relative;
+  block-size: 100%;
+  aspect-ratio: 390 / 844;
+  overflow: hidden;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.iframe {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 390px;
+  block-size: 844px;
+  border: var(--border-none);
+  opacity: 0;
+  transform: scale(var(--app-scale, 1));
+  transform-origin: top left;
+  transition: opacity var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.iframe[data-ready] {
+  opacity: 1;
+}
+
+/* 40 round button, 24 from the panel's top right corner. */
+.fullScreen {
+  position: absolute;
+  inset-block-start: var(--spacing-3xl);
+  inset-inline-end: var(--spacing-3xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--size-2xl);
+  block-size: var(--size-2xl);
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-icon-muted);
+  cursor: pointer;
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.fullScreen:focus-visible {
+  color: var(--color-icon-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fullScreen:hover {
+    color: var(--color-icon-strong);
+  }
+}
+
+/* ---------- Motion: opens with .animate-overlay / .animate-modal, closes in reverse ---------- */
+
+.closing .backdrop {
+  animation: app-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+.closing .panel {
+  animation: app-scale-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+}
+
+@keyframes app-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes app-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* The same 0.96 as the work overlay's closing motion. */
+@keyframes app-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+/* Reduced motion: fades only, no scaling. */
+@media (prefers-reduced-motion: reduce) {
+  .dialog .panel {
+    animation-name: app-fade-in;
+  }
+
+  .closing .panel {
+    animation-name: app-fade-out;
+  }
+}

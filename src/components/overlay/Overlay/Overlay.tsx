@@ -231,11 +231,13 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
               ))}
             </div>
 
+            {/* A case with only About has no nav (600:268); the column keeps the content width. */}
             <OverlayNav
               label={t('sectionsNav')}
               items={view.sections}
               activeId={activeId}
               onSelect={selectSection}
+              className={view.sections.length > 1 ? undefined : styles.navHidden}
             />
           </div>
 

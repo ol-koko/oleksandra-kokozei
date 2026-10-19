@@ -6,7 +6,8 @@ const DETAIL = { width: 1788, height: 870 } as const;
 /**
  * Case studies, keyed by work. A work opens its overlay only when it is
  * published (`works.ts`) and has an entry here. Copy lives in messages
- * (`WorkCases.*`). Images are WebP at about 2× their displayed width.
+ * (`WorkCases.*`). Screenshots are WebP at about 3× their displayed width
+ * (never upscaled), lossless or quality 94, and served as they are (WorkMedia).
  */
 export const workCases = {
   /** Desktop 448:532, mobile patterns 520:879. */
@@ -35,7 +36,7 @@ export const workCases = {
           {
             kind: 'photo',
             copy: 'ces.wireframes',
-            image: { src: '/media/works/ces/crm-wireframes.webp', width: 1788, height: 888 },
+            image: { src: '/media/works/ces/crm-wireframes.webp', width: 2682, height: 1333 },
           },
         ],
       },
@@ -55,6 +56,116 @@ export const workCases = {
         ],
       },
     ],
+  },
+
+  /** Desktop 551:480; mobile follows the CES mobile patterns. */
+  juJutsu: {
+    description: 'juJutsu.description',
+    icon: { src: '/media/works/ju-jitsu/logo.webp', width: 200, height: 200 },
+    cover: {
+      media: {
+        webm: '/media/works/ju-jitsu/cover.webm',
+        mp4: '/media/works/ju-jitsu/cover.mp4',
+        ...DETAIL,
+      },
+      alt: 'juJutsu.coverAlt',
+    },
+    facts: [
+      { id: 'year' },
+      { id: 'role', value: 'juJutsu.facts.role' },
+      { id: 'productType', value: 'juJutsu.facts.productType' },
+      { id: 'platform', value: 'juJutsu.facts.platform' },
+    ],
+    liveSite: 'juJutsu',
+    about: [
+      { kind: 'story', copy: 'juJutsu.overview' },
+      {
+        kind: 'photo',
+        copy: 'juJutsu.promptToWebsite',
+        image: { src: '/media/works/ju-jitsu/from-prompt-to-website.webp', ...DETAIL },
+      },
+    ],
+    sections: [
+      { id: 'goal', nav: 'juJutsu.nav.goal', blocks: [{ kind: 'story', copy: 'juJutsu.goal' }] },
+      {
+        id: 'design',
+        nav: 'juJutsu.nav.design',
+        blocks: [
+          {
+            kind: 'topics',
+            copy: 'juJutsu.design',
+            topics: [
+              'juJutsu.design.topics.schedule',
+              'juJutsu.design.topics.booking',
+              'juJutsu.design.topics.assistant',
+              'juJutsu.design.topics.content',
+            ],
+          },
+          {
+            kind: 'photo-grid',
+            photos: [
+              {
+                copy: 'juJutsu.screens.classDiscovery',
+                image: {
+                  src: '/media/works/ju-jitsu/class-discovery.webp',
+                  width: 1308,
+                  height: 751,
+                },
+              },
+              {
+                copy: 'juJutsu.screens.bookingFlow',
+                image: { src: '/media/works/ju-jitsu/booking-flow.webp', width: 1308, height: 745 },
+              },
+              {
+                copy: 'juJutsu.screens.aiAssistance',
+                image: {
+                  src: '/media/works/ju-jitsu/ai-assistance.webp',
+                  width: 1308,
+                  height: 751,
+                },
+              },
+              {
+                copy: 'juJutsu.screens.contentStructure',
+                image: {
+                  src: '/media/works/ju-jitsu/content-structure.webp',
+                  width: 1308,
+                  height: 752,
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'result',
+        nav: 'juJutsu.nav.result',
+        blocks: [{ kind: 'story', copy: 'juJutsu.result' }],
+      },
+    ],
+  },
+
+  /** Desktop 600:268: header and cover, no other sections. Mobile follows the CES mobile patterns. */
+  blowStressAway: {
+    titleEmoji: 'blowStressAway.titleEmoji',
+    description: 'blowStressAway.description',
+    cover: {
+      media: {
+        webm: '/media/works/blow-stress-away/cover.webm',
+        mp4: '/media/works/blow-stress-away/cover.mp4',
+        ...DETAIL,
+      },
+      alt: 'blowStressAway.coverAlt',
+    },
+    facts: [
+      { id: 'design', value: 'blowStressAway.facts.design' },
+      { id: 'frontend', value: 'blowStressAway.facts.frontend' },
+      { id: 'styling', value: 'blowStressAway.facts.styling' },
+      { id: 'ai', value: 'blowStressAway.facts.ai' },
+    ],
+    liveSite: 'blowStressAway',
+    liveApp: { title: 'blowStressAway.appTitle' },
+    about: [],
+    sections: [],
   },
 
   /** Desktop 439:414; mobile follows the CES mobile patterns. */
@@ -89,8 +200,8 @@ export const workCases = {
             copy: 'filmBudget.research',
             image: {
               src: '/media/works/film-budget/research-analysis.webp',
-              width: 1788,
-              height: 975,
+              width: 2682,
+              height: 1462,
             },
           },
         ],
@@ -120,8 +231,8 @@ export const workCases = {
             copy: 'filmBudget.designFile',
             image: {
               src: '/media/works/film-budget/design-file-overview.webp',
-              width: 1788,
-              height: 970,
+              width: 2602,
+              height: 1412,
             },
           },
         ],

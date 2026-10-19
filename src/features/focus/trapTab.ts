@@ -1,6 +1,7 @@
 import type { KeyboardEvent } from 'react';
 
-const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+/** An iframe takes focus too: an embedded app is a stop in the Tab order. */
+const FOCUSABLE = 'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
 
 /**
  * Keeps Tab inside `container`: from the last focusable element it wraps to

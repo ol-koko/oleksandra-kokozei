@@ -45,8 +45,10 @@
   border-radius: var(--border-radius-2xl);
 }
 
+/* Stays at the end of the row when there is no icon (Blow Stress Away). */
 .link {
   display: flex;
+  margin-inline-start: auto;
   color: var(--color-icon-subtle);
   transition: color var(--motion-duration-fast) var(--motion-easing-standard);
 }
@@ -119,5 +121,15 @@
     position: absolute;
     inset-block-start: var(--spacing-none);
     inset-inline-end: var(--spacing-none);
+  }
+
+  /* The live-app arrow sits 24 lower than the live-site link (655:1299). */
+  .appLink {
+    inset-block-start: var(--spacing-3xl);
+  }
+
+  /* Without an icon the row holds only the placed link: no gap above the title (600:280). */
+  .linkOnly {
+    display: contents;
   }
 }

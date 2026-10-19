@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { Emoji, splitLeadingEmoji } from '@/components/ui/Emoji/Emoji';
 import type { WorkStoryBlock } from '@/content/types';
 import styles from './WorkStory.module.css';
 
@@ -35,7 +36,9 @@ export function WorkStory({ block, headingLevel, headingId }: WorkStoryProps) {
         <div className={styles.topics}>
           {block.topics.map((topic) => (
             <div key={topic} className={styles.topic}>
-              <TopicHeading className="text-body-m">{t(`${topic}.title`)}</TopicHeading>
+              <TopicHeading className="text-body-m">
+                <TopicTitle text={t(`${topic}.title`)} />
+              </TopicHeading>
               <StoryBody text={t(`${topic}.body`)} />
             </div>
           ))}
@@ -45,19 +48,65 @@ export function WorkStory({ block, headingLevel, headingId }: WorkStoryProps) {
   );
 }
 
-/** A body message: each line is a paragraph; an empty line adds a gap, as in Figma. */
+/** A topic title; a leading emoji is decorative, so the title is read once. */
+function TopicTitle({ text }: { text: string }) {
+  const title = splitLeadingEmoji(text);
+  return (
+    <>
+      {title.emoji && (
+        <>
+          <Emoji symbol={title.emoji} />{' '}
+        </>
+      )}
+      {title.text}
+    </>
+  );
+}
+
+const LIST_MARKER = '- ';
+
+/**
+ * A body message: each line is a paragraph; an empty line adds a gap, as in
+ * Figma. Consecutive lines starting with `- ` form one bulleted list.
+ */
 function StoryBody({ text }: { text: string }) {
   return (
     <div className={styles.body}>
       {text.split('\n\n').map((run) => (
         <div key={run}>
-          {run.split('\n').map((line) => (
-            <p key={line} className="text-body-s">
-              {line}
-            </p>
-          ))}
+          {groupLines(run.split('\n')).map((group) =>
+            typeof group === 'string' ? (
+              <p key={group} className="text-body-s">
+                {group}
+              </p>
+            ) : (
+              <ul key={group.join('\n')} className={styles.list}>
+                {group.map((item) => (
+                  <li key={item} className="text-body-s">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ),
+          )}
         </div>
       ))}
     </div>
   );
+}
+
+/** Paragraphs stay strings; runs of list lines become one array of items, without the marker. */
+function groupLines(lines: readonly string[]): (string | string[])[] {
+  const groups: (string | string[])[] = [];
+  for (const line of lines) {
+    if (!line.startsWith(LIST_MARKER)) {
+      groups.push(line);
+      continue;
+    }
+    const item = line.slice(LIST_MARKER.length);
+    const last = groups.at(-1);
+    if (Array.isArray(last)) last.push(item);
+    else groups.push([item]);
+  }
+  return groups;
 }

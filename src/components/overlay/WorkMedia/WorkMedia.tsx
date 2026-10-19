@@ -3,9 +3,6 @@ import { LoopVideo } from '@/components/media/LoopVideo/LoopVideo';
 import type { ImageAsset, VideoAsset } from '@/content/types';
 import styles from './WorkMedia.module.css';
 
-/** Detailed screenshots (wireframes, boards): above the default 75, allowed in next.config.ts. */
-const WORK_MEDIA_QUALITY = 90;
-
 type WorkMediaProps = {
   media: ImageAsset | VideoAsset;
   alt: string;
@@ -32,7 +29,7 @@ export function WorkMedia({ media, alt, eager = false }: WorkMediaProps) {
         image={media}
         alt={alt}
         eager={eager}
-        quality={WORK_MEDIA_QUALITY}
+        unoptimized
         sizes="(min-width: 1200px) 894px, (min-width: 768px) 75vw, calc(100vw - 32px)"
       />
     </div>

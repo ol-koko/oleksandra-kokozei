@@ -15,5 +15,6 @@ export const footerSocialOrder = [
 
 export const projectSites = [
   { id: 'filmBudget', href: 'https://www.filmbudget.dk/en/' },
-  { id: 'blowStressAway', href: 'https://blowstressaway.figma.site/' },
+  { id: 'juJutsu', href: 'https://jujutsu-plus.base44.app/' },
+  { id: 'blowStressAway', href: 'https://blow-stress-away.oleksandra-kokozei.com' },
 ] as const satisfies readonly ExternalLink<ProjectSiteId>[];

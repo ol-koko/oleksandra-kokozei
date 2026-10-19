@@ -134,6 +134,11 @@
   padding-inline: var(--page-gutter);
 }
 
+/* Hidden but still in the layout, so the content column keeps its width. */
+.navHidden {
+  visibility: hidden;
+}
+
 /* Mobile section rhythm: 48 above and below each divider. */
 .divider {
   margin-block: var(--spacing-6xl);

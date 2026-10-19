@@ -6,13 +6,13 @@ import { SandParticles } from './sandParticles';
 /**
  * How the effect is triggered on this device.
  * - `pointer` (hover devices): hover and keyboard focus.
- * - `pointer-autoplay`: the same, plus a sweep every 30 seconds.
+ * - `pointer-autoplay`: the same, plus a sweep every 10 seconds.
  * - `in-view` (touch): one sweep the first time the text is fully in view.
  */
 export type SandMode = 'pointer' | 'pointer-autoplay' | 'in-view';
 
 /** Pause between autoplay sweeps, restarted after every play and hover. */
-const AUTOPLAY_DELAY_MS = 30_000;
+const AUTOPLAY_DELAY_MS = 10_000;
 
 /** Share of the text that counts as fully in view. */
 const FULLY_VISIBLE = 0.99;

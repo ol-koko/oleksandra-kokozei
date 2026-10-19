@@ -22,7 +22,7 @@ export const works = [
   {
     slug: 'juJutsu',
     year: 2026,
-    published: false,
+    published: true,
     cover: {
       video: {
         webm: '/media/works/ju-jitsu/card.webm',
@@ -35,7 +35,7 @@ export const works = [
   {
     slug: 'blowStressAway',
     year: 2026,
-    published: false,
+    published: true,
     cover: {
       video: {
         webm: '/media/works/blow-stress-away/card.webm',

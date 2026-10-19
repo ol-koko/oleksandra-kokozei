@@ -5,7 +5,7 @@ import type messages from '../../messages/en.json';
 export type SocialLinkId = 'linkedin' | 'behance' | 'github';
 
 /** Identifiers for live project sites. Display labels live in messages (`Links.projects.*`). */
-export type ProjectSiteId = 'filmBudget' | 'blowStressAway';
+export type ProjectSiteId = 'filmBudget' | 'juJutsu' | 'blowStressAway';
 
 /** Page sections. Each id is the anchor of a `<section>` on the main page. */
 export type SectionId = 'me' | 'works' | 'experience';
@@ -135,7 +135,8 @@ export type WorkCopyGroup<Field extends string> = WorkCopyKey extends infer Key
 /**
  * A text block of a case study: label and lead on the left, then either one
  * body (`<group>.body`) or titled topics, each with its own body. In a body,
- * a line break starts a new paragraph and an empty line adds a gap.
+ * a line break starts a new paragraph, an empty line adds a gap, and lines
+ * starting with `- ` form a bulleted list.
  */
 export type WorkStoryBlock =
   | { kind: 'story'; copy: WorkCopyGroup<'label'> & WorkCopyGroup<'lead'> & WorkCopyGroup<'body'> }
@@ -152,11 +153,33 @@ export type WorkPhotoBlock = {
   image: ImageAsset;
 };
 
-export type WorkBlock = WorkStoryBlock | WorkPhotoBlock;
+/** Captioned photos side by side, two per row on desktop (Figma 558:717). */
+export type WorkPhotoGridBlock = {
+  kind: 'photo-grid';
+  photos: readonly Omit<WorkPhotoBlock, 'kind'>[];
+};
 
-/** Facts in the case header. Labels live in `Overlay.work.facts.*`; the year comes from the work. */
+export type WorkBlock = WorkStoryBlock | WorkPhotoBlock | WorkPhotoGridBlock;
+
+/**
+ * Facts in the case header. Labels live in `Overlay.work.facts.*`; the year
+ * comes from the work. A value with line breaks lists one item per line.
+ */
 export type WorkFact =
-  { id: 'year' } | { id: 'role' | 'productType' | 'projectType' | 'team'; value: WorkCopyKey };
+  | { id: 'year' }
+  | {
+      id:
+        | 'role'
+        | 'productType'
+        | 'projectType'
+        | 'platform'
+        | 'team'
+        | 'design'
+        | 'frontend'
+        | 'styling'
+        | 'ai';
+      value: WorkCopyKey;
+    };
 
 /** A case study section after About: its nav label and blocks. */
 export type WorkCaseSection = {
@@ -170,15 +193,28 @@ export type WorkCaseSection = {
  * One work overlay as data. Every case renders through the same components:
  * About (header, cover, optional private note, its blocks), then `sections`.
  */
+/** The cover under the header: a still or a looping video, with an optional caption below. */
+export type WorkMediaCover = {
+  media: ImageAsset | VideoAsset;
+  alt: WorkCopyKey;
+  caption?: WorkCopyKey;
+};
+
 export type WorkCase = {
+  /** A decorative emoji before the title in the case header only (Blow Stress Away ☀️). */
+  titleEmoji?: WorkCopyKey;
   description: WorkCopyKey;
-  /** 100 × 100 tile next to the title. Decorative: the title follows. */
-  icon: ImageAsset;
-  /** The cover under the header: a still or a looping video, with an optional caption below. */
-  cover: { media: ImageAsset | VideoAsset; alt: WorkCopyKey; caption?: WorkCopyKey };
+  /** 100 × 100 tile next to the title. Decorative: the title follows. Blow Stress Away has none. */
+  icon?: ImageAsset;
+  cover: WorkMediaCover;
   facts: readonly WorkFact[];
   /** Live site, linked from the header. CES has none (D4). */
   liveSite?: ProjectSiteId;
+  /**
+   * The live site is an app: on desktop the header link opens it in an overlay
+   * above the case, in an iframe titled `title`; on mobile it opens in a new tab.
+   */
+  liveApp?: { title: WorkCopyKey };
   /** Shows the "Private project overview" card, which leads to the About blocks. */
   privateNote?: boolean;
   about: readonly WorkBlock[];

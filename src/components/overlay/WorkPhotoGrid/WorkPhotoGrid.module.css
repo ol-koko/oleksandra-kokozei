@@ -1,0 +1,37 @@
+/* Mobile: one column. Desktop: two columns. Both 24 apart (558:717). */
+.grid {
+  display: grid;
+  gap: var(--spacing-3xl);
+}
+
+/* Photo → caption: 16 (558:718). */
+.photo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+/*
+ * The cell follows the owner's crops (about 1.74; 1308 × 751) instead of the
+ * Figma 435.5 × 274 (558:719, to be updated), so the photos show in full. One
+ * ratio for all cells keeps each row level; Booking Flow (1.756) loses under
+ * a pixel per side to cover.
+ */
+.frame {
+  position: relative;
+  aspect-ratio: 1308 / 751;
+  overflow: hidden;
+  border-radius: var(--border-radius-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.caption {
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
