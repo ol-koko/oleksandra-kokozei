@@ -31,7 +31,7 @@ export function WorkCard({ work }: WorkCardProps) {
         <LoopVideo video={cover.video} />
         {cover.logo && (
           <Image
-            className={styles.logo}
+            className={`${styles.logo} ${styles[cover.logo.placement]}`}
             src={cover.logo.src}
             alt=""
             aria-hidden="true"

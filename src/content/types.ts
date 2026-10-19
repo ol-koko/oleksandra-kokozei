@@ -40,10 +40,10 @@ export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget';
 export type WorkCover = {
   video: VideoAsset;
   /**
-   * Logo in the top-right corner, drawn above the video instead of baked in,
-   * so it keeps its inset and is never cropped with the video.
+   * Logo drawn above the video instead of baked in, so it keeps its place and
+   * is never cropped with the video: centered, or in the top-right corner.
    */
-  logo?: ImageAsset;
+  logo?: ImageAsset & { placement: 'center' | 'top-end' };
 };
 
 export type Work = {

@@ -22,10 +22,18 @@
 /* Above the video, inside the cover, so it follows the cover's hover scale. */
 .logo {
   position: absolute;
-  inset-block-start: var(--spacing-lg);
-  inset-inline-end: var(--spacing-lg);
   inline-size: var(--size-cover-logo);
   block-size: auto;
+}
+
+.center {
+  inset: 0;
+  margin: auto;
+}
+
+.top-end {
+  inset-block-start: var(--spacing-lg);
+  inset-inline-end: var(--spacing-lg);
 }
 
 /* Narrow cards: keep the desktop share of the card (71 of 486), up to the full size. About 52 px at 390. */

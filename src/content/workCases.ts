@@ -12,7 +12,7 @@ export const workCases = {
   /** Desktop 448:532, mobile patterns 520:879. */
   ces: {
     description: 'ces.description',
-    icon: { src: '/media/works/ces/icon.webp', width: 200, height: 200 },
+    icon: { src: '/media/works/ces/logo-blue.svg', width: 71, height: 71 },
     cover: { media: { src: '/media/works/ces/cover.webp', ...DETAIL }, alt: 'ces.coverAlt' },
     facts: [
       { id: 'year' },
