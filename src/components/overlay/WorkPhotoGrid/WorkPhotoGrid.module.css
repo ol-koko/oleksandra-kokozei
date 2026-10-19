@@ -11,10 +11,15 @@
   gap: var(--spacing-xl);
 }
 
-/* 435.5 × 274 cell (558:719), kept as a ratio so it holds below the frame width. */
+/*
+ * The cell follows the owner's crops (about 1.74; 1308 × 751) instead of the
+ * Figma 435.5 × 274 (558:719, to be updated), so the photos show in full. One
+ * ratio for all cells keeps each row level; Booking Flow (1.756) loses under
+ * a pixel per side to cover.
+ */
 .frame {
   position: relative;
-  aspect-ratio: 435.5 / 274;
+  aspect-ratio: 1308 / 751;
   overflow: hidden;
   border-radius: var(--border-radius-2xl);
   box-shadow: var(--shadow-sm);
