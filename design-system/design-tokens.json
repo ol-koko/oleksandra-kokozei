@@ -290,6 +290,10 @@
       "duration-500": {
         "$type": "duration",
         "$value": "500ms"
+      },
+      "duration-1500": {
+        "$type": "duration",
+        "$value": "1500ms"
       }
     },
     "easing": {
@@ -352,6 +356,10 @@
         "placeholder": {
           "$type": "color",
           "$value": "{primitive.color.gray.100}"
+        },
+        "shimmer": {
+          "$type": "color",
+          "$value": "{primitive.color.white.80}"
         },
         "gradient-start": {
           "$type": "color",
@@ -870,6 +878,10 @@
         "slower": {
           "$type": "duration",
           "$value": "{primitive.duration.duration-500}"
+        },
+        "shimmer": {
+          "$type": "duration",
+          "$value": "{primitive.duration.duration-1500}"
         }
       },
       "easing": {

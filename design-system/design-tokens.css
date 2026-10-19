@@ -73,6 +73,7 @@
   --color-surface-raised: var(--gray-0);
   --color-surface-subtle: var(--gray-50);
   --color-media-placeholder: var(--gray-100);
+  --color-media-shimmer: var(--white-80);
   --color-icon-decorative: var(--gray-100);
   --color-text-strong: var(--gray-1000);
   --color-text-primary: var(--gray-800);
@@ -189,6 +190,7 @@
   --duration-300: 300ms;
   --duration-400: 400ms;
   --duration-500: 500ms;
+  --duration-1500: 1500ms;
   --ease-out: cubic-bezier(0, 0, 0.58, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -199,6 +201,7 @@
   --motion-duration-base: var(--duration-300);
   --motion-duration-slow: var(--duration-400);
   --motion-duration-slower: var(--duration-500);
+  --motion-duration-shimmer: var(--duration-1500);
   --motion-easing-standard: var(--ease-out);
   --motion-easing-emphasized: var(--ease-out-expo);
   --motion-easing-gentle: var(--ease-out-quad);
