@@ -169,7 +169,8 @@ export type WorkCase = {
   description: WorkCopyKey;
   /** 100 × 100 tile next to the title. Decorative: the title follows. */
   icon: ImageAsset;
-  cover: { image: ImageAsset; alt: WorkCopyKey };
+  /** The cover under the header: a still or a looping video, with an optional caption below. */
+  cover: { media: ImageAsset | VideoAsset; alt: WorkCopyKey; caption?: WorkCopyKey };
   facts: readonly WorkFact[];
   /** Live site, linked from the header. CES has none (D4). */
   liveSite?: ProjectSiteId;
