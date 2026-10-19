@@ -1,0 +1,14 @@
+.skeleton {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--color-media-placeholder);
+}
+
+/* Rests off to the left; .animate-shimmer sweeps it across (animations.css). */
+.band {
+  position: absolute;
+  inset: 0;
+  translate: -100% 0;
+  background: linear-gradient(90deg, transparent, var(--color-media-shimmer), transparent);
+}

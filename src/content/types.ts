@@ -22,6 +22,17 @@ export type ImageAsset = {
   height: number;
 };
 
+/**
+ * A silent looping video in `public/`, encoded twice: AV1 WebM first, H.264
+ * MP4 as the fallback. Width and height are its intrinsic size in pixels.
+ */
+export type VideoAsset = {
+  webm: `/media/${string}.webm`;
+  mp4: `/media/${string}.mp4`;
+  width: number;
+  height: number;
+};
+
 /** Works on the main page. Title and description live in messages (`Works.items.*`). */
 export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget';
 

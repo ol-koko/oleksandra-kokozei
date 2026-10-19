@@ -1,0 +1,9 @@
+.image {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.image[data-ready] {
+  opacity: 1;
+}
