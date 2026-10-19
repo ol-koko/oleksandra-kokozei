@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import { LinkIcon } from '@/components/icons/LinkIcon';
 import { PrivateNote } from '@/components/overlay/PrivateNote/PrivateNote';
 import { WorkBlocks } from '@/components/overlay/WorkBlocks/WorkBlocks';
-import { WorkEmbed } from '@/components/overlay/WorkEmbed/WorkEmbed';
 import { WorkFacts } from '@/components/overlay/WorkFacts/WorkFacts';
 import { WorkMedia } from '@/components/overlay/WorkMedia/WorkMedia';
 import { WorkPhoto } from '@/components/overlay/WorkPhoto/WorkPhoto';
@@ -24,8 +23,8 @@ type WorkIntroProps = {
 /**
  * The About section of a work overlay (Figma 448:534, mobile 520:1036): icon,
  * title, description and facts, a link to the live site when there is one,
- * the cover (captioned when it has one, or a live app), the optional private
- * note, then the About blocks.
+ * the cover (captioned when it has one), the optional private note, then the
+ * About blocks.
  */
 export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
   const t = useTranslations('Overlay.work');
@@ -82,9 +81,7 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
       </div>
 
       <Divider />
-      {'embed' in cover ? (
-        <WorkEmbed cover={cover} title={title} />
-      ) : cover.caption ? (
+      {cover.caption ? (
         <WorkPhoto
           media={cover.media}
           alt={tCases(cover.alt)}

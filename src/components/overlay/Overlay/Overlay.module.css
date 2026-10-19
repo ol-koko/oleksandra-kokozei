@@ -134,11 +134,6 @@
   padding-inline: var(--page-gutter);
 }
 
-/* Desktop only: mobile closes through the breadcrumbs (D10). */
-.close {
-  display: none;
-}
-
 /* Hidden but still in the layout, so the content column keeps its width. */
 .navHidden {
   visibility: hidden;
@@ -184,40 +179,6 @@
 
   .divider {
     margin-block: var(--spacing-9xl);
-  }
-
-  /*
-   * Overlays that embed a live app: Esc cannot close them while focus is in
-   * the iframe. A 40 round target, 24 from the panel's top right corner, above
-   * the scroller (its mask makes a stacking context).
-   */
-  .close {
-    position: absolute;
-    z-index: 1;
-    inset-block-start: var(--spacing-3xl);
-    inset-inline-end: var(--spacing-3xl);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    inline-size: var(--size-2xl);
-    block-size: var(--size-2xl);
-    padding: var(--spacing-none);
-    border: var(--border-none);
-    border-radius: var(--border-radius-full);
-    background: none;
-    color: var(--color-icon-muted);
-    cursor: pointer;
-    transition: color var(--motion-duration-fast) var(--motion-easing-standard);
-  }
-
-  .close:focus-visible {
-    color: var(--color-icon-strong);
-  }
-}
-
-@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
-  .close:hover {
-    color: var(--color-icon-strong);
   }
 }
 

@@ -139,23 +139,17 @@ export const workCases = {
     ],
   },
 
-  /**
-   * Desktop 600:268: header and the live app, no other sections. Mobile
-   * follows the CES mobile patterns, with the card video in place of the app.
-   */
+  /** Desktop 600:268: header and cover, no other sections. Mobile follows the CES mobile patterns. */
   blowStressAway: {
     titleEmoji: 'blowStressAway.titleEmoji',
     description: 'blowStressAway.description',
     cover: {
-      embed: 'blowStressAway',
-      title: 'blowStressAway.embedTitle',
-      fallback: {
-        webm: '/media/works/blow-stress-away/card.webm',
-        mp4: '/media/works/blow-stress-away/card.mp4',
-        width: 1280,
-        height: 720,
+      media: {
+        webm: '/media/works/blow-stress-away/cover.webm',
+        mp4: '/media/works/blow-stress-away/cover.mp4',
+        ...DETAIL,
       },
-      fallbackAlt: 'blowStressAway.fallbackAlt',
+      alt: 'blowStressAway.coverAlt',
     },
     facts: [
       { id: 'design', value: 'blowStressAway.facts.design' },
