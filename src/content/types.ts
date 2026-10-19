@@ -210,6 +210,11 @@ export type WorkCase = {
   facts: readonly WorkFact[];
   /** Live site, linked from the header. CES has none (D4). */
   liveSite?: ProjectSiteId;
+  /**
+   * The live site is an app: on desktop the header link opens it in an overlay
+   * above the case, in an iframe titled `title`; on mobile it opens in a new tab.
+   */
+  liveApp?: { title: WorkCopyKey };
   /** Shows the "Private project overview" card, which leads to the About blocks. */
   privateNote?: boolean;
   about: readonly WorkBlock[];

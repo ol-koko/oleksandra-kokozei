@@ -182,7 +182,7 @@
         "ai": "Figma Make\nCursor\nOpus 4.5"
       },
       "coverAlt": "Phone on a soft pink gradient playing Blow Stress Away: a worried girl under storm clouds and a tangle of stress, the clouds clear and the sun comes out over her",
-      "embedTitle": "Blow Stress Away, a live breathing app that asks for microphone access"
+      "appTitle": "Blow Stress Away, a live breathing app that asks for microphone access"
     },
     "filmBudget": {
       "description": "FilmBudget is a website for a Danish video production company, designed to help potential clients understand services and pricing before requesting a quote. I designed the UX and UI for desktop and mobile, focusing on transparent pricing, clear navigation, and a straightforward inquiry process.",
@@ -256,6 +256,7 @@
   },
   "Overlay": {
     "hint": "Натисніть Escape, щоб закрити.",
+    "appHint": "Press Tab to leave the app, then Escape to close it.",
     "sectionsNav": "Розділи",
     "breadcrumbs": "Навігаційний ланцюжок",
     "backToPage": ", назад до сторінки",
@@ -358,6 +359,7 @@
         "ai": "AI"
       },
       "openLiveSite": "Open the {title} live site (opens in a new tab)",
+      "openApp": "Open the {title} app",
       "fullScreen": "Open {title} in full screen",
       "privateNote": {
         "title": "Private project overview",

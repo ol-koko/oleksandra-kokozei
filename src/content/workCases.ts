@@ -158,6 +158,7 @@ export const workCases = {
       { id: 'ai', value: 'blowStressAway.facts.ai' },
     ],
     liveSite: 'blowStressAway',
+    liveApp: { title: 'blowStressAway.appTitle' },
     about: [],
     sections: [],
   },

@@ -7,7 +7,10 @@ import { isPublishedWork } from '@/content/works';
 const OVERLAY_PARAM = 'overlay';
 /** `?work=<url slug>` opens a work overlay. */
 const WORK_PARAM = 'work';
-/** Marks history entries pushed by `openOverlay`, so closing can step back over them. */
+/** `&app=live` opens a work's live app in an overlay above its case (desktop). */
+const APP_PARAM = 'app';
+const APP_VALUE = 'live';
+/** Marks history entries pushed by `openOverlay` and `openApp`, so closing can step back over them. */
 const ENTRY_FLAG = '__overlayEntry';
 
 /** Stable id of an overlay, used for keys, anchors and trigger lookup. */
@@ -35,14 +38,30 @@ export function parseOverlayRoute(params: Pick<URLSearchParams, 'get'>): Overlay
   return slug && isPublishedWork(slug) && getWorkCase(slug) ? { kind: 'work', slug } : null;
 }
 
-function urlFor(route: OverlayRoute | null) {
+/** Whether the URL also opens the live app of the work overlay `route`. */
+export function parseAppOpen(params: Pick<URLSearchParams, 'get'>, route: OverlayRoute | null) {
+  return (
+    route?.kind === 'work' &&
+    getWorkCase(route.slug)?.liveApp !== undefined &&
+    params.get(APP_PARAM) === APP_VALUE
+  );
+}
+
+function urlFor(route: OverlayRoute | null, { app = false } = {}) {
   const url = new URL(window.location.href);
   url.searchParams.delete(OVERLAY_PARAM);
   url.searchParams.delete(WORK_PARAM);
+  url.searchParams.delete(APP_PARAM);
   url.hash = '';
   if (route?.kind === 'me') url.searchParams.set(OVERLAY_PARAM, 'me');
   if (route?.kind === 'work') url.searchParams.set(WORK_PARAM, workUrlSlugs[route.slug]);
+  if (app) url.searchParams.set(APP_PARAM, APP_VALUE);
   return url;
+}
+
+function isPushedEntry() {
+  const state: unknown = window.history.state;
+  return typeof state === 'object' && state !== null && ENTRY_FLAG in state;
 }
 
 type Opener = {
@@ -74,10 +93,30 @@ export function openOverlay(route: OverlayRoute, from: Opener) {
  * a shared link there is nothing to step back to: drop the param in place.
  */
 export function closeOverlay() {
-  const state: unknown = window.history.state;
-  const pushedHere = typeof state === 'object' && state !== null && ENTRY_FLAG in state;
-  if (pushedHere) window.history.back();
+  if (isPushedEntry()) window.history.back();
   else window.history.replaceState(null, '', urlFor(null));
+}
+
+/**
+ * Opens the live app of the open work overlay as its own history entry, so
+ * browser Back closes the app first and returns to the case.
+ */
+export function openApp(route: OverlayRoute, { fromPointer }: { fromPointer: boolean }) {
+  appFromPointer = fromPointer;
+  window.history.pushState({ [ENTRY_FLAG]: true }, '', urlFor(route, { app: true }));
+}
+
+let appFromPointer = false;
+
+/** Whether the app overlay was opened by a pointer. After a direct visit, as for the keyboard. */
+export function appOpenedFromPointer() {
+  return appFromPointer;
+}
+
+/** Closes the live app and leaves its case open, like `closeOverlay`. */
+export function closeApp(route: OverlayRoute) {
+  if (isPushedEntry()) window.history.back();
+  else window.history.replaceState(null, '', urlFor(route));
 }
 
 /** The element to return focus to: the opener, or the page trigger for this overlay. */

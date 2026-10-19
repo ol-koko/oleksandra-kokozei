@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { LinkIcon } from '@/components/icons/LinkIcon';
 import { PrivateNote } from '@/components/overlay/PrivateNote/PrivateNote';
 import { WorkBlocks } from '@/components/overlay/WorkBlocks/WorkBlocks';
 import { WorkFacts } from '@/components/overlay/WorkFacts/WorkFacts';
+import { WorkLiveLink } from '@/components/overlay/WorkLiveLink/WorkLiveLink';
 import { WorkMedia } from '@/components/overlay/WorkMedia/WorkMedia';
 import { WorkPhoto } from '@/components/overlay/WorkPhoto/WorkPhoto';
 import { Divider } from '@/components/ui/Divider/Divider';
@@ -27,7 +27,6 @@ type WorkIntroProps = {
  * About blocks.
  */
 export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
-  const t = useTranslations('Overlay.work');
   const tWorks = useTranslations('Works');
   const tCases = useTranslations('WorkCases');
   const title = tWorks(`items.${slug}.title`);
@@ -52,15 +51,13 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
               />
             )}
             {liveSite && (
-              <a
-                className={styles.link}
+              <WorkLiveLink
+                slug={slug}
                 href={liveSite.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t('openLiveSite', { title })}
-              >
-                <LinkIcon />
-              </a>
+                title={title}
+                app={workCase.liveApp !== undefined}
+                className={workCase.liveApp ? `${styles.link} ${styles.appLink}` : styles.link}
+              />
             )}
           </div>
 

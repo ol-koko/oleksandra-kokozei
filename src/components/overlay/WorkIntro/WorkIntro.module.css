@@ -123,6 +123,11 @@
     inset-inline-end: var(--spacing-none);
   }
 
+  /* The live-app arrow sits 24 lower than the live-site link (655:1299). */
+  .appLink {
+    inset-block-start: var(--spacing-3xl);
+  }
+
   /* Without an icon the row holds only the placed link: no gap above the title (600:280). */
   .linkOnly {
     display: contents;
