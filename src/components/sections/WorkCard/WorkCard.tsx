@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { LoopVideo } from '@/components/media/LoopVideo/LoopVideo';
 import { OverlayTrigger } from '@/components/overlay/OverlayTrigger/OverlayTrigger';
 import type { Work } from '@/content/types';
 import styles from './WorkCard.module.css';
@@ -9,7 +9,7 @@ type WorkCardProps = {
 };
 
 /**
- * Cover with a "Title・Year" pill, then a one-line description (Figma 57:496).
+ * Cover video with a "Title・Year" pill, then a one-line description (Figma 57:496).
  * The pill text is the card heading and holds the button that opens the work
  * overlay; the button's hit area stretches over the whole card. An unpublished
  * work shows the same card without the button and without hover motion.
@@ -23,46 +23,11 @@ export function WorkCard({ work }: WorkCardProps) {
       {t('pill', { title: t(`items.${work.slug}.title`), year: work.year })}
     </span>
   );
-  const coverClass = [
-    'work-cover',
-    styles.cover,
-    cover.background === 'placeholder' && styles.placeholder,
-    cover.background === 'gradient' && styles.gradient,
-  ]
-    .filter(Boolean)
-    .join(' ');
 
   return (
     <article className={work.published ? `work-card ${styles.card}` : styles.card}>
-      <div className={coverClass}>
-        {cover.fit === 'photo' ? (
-          <Image
-            className={styles.photo}
-            src={cover.image.src}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 486px, (min-width: 768px) 50vw, 100vw"
-          />
-        ) : (
-          <Image
-            className={styles.mockup}
-            src={cover.image.src}
-            alt=""
-            width={cover.image.width}
-            height={cover.image.height}
-            sizes="(min-width: 1024px) 142px, 30vw"
-          />
-        )}
-
-        {cover.logo && (
-          <Image
-            className={`${styles.logo} ${styles[cover.logo.placement]}`}
-            src={cover.logo.src}
-            alt=""
-            width={cover.logo.width}
-            height={cover.logo.height}
-          />
-        )}
+      <div className={`work-cover ${styles.cover}`}>
+        <LoopVideo video={cover.video} />
       </div>
 
       <h3 className={styles.title}>

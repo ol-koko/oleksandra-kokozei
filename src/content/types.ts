@@ -36,14 +36,9 @@ export type VideoAsset = {
 /** Works on the main page. Title and description live in messages (`Works.items.*`). */
 export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget';
 
+/** Card cover: a looping video with any logo or backdrop baked in. */
 export type WorkCover = {
-  image: ImageAsset;
-  /** `photo` fills the cover; `mockup` is a device frame centered at 90 % of the cover height. */
-  fit: 'photo' | 'mockup';
-  /** Surface behind the image: grey placeholder or the pink media gradient. */
-  background?: 'placeholder' | 'gradient';
-  /** Logo on top of the image, at its intrinsic size. */
-  logo?: ImageAsset & { placement: 'center' | 'top-end' };
+  video: VideoAsset;
 };
 
 export type Work = {

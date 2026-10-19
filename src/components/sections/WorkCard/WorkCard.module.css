@@ -19,42 +19,6 @@
   border-radius: var(--border-radius-3xl);
 }
 
-.placeholder {
-  background-color: var(--color-media-placeholder);
-}
-
-.gradient {
-  background: var(--gradient-media-cover);
-}
-
-.photo {
-  object-fit: cover;
-}
-
-/* Phone mockup: 228 of 253 px tall in Figma (90 %), centered. */
-.mockup {
-  position: absolute;
-  inset: 0;
-  inline-size: auto;
-  block-size: 90%;
-  margin: auto;
-}
-
-.logo {
-  position: absolute;
-}
-
-.center {
-  inset: 0;
-  margin: auto;
-}
-
-/* FilmBudget logo: anchored top right, so it stays inside the card on mobile. */
-.top-end {
-  inset-block-start: var(--spacing-lg);
-  inset-inline-end: var(--spacing-lg);
-}
-
 /*
  * The heading sits on the cover's grid cell, bottom left, without being
  * positioned itself: the button's ::after then resolves against the card, not
@@ -120,11 +84,6 @@
 }
 
 @media (min-width: 1024px) {
-  .top-end {
-    inset-block-start: var(--spacing-xl);
-    inset-inline-end: var(--spacing-xl);
-  }
-
   /* Figma text boxes run past the card's right edge; no end padding keeps every description on one line at 1440. */
   .description {
     padding-inline: var(--spacing-lg) var(--spacing-none);
