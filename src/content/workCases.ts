@@ -6,7 +6,8 @@ const DETAIL = { width: 1788, height: 870 } as const;
 /**
  * Case studies, keyed by work. A work opens its overlay only when it is
  * published (`works.ts`) and has an entry here. Copy lives in messages
- * (`WorkCases.*`). Images are WebP at about 2× their displayed width.
+ * (`WorkCases.*`). Screenshots are WebP at about 3× their displayed width
+ * (never upscaled), lossless or quality 94, and served as they are (WorkMedia).
  */
 export const workCases = {
   /** Desktop 448:532, mobile patterns 520:879. */
@@ -35,7 +36,7 @@ export const workCases = {
           {
             kind: 'photo',
             copy: 'ces.wireframes',
-            image: { src: '/media/works/ces/crm-wireframes.webp', width: 1788, height: 888 },
+            image: { src: '/media/works/ces/crm-wireframes.webp', width: 2682, height: 1333 },
           },
         ],
       },
@@ -199,8 +200,8 @@ export const workCases = {
             copy: 'filmBudget.research',
             image: {
               src: '/media/works/film-budget/research-analysis.webp',
-              width: 1788,
-              height: 975,
+              width: 2682,
+              height: 1462,
             },
           },
         ],
@@ -230,8 +231,8 @@ export const workCases = {
             copy: 'filmBudget.designFile',
             image: {
               src: '/media/works/film-budget/design-file-overview.webp',
-              width: 1788,
-              height: 970,
+              width: 2602,
+              height: 1412,
             },
           },
         ],

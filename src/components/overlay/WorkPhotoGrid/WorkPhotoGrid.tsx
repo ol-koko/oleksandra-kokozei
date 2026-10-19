@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
 import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
-import { WORK_MEDIA_QUALITY } from '@/components/overlay/WorkMedia/WorkMedia';
 import type { WorkPhotoGridBlock } from '@/content/types';
 import styles from './WorkPhotoGrid.module.css';
 
@@ -23,7 +22,7 @@ export function WorkPhotoGrid({ photos }: WorkPhotoGridProps) {
             <LoadingImage
               image={photo.image}
               alt={t(`${photo.copy}.alt`)}
-              quality={WORK_MEDIA_QUALITY}
+              unoptimized
               sizes="(min-width: 1200px) 436px, (min-width: 768px) 37vw, calc(100vw - 32px)"
             />
           </div>
