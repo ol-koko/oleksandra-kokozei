@@ -654,7 +654,7 @@
       },
       "size-cover-logo": {
         "$type": "sizing",
-        "$value": "60px"
+        "$value": "{primitive.dimension.dimension-15}"
       },
       "size-overlay-content": {
         "$type": "sizing",
