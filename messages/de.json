@@ -28,11 +28,11 @@
     "items": {
       "ces": {
         "title": "CES",
-        "description": "Admin platform for a complex maritime service ecosystem"
+        "description": "Admin platform for managing maritime services"
       },
       "juJutsu": {
         "title": "Ju-Jutsu⁺",
-        "description": "AI-assisted school platform for classes, schedules, and school life"
+        "description": "Martial arts website with online booking and AI assistance"
       },
       "blowStressAway": {
         "title": "Blow Stress Away",
@@ -40,7 +40,7 @@
       },
       "filmBudget": {
         "title": "FilmBudget",
-        "description": "Film budgeting services into a clear web experience"
+        "description": "Video production website with clear pricing and quote requests"
       }
     }
   },
