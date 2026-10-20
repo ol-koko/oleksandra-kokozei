@@ -162,7 +162,11 @@
  * and padding from the spacing scale, and a fluid column.
  */
 @media (min-width: 768px) {
-  .mobileOnly {
+  /*
+   * Scoped to the scroller so it outranks the header's and breadcrumbs' own
+   * `display` (one class each): their modules can land in a later CSS chunk.
+   */
+  .scroller .mobileOnly {
     display: none;
   }
 
