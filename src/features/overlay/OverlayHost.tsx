@@ -7,6 +7,7 @@ import type { OverlayRoute } from '@/content/types';
 import { usePathname } from '@/features/i18n/navigation';
 import { useMediaQuery } from '@/features/motion/useMediaQuery';
 import { isSameOverlay, markOpenedEntry, overlayKey, parseOverlayPath } from './overlayRoute';
+import { useOverlayDocumentTitle } from './useOverlayDocumentTitle';
 
 /** The app overlay is desktop only; on mobile the live app opens in a new tab. */
 const DESKTOP_QUERY = '(min-width: 768px)';
@@ -38,6 +39,7 @@ export function OverlayHost({ footer }: OverlayHostProps) {
   if (app && !appShown) setAppShown(true);
 
   useEffect(() => markOpenedEntry(pathname), [pathname]);
+  useOverlayDocumentTitle(route);
 
   const onClosed = useCallback(() => setShown(null), []);
   const onAppClosed = useCallback(() => setAppShown(false), []);

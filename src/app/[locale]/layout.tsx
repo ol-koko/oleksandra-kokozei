@@ -7,6 +7,7 @@ import type { ReactNode } from 'react';
 import { SiteFooter } from '@/components/layout/SiteFooter/SiteFooter';
 import { SiteHeader } from '@/components/layout/SiteHeader/SiteHeader';
 import { openGraphLocales, siteUrl, themeColor } from '@/content/site';
+import { languageAlternates } from '@/features/i18n/alternates';
 import { getPathname } from '@/features/i18n/navigation';
 import { routing } from '@/features/i18n/routing';
 import { OverlayHost } from '@/features/overlay/OverlayHost';
@@ -35,15 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     alternates: {
       canonical: url,
-      languages: {
-        ...Object.fromEntries(
-          routing.locales.map((alternate) => [
-            alternate,
-            getPathname({ href: '/', locale: alternate }),
-          ]),
-        ),
-        'x-default': getPathname({ href: '/', locale: routing.defaultLocale }),
-      },
+      languages: languageAlternates('/'),
     },
     openGraph: {
       type: 'website',
