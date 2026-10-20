@@ -134,6 +134,17 @@
   padding-inline: var(--page-gutter);
 }
 
+/*
+ * Scroll reveal (animations.css) with the scroller as its timeline. A block
+ * also finishes once it is fully in view plus 40: nothing follows the last
+ * block on desktop, so a short one could never travel the full 50svh and
+ * would stay half revealed at the end of the scroll. The bottom padding (and
+ * the footer on mobile) always leaves those 40.
+ */
+.content :global(.reveal) {
+  --reveal-range-end: min(50svh, 100% + var(--spacing-5xl));
+}
+
 /* Hidden but still in the layout, so the content column keeps its width. */
 .navHidden {
   visibility: hidden;
