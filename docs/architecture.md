@@ -59,6 +59,14 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 - **Rendering:** `OverlayHost` lives in the layout, outside the slot, and opens whatever the path names. The slot pages render nothing: the overlay must outlive its route to play the closing motion after Back. Next.js applies no metadata from the slot, so the host keeps the tab title in step.
 - **Closing:** an overlay opened from the page steps back over its entry. After a direct visit, closing replaces the URL with the page path in place, without a reload.
 
+### Overlay motion
+
+- **Entrance:** the first screen (overlay-me About; a case's header, cover and private note) arrives with the panel's own entrance and has no reveal of its own.
+- **Scroll reveal:** later section headers and bodies, and every case block, use the page's `.reveal`. `view()` binds to the nearest scroll container, which is the overlay scroller. In the overlay a block also finishes once it is fully in view plus 40 px, so a short last block is never left half revealed at the end of the scroll. Reveals sit on wrappers inside a section, never on the `<section>`, because the nav and scroll-spy measure sections.
+- **Staggers:** shelves, hometown photos and case photo grids add `.animate-shelf-item` the first time they come into view (`useFirstView`), not at mount.
+- **Closing waits only for finite, time-based animations** (`finiteAnimations`). The shimmer loops, and a scroll-driven reveal below the fold never finishes, so either would block the close.
+- **Loading:** every overlay-me image (and the Hero portrait) goes through `LoadingImage` with the shimmer skeleton. The preloaded Hero photo is never hidden before load, so the LCP is not held back until hydration.
+
 ### Focus
 
 - **One focus ring for the whole site.** It is defined in `globals.css`: `:focus-visible` gets an outline of `--border-default` in `--color-text-primary`, offset `--spacing-xxs`. The outline follows each element's border-radius. Elements without their own radius get `--border-radius-xs` through a zero-specificity `:where()` rule. Never remove it for keyboard users.
