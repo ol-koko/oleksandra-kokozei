@@ -25,8 +25,11 @@
  * 2:2) at every width, capped at the Figma size; 100cqi is the card width.
  */
 .logo {
+  /* Card-only geometry, so local: the 60 px Figma logo. */
+  --logo-size: var(--dimension-15);
+
   position: absolute;
-  inline-size: min(var(--size-cover-logo), 100cqi * 60 / 486);
+  inline-size: min(var(--logo-size), 100cqi * 60 / 486);
   block-size: auto;
 }
 

@@ -196,6 +196,8 @@ export type WorkCaseSection = {
 /** The cover under the header: a still or a looping video, with an optional caption below. */
 export type WorkMediaCover = {
   media: ImageAsset | VideoAsset;
+  /** Logo drawn centered above the media instead of baked in, as on the work cards. Decorative: `alt` names it. */
+  logo?: ImageAsset;
   alt: WorkCopyKey;
   caption?: WorkCopyKey;
 };

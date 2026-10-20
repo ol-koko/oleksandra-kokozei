@@ -15,11 +15,14 @@ When syncing a new Figma export, merge it instead of overwriting. The repository
 
 `--shadow-polaroid` is kept but no longer used: polaroids use `--shadow-sm` (blur 6), and the Figma effect is being updated to match. Remove it once Figma no longer has the 3.15 blur.
 
+One-off component geometry is not a token (see Rules). The work card logo (60 px) and the case cover logo (78 px) are local `--logo-size` custom properties in `WorkCard.module.css` and `WorkMedia.module.css`. Colors, effects, gradients and motion values stay tokens even where only one component uses them today (`--color-overlay-lightbox`, `--color-media-shimmer`, `--blur-header`, `--blur-sm`, `--gradient-media-detail`, `--motion-duration-shimmer`): they are color roles, steps of a scale, or values planned as Figma variables.
+
 ## Rules
 
 - Use **semantic** tokens in components: `--color-*`, `--spacing-*`, `--border-radius-*`, `--border-*`, `--size-*`, `--motion-*`. Primitive tokens (`--gray-*`, `--dimension-*`) are building blocks for the semantic layer.
 - Use typography classes (`.text-body-*`, `.text-title-*`) for text styles instead of setting font properties by hand.
-- Never hardcode a value that exists as a token. If a Figma value has no token, flag it and propose a new token instead of hardcoding it.
+- Create a new token only for values that are reused in several places or represent a system-level design decision. One-off component geometry (a specific logo size, an inset used in one component, a single layout dimension) stays local: a custom property in that component's CSS module with a short comment, built on existing primitives (`--dimension-*`) where possible.
+- Never hardcode a value that already exists as a token.
 - Use the animation utility classes from `animations.css`. Every animation must respect `prefers-reduced-motion`.
 
 > **`animations.css` and `hover.css` are maintained in this repo.** They have been adapted to the project (for example `aria-current="true"` instead of `"page"`, the scroll-driven `.reveal`, `.animate-card` fill mode). Merge future updates from Figma by comparison, never by overwriting these two files.

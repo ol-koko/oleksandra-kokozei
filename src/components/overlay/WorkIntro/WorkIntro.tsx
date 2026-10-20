@@ -70,7 +70,7 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
               )}
               {title}
             </h2>
-            <p className={`${styles.description} text-body-2xs`}>{tCases(workCase.description)}</p>
+            <p className={`${styles.description} text-body-l`}>{tCases(workCase.description)}</p>
           </div>
         </div>
 
@@ -81,12 +81,13 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
       {cover.caption ? (
         <WorkPhoto
           media={cover.media}
+          logo={cover.logo}
           alt={tCases(cover.alt)}
           caption={tCases(cover.caption)}
           eager
         />
       ) : (
-        <WorkMedia media={cover.media} alt={tCases(cover.alt)} eager />
+        <WorkMedia media={cover.media} logo={cover.logo} alt={tCases(cover.alt)} eager />
       )}
 
       {workCase.about.length > 0 && (

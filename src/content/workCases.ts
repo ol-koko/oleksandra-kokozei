@@ -14,7 +14,15 @@ export const workCases = {
   ces: {
     description: 'ces.description',
     icon: { src: '/media/works/ces/logo-blue.svg', width: 71, height: 71 },
-    cover: { media: { src: '/media/works/ces/cover.webp', ...DETAIL }, alt: 'ces.coverAlt' },
+    cover: {
+      media: {
+        webm: '/media/works/ces/cover.webm',
+        mp4: '/media/works/ces/cover.mp4',
+        ...DETAIL,
+      },
+      logo: { src: '/media/works/ces/logo-white.svg', width: 71, height: 71 },
+      alt: 'ces.coverAlt',
+    },
     facts: [
       { id: 'year' },
       { id: 'role', value: 'ces.facts.role' },

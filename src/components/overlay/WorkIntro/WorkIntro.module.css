@@ -70,7 +70,7 @@
   gap: var(--spacing-xl);
 }
 
-/* body-2xs on mobile (520:893), body-l on desktop (448:545). */
+/* body-l on desktop (448:545) and mobile (520:893 shows body-2xs; owner decision: body-l everywhere). */
 .description {
   max-inline-size: var(--size-measure);
   color: var(--color-text-strong);
@@ -100,12 +100,6 @@
   .header {
     gap: var(--spacing-5xl);
     margin-block-end: var(--spacing-none);
-  }
-
-  .description {
-    font-weight: var(--font-weight-regular);
-    font-size: var(--font-size-16);
-    line-height: var(--line-height-relaxed);
   }
 
   .more {
