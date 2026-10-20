@@ -25,6 +25,7 @@ import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
 import { useInitialSectionScroll } from '@/features/overlay/useInitialSectionScroll';
 import { useOverlayScrollSpy } from '@/features/overlay/useOverlayScrollSpy';
 import { useOverlayView } from '@/features/overlay/useOverlayView';
+import { useRevealReach } from '@/features/overlay/useRevealReach';
 import { useScrollEdges } from '@/features/overlay/useScrollEdges';
 import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
 import { scrollToSection, sectionLinkTarget } from '@/features/section-links/sectionLinks';
@@ -74,6 +75,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
   const anchorIds = useMemo(() => view.sections.map((section) => section.anchorId), [view]);
   const { activeId, lock, release } = useOverlayScrollSpy(anchorIds, scrollerRef, sentinelRef);
   useScrollEdges(scrollerRef);
+  useRevealReach(scrollerRef);
 
   // Open on mount. Focus goes to the scroller, so arrow keys scroll at once and Tab reaches the nav.
   useEffect(() => {

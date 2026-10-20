@@ -135,14 +135,13 @@
 }
 
 /*
- * Scroll reveal (animations.css) with the scroller as its timeline. A block
- * also finishes once it is fully in view plus 40: nothing follows the last
- * block on desktop, so a short one could never travel the full 50svh and
- * would stay half revealed at the end of the scroll. The bottom padding (and
- * the footer on mobile) always leaves those 40.
+ * Scroll reveal (animations.css) with the scroller as its timeline and the
+ * page's range (50svh). Blocks near the end of the content can never travel
+ * that far, so they finish within their reach (useRevealReach) instead of
+ * staying half revealed at the end of the scroll.
  */
 .content :global(.reveal) {
-  --reveal-range-end: min(50svh, 100% + var(--spacing-5xl));
+  --reveal-range-end: min(50svh, var(--reveal-reach, 50svh));
 }
 
 /* Hidden but still in the layout, so the content column keeps its width. */
