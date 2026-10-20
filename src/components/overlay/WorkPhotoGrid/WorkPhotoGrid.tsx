@@ -14,8 +14,8 @@ type WorkPhotoGridProps = {
 /**
  * Captioned screenshots, two per row on desktop (Figma 558:717) and one per
  * row on mobile, like the case photos. The photos rise in one after another
- * once the grid first comes into view. Hovering a photo zooms the image
- * inside its frame; decorative, the photos are not controls.
+ * once the grid first comes into view. Hovering a photo scales its card
+ * like a work card cover; decorative, the photos are not controls.
  */
 export function WorkPhotoGrid({ photos }: WorkPhotoGridProps) {
   const t = useTranslations('WorkCases');
@@ -31,14 +31,12 @@ export function WorkPhotoGrid({ photos }: WorkPhotoGridProps) {
           style={{ '--i': index } as CSSProperties}
         >
           <div className={styles.frame}>
-            <div className={styles.media}>
-              <LoadingImage
-                image={photo.image}
-                alt={t(`${photo.copy}.alt`)}
-                unoptimized
-                sizes="(min-width: 1200px) 436px, (min-width: 768px) 37vw, calc(100vw - 32px)"
-              />
-            </div>
+            <LoadingImage
+              image={photo.image}
+              alt={t(`${photo.copy}.alt`)}
+              unoptimized
+              sizes="(min-width: 1200px) 436px, (min-width: 768px) 37vw, calc(100vw - 32px)"
+            />
           </div>
           <figcaption className={`${styles.caption} text-body-2xs`}>
             {t(`${photo.copy}.caption`)}
