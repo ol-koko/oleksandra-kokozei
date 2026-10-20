@@ -174,9 +174,7 @@
    * content track grows to 894 first and the nav takes the rest (78 at 1440),
    * never less than its labels; narrower columns shrink the content track.
    */
-  /* Positioned: a work overlay's live-site link sits at its top right, above the nav. */
   .layout {
-    position: relative;
     display: grid;
     grid-template-columns: minmax(0, var(--size-overlay-content)) 1fr;
     column-gap: var(--spacing-3xl);
