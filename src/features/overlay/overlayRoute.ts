@@ -47,6 +47,13 @@ export function parseAppOpen(params: Pick<URLSearchParams, 'get'>, route: Overla
   );
 }
 
+/** The query that opens `route`, for links that must keep it open (language switch). */
+export function overlayQuery(route: OverlayRoute): Record<string, string> {
+  return route.kind === 'me'
+    ? { [OVERLAY_PARAM]: 'me' }
+    : { [WORK_PARAM]: workUrlSlugs[route.slug] };
+}
+
 function urlFor(route: OverlayRoute | null, { app = false } = {}) {
   const url = new URL(window.location.href);
   url.searchParams.delete(OVERLAY_PARAM);
