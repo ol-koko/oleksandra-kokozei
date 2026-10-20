@@ -16,9 +16,12 @@
  * 100cqi is the frame width.
  */
 .logo {
+  /* Cover-only geometry, so local: the 78 px Figma logo (no 78 px primitive). */
+  --logo-size: 78px;
+
   position: absolute;
   inset: 0;
-  inline-size: min(var(--size-case-cover-logo), 100cqi * 78 / 894);
+  inline-size: min(var(--logo-size), 100cqi * 78 / 894);
   block-size: auto;
   margin: auto;
 }

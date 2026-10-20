@@ -652,14 +652,6 @@
         "$type": "sizing",
         "$value": "996px"
       },
-      "size-cover-logo": {
-        "$type": "sizing",
-        "$value": "{primitive.dimension.dimension-15}"
-      },
-      "size-case-cover-logo": {
-        "$type": "sizing",
-        "$value": "78px"
-      },
       "size-overlay-content": {
         "$type": "sizing",
         "$value": "894px"

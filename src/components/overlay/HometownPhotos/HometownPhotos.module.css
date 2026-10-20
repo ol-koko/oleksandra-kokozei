@@ -118,7 +118,7 @@
 @media (min-width: 1024px) {
   .stage,
   .root[data-expanded='true'] .stage {
-    --hometown-scale: min(1, tan(atan2(100cqi, 894px)));
+    --hometown-scale: min(1, tan(atan2(100cqi, var(--size-overlay-content))));
 
     block-size: calc(470px * var(--hometown-scale));
   }
@@ -129,7 +129,7 @@
     inset: auto;
     inset-block-start: 0;
     inset-inline-start: 0;
-    inline-size: 894px;
+    inline-size: var(--size-overlay-content);
     block-size: 470px;
     scale: var(--hometown-scale);
     transform-origin: top left;
