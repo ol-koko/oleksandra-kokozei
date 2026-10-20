@@ -79,13 +79,6 @@
   box-shadow: var(--shadow-md);
 }
 
-.sleeve img {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-}
-
 .sleeve::after {
   content: '';
   position: absolute;

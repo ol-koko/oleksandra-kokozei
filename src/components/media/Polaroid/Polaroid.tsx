@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import type { CSSProperties } from 'react';
+import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
 import type { ImageAsset } from '@/content/types';
 import styles from './Polaroid.module.css';
 
@@ -17,7 +17,10 @@ type PolaroidProps = {
   className?: string;
 };
 
-/** White instant-photo frame around a photo (Figma 179:773 "polaroid"). */
+/**
+ * White instant-photo frame around a photo (Figma 179:773 "polaroid"), with a
+ * loading skeleton in the photo area.
+ */
 export function Polaroid({
   image,
   alt,
@@ -35,14 +38,7 @@ export function Polaroid({
       style={{ '--polaroid-rotation': `${rotation}deg` } as CSSProperties}
     >
       <div className={styles.photo}>
-        <Image
-          className={styles.image}
-          src={image.src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          preload={preload}
-        />
+        <LoadingImage image={image} alt={alt} sizes={sizes} preload={preload} />
       </div>
     </div>
   );

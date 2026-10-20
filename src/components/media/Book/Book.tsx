@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import type { CSSProperties } from 'react';
+import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
 import type { ImageAsset } from '@/content/types';
 import styles from './Book.module.css';
 
@@ -49,13 +49,7 @@ export function Book({ cover, backColor, alt, pressed, onToggle }: BookProps) {
             <span key={leaf} className={`${styles.leaf} ${styles[leaf]}`} />
           ))}
           <span className={styles.cover}>
-            <Image
-              src={cover.src}
-              alt={alt}
-              width={cover.width}
-              height={cover.height}
-              sizes="150px"
-            />
+            <LoadingImage image={cover} alt={alt} sizes="150px" />
           </span>
         </span>
       </span>

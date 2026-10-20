@@ -157,13 +157,6 @@
     box-shadow var(--t) var(--ease);
 }
 
-.cover img {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-}
-
 .cover::after {
   content: '';
   position: absolute;

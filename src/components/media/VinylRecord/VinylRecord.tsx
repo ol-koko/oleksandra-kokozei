@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
 import type { ImageAsset } from '@/content/types';
 import styles from './VinylRecord.module.css';
 
@@ -36,7 +37,7 @@ export function VinylRecord({ cover, href, label, open }: VinylRecordProps) {
         </span>
         <span className={styles.sleeve}>
           {/* The link's aria-label names the song; the cover itself is decorative. */}
-          <Image src={cover.src} alt="" width={cover.width} height={cover.height} sizes="186px" />
+          <LoadingImage image={cover} alt="" sizes="186px" />
         </span>
       </span>
     </a>
