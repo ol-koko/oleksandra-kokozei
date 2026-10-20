@@ -56,7 +56,7 @@
   font-weight: inherit;
 }
 
-/* The pill is a visual tag: the button inside it carries no styling of its own. */
+/* The pill is a visual tag: the link inside it carries no styling of its own. */
 .button {
   display: flex;
   padding: var(--spacing-none);
@@ -65,6 +65,7 @@
   color: inherit;
   font: inherit;
   text-align: inherit;
+  text-decoration: none;
   cursor: pointer;
 }
 

@@ -13,7 +13,7 @@ export function HeroSection() {
   const t = useTranslations('Me');
 
   return (
-    <section id="me" aria-labelledby={HEADING_ID} className={styles.hero}>
+    <section id="me" aria-labelledby={HEADING_ID} tabIndex={-1} className={styles.hero}>
       <div className={styles.portrait}>
         <PolaroidSign image={portrait} alt={t('portraitAlt')} preload animateEntrance />
       </div>

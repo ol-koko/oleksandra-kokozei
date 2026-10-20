@@ -8,10 +8,8 @@ import styles from './LanguageSwitcher.module.css';
 
 type LanguageSwitcherProps = {
   label: string;
-  /** Section in view; kept as the URL hash when switching language. */
+  /** Section in view; carried as a hash that the new page scrolls to and then removes. */
   activeId?: SectionId;
-  /** Query kept when switching language, so an open overlay stays open (`?overlay=me`). */
-  query?: Record<string, string>;
   onNavigate?: () => void;
   className?: string;
 };
@@ -19,7 +17,6 @@ type LanguageSwitcherProps = {
 export function LanguageSwitcher({
   label,
   activeId,
-  query,
   onNavigate,
   className,
 }: LanguageSwitcherProps) {
@@ -35,10 +32,11 @@ export function LanguageSwitcher({
             {/*
              * A plain anchor: switching locale swaps the root layout, so it is a full navigation
              * anyway. getPathname keeps the default locale unprefixed (/, /uk, /de), which
-             * next-intl's Link does not when `locale` is set.
+             * next-intl's Link does not when `locale` is set. The pathname keeps an open overlay
+             * open (`/uk/works/ces`).
              */}
             <a
-              href={`${getPathname({ locale, href: { pathname, query } })}${activeId ? `#${activeId}` : ''}`}
+              href={`${getPathname({ locale, href: pathname })}${activeId ? `#${activeId}` : ''}`}
               hrefLang={locale}
               className={`lang-pill ${styles.chip} text-body-m`}
               aria-current={locale === currentLocale ? 'true' : undefined}

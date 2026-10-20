@@ -15,23 +15,18 @@ import { OverlayHeader } from '@/components/overlay/OverlayHeader/OverlayHeader'
 import { OverlayNav } from '@/components/overlay/OverlayNav/OverlayNav';
 import { OverlaySection } from '@/components/overlay/OverlaySection/OverlaySection';
 import { Divider } from '@/components/ui/Divider/Divider';
-import { sectionIds } from '@/content/navigation';
-import type { OverlayRoute, SectionId } from '@/content/types';
+import type { OverlayRoute } from '@/content/types';
 import { moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
-import {
-  closeOverlay,
-  findTrigger,
-  getOpener,
-  overlayQuery,
-} from '@/features/overlay/overlayRoute';
+import { closeOverlay, findTrigger, getOpener } from '@/features/overlay/overlayRoute';
 import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
 import { useInitialSectionScroll } from '@/features/overlay/useInitialSectionScroll';
 import { useOverlayScrollSpy } from '@/features/overlay/useOverlayScrollSpy';
 import { useOverlayView } from '@/features/overlay/useOverlayView';
 import { useScrollEdges } from '@/features/overlay/useScrollEdges';
 import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
+import { scrollToSection, sectionLinkTarget } from '@/features/section-links/sectionLinks';
 import styles from './Overlay.module.css';
 
 type OverlayProps = {
@@ -48,9 +43,6 @@ type CloseRequest = {
   /** Runs instead of returning focus to the trigger (a page link was followed). */
   then?: () => void;
 };
-
-const isSectionId = (value: string): value is SectionId =>
-  (sectionIds as readonly string[]).includes(value);
 
 /**
  * The one overlay shell (D5). Desktop: a fixed panel over a dimmed page that
@@ -172,15 +164,11 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
     }
 
     // Links to page sections (mobile menu, footer): close the overlay, then scroll the page there.
-    if (event.defaultPrevented || !(event.target instanceof Element)) return;
-    const id = event.target.closest('a[href^="#"]')?.getAttribute('href')?.slice(1);
-    if (!id || !isSectionId(id)) return;
+    if (event.defaultPrevented) return;
+    const id = sectionLinkTarget(event.target);
+    if (!id) return;
     event.preventDefault();
-    requestClose({
-      fromPointer: true,
-      then: () =>
-        document.getElementById(id)?.scrollIntoView({ behavior: scrollBehavior(), block: 'start' }),
-    });
+    requestClose({ fromPointer: true, then: () => scrollToSection(id, { fromPointer: true }) });
   };
 
   return (
@@ -218,11 +206,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
             {t('hint')}
           </p>
 
-          <OverlayHeader
-            activeId={view.parentSection}
-            query={overlayQuery(route)}
-            className={styles.mobileOnly}
-          />
+          <OverlayHeader activeId={view.parentSection} className={styles.mobileOnly} />
           <Breadcrumbs
             parentLabel={view.parentLabel}
             current={view.crumb}

@@ -66,7 +66,7 @@ export const works = [
   },
 ] as const satisfies readonly Work[];
 
-/** Whether a work's card and `?work=` link open its overlay. */
+/** Whether a work's card and `/works/<slug>` link open its overlay. */
 export function isPublishedWork(slug: WorkSlug) {
   return works.some((work) => work.slug === slug && work.published);
 }

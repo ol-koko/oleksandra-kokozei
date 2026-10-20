@@ -1,6 +1,6 @@
 import type { ShelfSong } from './types';
 
-/** "Fav songs" in overlay-me, left to right as in Figma (130:10). Covers are square. */
+/** "Music" in overlay-me, left to right as in Figma (130:10). Covers are square. */
 export const songs = [
   {
     id: 'wickedGame',

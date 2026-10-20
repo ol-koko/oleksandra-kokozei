@@ -7,8 +7,10 @@ import type { ReactNode } from 'react';
 import { SiteFooter } from '@/components/layout/SiteFooter/SiteFooter';
 import { SiteHeader } from '@/components/layout/SiteHeader/SiteHeader';
 import { openGraphLocales, siteUrl, themeColor } from '@/content/site';
+import { languageAlternates } from '@/features/i18n/alternates';
 import { getPathname } from '@/features/i18n/navigation';
 import { routing } from '@/features/i18n/routing';
+import { OverlayHost } from '@/features/overlay/OverlayHost';
 import { figtree } from '@/styles/fonts';
 import '../globals.css';
 
@@ -34,15 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     alternates: {
       canonical: url,
-      languages: {
-        ...Object.fromEntries(
-          routing.locales.map((alternate) => [
-            alternate,
-            getPathname({ href: '/', locale: alternate }),
-          ]),
-        ),
-        'x-default': getPathname({ href: '/', locale: routing.defaultLocale }),
-      },
+      languages: languageAlternates('/'),
     },
     openGraph: {
       type: 'website',
@@ -68,9 +62,11 @@ export const viewport: Viewport = {
 
 type LocaleLayoutProps = {
   children: ReactNode;
+  /** `@modal`: intercepted overlay routes. They only carry metadata; `OverlayHost` renders the overlay. */
+  modal: ReactNode;
 };
 
-export default async function LocaleLayout({ children }: LocaleLayoutProps) {
+export default async function LocaleLayout({ children, modal }: LocaleLayoutProps) {
   const locale = await getLocaleParam();
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -94,6 +90,8 @@ export default async function LocaleLayout({ children }: LocaleLayoutProps) {
           <SiteHeader />
           {children}
           <SiteFooter />
+          {modal}
+          <OverlayHost footer={<SiteFooter />} />
         </NextIntlClientProvider>
       </body>
     </html>

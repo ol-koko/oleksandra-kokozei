@@ -12,7 +12,12 @@ export function ExperienceSection() {
   const t = useTranslations('Experience');
 
   return (
-    <section id="experience" aria-labelledby={HEADING_ID} className={styles.experience}>
+    <section
+      id="experience"
+      aria-labelledby={HEADING_ID}
+      tabIndex={-1}
+      className={styles.experience}
+    >
       <div className={`${styles.content} reveal`}>
         <h2 id={HEADING_ID} className="text-title-l">
           {t('heading')}

@@ -35,3 +35,8 @@
     gap: var(--spacing-6xl);
   }
 }
+
+/* A scroll target for the nav, not a control: no focus ring. */
+.works:focus-visible {
+  outline: none;
+}

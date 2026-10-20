@@ -8,6 +8,7 @@ import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher/Langu
 import { SectionNav } from '@/components/navigation/SectionNav/SectionNav';
 import { sectionIds } from '@/content/navigation';
 import { useScrollSpy } from '@/features/scroll-spy/useScrollSpy';
+import { useSectionLinks } from '@/features/section-links/useSectionLinks';
 import styles from './SiteHeader.module.css';
 
 /**
@@ -18,6 +19,7 @@ export function SiteHeader() {
   const t = useTranslations('Header');
   const headerRef = useRef<HTMLElement>(null);
   const activeId = useScrollSpy(sectionIds, headerRef);
+  useSectionLinks();
 
   return (
     <header ref={headerRef} className={styles.header}>

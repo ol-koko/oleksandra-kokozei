@@ -14,11 +14,11 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 
 | Path                      | Responsibility                                                                                                                   |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `src/app/[locale]/`       | Root layout (html `lang`, font, i18n provider, metadata) and the page                                                            |
+| `src/app/[locale]/`       | Root layout (html `lang`, font, i18n provider, metadata), the page, and overlay routes (`me/`, `works/[slug]/`, `@modal/(.)…`)   |
 | `src/app/globals.css`     | Imports design tokens, motion, and breakpoints; minimal reset and utilities                                                      |
 | `src/components/`         | Shared, presentational components (no data fetching, no feature logic)                                                           |
 | `src/features/i18n/`      | `routing.ts` (locales, prefix strategy), `request.ts` (messages per request), `navigation.ts` (locale-aware `Link`, `useRouter`) |
-| `src/features/overlay/`   | Modal overlays: open/close state, focus trap, sticky nav, scroll-spy                                                             |
+| `src/features/overlay/`   | Modal overlays: path routing and metadata, open/close state, focus trap, sticky nav, scroll-spy                                  |
 | `src/features/signature/` | Animated handwritten signature for the Hero Polaroid                                                                             |
 | `src/features/focus/`     | `moveFocus`: script focus for dialogs that shows a focus ring only after keyboard input                                          |
 | `src/content/`            | Typed content data (links now; works and experience later)                                                                       |
@@ -50,6 +50,14 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 ### Rendering
 
 - Pages are Server Components by default. Client Components are introduced only where interactivity is needed (overlays, scroll-spy, language switcher).
+
+### Overlay routing
+
+- Overlays have clean, shareable paths: `/me`, `/works/<slug>`, and `/works/<slug>/app` for a live app above its case (locale prefixes as usual). Old query URLs (`/?overlay=me`, `/?work=<slug>`) redirect with 308 in the proxy.
+- **Direct visit:** `me/page.tsx` and `works/[slug]/page.tsx` render the page itself, with its own metadata (title, description, canonical, hreflang, Open Graph). Unknown or unpublished slugs are not in `generateStaticParams` and `dynamicParams` is off, so they are a 404.
+- **Open from the page:** triggers are links. The `@modal` slot intercepts the path (`@modal/(.)works/[slug]`), so the page stays mounted and the browser gets a real history entry.
+- **Rendering:** `OverlayHost` lives in the layout, outside the slot, and opens whatever the path names. The slot pages render nothing: the overlay must outlive its route to play the closing motion after Back. Next.js applies no metadata from the slot, so the host keeps the tab title in step.
+- **Closing:** an overlay opened from the page steps back over its entry. After a direct visit, closing replaces the URL with the page path in place, without a reload.
 
 ### Focus
 

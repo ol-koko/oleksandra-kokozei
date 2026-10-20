@@ -52,7 +52,7 @@ export type Work = {
   cover: WorkCover;
   /**
    * Whether the case study is ready. An unpublished work keeps its card on the
-   * page, but the card opens nothing and its `?work=` link is ignored.
+   * page, but the card opens nothing and its `/works/<slug>` path is a 404.
    */
   published: boolean;
 };
@@ -99,7 +99,7 @@ export type ShelfSong = ShelfItem<SongId> & {
 /** Books in overlay-me. Title and author live in messages (`Overlay.me.sections.books.items.*`). */
 export type BookId = 'goodNightMrHolmes' | 'likeSwitch' | 'designOfEverydayThings';
 
-/** One item on a shelf (Fav songs, Books): its id and cover art. */
+/** One item on a shelf (Music, Books): its id and cover art. */
 export type ShelfItem<Id extends string> = {
   id: Id;
   cover: ImageAsset;
@@ -221,7 +221,7 @@ export type WorkCase = {
   sections: readonly WorkCaseSection[];
 };
 
-/** Which overlay is open: `?overlay=me` or `?work=<url slug>`. */
+/** Which overlay is open: `/me` or `/works/<url slug>`. */
 export type OverlayRoute = { kind: 'me' } | { kind: 'work'; slug: WorkSlug };
 
 /**

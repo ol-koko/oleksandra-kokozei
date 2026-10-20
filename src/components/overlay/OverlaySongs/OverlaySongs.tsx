@@ -6,7 +6,7 @@ import { Shelf, type ShelfEntry } from '@/components/overlay/Shelf/Shelf';
 import { songs } from '@/content/songs';
 
 /**
- * "Fav songs" in overlay-me (130:38, 322:220): a vinyl record per song,
+ * "Music" in overlay-me (130:38, 322:220): a vinyl record per song,
  * linking to the track on Spotify. A tap opens the link, so it never toggles
  * the record; on touch the centered record still plays by itself.
  */

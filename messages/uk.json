@@ -1,7 +1,8 @@
 {
   "Metadata": {
     "title": "Oleksandra Kokozei | UI/UX Designer & Design Engineer",
-    "description": "Portfolio of Oleksandra Kokozei, a UI/UX designer and design engineer based in Stuttgart, Germany."
+    "description": "Portfolio of Oleksandra Kokozei, a UI/UX designer and design engineer based in Stuttgart, Germany.",
+    "pageTitle": "{title} | Oleksandra Kokozei"
   },
   "Common": {
     "name": "Oleksandra Kokozei"
@@ -284,7 +285,7 @@
         },
         "music": {
           "nav": "Music",
-          "heading": "Fav songs",
+          "heading": "Music",
           "listenOnSpotify": "Слухати «{title}» — {artist} у Spotify (відкриється в новій вкладці)",
           "previous": "Previous song",
           "next": "Next song",

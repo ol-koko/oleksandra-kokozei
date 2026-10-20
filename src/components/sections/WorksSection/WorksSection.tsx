@@ -10,7 +10,7 @@ export function WorksSection() {
   const t = useTranslations('Works');
 
   return (
-    <section id="works" aria-labelledby={HEADING_ID} className={styles.works}>
+    <section id="works" aria-labelledby={HEADING_ID} tabIndex={-1} className={styles.works}>
       <h2 id={HEADING_ID} className="text-title-l reveal">
         {t('heading')}
       </h2>
