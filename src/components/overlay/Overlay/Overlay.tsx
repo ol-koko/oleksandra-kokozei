@@ -222,7 +222,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
             <div className={styles.content}>
               {view.sections.map((section, index) => (
                 <Fragment key={section.id}>
-                  {index > 0 && <Divider className={styles.divider} />}
+                  {index > 0 && <Divider className={styles.divider} revealWithNext />}
                   <OverlaySection section={section} />
                 </Fragment>
               ))}

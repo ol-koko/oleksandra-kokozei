@@ -7,6 +7,14 @@ const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 /** At most this many steps of stagger, so a batch never keeps the last element waiting long. */
 const MAX_STAGGER = 6;
 
+/** Elements that never reveal on their own, only together with what follows them (dividers). */
+const WITH_NEXT = '[data-reveal="with-next"]';
+
+/** Sorts elements into document order. */
+function byDocumentOrder(a: Element, b: Element) {
+  return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+}
+
 /**
  * Time-based reveal for the overlay content, like the Hero entrance: every
  * `[data-reveal]` element in the scroller fades up once per open. The first
@@ -15,7 +23,9 @@ const MAX_STAGGER = 6;
  * Elements that come into view together rise one after another. A
  * `[data-reveal-row]` reveals as one: when any of its items comes in, all
  * do, so items hidden sideways in a scrolling row (mobile shelves) are
- * already there when swiped to.
+ * already there when swiped to. A `[data-reveal="with-next"]` (a divider)
+ * is never observed: it rises just before the first element after it, so it
+ * is never on screen alone.
  *
  * Script arms the scroller (`data-reveal-armed`), which hides the elements
  * until they are revealed (animations.css), so without script, and with
@@ -37,7 +47,6 @@ export function useOverlayReveal(scrollerRef: RefObject<HTMLElement | null>) {
       const edge = getComputedStyle(scroller).getPropertyValue('--spacing-5xl').trim() || '0px';
       observer = new IntersectionObserver(
         (entries, self) => {
-          // Entries come in document order: a batch rises in reading order.
           const batch = new Set<HTMLElement>();
           for (const entry of entries) {
             if (!entry.isIntersecting) continue;
@@ -47,8 +56,17 @@ export function useOverlayReveal(scrollerRef: RefObject<HTMLElement | null>) {
               if (!element.hasAttribute('data-revealed')) batch.add(element);
             }
           }
+          if (!batch.size) return;
+          // Hidden dividers above anything revealed now come along, one step ahead of it.
+          const last = [...batch].sort(byDocumentOrder).at(-1);
+          for (const lead of scroller.querySelectorAll<HTMLElement>(WITH_NEXT)) {
+            if (lead.hasAttribute('data-revealed') || !last) continue;
+            if (lead.compareDocumentPosition(last) & Node.DOCUMENT_POSITION_FOLLOWING)
+              batch.add(lead);
+          }
+          // A batch rises in reading order.
           let step = 0;
-          for (const element of batch) {
+          for (const element of [...batch].sort(byDocumentOrder)) {
             element.style.setProperty('--reveal-i', String(Math.min(step++, MAX_STAGGER)));
             element.setAttribute('data-revealed', '');
             self.unobserve(element);
@@ -56,7 +74,9 @@ export function useOverlayReveal(scrollerRef: RefObject<HTMLElement | null>) {
         },
         { root: scroller, rootMargin: `0px 0px -${edge} 0px` },
       );
-      for (const element of scroller.querySelectorAll('[data-reveal]')) observer.observe(element);
+      for (const element of scroller.querySelectorAll(`[data-reveal]:not(${WITH_NEXT})`)) {
+        observer.observe(element);
+      }
     };
 
     // Only the panel's entrance counts, as for the initial section scroll.

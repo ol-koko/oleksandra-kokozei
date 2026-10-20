@@ -65,6 +65,7 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 - **When:** the first screen waits for the panel's entrance. Everything else waits until it enters the scroller (IntersectionObserver with the scroller as root, ignoring the 40 px bottom fade). Content scrolled past during the overlay-me glide to Home is revealed on the way, so the glide lands on visible content.
 - **No script, reduced motion:** script arms the scroller (`data-reveal-armed`) before the first paint, and only that hides the elements. Without script or with reduced motion nothing is armed and everything shows at once.
 - **Closing** waits only for the closing motion of the backdrop, panel and scroller, never for reveals inside. AppOverlay and the Lightbox wait for finite, time-based animations only (`finiteAnimations`), so the looping shimmer never blocks them.
+- **Dividers** (`Divider revealWithNext`) are never observed on their own: a hidden divider rises one step ahead of the first element after it, so it is never on screen alone.
 - Reveals never sit on the `<section>`, because the nav and scroll-spy measure sections.
 - **Loading:** every overlay-me image (and the Hero portrait) goes through `LoadingImage` with the shimmer skeleton. The preloaded Hero photo is never hidden before load, so the LCP is not held back until hydration.
 

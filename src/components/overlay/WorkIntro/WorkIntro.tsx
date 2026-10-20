@@ -82,7 +82,7 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
         {year !== undefined && <WorkFacts facts={workCase.facts} year={year} />}
       </div>
 
-      <Divider />
+      <Divider revealWithNext />
       {cover.caption ? (
         <WorkPhoto
           media={cover.media}
