@@ -23,6 +23,31 @@
   overflow: hidden;
   border-radius: var(--border-radius-2xl);
   box-shadow: var(--shadow-sm);
+  /* Keeps the rounded clip while the image is scaled (Safari). */
+  isolation: isolate;
+}
+
+/*
+ * Hover, like the work card covers (hover.css): only the image grows inside
+ * the still frame; the caption and the layout stay put. A wrapper, so the
+ * image keeps its own fade-in transition.
+ */
+.media {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .photo:hover .media {
+    transform: scale(var(--motion-scale-hover));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo:hover .media {
+    transform: none;
+  }
 }
 
 .caption {
