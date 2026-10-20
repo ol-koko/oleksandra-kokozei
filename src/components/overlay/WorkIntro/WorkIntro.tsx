@@ -81,12 +81,13 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
       {cover.caption ? (
         <WorkPhoto
           media={cover.media}
+          logo={cover.logo}
           alt={tCases(cover.alt)}
           caption={tCases(cover.caption)}
           eager
         />
       ) : (
-        <WorkMedia media={cover.media} alt={tCases(cover.alt)} eager />
+        <WorkMedia media={cover.media} logo={cover.logo} alt={tCases(cover.alt)} eager />
       )}
 
       {workCase.about.length > 0 && (

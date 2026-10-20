@@ -153,6 +153,7 @@
   /* Semantic: layout size */
   --size-content-max: 996px;
   --size-cover-logo: var(--dimension-15);
+  --size-case-cover-logo: 78px;
   --size-overlay-content: 894px;
   --size-overlay-max: 1200px;
   --size-measure: 585px;
