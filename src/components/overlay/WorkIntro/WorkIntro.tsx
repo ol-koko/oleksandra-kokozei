@@ -70,7 +70,7 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
               )}
               {title}
             </h2>
-            <p className={`${styles.description} text-body-2xs`}>{tCases(workCase.description)}</p>
+            <p className={`${styles.description} text-body-l`}>{tCases(workCase.description)}</p>
           </div>
         </div>
 
