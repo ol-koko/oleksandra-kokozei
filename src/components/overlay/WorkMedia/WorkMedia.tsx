@@ -31,7 +31,7 @@ export function WorkMedia({ media, logo, alt, eager = false }: WorkMediaProps) {
 
   if ('webm' in media) {
     return (
-      <div className={styles.frame}>
+      <div className={styles.frame} data-reveal>
         <LoopVideo video={media} label={alt} />
         {logoImage}
       </div>
@@ -39,7 +39,7 @@ export function WorkMedia({ media, logo, alt, eager = false }: WorkMediaProps) {
   }
 
   return (
-    <div className={styles.frame}>
+    <div className={styles.frame} data-reveal>
       <LoadingImage
         image={media}
         alt={alt}

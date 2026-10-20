@@ -15,7 +15,9 @@ export function WorkPhoto({ media, logo, alt, caption, eager }: WorkPhotoProps) 
   return (
     <figure className={styles.photo}>
       <WorkMedia media={media} logo={logo} alt={alt} eager={eager} />
-      <figcaption className={`${styles.caption} text-body-2xs`}>{caption}</figcaption>
+      <figcaption className={`${styles.caption} text-body-2xs`} data-reveal>
+        {caption}
+      </figcaption>
     </figure>
   );
 }

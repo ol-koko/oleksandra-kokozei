@@ -8,7 +8,6 @@ import { hometownPhotos } from '@/content/hometown';
 import type { HometownPhoto } from '@/content/types';
 import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
-import { useFirstView } from '@/features/motion/useFirstView';
 import { scrollToSection } from '@/features/overlay/sectionScrollTop';
 import styles from './HometownPhotos.module.css';
 
@@ -27,8 +26,8 @@ const PHOTO_SIZES = '(min-width: 1024px) 228px, 188px';
  * only, they keep their space); they leave the layout once both are done and
  * they are out of view, so nothing in view jumps.
  *
- * The photos in view rise in one after another once the collage first
- * comes into view (desktop: all four; mobile: the first).
+ * Photos fade up one after another as they come into view (`data-reveal`),
+ * including the ones "more" shows.
  *
  * Every photo is a button that opens it full screen in a lightbox; focus
  * returns to that photo when the lightbox closes.
@@ -39,8 +38,6 @@ export function HometownPhotos() {
   const expanded = phase !== 'collapsed';
   const listId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const seen = useFirstView(stageRef);
   /** Resolves the fade-out of the extra photos while folding. */
   const fadeEndRef = useRef<(() => void) | null>(null);
   const [shown, setShown] = useState<{ photo: HometownPhoto; fromPointer: boolean } | null>(null);
@@ -78,27 +75,22 @@ export function HometownPhotos() {
 
   return (
     <div className={styles.root} data-expanded={expanded}>
-      <div ref={stageRef} className={styles.stage}>
+      <div className={styles.stage}>
         <ul id={listId} className={styles.photos}>
           {hometownPhotos.map((photo, index) => {
             const extra = index > 0;
-            // "More" shows the extras one after another from the first delay; folding fades them out.
-            const revealedByMore = extra && phase === 'expanded';
-            const staggered = revealedByMore || (seen && !(extra && phase === 'folding'));
             return (
               <li
                 key={photo.id}
                 className={[
                   styles.item,
                   extra && styles.extra,
-                  staggered && 'animate-shelf-item',
                   extra && phase === 'folding' && styles.leaving,
                 ]
                   .filter(Boolean)
                   .join(' ')}
                 style={
                   {
-                    '--i': revealedByMore ? index - 1 : index,
                     '--desktop-x': `${photo.desktop.x}px`,
                     '--desktop-y': `${photo.desktop.y}px`,
                     '--desktop-z': photo.desktop.z,
@@ -106,6 +98,7 @@ export function HometownPhotos() {
                     '--mobile-y': `${photo.mobile.y}px`,
                   } as CSSProperties
                 }
+                data-reveal
                 onAnimationEnd={
                   index === hometownPhotos.length - 1 && phase === 'folding'
                     ? () => fadeEndRef.current?.()

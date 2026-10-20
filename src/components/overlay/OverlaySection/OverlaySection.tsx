@@ -19,9 +19,9 @@ type OverlaySectionProps = {
  * bodies bring their own heading. Focusable by script, so the overlay nav can
  * move focus to the section.
  *
- * Header and body reveal on scroll (`.reveal`). The intros are the first
- * screen and come in with the panel, so they do not; case blocks reveal one
- * by one (`WorkBlocks`). The section itself never moves: the nav measures it.
+ * The header and the body's items fade up as they come into view
+ * (`data-reveal`, see useOverlayReveal); the section itself never moves,
+ * because the nav measures it.
  */
 export function OverlaySection({ section }: OverlaySectionProps) {
   const headingId = `${section.anchorId}-heading`;
@@ -42,7 +42,7 @@ export function OverlaySection({ section }: OverlaySectionProps) {
         <WorkBlocks blocks={body.blocks} headingLevel={2} headingId={headingId} />
       ) : (
         <>
-          <div className={`${styles.header} reveal`}>
+          <div className={styles.header} data-reveal>
             <h2 id={headingId} className="text-title-l">
               {section.heading}
             </h2>
@@ -54,12 +54,10 @@ export function OverlaySection({ section }: OverlaySectionProps) {
             )}
           </div>
 
-          <div className="reveal">
-            {body.kind === 'hometown' && <HometownPhotos />}
-            {body.kind === 'songs' && <OverlaySongs />}
-            {body.kind === 'books' && <OverlayBooks />}
-            {body.kind === 'films' && <OverlayFilms />}
-          </div>
+          {body.kind === 'hometown' && <HometownPhotos />}
+          {body.kind === 'songs' && <OverlaySongs />}
+          {body.kind === 'books' && <OverlayBooks />}
+          {body.kind === 'films' && <OverlayFilms />}
         </>
       )}
     </section>

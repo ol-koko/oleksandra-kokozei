@@ -18,14 +18,13 @@ import { Divider } from '@/components/ui/Divider/Divider';
 import type { OverlayRoute } from '@/content/types';
 import { moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
-import { finiteAnimations } from '@/features/motion/finiteAnimations';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
 import { closeOverlay, findTrigger, getOpener } from '@/features/overlay/overlayRoute';
 import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
 import { useInitialSectionScroll } from '@/features/overlay/useInitialSectionScroll';
 import { useOverlayScrollSpy } from '@/features/overlay/useOverlayScrollSpy';
 import { useOverlayView } from '@/features/overlay/useOverlayView';
-import { useRevealReach } from '@/features/overlay/useRevealReach';
+import { useOverlayReveal } from '@/features/overlay/useOverlayReveal';
 import { useScrollEdges } from '@/features/overlay/useScrollEdges';
 import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
 import { scrollToSection, sectionLinkTarget } from '@/features/section-links/sectionLinks';
@@ -75,7 +74,6 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
   const anchorIds = useMemo(() => view.sections.map((section) => section.anchorId), [view]);
   const { activeId, lock, release } = useOverlayScrollSpy(anchorIds, scrollerRef, sentinelRef);
   useScrollEdges(scrollerRef);
-  useRevealReach(scrollerRef);
 
   // Open on mount. Focus goes to the scroller, so arrow keys scroll at once and Tab reaches the nav.
   useEffect(() => {
@@ -94,6 +92,9 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
       }
     };
   }, []);
+
+  // After the open effect: reveals wait for the panel's entrance.
+  useOverlayReveal(scrollerRef);
 
   useInitialSectionScroll({
     scrollerRef,
@@ -131,7 +132,9 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
       onClosed();
     };
 
-    const animations = finiteAnimations(dialog);
+    // Only the closing motion counts: content reveals inside never hold the close up.
+    const layers = [backdropRef.current, scrollerRef.current?.parentElement, scrollerRef.current];
+    const animations = layers.flatMap((layer) => layer?.getAnimations() ?? []);
     Promise.all(animations.map((animation) => animation.finished)).then(finish, finish);
 
     return () => {

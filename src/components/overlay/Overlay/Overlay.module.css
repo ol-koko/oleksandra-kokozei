@@ -134,16 +134,6 @@
   padding-inline: var(--page-gutter);
 }
 
-/*
- * Scroll reveal (animations.css) with the scroller as its timeline and the
- * page's range (50svh). Blocks near the end of the content can never travel
- * that far, so they finish within their reach (useRevealReach) instead of
- * staying half revealed at the end of the scroll.
- */
-.content :global(.reveal) {
-  --reveal-range-end: min(50svh, var(--reveal-reach, 50svh));
-}
-
 /* Hidden but still in the layout, so the content column keeps its width. */
 .navHidden {
   visibility: hidden;

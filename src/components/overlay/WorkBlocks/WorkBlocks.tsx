@@ -13,39 +13,31 @@ type WorkBlocksProps = {
   headingId?: string;
 };
 
-/**
- * Case study blocks in reading order: text blocks, captioned photos and photo
- * grids. Each block reveals on scroll on its own.
- */
+/** Case study blocks in reading order: text blocks, captioned photos and photo grids. */
 export function WorkBlocks({ blocks, headingLevel, headingId }: WorkBlocksProps) {
   const t = useTranslations('WorkCases');
 
   return (
     <div className={styles.blocks}>
-      {blocks.map((block, index) => (
-        <div key={blockKey(block, index)} className="reveal">
-          {block.kind === 'photo' ? (
-            <WorkPhoto
-              media={block.image}
-              alt={t(`${block.copy}.alt`)}
-              caption={t(`${block.copy}.caption`)}
-            />
-          ) : block.kind === 'photo-grid' ? (
-            <WorkPhotoGrid photos={block.photos} />
-          ) : (
-            <WorkStory
-              block={block}
-              headingLevel={headingLevel}
-              headingId={index === 0 ? headingId : undefined}
-            />
-          )}
-        </div>
-      ))}
+      {blocks.map((block, index) =>
+        block.kind === 'photo' ? (
+          <WorkPhoto
+            key={block.copy}
+            media={block.image}
+            alt={t(`${block.copy}.alt`)}
+            caption={t(`${block.copy}.caption`)}
+          />
+        ) : block.kind === 'photo-grid' ? (
+          <WorkPhotoGrid key={block.photos[0]?.copy ?? index} photos={block.photos} />
+        ) : (
+          <WorkStory
+            key={block.copy}
+            block={block}
+            headingLevel={headingLevel}
+            headingId={index === 0 ? headingId : undefined}
+          />
+        ),
+      )}
     </div>
   );
-}
-
-/** A grid has no copy of its own: it goes by its first photo. */
-function blockKey(block: WorkBlock, index: number) {
-  return block.kind === 'photo-grid' ? (block.photos[0]?.copy ?? String(index)) : block.copy;
 }

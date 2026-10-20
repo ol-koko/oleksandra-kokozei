@@ -15,7 +15,7 @@ export function WorkFacts({ facts, year }: WorkFactsProps) {
   return (
     <dl className={styles.facts}>
       {facts.map((fact) => (
-        <div key={fact.id} className={styles.fact}>
+        <div key={fact.id} className={styles.fact} data-reveal>
           <dt className={`${styles.label} text-title-m`}>{t(fact.id)}</dt>
           {fact.id === 'year' ? (
             <dd className="text-body-l">{year}</dd>

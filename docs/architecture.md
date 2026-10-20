@@ -61,10 +61,11 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 
 ### Overlay motion
 
-- **Entrance:** the first screen (overlay-me About; a case's header, cover and private note) arrives with the panel's own entrance and has no reveal of its own.
-- **Scroll reveal:** later section headers and bodies, and every case block, use the page's `.reveal`. `view()` binds to the nearest scroll container, which is the overlay scroller. Blocks near the end of the content cannot travel the full 50svh, so `useRevealReach` measures how far each can still go and the overlay caps the range there: nothing is left half revealed at the end of the scroll, and every other block keeps the page's range. Reveals sit on wrappers inside a section, never on the `<section>`, because the nav and scroll-spy measure sections.
-- **Staggers:** shelves, hometown photos and case photo grids add `.animate-shelf-item` the first time they come into view (`useFirstView`), not at mount.
-- **Closing waits only for finite, time-based animations** (`finiteAnimations`). The shimmer loops, and a scroll-driven reveal below the fold never finishes, so either would block the close.
+- **Time-based reveal, like the Hero entrance** (`useOverlayReveal`). Content elements carry `data-reveal`: case icon, title, description, each fact, cover, private note; each story label, lead and body; photos and their captions; each grid photo, shelf item and hometown photo; section headers; the About portrait, greeting and bio paragraphs. Each one fades up once per open with `rise-in` (`--motion-duration-slow`, `--motion-easing-gentle`, `--dimension-4`). Elements that enter together rise 60 ms apart.
+- **When:** the first screen waits for the panel's entrance. Everything else waits until it enters the scroller (IntersectionObserver with the scroller as root, ignoring the 40 px bottom fade). Content scrolled past during the overlay-me glide to Home is revealed on the way, so the glide lands on visible content.
+- **No script, reduced motion:** script arms the scroller (`data-reveal-armed`) before the first paint, and only that hides the elements. Without script or with reduced motion nothing is armed and everything shows at once.
+- **Closing** waits only for the closing motion of the backdrop, panel and scroller, never for reveals inside. AppOverlay and the Lightbox wait for finite, time-based animations only (`finiteAnimations`), so the looping shimmer never blocks them.
+- Reveals never sit on the `<section>`, because the nav and scroll-spy measure sections.
 - **Loading:** every overlay-me image (and the Hero portrait) goes through `LoadingImage` with the shimmer skeleton. The preloaded Hero photo is never hidden before load, so the LCP is not held back until hydration.
 
 ### Focus

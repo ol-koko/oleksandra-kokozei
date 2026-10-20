@@ -117,6 +117,22 @@
   }
 }
 
+/* Time-based reveal (overlays, useOverlayReveal): script arms a scroller with data-reveal-armed,
+   which hides its [data-reveal] elements; each one gets data-revealed and --reveal-i (its place
+   among the elements that came into view together) when it enters, and rises in like the Hero
+   (.animate-card). Without script, and with reduced motion, nothing is armed and the content
+   shows as is. Zero specificity, so a component's own animation on the element wins. */
+[data-reveal-armed] [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :where([data-revealed]) {
+    animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) backwards;
+    animation-delay: calc(var(--reveal-i, 0) * 60ms);
+  }
+}
+
 /* ---------- Accessibility ---------- */
 
 @media (prefers-reduced-motion: reduce) {

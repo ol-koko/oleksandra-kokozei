@@ -2,7 +2,6 @@
 
 import { useRef, type CSSProperties, type ReactNode } from 'react';
 import { CaretRightIcon } from '@/components/icons/CaretRightIcon';
-import { useFirstView } from '@/features/motion/useFirstView';
 import { useShelfAutoplay } from '@/features/shelf/useShelfAutoplay';
 import { useShelfScroll } from '@/features/shelf/useShelfScroll';
 import styles from './Shelf.module.css';
@@ -35,15 +34,14 @@ type ShelfProps = {
  * side by side, scaled down as one when the column is narrower. Mobile and
  * tablet (322:249, 322:302): one item at a time in a scroll-snap row between
  * two arrow buttons. At most one item is open; see `useShelfAutoplay` for
- * taps and the touch autoplay. The items rise in one after another once the
- * row first comes into view.
+ * taps and the touch autoplay. The row fades up item after item as it comes
+ * into view, as one (`data-reveal-row`).
  */
 export function Shelf({ entries, previousLabel, nextLabel }: ShelfProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLUListElement>(null);
   const { openId, toggle } = useShelfAutoplay(rootRef, scrollerRef);
   const { atStart, atEnd, scrollByItem } = useShelfScroll(scrollerRef);
-  const seen = useFirstView(rootRef);
 
   return (
     <div
@@ -58,14 +56,9 @@ export function Shelf({ entries, previousLabel, nextLabel }: ShelfProps) {
         onClick={() => scrollByItem(-1)}
       />
 
-      <ul ref={scrollerRef} className={styles.row}>
-        {entries.map((entry, index) => (
-          <li
-            key={entry.id}
-            data-shelf-id={entry.id}
-            className={seen ? `${styles.item} animate-shelf-item` : styles.item}
-            style={{ '--i': index } as CSSProperties}
-          >
+      <ul ref={scrollerRef} className={styles.row} data-reveal-row>
+        {entries.map((entry) => (
+          <li key={entry.id} data-shelf-id={entry.id} className={styles.item} data-reveal>
             {entry.renderMedia({
               pressed: openId === entry.id,
               onToggle: () => toggle(entry.id),

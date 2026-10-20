@@ -24,18 +24,20 @@ export function WorkStory({ block, headingLevel, headingId }: WorkStoryProps) {
   return (
     <div className={styles.story}>
       <div className={styles.intro}>
-        <Heading id={headingId} className={`${styles.label} text-title-s`}>
+        <Heading id={headingId} className={`${styles.label} text-title-s`} data-reveal>
           {t(`${block.copy}.label`)}
         </Heading>
-        <p className={`${styles.lead} text-title-s`}>{t(`${block.copy}.lead`)}</p>
+        <p className={`${styles.lead} text-title-s`} data-reveal>
+          {t(`${block.copy}.lead`)}
+        </p>
       </div>
 
       {block.kind === 'story' ? (
-        <StoryBody text={t(`${block.copy}.body`)} />
+        <StoryBody text={t(`${block.copy}.body`)} reveal />
       ) : (
         <div className={styles.topics}>
           {block.topics.map((topic) => (
-            <div key={topic} className={styles.topic}>
+            <div key={topic} className={styles.topic} data-reveal>
               <TopicHeading className="text-body-m">
                 <TopicTitle text={t(`${topic}.title`)} />
               </TopicHeading>
@@ -67,11 +69,12 @@ const LIST_MARKER = '- ';
 
 /**
  * A body message: each line is a paragraph; an empty line adds a gap, as in
- * Figma. Consecutive lines starting with `- ` form one bulleted list.
+ * Figma. Consecutive lines starting with `- ` form one bulleted list. Fades
+ * up on its own unless it sits in a topic that does.
  */
-function StoryBody({ text }: { text: string }) {
+function StoryBody({ text, reveal = false }: { text: string; reveal?: boolean }) {
   return (
-    <div className={styles.body}>
+    <div className={styles.body} data-reveal={reveal || undefined}>
       {text.split('\n\n').map((run) => (
         <div key={run}>
           {groupLines(run.split('\n')).map((group) =>

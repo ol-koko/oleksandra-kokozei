@@ -39,7 +39,10 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
     <div className={styles.intro}>
       <div className={styles.header}>
         <div className={styles.identity}>
-          <div className={workCase.icon ? styles.top : `${styles.top} ${styles.linkOnly}`}>
+          <div
+            className={workCase.icon ? styles.top : `${styles.top} ${styles.linkOnly}`}
+            data-reveal
+          >
             {workCase.icon && (
               <Image
                 className={styles.icon}
@@ -62,7 +65,7 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
           </div>
 
           <div className={styles.text}>
-            <h2 id={headingId} className="text-title-l">
+            <h2 id={headingId} className="text-title-l" data-reveal>
               {workCase.titleEmoji && (
                 <>
                   <Emoji symbol={tCases(workCase.titleEmoji)} />{' '}
@@ -70,7 +73,9 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
               )}
               {title}
             </h2>
-            <p className={`${styles.description} text-body-l`}>{tCases(workCase.description)}</p>
+            <p className={`${styles.description} text-body-l`} data-reveal>
+              {tCases(workCase.description)}
+            </p>
           </div>
         </div>
 
