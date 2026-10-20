@@ -99,7 +99,7 @@ export type ShelfSong = ShelfItem<SongId> & {
 /** Books in overlay-me. Title and author live in messages (`Overlay.me.sections.books.items.*`). */
 export type BookId = 'goodNightMrHolmes' | 'likeSwitch' | 'designOfEverydayThings';
 
-/** One item on a shelf (Fav songs, Books): its id and cover art. */
+/** One item on a shelf (Music, Books): its id and cover art. */
 export type ShelfItem<Id extends string> = {
   id: Id;
   cover: ImageAsset;

@@ -285,7 +285,7 @@
         },
         "music": {
           "nav": "Music",
-          "heading": "Fav songs",
+          "heading": "Music",
           "listenOnSpotify": "Слухати «{title}» — {artist} у Spotify (відкриється в новій вкладці)",
           "previous": "Previous song",
           "next": "Next song",
