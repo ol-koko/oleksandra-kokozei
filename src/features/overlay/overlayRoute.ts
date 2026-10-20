@@ -1,20 +1,22 @@
+import { hasLocale } from 'next-intl';
 import { workUrlSlugs } from '@/content/overlays';
 import type { OverlayRoute, WorkSlug } from '@/content/types';
 import { getWorkCase } from '@/content/workCases';
 import { isPublishedWork } from '@/content/works';
+import { routing } from '@/features/i18n/routing';
 
-/** `?overlay=me` opens overlay-me. */
-const OVERLAY_PARAM = 'overlay';
-/** `?work=<url slug>` opens a work overlay. */
-const WORK_PARAM = 'work';
-/** `&app=live` opens a work's live app in an overlay above its case (desktop). */
-const APP_PARAM = 'app';
-const APP_VALUE = 'live';
-/** Marks history entries pushed by `openOverlay` and `openApp`, so closing can step back over them. */
+/** Route segments, matching the folders in `src/app/[locale]`: `/me`, `/works/<url slug>[/app]`. */
+const ME_SEGMENT = 'me';
+const WORKS_SEGMENT = 'works';
+const APP_SEGMENT = 'app';
+/** Marks history entries opened from the page, so closing can step back over them. */
 const ENTRY_FLAG = '__overlayEntry';
 
 /** Stable id of an overlay, used for keys, anchors and trigger lookup. */
 export type OverlayKey = 'me' | `work-${WorkSlug}`;
+
+/** What an overlay path opens: the overlay, and on desktop the work's live app above it. */
+export type OverlayLocation = { route: OverlayRoute; app: boolean };
 
 export function overlayKey(route: OverlayRoute): OverlayKey {
   return route.kind === 'me' ? 'me' : `work-${route.slug}`;
@@ -24,55 +26,90 @@ export function isSameOverlay(a: OverlayRoute | null, b: OverlayRoute | null) {
   return a !== null && b !== null && overlayKey(a) === overlayKey(b);
 }
 
+/** Works whose overlay opens: published, with a case study. */
+export function openableWorkSlugs(): WorkSlug[] {
+  return (Object.keys(workUrlSlugs) as WorkSlug[]).filter(
+    (slug) => isPublishedWork(slug) && getWorkCase(slug) !== undefined,
+  );
+}
+
+/** Openable works that also have a live app overlay. */
+export function liveAppWorkSlugs(): WorkSlug[] {
+  return openableWorkSlugs().filter((slug) => getWorkCase(slug)?.liveApp !== undefined);
+}
+
+/** Static params of `/works/[slug]`. */
+export function workRouteParams() {
+  return openableWorkSlugs().map((slug) => ({ slug: workUrlSlugs[slug] }));
+}
+
+/** Static params of `/works/[slug]/app`. */
+export function appRouteParams() {
+  return liveAppWorkSlugs().map((slug) => ({ slug: workUrlSlugs[slug] }));
+}
+
+/** The openable work behind a URL slug (`ju-jutsu`), if any. */
+export function workSlugFromUrl(urlSlug: string): WorkSlug | undefined {
+  return openableWorkSlugs().find((slug) => workUrlSlugs[slug] === urlSlug);
+}
+
+/** The path that opens `route`, without the locale prefix (`/works/ces`). */
+export function overlayPath(route: OverlayRoute, { app = false } = {}) {
+  if (route.kind === 'me') return `/${ME_SEGMENT}`;
+  const path = `/${WORKS_SEGMENT}/${workUrlSlugs[route.slug]}`;
+  return app ? `${path}/${APP_SEGMENT}` : path;
+}
+
 /**
- * Reads the overlay from the query string. Unknown values, unpublished works
- * and works without a case study open nothing.
+ * Reads the overlay from a pathname without the locale prefix. Unknown slugs,
+ * unpublished works and works without a case study open nothing.
  */
-export function parseOverlayRoute(params: Pick<URLSearchParams, 'get'>): OverlayRoute | null {
-  if (params.get(OVERLAY_PARAM) === 'me') return { kind: 'me' };
+export function parseOverlayPath(pathname: string): OverlayLocation | null {
+  const [first, urlSlug, rest, ...extra] = pathname.split('/').filter(Boolean);
+  if (first === ME_SEGMENT && urlSlug === undefined) return { route: { kind: 'me' }, app: false };
+  if (first !== WORKS_SEGMENT || urlSlug === undefined || extra.length > 0) return null;
 
-  const workParam = params.get(WORK_PARAM);
-  const slug = (Object.keys(workUrlSlugs) as WorkSlug[]).find(
-    (key) => workUrlSlugs[key] === workParam,
-  );
-  return slug && isPublishedWork(slug) && getWorkCase(slug) ? { kind: 'work', slug } : null;
+  const slug = workSlugFromUrl(urlSlug);
+  if (!slug) return null;
+  if (rest === undefined) return { route: { kind: 'work', slug }, app: false };
+  return rest === APP_SEGMENT && getWorkCase(slug)?.liveApp !== undefined
+    ? { route: { kind: 'work', slug }, app: true }
+    : null;
 }
 
-/** Whether the URL also opens the live app of the work overlay `route`. */
-export function parseAppOpen(params: Pick<URLSearchParams, 'get'>, route: OverlayRoute | null) {
-  return (
-    route?.kind === 'work' &&
-    getWorkCase(route.slug)?.liveApp !== undefined &&
-    params.get(APP_PARAM) === APP_VALUE
-  );
-}
-
-/** The query that opens `route`, for links that must keep it open (language switch). */
-export function overlayQuery(route: OverlayRoute): Record<string, string> {
-  return route.kind === 'me'
-    ? { [OVERLAY_PARAM]: 'me' }
-    : { [WORK_PARAM]: workUrlSlugs[route.slug] };
-}
-
-function urlFor(route: OverlayRoute | null, { app = false } = {}) {
+/** Replaces the current entry with `path` in the current locale, without navigating. */
+function replacePath(path: string) {
   const url = new URL(window.location.href);
-  url.searchParams.delete(OVERLAY_PARAM);
-  url.searchParams.delete(WORK_PARAM);
-  url.searchParams.delete(APP_PARAM);
+  const [first] = url.pathname.split('/').filter(Boolean);
+  const prefix = hasLocale(routing.locales, first) ? `/${first}` : '';
+  url.pathname = `${prefix}${path}` || '/';
   url.hash = '';
-  if (route?.kind === 'me') url.searchParams.set(OVERLAY_PARAM, 'me');
-  if (route?.kind === 'work') url.searchParams.set(WORK_PARAM, workUrlSlugs[route.slug]);
-  if (app) url.searchParams.set(APP_PARAM, APP_VALUE);
-  return url;
+  // Next.js syncs native `replaceState` with its router, so the page does not re-render.
+  window.history.replaceState(null, '', url);
 }
 
-function isPushedEntry() {
+function isOpenedEntry() {
   const state: unknown = window.history.state;
   return typeof state === 'object' && state !== null && ENTRY_FLAG in state;
 }
 
+/** Path the router is about to push for an open from the page; marked once it lands. */
+let pendingEntry: string | null = null;
+
+/**
+ * Called by the host whenever the path changes. When the router has just
+ * pushed the entry of an overlay opened from the page, flags it, so closing
+ * steps back over it instead of leaving it in the history.
+ */
+export function markOpenedEntry(pathname: string) {
+  if (pendingEntry !== pathname) return;
+  pendingEntry = null;
+  // The router's own state is kept (`__NA`), so Next.js leaves this call alone.
+  window.history.replaceState({ ...window.history.state, [ENTRY_FLAG]: true }, '');
+}
+
 type Opener = {
-  /** The button that opened the overlay; focus returns to it on close. */
+  /** The link that opened the overlay; focus returns to it on close. */
   trigger: HTMLElement | null;
   fromPointer: boolean;
 };
@@ -85,35 +122,32 @@ export function getOpener() {
 }
 
 /**
- * Opens an overlay by pushing its query param. Next.js syncs native
- * `pushState` with `useSearchParams`, so the overlay host renders it, and
- * browser Back pops the entry, which closes it.
+ * Records a trigger about to open `route`. The link itself navigates: the
+ * intercepting route keeps the page in place, the host renders the overlay,
+ * and browser Back pops the entry, which closes it.
  */
-export function openOverlay(route: OverlayRoute, from: Opener) {
+export function rememberOpener(route: OverlayRoute, from: Opener) {
   opener = from;
-  window.history.pushState({ [ENTRY_FLAG]: true }, '', urlFor(route));
+  pendingEntry = overlayPath(route);
 }
 
 /**
- * Closes the open overlay. When this session pushed its entry, step back over
- * it, so the history stays as it was before opening. After a direct visit to
- * a shared link there is nothing to step back to: drop the param in place.
+ * Closes the open overlay. When it was opened from the page, step back over
+ * its entry, so the history stays as it was before opening. After a direct
+ * visit there is nothing to step back to: go to the page path in place.
  */
 export function closeOverlay() {
-  if (isPushedEntry()) window.history.back();
-  else window.history.replaceState(null, '', urlFor(null));
-}
-
-/**
- * Opens the live app of the open work overlay as its own history entry, so
- * browser Back closes the app first and returns to the case.
- */
-export function openApp(route: OverlayRoute, { fromPointer }: { fromPointer: boolean }) {
-  appFromPointer = fromPointer;
-  window.history.pushState({ [ENTRY_FLAG]: true }, '', urlFor(route, { app: true }));
+  if (isOpenedEntry()) window.history.back();
+  else replacePath('');
 }
 
 let appFromPointer = false;
+
+/** Records an open of the live app above `route`; the caller pushes `overlayPath(route, { app: true })`. */
+export function rememberAppOpener(route: OverlayRoute, { fromPointer }: { fromPointer: boolean }) {
+  appFromPointer = fromPointer;
+  pendingEntry = overlayPath(route, { app: true });
+}
 
 /** Whether the app overlay was opened by a pointer. After a direct visit, as for the keyboard. */
 export function appOpenedFromPointer() {
@@ -122,8 +156,8 @@ export function appOpenedFromPointer() {
 
 /** Closes the live app and leaves its case open, like `closeOverlay`. */
 export function closeApp(route: OverlayRoute) {
-  if (isPushedEntry()) window.history.back();
-  else window.history.replaceState(null, '', urlFor(route));
+  if (isOpenedEntry()) window.history.back();
+  else replacePath(overlayPath(route));
 }
 
 /** The element to return focus to: the opener, or the page trigger for this overlay. */

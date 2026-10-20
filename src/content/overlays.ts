@@ -17,7 +17,7 @@ export const workOverlay = {
   parentSection: 'works',
 } as const satisfies OverlayContent;
 
-/** Work slugs as they appear in shareable links (`?work=blow-stress-away`). */
+/** Work slugs as they appear in shareable links (`/works/blow-stress-away`). */
 export const workUrlSlugs = {
   ces: 'ces',
   juJutsu: 'ju-jutsu',

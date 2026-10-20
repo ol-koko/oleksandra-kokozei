@@ -20,12 +20,7 @@ import type { OverlayRoute, SectionId } from '@/content/types';
 import { moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
-import {
-  closeOverlay,
-  findTrigger,
-  getOpener,
-  overlayQuery,
-} from '@/features/overlay/overlayRoute';
+import { closeOverlay, findTrigger, getOpener } from '@/features/overlay/overlayRoute';
 import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
 import { useInitialSectionScroll } from '@/features/overlay/useInitialSectionScroll';
 import { useOverlayScrollSpy } from '@/features/overlay/useOverlayScrollSpy';
@@ -218,11 +213,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
             {t('hint')}
           </p>
 
-          <OverlayHeader
-            activeId={view.parentSection}
-            query={overlayQuery(route)}
-            className={styles.mobileOnly}
-          />
+          <OverlayHeader activeId={view.parentSection} className={styles.mobileOnly} />
           <Breadcrumbs
             parentLabel={view.parentLabel}
             current={view.crumb}

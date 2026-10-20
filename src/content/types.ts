@@ -52,7 +52,7 @@ export type Work = {
   cover: WorkCover;
   /**
    * Whether the case study is ready. An unpublished work keeps its card on the
-   * page, but the card opens nothing and its `?work=` link is ignored.
+   * page, but the card opens nothing and its `/works/<slug>` path is a 404.
    */
   published: boolean;
 };
@@ -221,7 +221,7 @@ export type WorkCase = {
   sections: readonly WorkCaseSection[];
 };
 
-/** Which overlay is open: `?overlay=me` or `?work=<url slug>`. */
+/** Which overlay is open: `/me` or `/works/<url slug>`. */
 export type OverlayRoute = { kind: 'me' } | { kind: 'work'; slug: WorkSlug };
 
 /**

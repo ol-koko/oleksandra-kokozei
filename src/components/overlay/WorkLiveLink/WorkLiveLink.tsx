@@ -6,8 +6,9 @@ import { ArrowUpRightIcon } from '@/components/icons/ArrowUpRightIcon';
 import { LinkIcon } from '@/components/icons/LinkIcon';
 import type { WorkSlug } from '@/content/types';
 import { isPointerClick } from '@/features/focus/moveFocus';
-import { openApp } from '@/features/overlay/overlayRoute';
+import { useRouter } from '@/features/i18n/navigation';
 import { useMediaQuery } from '@/features/motion/useMediaQuery';
+import { overlayPath, rememberAppOpener } from '@/features/overlay/overlayRoute';
 
 /** Where the app overlay opens. Keep in sync with the desktop overlay in Overlay.module.css. */
 const DESKTOP_QUERY = '(min-width: 768px)';
@@ -28,6 +29,7 @@ type WorkLiveLinkProps = {
  */
 export function WorkLiveLink({ slug, href, title, app, className }: WorkLiveLinkProps) {
   const t = useTranslations('Overlay.work');
+  const router = useRouter();
   const desktop = useMediaQuery(DESKTOP_QUERY);
   const inOverlay = app && desktop;
 
@@ -36,7 +38,9 @@ export function WorkLiveLink({ slug, href, title, app, className }: WorkLiveLink
       return;
     }
     event.preventDefault();
-    openApp({ kind: 'work', slug }, { fromPointer: isPointerClick(event) });
+    const route = { kind: 'work', slug } as const;
+    rememberAppOpener(route, { fromPointer: isPointerClick(event) });
+    router.push(overlayPath(route, { app: true }), { scroll: false });
   };
 
   return (

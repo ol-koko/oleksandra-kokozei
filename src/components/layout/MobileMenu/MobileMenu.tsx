@@ -18,8 +18,6 @@ type Phase = 'closed' | 'open' | 'closing';
 
 type MobileMenuProps = {
   activeId?: SectionId;
-  /** Query kept by the language links (an open overlay's own). */
-  query?: Record<string, string>;
 };
 
 const subscribeNever = () => () => {};
@@ -39,7 +37,7 @@ const subscribeNever = () => () => {};
  * the overlay's modal dialog and scrolled container gets no taps on iOS Safari.
  * React events still bubble through the overlay, which handles section links.
  */
-export function MobileMenu({ activeId, query }: MobileMenuProps) {
+export function MobileMenu({ activeId }: MobileMenuProps) {
   const t = useTranslations('Header');
   const [phase, setPhase] = useState<Phase>('closed');
   const open = phase === 'open';
@@ -184,7 +182,6 @@ export function MobileMenu({ activeId, query }: MobileMenuProps) {
             <LanguageSwitcher
               label={t('languageNav')}
               activeId={activeId}
-              query={query}
               className={styles.languages}
               onNavigate={() => closeMenu(false)}
             />

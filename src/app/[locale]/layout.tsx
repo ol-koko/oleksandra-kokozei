@@ -9,6 +9,7 @@ import { SiteHeader } from '@/components/layout/SiteHeader/SiteHeader';
 import { openGraphLocales, siteUrl, themeColor } from '@/content/site';
 import { getPathname } from '@/features/i18n/navigation';
 import { routing } from '@/features/i18n/routing';
+import { OverlayHost } from '@/features/overlay/OverlayHost';
 import { figtree } from '@/styles/fonts';
 import '../globals.css';
 
@@ -68,9 +69,11 @@ export const viewport: Viewport = {
 
 type LocaleLayoutProps = {
   children: ReactNode;
+  /** `@modal`: intercepted overlay routes. They only carry metadata; `OverlayHost` renders the overlay. */
+  modal: ReactNode;
 };
 
-export default async function LocaleLayout({ children }: LocaleLayoutProps) {
+export default async function LocaleLayout({ children, modal }: LocaleLayoutProps) {
   const locale = await getLocaleParam();
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -94,6 +97,8 @@ export default async function LocaleLayout({ children }: LocaleLayoutProps) {
           <SiteHeader />
           {children}
           <SiteFooter />
+          {modal}
+          <OverlayHost footer={<SiteFooter />} />
         </NextIntlClientProvider>
       </body>
     </html>
