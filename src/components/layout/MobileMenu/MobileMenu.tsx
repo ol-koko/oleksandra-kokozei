@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 import { MenuToggleIcon } from '@/components/icons/MenuToggleIcon';
 import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher/LanguageSwitcher';
 import { SectionNav } from '@/components/navigation/SectionNav/SectionNav';
@@ -17,7 +18,11 @@ type Phase = 'closed' | 'open' | 'closing';
 
 type MobileMenuProps = {
   activeId?: SectionId;
+  /** Query kept by the language links (an open overlay's own). */
+  query?: Record<string, string>;
 };
+
+const subscribeNever = () => () => {};
 
 /**
  * Menu button + full-screen menu (Figma 233:666) for viewports below 1024 px.
@@ -29,8 +34,12 @@ type MobileMenuProps = {
  * moves: it sits over the menu button, so the burger ↔ cross morph stays
  * visible both ways. Closing plays a quicker reverse; the dialog closes and
  * focus returns only when it has finished.
+ *
+ * The dialog is portaled to <body>: inside an overlay, a modal dialog nested in
+ * the overlay's modal dialog and scrolled container gets no taps on iOS Safari.
+ * React events still bubble through the overlay, which handles section links.
  */
-export function MobileMenu({ activeId }: MobileMenuProps) {
+export function MobileMenu({ activeId, query }: MobileMenuProps) {
   const t = useTranslations('Header');
   const [phase, setPhase] = useState<Phase>('closed');
   const open = phase === 'open';
@@ -42,6 +51,12 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
   const dialogId = useId();
   /** Whether this menu holds a page scroll lock. */
   const lockedRef = useRef(false);
+  /** The portal needs <body>, so the closed dialog renders from hydration on. */
+  const hydrated = useSyncExternalStore(
+    subscribeNever,
+    () => true,
+    () => false,
+  );
 
   const openMenu = (fromPointer: boolean) => {
     dialogRef.current?.showModal();
@@ -123,52 +138,59 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
         <MenuToggleIcon open={open} />
       </button>
 
-      <dialog
-        ref={dialogRef}
-        id={dialogId}
-        aria-label={t('menu')}
-        className={`${styles.dialog} ${phase === 'closing' ? styles.closing : ''}`}
-        onKeyDown={(event) => trapTab(event, dialogRef.current)}
-        onCancel={(event) => {
-          // Esc: close through the same path so scroll and focus are restored.
-          event.preventDefault();
-          closeMenu(true);
-        }}
-      >
-        <div className={styles.panel} aria-hidden="true" />
-
-        <div className={styles.topBar}>
-          <button
-            ref={closeButtonRef}
-            type="button"
-            className={styles.iconButton}
-            aria-label={t('closeMenu')}
-            onClick={(event) => closeMenu(true, isPointerClick(event))}
+      {hydrated &&
+        createPortal(
+          <dialog
+            ref={dialogRef}
+            id={dialogId}
+            aria-label={t('menu')}
+            className={`${styles.dialog} ${phase === 'closing' ? styles.closing : ''}`}
+            onKeyDown={(event) => trapTab(event, dialogRef.current)}
+            onCancel={(event) => {
+              // Esc: close through the same path so scroll and focus are restored. React bubbles
+              // the event through the portal; inside an overlay, Esc closes only the menu.
+              event.preventDefault();
+              event.stopPropagation();
+              closeMenu(true);
+            }}
           >
-            {/*
-             * Sits where the menu button is, so opening reads as one burger → cross morph,
-             * and turns back into the burger together with it while the menu closes.
-             */}
-            <MenuToggleIcon open={phase !== 'closing'} morphIn />
-          </button>
-        </div>
+            <div className={styles.panel} aria-hidden="true" />
 
-        <SectionNav
-          label={t('mainNav')}
-          activeId={activeId}
-          orientation="column"
-          size="l"
-          className={styles.nav}
-          onNavigate={() => closeMenu(false)}
-        />
+            <div className={styles.topBar}>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                className={styles.iconButton}
+                aria-label={t('closeMenu')}
+                onClick={(event) => closeMenu(true, isPointerClick(event))}
+              >
+                {/*
+                 * Sits where the menu button is, so opening reads as one burger → cross morph,
+                 * and turns back into the burger together with it while the menu closes.
+                 */}
+                <MenuToggleIcon open={phase !== 'closing'} morphIn />
+              </button>
+            </div>
 
-        <LanguageSwitcher
-          label={t('languageNav')}
-          activeId={activeId}
-          className={styles.languages}
-          onNavigate={() => closeMenu(false)}
-        />
-      </dialog>
+            <SectionNav
+              label={t('mainNav')}
+              activeId={activeId}
+              orientation="column"
+              size="l"
+              className={styles.nav}
+              onNavigate={() => closeMenu(false)}
+            />
+
+            <LanguageSwitcher
+              label={t('languageNav')}
+              activeId={activeId}
+              query={query}
+              className={styles.languages}
+              onNavigate={() => closeMenu(false)}
+            />
+          </dialog>,
+          document.body,
+        )}
     </>
   );
 }

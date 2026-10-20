@@ -10,6 +10,8 @@ type LanguageSwitcherProps = {
   label: string;
   /** Section in view; kept as the URL hash when switching language. */
   activeId?: SectionId;
+  /** Query kept when switching language, so an open overlay stays open (`?overlay=me`). */
+  query?: Record<string, string>;
   onNavigate?: () => void;
   className?: string;
 };
@@ -17,6 +19,7 @@ type LanguageSwitcherProps = {
 export function LanguageSwitcher({
   label,
   activeId,
+  query,
   onNavigate,
   className,
 }: LanguageSwitcherProps) {
@@ -35,7 +38,7 @@ export function LanguageSwitcher({
              * next-intl's Link does not when `locale` is set.
              */}
             <a
-              href={`${getPathname({ locale, href: pathname })}${activeId ? `#${activeId}` : ''}`}
+              href={`${getPathname({ locale, href: { pathname, query } })}${activeId ? `#${activeId}` : ''}`}
               hrefLang={locale}
               className={`lang-pill ${styles.chip} text-body-m`}
               aria-current={locale === currentLocale ? 'true' : undefined}
