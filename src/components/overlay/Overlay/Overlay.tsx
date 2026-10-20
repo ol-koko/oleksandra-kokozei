@@ -18,6 +18,7 @@ import { Divider } from '@/components/ui/Divider/Divider';
 import type { OverlayRoute } from '@/content/types';
 import { moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
+import { finiteAnimations } from '@/features/motion/finiteAnimations';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
 import { closeOverlay, findTrigger, getOpener } from '@/features/overlay/overlayRoute';
 import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
@@ -128,9 +129,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
       onClosed();
     };
 
-    const animations = dialog
-      .getAnimations({ subtree: true })
-      .filter((animation) => animation.effect?.getTiming().iterations !== Infinity);
+    const animations = finiteAnimations(dialog);
     Promise.all(animations.map((animation) => animation.finished)).then(finish, finish);
 
     return () => {

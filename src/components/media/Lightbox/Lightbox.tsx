@@ -7,6 +7,7 @@ import { Polaroid } from '@/components/media/Polaroid/Polaroid';
 import type { ImageAsset } from '@/content/types';
 import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
+import { finiteAnimations } from '@/features/motion/finiteAnimations';
 import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
 import styles from './Lightbox.module.css';
 
@@ -71,7 +72,7 @@ export function Lightbox({ image, alt, fromPointer, onClosed }: LightboxProps) {
       onClosed(closing.fromPointer);
     };
 
-    const animations = dialog.getAnimations({ subtree: true });
+    const animations = finiteAnimations(dialog);
     Promise.all(animations.map((animation) => animation.finished)).then(finish, finish);
 
     return () => {

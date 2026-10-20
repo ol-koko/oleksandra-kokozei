@@ -9,6 +9,7 @@ import type { WorkSlug } from '@/content/types';
 import { getWorkCase } from '@/content/workCases';
 import { moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
+import { finiteAnimations } from '@/features/motion/finiteAnimations';
 import { appOpenedFromPointer, closeApp } from '@/features/overlay/overlayRoute';
 import styles from './AppOverlay.module.css';
 
@@ -110,9 +111,7 @@ export function AppOverlay({ slug, open, onClosed }: AppOverlayProps) {
       onClosed();
     };
 
-    const animations = dialog
-      .getAnimations({ subtree: true })
-      .filter((animation) => animation.effect?.getTiming().iterations !== Infinity);
+    const animations = finiteAnimations(dialog);
     Promise.all(animations.map((animation) => animation.finished)).then(finish, finish);
 
     return () => {
