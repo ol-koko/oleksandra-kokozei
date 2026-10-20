@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, type RefObject } from 'react';
+import { onSectionNavigate } from '@/features/section-links/sectionLinks';
 import {
   ACTIVATION_RATIO,
   BOTTOM_THRESHOLD,
@@ -17,8 +18,8 @@ import {
  * the page the last section is active, because a short final section may
  * never reach the line.
  *
- * A click on an in-page link to one of the sections (from any nav) makes that
- * section active at once and keeps it active while the browser scrolls there,
+ * Following a link to one of the sections (from any nav, `onSectionNavigate`)
+ * makes that section active at once and keeps it active while the page scrolls there,
  * until the user scrolls manually (wheel, touch, scroll keys, scrollbar).
  */
 export function useScrollSpy<Id extends string>(
@@ -57,10 +58,8 @@ export function useScrollSpy<Id extends string>(
       if (frame === 0) frame = requestAnimationFrame(update);
     };
 
-    const onClick = (event: MouseEvent) => {
-      if (event.defaultPrevented || !(event.target instanceof Element)) return;
-      const id = event.target.closest('a[href^="#"]')?.getAttribute('href')?.slice(1);
-      if (!id || !isSectionId(id)) return;
+    const onNavigate = (id: string) => {
+      if (!isSectionId(id)) return;
       lockedId = id;
       setActiveId(id);
     };
@@ -89,7 +88,7 @@ export function useScrollSpy<Id extends string>(
     window.addEventListener('touchmove', release, passive);
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('pointerdown', onPointerDown);
-    document.addEventListener('click', onClick);
+    const unsubscribe = onSectionNavigate(onNavigate);
 
     return () => {
       cancelAnimationFrame(frame);
@@ -99,7 +98,7 @@ export function useScrollSpy<Id extends string>(
       window.removeEventListener('touchmove', release);
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('pointerdown', onPointerDown);
-      document.removeEventListener('click', onClick);
+      unsubscribe();
     };
   }, [ids, offsetRef]);
 

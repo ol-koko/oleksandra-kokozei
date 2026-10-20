@@ -8,7 +8,7 @@ import styles from './LanguageSwitcher.module.css';
 
 type LanguageSwitcherProps = {
   label: string;
-  /** Section in view; kept as the URL hash when switching language. */
+  /** Section in view; carried as a hash that the new page scrolls to and then removes. */
   activeId?: SectionId;
   onNavigate?: () => void;
   className?: string;

@@ -47,3 +47,8 @@
     flex: 0 1 calc((var(--size-content-max) - var(--spacing-3xl)) / 2);
   }
 }
+
+/* A scroll target for the nav, not a control: no focus ring. */
+.hero:focus-visible {
+  outline: none;
+}
