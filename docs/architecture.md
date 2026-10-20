@@ -59,6 +59,16 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 - **Rendering:** `OverlayHost` lives in the layout, outside the slot, and opens whatever the path names. The slot pages render nothing: the overlay must outlive its route to play the closing motion after Back. Next.js applies no metadata from the slot, so the host keeps the tab title in step.
 - **Closing:** an overlay opened from the page steps back over its entry. After a direct visit, closing replaces the URL with the page path in place, without a reload.
 
+### Overlay motion
+
+- **Time-based reveal, like the Hero entrance** (`useOverlayReveal`). Content elements carry `data-reveal`: case icon, title, description, each fact, cover, private note; each story label, lead and body; photos and their captions; each grid photo, shelf item and hometown photo; section headers; the About portrait, greeting and bio paragraphs. Each one fades up once per open with `rise-in` (`--motion-duration-slow`, `--motion-easing-gentle`, `--dimension-4`). Elements that enter together rise 60 ms apart.
+- **When:** the first screen waits for the panel's entrance. Everything else waits until it enters the scroller (IntersectionObserver with the scroller as root, ignoring the 40 px bottom fade). Content scrolled past during the overlay-me glide to Home is revealed on the way, so the glide lands on visible content.
+- **No script, reduced motion:** script arms the scroller (`data-reveal-armed`) before the first paint, and only that hides the elements. Without script or with reduced motion nothing is armed and everything shows at once.
+- **Closing** waits only for the closing motion of the backdrop, panel and scroller, never for reveals inside. AppOverlay and the Lightbox wait for finite, time-based animations only (`finiteAnimations`), so the looping shimmer never blocks them.
+- **Dividers** (`Divider revealWithNext`) are never observed on their own: a hidden divider rises one step ahead of the first element after it, so it is never on screen alone.
+- Reveals never sit on the `<section>`, because the nav and scroll-spy measure sections.
+- **Loading:** every overlay-me image (and the Hero portrait) goes through `LoadingImage` with the shimmer skeleton. The preloaded Hero photo is never hidden before load, so the LCP is not held back until hydration.
+
 ### Focus
 
 - **One focus ring for the whole site.** It is defined in `globals.css`: `:focus-visible` gets an outline of `--border-default` in `--color-text-primary`, offset `--spacing-xxs`. The outline follows each element's border-radius. Elements without their own radius get `--border-radius-xs` through a zero-specificity `:where()` rule. Never remove it for keyboard users.

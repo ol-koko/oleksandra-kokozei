@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
 import type { ImageAsset } from '@/content/types';
 import styles from './VhsTape.module.css';
 
@@ -62,13 +62,7 @@ export function VhsTape({ poster, alt, pressed, onToggle }: VhsTapeProps) {
           <span className={styles.label} />
         </span>
         <span className={styles.sleeve}>
-          <Image
-            src={poster.src}
-            alt={alt}
-            width={poster.width}
-            height={poster.height}
-            sizes="150px"
-          />
+          <LoadingImage image={poster} alt={alt} sizes="150px" />
         </span>
       </span>
     </button>

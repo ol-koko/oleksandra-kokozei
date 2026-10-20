@@ -52,13 +52,6 @@
   box-shadow: var(--shadow-md);
 }
 
-.sleeve img {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-}
-
 /* Sleeve fold on the left and a light paper sheen. */
 .sleeve::before {
   content: '';

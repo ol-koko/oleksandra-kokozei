@@ -18,6 +18,10 @@ type OverlaySectionProps = {
  * text), then the body its kind names. The about intro and the work case
  * bodies bring their own heading. Focusable by script, so the overlay nav can
  * move focus to the section.
+ *
+ * The header and the body's items fade up as they come into view
+ * (`data-reveal`, see useOverlayReveal); the section itself never moves,
+ * because the nav measures it.
  */
 export function OverlaySection({ section }: OverlaySectionProps) {
   const headingId = `${section.anchorId}-heading`;
@@ -38,7 +42,7 @@ export function OverlaySection({ section }: OverlaySectionProps) {
         <WorkBlocks blocks={body.blocks} headingLevel={2} headingId={headingId} />
       ) : (
         <>
-          <div className={styles.header}>
+          <div className={styles.header} data-reveal>
             <h2 id={headingId} className="text-title-l">
               {section.heading}
             </h2>

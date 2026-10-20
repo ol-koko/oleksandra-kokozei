@@ -42,6 +42,7 @@ export function PrivateNote({ targetId }: PrivateNoteProps) {
       ref={ref}
       type="button"
       className={styles.note}
+      data-reveal
       onClick={(event) => {
         const target = document.getElementById(targetId);
         if (!target) return;

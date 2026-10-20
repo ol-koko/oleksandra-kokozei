@@ -26,6 +26,9 @@ const PHOTO_SIZES = '(min-width: 1024px) 228px, 188px';
  * only, they keep their space); they leave the layout once both are done and
  * they are out of view, so nothing in view jumps.
  *
+ * Photos fade up one after another as they come into view (`data-reveal`),
+ * including the ones "more" shows.
+ *
  * Every photo is a button that opens it full screen in a lightbox; focus
  * returns to that photo when the lightbox closes.
  */
@@ -82,14 +85,12 @@ export function HometownPhotos() {
                 className={[
                   styles.item,
                   extra && styles.extra,
-                  extra && phase === 'expanded' && 'animate-shelf-item',
                   extra && phase === 'folding' && styles.leaving,
                 ]
                   .filter(Boolean)
                   .join(' ')}
                 style={
                   {
-                    '--i': index - 1,
                     '--desktop-x': `${photo.desktop.x}px`,
                     '--desktop-y': `${photo.desktop.y}px`,
                     '--desktop-z': photo.desktop.z,
@@ -97,6 +98,7 @@ export function HometownPhotos() {
                     '--mobile-y': `${photo.mobile.y}px`,
                   } as CSSProperties
                 }
+                data-reveal
                 onAnimationEnd={
                   index === hometownPhotos.length - 1 && phase === 'folding'
                     ? () => fadeEndRef.current?.()

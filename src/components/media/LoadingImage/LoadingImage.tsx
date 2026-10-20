@@ -17,6 +17,12 @@ type LoadingImageProps = {
   unoptimized?: boolean;
   /** Loads at once instead of when the image nears the viewport. */
   eager?: boolean;
+  /**
+   * Preloads the image (above the fold, the LCP photo). It is not hidden
+   * before it loads, so it paints as soon as it can, even before hydration;
+   * the skeleton shows underneath until then.
+   */
+  preload?: boolean;
 };
 
 /**
@@ -30,6 +36,7 @@ export function LoadingImage({
   sizes,
   unoptimized = false,
   eager = false,
+  preload = false,
 }: LoadingImageProps) {
   const [ready, setReady] = useState(false);
 
@@ -38,11 +45,12 @@ export function LoadingImage({
       <MediaSkeleton ready={ready} />
       <Image
         className={styles.image}
-        data-ready={ready || undefined}
+        data-ready={ready || preload || undefined}
         src={image.src}
         alt={alt}
         fill
-        loading={eager ? 'eager' : 'lazy'}
+        loading={eager || preload ? 'eager' : 'lazy'}
+        preload={preload}
         unoptimized={unoptimized}
         sizes={sizes}
         onLoad={() => setReady(true)}

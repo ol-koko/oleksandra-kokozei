@@ -93,7 +93,9 @@
 }
 
 @media (min-width: 768px) {
+  /* Positioned: holds the link row when there is no icon (below). */
   .intro {
+    position: relative;
     gap: var(--spacing-5xl);
   }
 
@@ -108,22 +110,25 @@
   }
 
   /*
-   * Desktop: the link sits at the top right of the overlay, above the section
-   * nav (439:441), so it is placed against the overlay layout, not the column.
+   * Desktop: the link ends the icon row, at the right edge of the content
+   * column and level with the top of the header. An owner correction of
+   * 439:441, which puts it above the section nav. It stays in the row, so it
+   * rises with the row and never moves after the entrance.
    */
-  .link {
-    position: absolute;
-    inset-block-start: var(--spacing-none);
-    inset-inline-end: var(--spacing-none);
-  }
 
-  /* The live-app arrow sits 24 lower than the live-site link (655:1299). */
+  /* The live-app arrow sits 24 lower than the live-site link (655:1299); an offset, not layout. */
   .appLink {
+    position: relative;
     inset-block-start: var(--spacing-3xl);
   }
 
-  /* Without an icon the row holds only the placed link: no gap above the title (600:280). */
+  /*
+   * Without an icon the row holds only the link: out of flow at the column's
+   * top right, so there is no gap above the title (600:280).
+   */
   .linkOnly {
-    display: contents;
+    position: absolute;
+    inset-block-start: var(--spacing-none);
+    inset-inline-end: var(--spacing-none);
   }
 }

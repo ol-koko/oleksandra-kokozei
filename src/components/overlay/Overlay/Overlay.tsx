@@ -24,6 +24,7 @@ import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
 import { useInitialSectionScroll } from '@/features/overlay/useInitialSectionScroll';
 import { useOverlayScrollSpy } from '@/features/overlay/useOverlayScrollSpy';
 import { useOverlayView } from '@/features/overlay/useOverlayView';
+import { useOverlayReveal } from '@/features/overlay/useOverlayReveal';
 import { useScrollEdges } from '@/features/overlay/useScrollEdges';
 import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
 import { scrollToSection, sectionLinkTarget } from '@/features/section-links/sectionLinks';
@@ -92,6 +93,9 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
     };
   }, []);
 
+  // After the open effect: reveals wait for the panel's entrance.
+  useOverlayReveal(scrollerRef);
+
   useInitialSectionScroll({
     scrollerRef,
     anchorId: view.initialAnchorId,
@@ -128,9 +132,9 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
       onClosed();
     };
 
-    const animations = dialog
-      .getAnimations({ subtree: true })
-      .filter((animation) => animation.effect?.getTiming().iterations !== Infinity);
+    // Only the closing motion counts: content reveals inside never hold the close up.
+    const layers = [backdropRef.current, scrollerRef.current?.parentElement, scrollerRef.current];
+    const animations = layers.flatMap((layer) => layer?.getAnimations() ?? []);
     Promise.all(animations.map((animation) => animation.finished)).then(finish, finish);
 
     return () => {
@@ -218,7 +222,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
             <div className={styles.content}>
               {view.sections.map((section, index) => (
                 <Fragment key={section.id}>
-                  {index > 0 && <Divider className={styles.divider} />}
+                  {index > 0 && <Divider className={styles.divider} revealWithNext />}
                   <OverlaySection section={section} />
                 </Fragment>
               ))}

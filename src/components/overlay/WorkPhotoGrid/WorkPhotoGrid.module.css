@@ -23,6 +23,24 @@
   overflow: hidden;
   border-radius: var(--border-radius-2xl);
   box-shadow: var(--shadow-sm);
+  transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+}
+
+/*
+ * Hover, like the work card covers (hover.css): the whole card (rounded
+ * frame, shadow and image) scales as one unit, so nothing inside is cropped
+ * further. The caption stays still, and a transform never moves the layout.
+ */
+@media (hover: hover) and (pointer: fine) {
+  .photo:hover .frame {
+    transform: scale(var(--motion-scale-hover));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo:hover .frame {
+    transform: none;
+  }
 }
 
 .caption {

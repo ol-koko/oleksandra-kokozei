@@ -31,7 +31,7 @@ export function AboutIntro({ headingLevel, headingId, animateEntrance = false }:
 
   return (
     <div className={styles.intro}>
-      <div className={styles.header}>
+      <div className={styles.header} data-reveal>
         <Heading
           id={headingId}
           className={['text-title-l', greeting.className].filter(Boolean).join(' ')}
@@ -48,6 +48,7 @@ export function AboutIntro({ headingLevel, headingId, animateEntrance = false }:
           return (
             <p
               key={key}
+              data-reveal
               className={['text-body-l', paragraph.className].filter(Boolean).join(' ')}
               style={paragraph.style}
             >
