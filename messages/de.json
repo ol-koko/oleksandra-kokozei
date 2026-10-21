@@ -55,8 +55,8 @@
       },
       "coverAlt": "Ruhiges Meer in der Abenddämmerung mit dem weißen CES-Logo in der Mitte",
       "nav": {
-        "scope": "Umfang",
-        "flows": "Abläufe"
+        "scope": "Scope",
+        "flows": "Flows"
       },
       "overview": {
         "label": "Überblick",
@@ -109,9 +109,9 @@
       },
       "coverAlt": "MacBook Pro mit der Buchung einer Probestunde bei Ju-Jutsu⁺: Fortschrittsanzeige, Oktoberkalender und freie Zeitfenster für den gewählten Tag vor einer Strichzeichnung einer Pagode",
       "nav": {
-        "goal": "Ziel",
+        "goal": "Goal",
         "design": "Design",
-        "result": "Ergebnis"
+        "result": "Result"
       },
       "overview": {
         "label": "Überblick",
@@ -195,9 +195,9 @@
       "coverAlt": "MacBook Pro mit der FilmBudget-Startseite: die Überschrift „Get instant overview of video prices and create your own film budget online“ über einem wechselnden Reel aus Sport- und Filmaufnahmen",
       "coverCaption": "*Die Live-Website wurde inzwischen aktualisiert",
       "nav": {
-        "goal": "Ziel",
-        "decisions": "Konzept",
-        "result": "Ergebnis"
+        "goal": "Goal",
+        "decisions": "Decision",
+        "result": "Result"
       },
       "overview": {
         "label": "Überblick",
@@ -266,10 +266,10 @@
       "crumb": "Mehr",
       "sections": {
         "about": {
-          "nav": "Über mich"
+          "nav": "About"
         },
         "home": {
-          "nav": "Heimat",
+          "nav": "Home",
           "heading": "Meine Heimatstadt",
           "caption": "Odessa, Ukraine",
           "more": "mehr",
@@ -284,7 +284,7 @@
           }
         },
         "music": {
-          "nav": "Musik",
+          "nav": "Music",
           "heading": "Musik",
           "listenOnSpotify": "„{title}“ von {artist} auf Spotify anhören (öffnet in neuem Tab)",
           "previous": "Vorheriger Song",
@@ -305,7 +305,7 @@
           }
         },
         "books": {
-          "nav": "Bücher",
+          "nav": "Books",
           "heading": "Bücher",
           "coverAlt": "Cover von „{title}“ von {author}",
           "previous": "Vorheriges Buch",
@@ -326,7 +326,7 @@
           }
         },
         "films": {
-          "nav": "Filme",
+          "nav": "Films",
           "heading": "Filme",
           "posterAlt": "Filmplakat von „{title}“ ({year})",
           "previous": "Vorheriger Film",
@@ -346,7 +346,7 @@
       }
     },
     "work": {
-      "aboutNav": "Projekt",
+      "aboutNav": "About",
       "facts": {
         "year": "Jahr",
         "role": "Rolle",

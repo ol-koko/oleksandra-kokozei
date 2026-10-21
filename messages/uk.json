@@ -55,8 +55,8 @@
       },
       "coverAlt": "Спокійне море в сутінках з білим логотипом CES у центрі",
       "nav": {
-        "scope": "Обсяг",
-        "flows": "Процеси"
+        "scope": "Scope",
+        "flows": "Flows"
       },
       "overview": {
         "label": "Огляд",
@@ -109,9 +109,9 @@
       },
       "coverAlt": "MacBook Pro із записом на пробне заняття Ju-Jutsu⁺: індикатор прогресу, жовтневий календар і вільні слоти на обраний день на тлі лінійного малюнка пагоди",
       "nav": {
-        "goal": "Мета",
-        "design": "Дизайн",
-        "result": "Результат"
+        "goal": "Goal",
+        "design": "Design",
+        "result": "Result"
       },
       "overview": {
         "label": "Огляд",
@@ -195,9 +195,9 @@
       "coverAlt": "MacBook Pro з головною сторінкою FilmBudget: заголовок «Get instant overview of video prices and create your own film budget online» поверх змінного ролика зі спортивними та кінокадрами",
       "coverCaption": "*Відтоді сайт оновили",
       "nav": {
-        "goal": "Мета",
-        "decisions": "Рішення",
-        "result": "Результат"
+        "goal": "Goal",
+        "decisions": "Decision",
+        "result": "Result"
       },
       "overview": {
         "label": "Огляд",
@@ -266,10 +266,10 @@
       "crumb": "Більше",
       "sections": {
         "about": {
-          "nav": "Про мене"
+          "nav": "About"
         },
         "home": {
-          "nav": "Дім",
+          "nav": "Home",
           "heading": "Моє рідне місто",
           "caption": "Odesa, Ukraine",
           "more": "більше",
@@ -284,7 +284,7 @@
           }
         },
         "music": {
-          "nav": "Музика",
+          "nav": "Music",
           "heading": "Музика",
           "listenOnSpotify": "Слухати «{title}» — {artist} у Spotify (відкривається в новій вкладці)",
           "previous": "Попередня пісня",
@@ -305,7 +305,7 @@
           }
         },
         "books": {
-          "nav": "Книжки",
+          "nav": "Books",
           "heading": "Книжки",
           "coverAlt": "Обкладинка книжки «{title}», {author}",
           "previous": "Попередня книжка",
@@ -326,7 +326,7 @@
           }
         },
         "films": {
-          "nav": "Фільми",
+          "nav": "Films",
           "heading": "Фільми",
           "posterAlt": "Постер фільму «{title}» ({year})",
           "previous": "Попередній фільм",
@@ -346,7 +346,7 @@
       }
     },
     "work": {
-      "aboutNav": "Про проєкт",
+      "aboutNav": "About",
       "facts": {
         "year": "Рік",
         "role": "Роль",
