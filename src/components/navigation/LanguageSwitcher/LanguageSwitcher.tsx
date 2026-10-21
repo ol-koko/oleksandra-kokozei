@@ -29,6 +29,21 @@ function placeIndicator(indicator: HTMLElement, chip: HTMLElement) {
   indicator.style.setProperty('--pill-w', `${chip.offsetWidth}px`);
 }
 
+/** The indicator geometry under a chip, as a keyframe. */
+function chipFrame(chip: HTMLElement): Keyframe {
+  return { transform: `translateX(${chip.offsetLeft}px)`, width: `${chip.offsetWidth}px` };
+}
+
+/** A motion token duration (`250ms`, `0.25s`) in milliseconds. */
+function toMilliseconds(duration: string) {
+  const value = parseFloat(duration);
+  if (!Number.isFinite(value)) return 0;
+  return duration.trim().endsWith('ms') ? value : value * 1000;
+}
+
+/** How long past the slide the safety fallback waits before navigating anyway. */
+const FALLBACK_SLACK_MS = 200;
+
 export function LanguageSwitcher({
   label,
   activeId,
@@ -80,19 +95,33 @@ export function LanguageSwitcher({
     // Prefetched only now: the cookie just changed, and a prefetch made before that is dropped.
     const href = chip.href;
     prefetchDocument(href);
-    indicator.style.transition = 'none';
-    placeIndicator(indicator, from);
-    indicator.getBoundingClientRect(); // Commit the start position before transitioning.
-    indicator.style.transition = '';
     placeIndicator(indicator, chip);
     setTarget(locale);
 
-    Promise.all(indicator.getAnimations().map((animation) => animation.finished))
-      .catch(() => undefined)
-      .then(() => {
-        onNavigate?.();
-        window.location.assign(href);
-      });
+    let navigated = false;
+    const navigate = () => {
+      if (navigated) return;
+      navigated = true;
+      onNavigate?.();
+      window.location.assign(href);
+    };
+
+    const tokens = getComputedStyle(indicator);
+    const duration = toMilliseconds(tokens.getPropertyValue('--motion-duration-moderate'));
+    const easing = tokens.getPropertyValue('--motion-easing-emphasized').trim() || 'ease-out';
+    // Safety net: a switch never waits longer than the slide, whatever happens to it.
+    window.setTimeout(navigate, duration + FALLBACK_SLACK_MS);
+    // Web Animations rather than a CSS transition: the animation exists as soon as it is
+    // created, so `finished` waits for the slide in every engine. Waiting on a transition
+    // via getAnimations() depends on when the engine creates it; an empty list resolves at
+    // once, which navigated without a slide on iOS Safari.
+    try {
+      indicator
+        .animate([chipFrame(from), chipFrame(chip)], { duration, easing })
+        .finished.then(navigate, navigate);
+    } catch {
+      navigate();
+    }
   }
 
   return (

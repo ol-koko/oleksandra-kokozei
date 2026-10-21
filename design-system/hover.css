@@ -171,7 +171,9 @@
    A language switch is a full page navigation, so the active pill shows its own background
    at rest (no measuring, no flash on load); the indicator only appears while it slides
    ([data-sliding]), and the page navigates when the slide ends (LanguageSwitcher).
-   JS sets --pill-x (offsetLeft) and --pill-w (offsetWidth) on the indicator. */
+   JS sets --pill-x (offsetLeft) and --pill-w (offsetWidth) on the indicator and plays the
+   slide with the Web Animations API (--motion-duration-moderate, --motion-easing-emphasized),
+   so the navigation can wait for it reliably in every engine. */
 
 .lang-switch {
   position: relative;
@@ -187,9 +189,6 @@
   border-radius: var(--border-radius-full);
   background: var(--color-surface-subtle);
   opacity: 0;
-  transition:
-    transform var(--motion-duration-moderate) var(--motion-easing-emphasized),
-    width var(--motion-duration-moderate) var(--motion-easing-emphasized);
 }
 .lang-switch[data-sliding] .lang-switch__indicator {
   opacity: 1;
@@ -214,10 +213,6 @@
 /* ---------- Reduced motion: no scale or movement, color changes only ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .lang-switch__indicator {
-    transition: none;
-  }
-
   .polaroid-group:has(.polaroid:hover),
   .work-card:hover .work-cover,
   .work-card:focus-visible .work-cover,
