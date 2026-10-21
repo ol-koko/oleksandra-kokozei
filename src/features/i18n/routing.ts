@@ -5,10 +5,10 @@ export const routing = defineRouting({
   defaultLocale: 'en',
   // English is served at `/`, other locales at `/uk` and `/de`.
   localePrefix: 'as-needed',
-  // Detection (saved choice > Vercel geo > en) is planned for a later stage.
-  // Until then, never infer the locale from Accept-Language.
+  // src/proxy.ts detects the locale itself (saved choice > Vercel country > en),
+  // so next-intl never infers it from Accept-Language.
   localeDetection: false,
-  // No locale cookie until detection is implemented; the URL is the only source.
+  // The language switcher writes the cookie only on an explicit choice (localeCookie.ts).
   localeCookie: false,
 });
 

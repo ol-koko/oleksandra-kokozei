@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { languageOrder } from '@/content/navigation';
 import type { SectionId } from '@/content/types';
+import { saveLocaleChoice } from '@/features/i18n/localeCookie';
 import { getPathname, usePathname } from '@/features/i18n/navigation';
 import styles from './LanguageSwitcher.module.css';
 
@@ -40,7 +41,10 @@ export function LanguageSwitcher({
               hrefLang={locale}
               className={`lang-pill ${styles.chip} text-body-m`}
               aria-current={locale === currentLocale ? 'true' : undefined}
-              onClick={onNavigate}
+              onClick={() => {
+                saveLocaleChoice(locale);
+                onNavigate?.();
+              }}
             >
               {t(`${locale}.label`)}
               <span className="visually-hidden" lang={locale}>
