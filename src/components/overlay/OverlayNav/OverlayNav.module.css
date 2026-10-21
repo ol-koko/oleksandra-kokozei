@@ -4,8 +4,6 @@
 
 .link {
   text-decoration: none;
-  /* One line in every locale; a long label extends into the column gap instead (Overlay .nav). */
-  white-space: nowrap;
 }
 
 /*

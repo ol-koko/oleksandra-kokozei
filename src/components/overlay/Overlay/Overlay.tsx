@@ -234,9 +234,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
               items={view.sections}
               activeId={activeId}
               onSelect={selectSection}
-              className={[styles.nav, view.sections.length > 1 ? undefined : styles.navHidden]
-                .filter(Boolean)
-                .join(' ')}
+              className={view.sections.length > 1 ? undefined : styles.navHidden}
             />
           </div>
 
