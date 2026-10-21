@@ -1,4 +1,4 @@
-import type { Locale } from '@/features/i18n/routing';
+import type { SupportedLocale } from '@/features/i18n/routing';
 
 export const contactEmail = 'oleksandra.kokozei.ux@gmail.com';
 
@@ -8,8 +8,8 @@ export const homeTimeZone = 'Europe/Berlin';
 /** Production origin, used to resolve absolute URLs in link previews. */
 export const siteUrl = 'https://oleksandra-kokozei.com';
 
-/** Open Graph locale (`og:locale`) for each site locale. */
-export const openGraphLocales: Record<Locale, string> = {
+/** Open Graph locale (`og:locale`) for each supported locale. */
+export const openGraphLocales: Record<SupportedLocale, string> = {
   en: 'en_US',
   uk: 'uk_UA',
   de: 'de_DE',

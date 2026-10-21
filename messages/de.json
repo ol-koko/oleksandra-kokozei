@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "title": "Oleksandra Kokozei | UI/UX Designer & Design Engineer",
-    "description": "Portfolio of Oleksandra Kokozei, a UI/UX designer and design engineer based in Stuttgart, Germany.",
+    "title": "Oleksandra Kokozei | UI/UX-Designerin & Design Engineer",
+    "description": "Portfolio von Oleksandra Kokozei, UI/UX-Designerin und Design Engineer aus Stuttgart, Deutschland.",
     "pageTitle": "{title} | Oleksandra Kokozei"
   },
   "Common": {
@@ -13,14 +13,14 @@
     "experience": "Experience"
   },
   "Me": {
-    "greeting": "Hi, I’m Oleksandra",
-    "location": "Stuttgart, Germany",
+    "greeting": "Hallo, ich bin Oleksandra",
+    "location": "Stuttgart, Deutschland",
     "bio": {
-      "p1": "I’m a UI/UX designer who loves the space where aesthetics, logic, and technology meet. I’m naturally curious and detail-obsessed, and I enjoy turning messy ideas into clear, intuitive experiences that feel effortless to use.",
-      "p2": "I love not only designing ideas, but bringing them to life which led me to explore AI engineering and turn concepts into functional digital experiences. I learn by making, experimenting, and asking too many “what if?” questions.",
-      "p3": "At heart, I’m equal parts visual thinker, problem-solver, and curious builder with a soft spot for thoughtful details."
+      "p1": "Ich bin UI/UX-Designerin und fühle mich dort am wohlsten, wo Ästhetik, Logik und Technologie zusammenkommen. Ich bin von Natur aus neugierig, liebe Details und verwandle unübersichtliche Ideen gern in klare, intuitive Erlebnisse, die sich mühelos nutzen lassen.",
+      "p2": "Ich entwerfe Ideen nicht nur, ich möchte sie auch zum Leben erwecken – deshalb habe ich mich mit AI Engineering beschäftigt und mache aus Konzepten funktionierende digitale Produkte. Ich lerne durchs Ausprobieren: bauen, experimentieren und viel zu oft „Was wäre, wenn?“ fragen.",
+      "p3": "Im Kern bin ich zu gleichen Teilen visuelle Denkerin, Problemlöserin und neugierige Macherin – mit einer Schwäche für durchdachte Details."
     },
-    "more": "more",
+    "more": "mehr",
     "portraitAlt": "Porträt von Oleksandra Kokozei"
   },
   "Works": {
@@ -29,85 +29,85 @@
     "items": {
       "ces": {
         "title": "CES",
-        "description": "Admin platform for managing maritime services"
+        "description": "Admin-Plattform für die Verwaltung maritimer Services"
       },
       "juJutsu": {
         "title": "Ju-Jutsu⁺",
-        "description": "Martial arts website with online booking and AI assistance"
+        "description": "Kampfsport-Website mit Online-Buchung und KI-Assistenz"
       },
       "blowStressAway": {
         "title": "Blow Stress Away",
-        "description": "Breath-controlled stress relief experiment powered by MediaPipe"
+        "description": "Atemgesteuertes Experiment zum Stressabbau mit MediaPipe"
       },
       "filmBudget": {
         "title": "FilmBudget",
-        "description": "Video production website with clear pricing and quote requests"
+        "description": "Website einer Videoproduktion mit klaren Preisen und Angebotsanfrage"
       }
     }
   },
   "WorkCases": {
     "ces": {
-      "description": "CES’s administration platform connects recruitment workflows for crewing companies with the internal management of seafarer records, documents, and services. My UX/UI scope covers both CRM environments, focusing on information structure, operational workflows, and interfaces for managing interconnected records.",
+      "description": "Die Verwaltungsplattform von CES verbindet Recruiting-Prozesse für Crewing-Unternehmen mit der internen Verwaltung von Seeleuten, Dokumenten und Services. Mein UX/UI-Bereich umfasst beide CRM-Umgebungen – mit Fokus auf Informationsstruktur, operative Workflows und Oberflächen für miteinander verknüpfte Datensätze.",
       "facts": {
         "role": "UI/UX Designer",
         "productType": "Maritime Platform",
         "projectType": "Administration System"
       },
-      "coverAlt": "Calm sea at dusk with the white CES logo in the center",
+      "coverAlt": "Ruhiges Meer in der Abenddämmerung mit dem weißen CES-Logo in der Mitte",
       "nav": {
         "scope": "Scope",
         "flows": "Flows"
       },
       "overview": {
         "label": "Overview",
-        "lead": "Two workspaces with distinct responsibilities.",
-        "body": "My work centers on the operational interfaces used by crewing companies and the CES team. Both environments connect to the same maritime ecosystem, but each serves a different set of daily tasks.\nCrewing managers need to publish vacancies, review applications, find suitable seafarers, and manage communication. The CES team needs to maintain seafarer records, process verification and service requests, oversee crewing companies, and moderate vacancies.\n\nThe design challenge is to give each team a focused workspace while making the relationships between people, documents, vacancies, and requests clear."
+        "lead": "Zwei Arbeitsbereiche mit klar getrennten Aufgaben.",
+        "body": "Im Mittelpunkt meiner Arbeit stehen die operativen Oberflächen, mit denen Crewing-Unternehmen und das CES-Team arbeiten. Beide Umgebungen sind an dasselbe maritime Ökosystem angebunden, decken aber jeweils andere tägliche Aufgaben ab.\nCrewing-Manager veröffentlichen Stellen, prüfen Bewerbungen, suchen passende Seeleute und führen die Kommunikation. Das CES-Team pflegt die Profile der Seeleute, bearbeitet Verifizierungs- und Serviceanfragen, betreut Crewing-Unternehmen und moderiert Stellenanzeigen.\n\nDie gestalterische Herausforderung: jedem Team einen fokussierten Arbeitsbereich zu geben und zugleich die Beziehungen zwischen Personen, Dokumenten, Stellen und Anfragen klar sichtbar zu machen."
       },
       "scope": {
         "label": "Scope",
-        "lead": "From recruitment management to platform operations.",
+        "lead": "Vom Recruiting-Management bis zum Plattformbetrieb.",
         "topics": {
           "crewingCrm": {
             "title": "Crewing CRM",
-            "body": "The recruitment workspace covers vacancy management, application review, seafarer search, candidate records, and messaging. Its scope also includes company information, manager administration, recruitment statistics, and notifications.\nA key consideration is the vacancy lifecycle: distinguishing listings awaiting moderation from published, closed, and archived vacancies, while keeping applications and candidate actions accessible."
+            "body": "Der Recruiting-Bereich umfasst Stellenverwaltung, Prüfung von Bewerbungen, Suche nach Seeleuten, Kandidatenprofile und Nachrichten. Dazu kommen Unternehmensdaten, die Verwaltung der Manager, Recruiting-Statistiken und Benachrichtigungen.\nEin zentraler Punkt ist der Lebenszyklus einer Stelle: Anzeigen in der Moderation müssen sich klar von veröffentlichten, geschlossenen und archivierten unterscheiden, während Bewerbungen und Aktionen zu Kandidaten jederzeit erreichbar bleiben."
           },
           "cesCrm": {
             "title": "CES CRM",
-            "body": "The internal workspace covers seafarer records, document verification, service requests, crewing companies, and vacancy moderation. Supporting areas include reference data such as ranks and availability, news, statistics, and activity history.\nThe seafarer profile brings together professional information, availability, the assigned manager, documents, services, and order history. It also provides access to bonus records, invoicing, and CV generation, making it a central point for multiple operational tasks."
+            "body": "Der interne Bereich umfasst die Profile der Seeleute, Dokumentenprüfung, Serviceanfragen, Crewing-Unternehmen und die Moderation von Stellenanzeigen. Ergänzend gibt es Stammdaten wie Dienstgrade und Verfügbarkeit, News, Statistiken und einen Aktivitätsverlauf.\nDas Profil bündelt berufliche Angaben, Verfügbarkeit, den zuständigen Manager, Dokumente, Services und die Auftragshistorie. Von hier aus sind auch Bonusdaten, Rechnungsstellung und die Erstellung von Lebensläufen erreichbar – so wird das Profil zum zentralen Ausgangspunkt für viele operative Aufgaben."
           }
         }
       },
       "wireframes": {
-        "caption": "Initial CRM wireframes",
-        "alt": "Grid of early wireframes for the Crewing CRM and CES CRM: record pages, data tables, filters and forms"
+        "caption": "Erste CRM-Wireframes",
+        "alt": "Raster früher Wireframes für Crewing CRM und CES CRM: Detailseiten, Datentabellen, Filter und Formulare"
       },
       "workflows": {
         "label": "Workflows",
-        "lead": "Designing the connections between records and actions.",
+        "lead": "Verbindungen zwischen Datensätzen und Aktionen gestalten.",
         "topics": {
           "vacancies": {
             "title": "💼 Vacancies and applications",
-            "body": "A vacancy connects a role and vessel with employment details, publication status, and applications. The interface needs to support both an overview of recruitment activity and the review of individual listings and candidates."
+            "body": "Eine Stelle verknüpft Position und Schiff mit Beschäftigungsdetails, Veröffentlichungsstatus und Bewerbungen. Die Oberfläche muss sowohl den Überblick über alle Recruiting-Aktivitäten als auch die Prüfung einzelner Anzeigen und Kandidaten unterstützen."
           },
           "seafarers": {
             "title": "📑 Seafarers and documents",
-            "body": "A seafarer record connects professional details and availability with supporting documents. Document validity and verification require distinct status information so that administrators can understand what is current, what needs review, and what requires follow-up."
+            "body": "Ein Profil verknüpft berufliche Angaben und Verfügbarkeit mit den zugehörigen Dokumenten. Gültigkeit und Prüfung brauchen eigene Statusangaben, damit Administratoren sofort sehen, was aktuell ist, was geprüft werden muss und wo Handlungsbedarf besteht."
           },
           "services": {
             "title": "👤 Services and orders",
-            "body": "Service requests connect a seafarer with a specific task, its progress, and related order or payment information. Administrators need enough context to continue processing a request without losing track of the person or records involved.\nAcross these workflows, my design focus is clear hierarchy, searchable and filterable lists, understandable statuses, and relevant actions within each record. The goal is to support detailed operational work while keeping the two CRM environments consistent."
+            "body": "Eine Serviceanfrage verknüpft ein Profil mit einer konkreten Aufgabe, deren Fortschritt und den zugehörigen Auftrags- oder Zahlungsdaten. Administratoren brauchen genug Kontext, um eine Anfrage weiterzubearbeiten, ohne die Person oder die betroffenen Datensätze aus dem Blick zu verlieren.\nÜber alle Abläufe hinweg lege ich den Fokus auf klare Hierarchie, durchsuch- und filterbare Listen, verständliche Status und passende Aktionen in jedem Datensatz. Ziel ist es, detaillierte operative Arbeit zu unterstützen und beide CRM-Umgebungen konsistent zu halten."
           }
         }
       }
     },
     "juJutsu": {
-      "description": "Website redesign for a German jujitsu school, focused on helping visitors find a suitable class and book a session online. I took the project from identifying problems in the existing website to building a functional experience in Base44 within three days.",
+      "description": "Website-Redesign für eine deutsche Ju-Jutsu-Schule, damit Besucher schnell das passende Training finden und online buchen können. Ich habe das Projekt in drei Tagen umgesetzt – von der Analyse der bestehenden Website bis zur funktionierenden Lösung in Base44.",
       "facts": {
         "role": "UI/UX Designer\nWebsite Development",
         "productType": "Booking Website",
         "platform": "Base44"
       },
-      "coverAlt": "MacBook Pro showing the Ju-Jutsu⁺ trial lesson booking: a progress bar, an October calendar and the free time slots for the selected day, over a line drawing of a pagoda",
+      "coverAlt": "MacBook Pro mit der Buchung einer Probestunde bei Ju-Jutsu⁺: Fortschrittsanzeige, Oktoberkalender und freie Zeitfenster für den gewählten Tag vor einer Strichzeichnung einer Pagode",
       "nav": {
         "goal": "Goal",
         "design": "Design",
@@ -115,85 +115,85 @@
       },
       "overview": {
         "label": "Overview",
-        "lead": "From a local business problem to a working website.",
-        "body": "I selected Ju-Jutsu⁺ after reviewing its existing website and identifying opportunities to improve class discovery and booking. The school’s offering was buried in lengthy content, while the schedule was difficult to navigate and visitors could not book a lesson online.\n\nMy work covered defining the concept, restructuring content, planning the user flow, and implementing the website in Base44. I focused on connecting the information prospective students need with the actions they want to take: explore classes, find a suitable time and location, and book a session."
+        "lead": "Vom Problem eines lokalen Unternehmens zur funktionierenden Website.",
+        "body": "Ich habe Ju-Jutsu⁺ ausgewählt, nachdem ich die bestehende Website analysiert und Potenzial bei Kurssuche und Buchung erkannt hatte. Das Angebot der Schule ging in langen Texten unter, der Trainingsplan war schwer zu überblicken, und eine Online-Buchung gab es nicht.\n\nMeine Arbeit umfasste Konzept, Neustrukturierung der Inhalte, Planung des User Flows und die Umsetzung der Website in Base44. Dabei habe ich die Informationen, die Interessierte brauchen, direkt mit den nächsten Schritten verbunden: Kurse entdecken, passende Zeit und den richtigen Standort finden, Training buchen."
       },
       "promptToWebsite": {
-        "caption": "From prompt to website",
-        "alt": "Base44 editor on a MacBook Pro: the prompt that describes the Ju-Jutsu⁺ website on the left, the generated homepage with the headline “Komm, wie du bist.” and two people training on the right"
+        "caption": "Vom Prompt zur Website",
+        "alt": "Base44-Editor auf einem MacBook Pro: links der Prompt, der die Ju-Jutsu⁺-Website beschreibt, rechts die generierte Startseite mit der Überschrift „Komm, wie du bist.“ und zwei Menschen beim Training"
       },
       "goal": {
         "label": "Goal",
-        "lead": "Make the first step into training easier.",
-        "body": "The challenge was to turn an information-heavy website into a practical tool for choosing and booking classes. Visitors needed a clearer way to understand the school’s offering without reading through multiple sections or searching for relevant schedule details.\n\nI prioritized three tasks:\n- finding a class that matches the visitor’s needs\n- understanding the training options\n- booking online.\n\nFrom a business perspective, the aim was to support new student inquiries and reduce the need for manual coordination around schedules and bookings."
+        "lead": "Den ersten Schritt ins Training leichter machen.",
+        "body": "Die Herausforderung bestand darin, eine informationslastige Website in ein praktisches Werkzeug für Kurswahl und Buchung zu verwandeln. Besucher sollten das Angebot der Schule verstehen können, ohne mehrere Abschnitte zu lesen oder sich passende Termine mühsam zusammenzusuchen.\n\nIch habe drei Aufgaben priorisiert:\n- einen Kurs finden, der zu den eigenen Bedürfnissen passt\n- die Trainingsangebote verstehen\n- online buchen.\n\nAus geschäftlicher Sicht sollte die Website mehr Anfragen neuer Schüler bringen und den manuellen Abstimmungsaufwand bei Terminen und Buchungen verringern."
       },
       "design": {
         "label": "Design",
-        "lead": "Find a class. Explore the options. Book a session.",
+        "lead": "Kurs finden. Optionen entdecken. Training buchen.",
         "topics": {
           "schedule": {
             "title": "🗓️ A filterable training schedule",
-            "body": "I introduced a structured timetable with filters for class category, age group, and city. This gives visitors a way to narrow down the available options and focus on sessions relevant to them."
+            "body": "Ich habe einen strukturierten Stundenplan mit Filtern nach Kursart, Altersgruppe und Stadt eingeführt. So können Besucher die Auswahl eingrenzen und sich auf die Trainings konzentrieren, die für sie relevant sind."
           },
           "booking": {
             "title": "🤼 Online lesson booking",
-            "body": "I added a booking flow to give visitors a direct next step after exploring classes. Bringing booking into the website connects class discovery with taking action, rather than leaving visitors to arrange everything through a separate conversation."
+            "body": "Ich habe einen Buchungsablauf ergänzt, damit Besucher nach dem Stöbern direkt den nächsten Schritt gehen können. Die Buchung auf der Website verbindet Kurssuche und Handeln, statt alles in einem separaten Gespräch klären zu müssen."
           },
           "assistant": {
             "title": "💬 Bilingual AI assistance",
-            "body": "I integrated an AI assistant with English and Ukrainian support, adding a conversational way to ask questions while exploring the website."
+            "body": "Ich habe einen KI-Assistenten integriert, der Englisch und Ukrainisch spricht – so lassen sich beim Erkunden der Website Fragen einfach im Chat stellen."
           },
           "content": {
             "title": "🧹 Clearer content and visual hierarchy",
-            "body": "I shortened lengthy descriptions and reorganized information into scannable sections and cards. A clearer visual hierarchy highlights key details, helping visitors explore training options and find relevant information more easily."
+            "body": "Ich habe lange Beschreibungen gekürzt und die Informationen in übersichtliche Abschnitte und Karten gegliedert. Eine klarere visuelle Hierarchie hebt das Wichtigste hervor und erleichtert es, Trainingsangebote zu entdecken und relevante Infos zu finden."
           }
         }
       },
       "screens": {
         "classDiscovery": {
-          "caption": "Class Discovery",
-          "alt": "Weekly training schedule from Monday to Friday, filtered by city and course, with one card per class showing its time and location"
+          "caption": "Kurssuche",
+          "alt": "Wöchentlicher Trainingsplan von Montag bis Freitag, gefiltert nach Stadt und Kurs, mit einer Karte pro Kurs samt Uhrzeit und Ort"
         },
         "bookingFlow": {
-          "caption": "Booking Flow",
-          "alt": "Booking step “Termin wählen”: a progress bar, an October calendar and the available time slots for the selected day"
+          "caption": "Buchungsablauf",
+          "alt": "Buchungsschritt „Termin wählen“: Fortschrittsanzeige, Oktoberkalender und verfügbare Zeitfenster für den gewählten Tag"
         },
         "aiAssistance": {
-          "caption": "AI Assistance",
-          "alt": "Homepage hero with two people training in a dojo and the open chat window of the Ju-Jutsu⁺ AI assistant"
+          "caption": "KI-Assistenz",
+          "alt": "Startseite mit zwei Menschen beim Training im Dojo und dem geöffneten Chatfenster des Ju-Jutsu⁺-KI-Assistenten"
         },
         "contentStructure": {
-          "caption": "Content Structure",
-          "alt": "Class pages as cards: a photo of children training next to the course name, age group, short description and a button to book a trial lesson"
+          "caption": "Inhaltsstruktur",
+          "alt": "Kursseiten als Karten: ein Foto trainierender Kinder neben Kursname, Altersgruppe, Kurzbeschreibung und einem Button zur Buchung einer Probestunde"
         }
       },
       "result": {
         "label": "Result",
-        "lead": "An implemented website in three days.",
-        "body": "I built and published a functional website combining a filterable training schedule, online booking, and a bilingual AI assistant. The result brings class information and booking into one experience, with a more focused structure around prospective students’ immediate needs.\n\nUsing AI-assisted development in Base44, I moved from concept to implementation within a three-day timeframe. This project demonstrates my ability to define a focused scope, prioritize useful features, and carry a website beyond static design into a working product."
+        "lead": "Eine umgesetzte Website in drei Tagen.",
+        "body": "Ich habe eine funktionierende Website gebaut und veröffentlicht, die einen filterbaren Trainingsplan, Online-Buchung und einen zweisprachigen KI-Assistenten vereint. Kursinformationen und Buchung sind jetzt an einem Ort, und die Struktur richtet sich klar nach den unmittelbaren Bedürfnissen künftiger Schüler.\n\nMit KI-gestützter Entwicklung in Base44 bin ich innerhalb von drei Tagen vom Konzept zur Umsetzung gekommen. Das Projekt zeigt, dass ich einen fokussierten Umfang definieren, sinnvolle Features priorisieren und eine Website über das statische Design hinaus zu einem funktionierenden Produkt bringen kann."
       }
     },
     "blowStressAway": {
       "titleEmoji": "☀️",
-      "description": "A playful, MediaPipe-powered breathing experience designed to help you unwind after a demanding day. Blow away clouds representing everyday worries about work and life, making space for a moment of calm.",
+      "description": "Ein verspieltes Atemerlebnis auf Basis von MediaPipe, das nach einem anstrengenden Tag beim Abschalten hilft. Pusten Sie die Wolken der alltäglichen Sorgen um Arbeit und Leben weg – und schaffen Sie Raum für einen ruhigen Moment.",
       "facts": {
         "design": "Figma",
         "frontend": "TypeScript\nReact\nVite",
         "styling": "Tailwind CSS",
         "ai": "Figma Make\nCursor\nOpus 4.5"
       },
-      "coverAlt": "Phone on a soft pink gradient playing Blow Stress Away: a worried girl under storm clouds and a tangle of stress, the clouds clear and the sun comes out over her",
-      "appTitle": "Blow Stress Away, a live breathing app that asks for microphone access"
+      "coverAlt": "Smartphone auf zartrosa Verlauf mit Blow Stress Away: ein besorgtes Mädchen unter Gewitterwolken und einem Knäuel aus Stress – die Wolken ziehen ab, und über ihr kommt die Sonne heraus",
+      "appTitle": "Blow Stress Away, eine interaktive Atem-App, die Zugriff auf das Mikrofon anfragt"
     },
     "filmBudget": {
-      "description": "FilmBudget is a website for a Danish video production company, designed to help potential clients understand services and pricing before requesting a quote. I designed the UX and UI for desktop and mobile, focusing on transparent pricing, clear navigation, and a straightforward inquiry process.",
+      "description": "FilmBudget ist die Website einer dänischen Videoproduktionsfirma, die potenziellen Kunden hilft, Leistungen und Preise zu verstehen, bevor sie ein Angebot anfragen. Ich habe UX und UI für Desktop und Mobile gestaltet – mit Fokus auf transparente Preise, klare Navigation und einen unkomplizierten Anfrageprozess.",
       "facts": {
         "role": "UI/UX Designer",
         "projectType": "Marketing Website",
         "team": "Solo"
       },
-      "coverAlt": "MacBook Pro showing the FilmBudget homepage: the headline “Get instant overview of video prices and create your own film budget online” over a changing reel of sports and film footage",
-      "coverCaption": "*The live website has since been updated",
+      "coverAlt": "MacBook Pro mit der FilmBudget-Startseite: die Überschrift „Get instant overview of video prices and create your own film budget online“ über einem wechselnden Reel aus Sport- und Filmaufnahmen",
+      "coverCaption": "*Die Live-Website wurde inzwischen aktualisiert",
       "nav": {
         "goal": "Goal",
         "decisions": "Decision",
@@ -201,44 +201,44 @@
       },
       "overview": {
         "label": "Overview",
-        "lead": "Connecting business goals with the customer journey.",
-        "body": "My work covered research, site structure, wireframes, UI design, mobile adaptation, and a reusable UI kit. I applied the client’s existing brand guidelines across English and Danish layouts, organizing the experience around exploring services, understanding costs, and requesting a quote."
+        "lead": "Geschäftsziele und Customer Journey verbinden.",
+        "body": "Meine Arbeit umfasste Research, Seitenstruktur, Wireframes, UI-Design, mobile Anpassung und ein wiederverwendbares UI-Kit. Die bestehenden Markenrichtlinien des Kunden habe ich auf die englischen und dänischen Layouts übertragen und das Erlebnis um drei Schritte herum aufgebaut: Leistungen entdecken, Kosten verstehen, Angebot anfragen."
       },
       "goal": {
         "label": "Goal",
-        "lead": "Helping clients make an informed first step.",
-        "body": "Stakeholder interviews and a user survey highlighted three priorities: early access to approximate prices, information that builds trust, and easy contact. I translated these insights into a content hierarchy that brings service options and pricing forward, while keeping the path to an inquiry clear."
+        "lead": "Kunden einen fundierten ersten Schritt ermöglichen.",
+        "body": "Stakeholder-Interviews und eine Nutzerumfrage zeigten drei Prioritäten: früher Zugang zu Richtpreisen, vertrauensbildende Informationen und eine einfache Kontaktaufnahme. Daraus habe ich eine Inhaltshierarchie entwickelt, die Leistungen und Preise nach vorn holt und den Weg zur Anfrage klar hält."
       },
       "research": {
-        "caption": "Research & Analysis",
-        "alt": "Research board with stakeholder interview notes, a competitive analysis, a user journey map, user survey charts and an information architecture sketch"
+        "caption": "Research & Analyse",
+        "alt": "Research-Board mit Notizen aus Stakeholder-Interviews, Wettbewerbsanalyse, User Journey Map, Diagrammen der Nutzerumfrage und einer Skizze der Informationsarchitektur"
       },
       "decisions": {
         "label": "Design Decisions",
-        "lead": "Clear pricing. Focused choices. Easy contact.",
+        "lead": "Klare Preise. Gezielte Auswahl. Einfacher Kontakt.",
         "topics": {
           "pricing": {
             "title": "💶 Pricing with context",
-            "body": "Three example-based pricing tiers for each video type help visitors compare options and understand the likely budget."
+            "body": "Drei Preisstufen mit Beispielen pro Videoart helfen Besuchern, Optionen zu vergleichen und das voraussichtliche Budget einzuschätzen."
           },
           "inquiry": {
             "title": "🧹 A clear path to inquiry",
-            "body": "Prominent calls to action and a short contact form guide visitors toward requesting a quote. The confirmation page explains what happens next."
+            "body": "Gut sichtbare Calls to Action und ein kurzes Kontaktformular führen Besucher zur Angebotsanfrage. Die Bestätigungsseite erklärt, wie es weitergeht."
           },
           "devices": {
             "title": "📱 Consistency across devices",
-            "body": "Mobile layouts prioritize pricing and contact actions, while a reusable UI kit keeps components consistent across pages."
+            "body": "Mobile Layouts stellen Preise und Kontakt in den Vordergrund, und ein wiederverwendbares UI-Kit sorgt für konsistente Komponenten auf allen Seiten."
           }
         }
       },
       "result": {
         "label": "Result",
-        "lead": "A complete desktop and mobile design.",
-        "body": "I delivered desktop and mobile designs, English and Danish layouts, and a reusable UI kit for developer handoff.\n\nThe scope covered service discovery, pricing, quote requests, and confirmation, alongside supporting company and editorial pages.\nI applied the client’s existing visual identity throughout and created a reusable UI kit for consistent page layouts."
+        "lead": "Ein vollständiges Design für Desktop und Mobile.",
+        "body": "Ich habe Designs für Desktop und Mobile, englische und dänische Layouts sowie ein wiederverwendbares UI-Kit für die Übergabe an die Entwicklung geliefert.\n\nDas Projekt deckte Leistungsübersicht, Preise, Angebotsanfrage und Bestätigung ab, dazu ergänzende Unternehmens- und Redaktionsseiten.\nDie bestehende visuelle Identität des Kunden habe ich durchgängig angewendet und ein wiederverwendbares UI-Kit für konsistente Seitenlayouts erstellt."
       },
       "designFile": {
-        "caption": "Design file overview",
-        "alt": "FilmBudget design file: wireframes, desktop pages in English and Danish, mobile pages and the UI kit"
+        "caption": "Überblick über die Designdatei",
+        "alt": "FilmBudget-Designdatei: Wireframes, Desktop-Seiten auf Englisch und Dänisch, mobile Seiten und das UI-Kit"
       }
     }
   },
@@ -248,21 +248,21 @@
     "roles": {
       "independent": {
         "title": "Independent Designer",
-        "period": "2024 – Present",
-        "p1": "Since 2024, I’ve worked independently with international clients on projects across film production, education, logistics, sports, wellness, and service-based businesses.",
-        "p2": "My experience includes corporate websites, conversion-focused landing pages, multi-screen web applications, CRM-style interfaces, dashboards.",
-        "p3": "Depending on the project, I work across information architecture, user flows, wireframes, responsive UI, design systems, reusable components, multilingual interfaces, developer handoff, and Webflow/Framer implementation. I also collaborate directly with clients and developers, adapt existing brand systems, and use AI-assisted development to turn selected concepts into functional prototypes."
+        "period": "2024 – heute",
+        "p1": "Seit 2024 arbeite ich freiberuflich mit internationalen Kunden an Projekten aus Filmproduktion, Bildung, Logistik, Sport, Wellness und Dienstleistung.",
+        "p2": "Meine Erfahrung umfasst Unternehmenswebsites, conversionstarke Landingpages, Webanwendungen mit vielen Screens, CRM-Oberflächen und Dashboards.",
+        "p3": "Je nach Projekt arbeite ich an Informationsarchitektur, User Flows, Wireframes, responsivem UI, Designsystemen, wiederverwendbaren Komponenten, mehrsprachigen Oberflächen, Developer Handoff und der Umsetzung in Webflow/Framer. Außerdem arbeite ich direkt mit Kunden und Entwicklern zusammen, passe bestehende Markensysteme an und nutze KI-gestützte Entwicklung, um ausgewählte Konzepte in funktionale Prototypen zu verwandeln."
       }
     }
   },
   "Overlay": {
-    "hint": "Zum Schließen Escape drücken.",
-    "appHint": "Press Tab to leave the app, then Escape to close it.",
+    "hint": "Drücken Sie Escape, um zu schließen.",
+    "appHint": "Drücken Sie Tab, um die App zu verlassen, und dann Escape, um sie zu schließen.",
     "sectionsNav": "Abschnitte",
     "breadcrumbs": "Brotkrümelnavigation",
     "backToPage": ", zurück zur Seite",
     "me": {
-      "title": "Mehr über mich",
+      "title": "More about me",
       "crumb": "More",
       "sections": {
         "about": {
@@ -271,24 +271,24 @@
         "home": {
           "nav": "Home",
           "heading": "My hometown",
-          "caption": "Odesa, Ukraine",
-          "more": "more",
-          "close": "close",
-          "photosLabel": "hometown photos",
-          "openPhoto": "Open photo: {alt}",
+          "caption": "Odessa, Ukraine",
+          "more": "mehr",
+          "close": "schließen",
+          "photosLabel": "Fotos meiner Heimatstadt",
+          "openPhoto": "Foto öffnen: {alt}",
           "photos": {
-            "port": "Odesa seaport cranes across the sea at sunset, seen from a table set with glasses",
-            "opera": "Hand holding an instant photo of the Odesa Opera House in front of the building itself",
-            "beach": "Pebble beach and calm sea under an orange dusk sky",
-            "street": "Evening street café in Odesa with string lights, parasols and a large tree"
+            "port": "Kräne des Seehafens von Odessa über dem Meer bei Sonnenuntergang, gesehen von einem gedeckten Tisch mit Gläsern",
+            "opera": "Eine Hand hält ein Sofortbild der Oper von Odessa vor dem Gebäude selbst",
+            "beach": "Kieselstrand und ruhiges Meer unter orangefarbenem Abendhimmel",
+            "street": "Abendliches Straßencafé in Odessa mit Lichterketten, Sonnenschirmen und einem großen Baum"
           }
         },
         "music": {
           "nav": "Music",
           "heading": "Music",
-          "listenOnSpotify": "{title} von {artist} auf Spotify anhören (öffnet in neuem Tab)",
-          "previous": "Previous song",
-          "next": "Next song",
+          "listenOnSpotify": "„{title}“ von {artist} auf Spotify anhören (öffnet in neuem Tab)",
+          "previous": "Vorheriger Song",
+          "next": "Nächster Song",
           "items": {
             "wickedGame": {
               "title": "Wicked Game",
@@ -307,9 +307,9 @@
         "books": {
           "nav": "Books",
           "heading": "Books",
-          "coverAlt": "Cover of {title} by {author}",
-          "previous": "Previous book",
-          "next": "Next book",
+          "coverAlt": "Cover von „{title}“ von {author}",
+          "previous": "Vorheriges Buch",
+          "next": "Nächstes Buch",
           "items": {
             "goodNightMrHolmes": {
               "title": "Good Night, Mr. Holmes",
@@ -328,9 +328,9 @@
         "films": {
           "nav": "Films",
           "heading": "Films",
-          "posterAlt": "Poster of {title} ({year})",
-          "previous": "Previous film",
-          "next": "Next film",
+          "posterAlt": "Filmplakat von „{title}“ ({year})",
+          "previous": "Vorheriger Film",
+          "next": "Nächster Film",
           "items": {
             "focus": {
               "title": "Focus"
@@ -359,17 +359,17 @@
         "styling": "Styling",
         "ai": "AI"
       },
-      "openLiveSite": "Open the {title} live site (opens in a new tab)",
-      "openApp": "Open the {title} app",
-      "fullScreen": "Open {title} in full screen",
+      "openLiveSite": "Website von {title} öffnen (öffnet in neuem Tab)",
+      "openApp": "App {title} öffnen",
+      "fullScreen": "{title} im Vollbild öffnen",
       "privateNote": {
         "title": "Private project overview",
-        "text": "Let’s explore a few project details."
+        "text": "Werfen wir einen Blick auf einige Projektdetails."
       }
     }
   },
   "Lightbox": {
-    "close": "Close photo"
+    "close": "Foto schließen"
   },
   "Header": {
     "skipToContent": "Zum Inhalt springen",
@@ -394,7 +394,7 @@
     }
   },
   "Footer": {
-    "localTime": "<time></time>, Stuttgart, Germany",
+    "localTime": "<time></time>, Stuttgart, Deutschland",
     "nav": "Fußzeilennavigation",
     "socialNav": "Soziale Profile",
     "copyright": "© {year} Oleksandra Kokozei"

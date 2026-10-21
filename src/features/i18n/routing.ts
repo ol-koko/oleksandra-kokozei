@@ -1,14 +1,26 @@
 import { defineRouting } from 'next-intl/routing';
 
+/** Every locale with messages in `messages/`. */
+export const supportedLocales = ['en', 'uk', 'de'] as const;
+
+export type SupportedLocale = (typeof supportedLocales)[number];
+
+/**
+ * The locales the site serves. Ukrainian is off until a font with Cyrillic glyphs
+ * replaces Figtree: to re-enable it, change this line to `['en', 'uk', 'de']`.
+ * A disabled locale's URLs redirect to English (src/proxy.ts).
+ */
+const enabledLocales = ['en', 'de'] as const satisfies readonly SupportedLocale[];
+
 export const routing = defineRouting({
-  locales: ['en', 'uk', 'de'],
+  locales: enabledLocales,
   defaultLocale: 'en',
-  // English is served at `/`, other locales at `/uk` and `/de`.
+  // English is served at `/`, other locales under their prefix (`/de`).
   localePrefix: 'as-needed',
-  // Detection (saved choice > Vercel geo > en) is planned for a later stage.
-  // Until then, never infer the locale from Accept-Language.
+  // src/proxy.ts detects the locale itself (saved choice > Vercel country > en),
+  // so next-intl never infers it from Accept-Language.
   localeDetection: false,
-  // No locale cookie until detection is implemented; the URL is the only source.
+  // The language switcher writes the cookie only on an explicit choice (localeCookie.ts).
   localeCookie: false,
 });
 
