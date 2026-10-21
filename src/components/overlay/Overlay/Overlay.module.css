@@ -175,12 +175,24 @@
    * never less than its labels; narrower columns shrink the content track.
    */
   .layout {
+    --overlay-nav-gap: var(--spacing-3xl);
+
     display: grid;
     grid-template-columns: minmax(0, var(--size-overlay-content)) 1fr;
-    column-gap: var(--spacing-3xl);
+    column-gap: var(--overlay-nav-gap);
     inline-size: min(100% - var(--spacing-5xl) * 2, var(--size-content-max));
     margin-inline: auto;
     padding: var(--spacing-none);
+  }
+
+  /*
+   * Nav labels never wrap. A label wider than the nav column extends left into
+   * the gap, keeping --spacing-md clear of the content: the negative margin lets
+   * the nav's minimum width be its widest label minus that overhang, so long
+   * labels (de "Über mich", uk "Про проєкт") do not shrink the 894 content track.
+   */
+  .nav {
+    margin-inline-start: calc(var(--spacing-md) - var(--overlay-nav-gap));
   }
 
   .divider {
