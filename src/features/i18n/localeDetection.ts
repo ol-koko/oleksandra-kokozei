@@ -1,10 +1,13 @@
 import { hasLocale } from 'next-intl';
 import type { NextRequest } from 'next/server';
 import { LOCALE_COOKIE } from './localeCookie';
-import { routing, type Locale } from './routing';
+import { routing, supportedLocales, type Locale, type SupportedLocale } from './routing';
 
-/** Countries that get a translated site; everyone else stays on English. */
-const COUNTRY_LOCALES: Partial<Record<string, Locale>> = {
+/**
+ * Countries that get a translated site; everyone else stays on English. A country
+ * whose locale is disabled (UA while `uk` is off) stays on English too.
+ */
+const COUNTRY_LOCALES: Partial<Record<string, SupportedLocale>> = {
   UA: 'uk',
   DE: 'de',
   AT: 'de',
@@ -37,14 +40,25 @@ function country(request: NextRequest) {
 export function detectLocale(request: NextRequest): Locale | null {
   if (CRAWLER.test(request.headers.get('user-agent') ?? '')) return null;
 
+  // A saved disabled locale (`uk` while it is off) counts as no choice.
   const saved = request.cookies.get(LOCALE_COOKIE)?.value;
   const locale = hasLocale(routing.locales, saved)
     ? saved
     : COUNTRY_LOCALES[country(request)?.toUpperCase() ?? ''];
-  return locale && locale !== routing.defaultLocale ? locale : null;
+  return hasLocale(routing.locales, locale) && locale !== routing.defaultLocale ? locale : null;
 }
 
-/** The same URL under a locale prefix: `/works/ces?x=1` → `/uk/works/ces?x=1`. */
+/** The same URL in English when it names a disabled locale (`/uk/works/ces` → `/works/ces`). */
+export function withoutDisabledLocale(url: URL): URL | null {
+  const [, first = '', ...rest] = url.pathname.split('/');
+  const supported: readonly string[] = supportedLocales;
+  if (!supported.includes(first) || hasLocale(routing.locales, first)) return null;
+  const target = new URL(url);
+  target.pathname = `/${rest.join('/')}`;
+  return target;
+}
+
+/** The same URL under a locale prefix: `/works/ces?x=1` → `/de/works/ces?x=1`. */
 export function withLocalePrefix(url: URL, locale: Locale): URL {
   const target = new URL(url);
   target.pathname = `/${locale}${url.pathname === '/' ? '' : url.pathname}`;

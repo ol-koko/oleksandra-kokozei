@@ -68,13 +68,29 @@ See [docs/architecture.md](docs/architecture.md) for details.
 
 ## Languages and locale detection
 
-English is served without a prefix (`/`, `/works/ces`); Ukrainian and German live under `/uk` and `/de`. A visitor who opens an unprefixed URL is redirected once (307, path and query kept, e.g. `/works/ces` → `/uk/works/ces`) using this order:
+English is served without a prefix (`/`, `/works/ces`); German lives under `/de`. Ukrainian (`/uk`) is translated but currently disabled, see below. A visitor who opens an unprefixed URL is redirected once (307, path and query kept, e.g. `/works/ces` → `/de/works/ces`) using this order:
 
 1. **Saved choice:** the `NEXT_LOCALE` cookie, if present. `en` keeps English.
-2. **Country:** Vercel's `x-vercel-ip-country` header. `UA` → `uk`; `DE`, `AT`, `CH` → `de`.
+2. **Country:** Vercel's `x-vercel-ip-country` header. `DE`, `AT`, `CH` → `de` (and `UA` → `uk` once Ukrainian is enabled).
 3. **English** for everyone else.
 
 URLs with a locale prefix are never redirected, and neither are search engine crawlers; every page lists its hreflang alternates with `x-default` pointing to the English path.
+
+### Ukrainian is disabled
+
+Figtree has no Cyrillic glyphs, so Ukrainian stays off until a Cyrillic font is chosen. The translations stay in `messages/uk.json`. While it is off:
+
+- the language switcher shows only en and de, and hreflang alternates and Open Graph locales list only en and de;
+- visitors from Ukraine get English, and a saved `NEXT_LOCALE=uk` counts as no choice;
+- any `/uk/...` URL redirects with 307 (temporary) to the same path in English.
+
+**To re-enable it**, change one line in `src/features/i18n/routing.ts`:
+
+```ts
+const enabledLocales = ['en', 'uk', 'de'] as const satisfies readonly SupportedLocale[];
+```
+
+Everything above (switcher, detection, redirects, alternates, static pages) follows from that list.
 
 ### Cookie
 
@@ -85,8 +101,8 @@ URLs with a locale prefix are never redirected, and neither are search engine cr
 There is no Vercel geo header in local development. Set `DEV_COUNTRY` to simulate one (ignored in production builds):
 
 ```bash
-DEV_COUNTRY=UA npm run dev   # / redirects to /uk
 DEV_COUNTRY=DE npm run dev   # / redirects to /de
+DEV_COUNTRY=UA npm run dev   # / stays English while uk is disabled
 ```
 
 Against a production build (`npm run build && npm run start`), send the header instead: `curl -sI -H 'x-vercel-ip-country: AT' http://localhost:3000/me`. Clear the `NEXT_LOCALE` cookie to test detection again in a browser.
