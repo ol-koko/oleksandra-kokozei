@@ -64,7 +64,7 @@
         "body": "Im Mittelpunkt meiner Arbeit stehen die operativen Oberflächen, mit denen Crewing-Unternehmen und das CES-Team arbeiten. Beide Umgebungen sind an dasselbe maritime Ökosystem angebunden, decken aber jeweils andere tägliche Aufgaben ab.\nCrewing-Manager veröffentlichen Stellen, prüfen Bewerbungen, suchen passende Seeleute und führen die Kommunikation. Das CES-Team pflegt die Profile der Seeleute, bearbeitet Verifizierungs- und Serviceanfragen, betreut Crewing-Unternehmen und moderiert Stellenanzeigen.\n\nDie gestalterische Herausforderung: jedem Team einen fokussierten Arbeitsbereich zu geben und zugleich die Beziehungen zwischen Personen, Dokumenten, Stellen und Anfragen klar sichtbar zu machen."
       },
       "scope": {
-        "label": "Umfang",
+        "label": "Scope",
         "lead": "Vom Recruiting-Management bis zum Plattformbetrieb.",
         "topics": {
           "crewingCrm": {
@@ -123,7 +123,7 @@
         "alt": "Base44-Editor auf einem MacBook Pro: links der Prompt, der die Ju-Jutsu⁺-Website beschreibt, rechts die generierte Startseite mit der Überschrift „Komm, wie du bist.“ und zwei Menschen beim Training"
       },
       "goal": {
-        "label": "Ziel",
+        "label": "Goal",
         "lead": "Den ersten Schritt ins Training leichter machen.",
         "body": "Die Herausforderung bestand darin, eine informationslastige Website in ein praktisches Werkzeug für Kurswahl und Buchung zu verwandeln. Besucher sollten das Angebot der Schule verstehen können, ohne mehrere Abschnitte zu lesen oder sich passende Termine mühsam zusammenzusuchen.\n\nIch habe drei Aufgaben priorisiert:\n- einen Kurs finden, der zu den eigenen Bedürfnissen passt\n- die Trainingsangebote verstehen\n- online buchen.\n\nAus geschäftlicher Sicht sollte die Website mehr Anfragen neuer Schüler bringen und den manuellen Abstimmungsaufwand bei Terminen und Buchungen verringern."
       },
@@ -168,7 +168,7 @@
         }
       },
       "result": {
-        "label": "Ergebnis",
+        "label": "Result",
         "lead": "Eine umgesetzte Website in drei Tagen.",
         "body": "Ich habe eine funktionierende Website gebaut und veröffentlicht, die einen filterbaren Trainingsplan, Online-Buchung und einen zweisprachigen KI-Assistenten vereint. Kursinformationen und Buchung sind jetzt an einem Ort, und die Struktur richtet sich klar nach den unmittelbaren Bedürfnissen künftiger Schüler.\n\nMit KI-gestützter Entwicklung in Base44 bin ich innerhalb von drei Tagen vom Konzept zur Umsetzung gekommen. Das Projekt zeigt, dass ich einen fokussierten Umfang definieren, sinnvolle Features priorisieren und eine Website über das statische Design hinaus zu einem funktionierenden Produkt bringen kann."
       }
@@ -205,7 +205,7 @@
         "body": "Meine Arbeit umfasste Research, Seitenstruktur, Wireframes, UI-Design, mobile Anpassung und ein wiederverwendbares UI-Kit. Die bestehenden Markenrichtlinien des Kunden habe ich auf die englischen und dänischen Layouts übertragen und das Erlebnis um drei Schritte herum aufgebaut: Leistungen entdecken, Kosten verstehen, Angebot anfragen."
       },
       "goal": {
-        "label": "Ziel",
+        "label": "Goal",
         "lead": "Kunden einen fundierten ersten Schritt ermöglichen.",
         "body": "Stakeholder-Interviews und eine Nutzerumfrage zeigten drei Prioritäten: früher Zugang zu Richtpreisen, vertrauensbildende Informationen und eine einfache Kontaktaufnahme. Daraus habe ich eine Inhaltshierarchie entwickelt, die Leistungen und Preise nach vorn holt und den Weg zur Anfrage klar hält."
       },
@@ -232,7 +232,7 @@
         }
       },
       "result": {
-        "label": "Ergebnis",
+        "label": "Result",
         "lead": "Ein vollständiges Design für Desktop und Mobile.",
         "body": "Ich habe Designs für Desktop und Mobile, englische und dänische Layouts sowie ein wiederverwendbares UI-Kit für die Übergabe an die Entwicklung geliefert.\n\nDas Projekt deckte Leistungsübersicht, Preise, Angebotsanfrage und Bestätigung ab, dazu ergänzende Unternehmens- und Redaktionsseiten.\nDie bestehende visuelle Identität des Kunden habe ich durchgängig angewendet und ein wiederverwendbares UI-Kit für konsistente Seitenlayouts erstellt."
       },
@@ -285,7 +285,7 @@
         },
         "music": {
           "nav": "Music",
-          "heading": "Musik",
+          "heading": "Music",
           "listenOnSpotify": "„{title}“ von {artist} auf Spotify anhören (öffnet in neuem Tab)",
           "previous": "Vorheriger Song",
           "next": "Nächster Song",
@@ -306,7 +306,7 @@
         },
         "books": {
           "nav": "Books",
-          "heading": "Bücher",
+          "heading": "Books",
           "coverAlt": "Cover von „{title}“ von {author}",
           "previous": "Vorheriges Buch",
           "next": "Nächstes Buch",
@@ -327,7 +327,7 @@
         },
         "films": {
           "nav": "Films",
-          "heading": "Filme",
+          "heading": "Films",
           "posterAlt": "Filmplakat von „{title}“ ({year})",
           "previous": "Vorheriger Film",
           "next": "Nächster Film",
