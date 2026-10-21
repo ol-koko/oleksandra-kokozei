@@ -59,7 +59,7 @@
         "flows": "Flows"
       },
       "overview": {
-        "label": "Überblick",
+        "label": "Overview",
         "lead": "Zwei Arbeitsbereiche mit klar getrennten Aufgaben.",
         "body": "Im Mittelpunkt meiner Arbeit stehen die operativen Oberflächen, mit denen Crewing-Unternehmen und das CES-Team arbeiten. Beide Umgebungen sind an dasselbe maritime Ökosystem angebunden, decken aber jeweils andere tägliche Aufgaben ab.\nCrewing-Manager veröffentlichen Stellen, prüfen Bewerbungen, suchen passende Seeleute und führen die Kommunikation. Das CES-Team pflegt die Profile der Seeleute, bearbeitet Verifizierungs- und Serviceanfragen, betreut Crewing-Unternehmen und moderiert Stellenanzeigen.\n\nDie gestalterische Herausforderung: jedem Team einen fokussierten Arbeitsbereich zu geben und zugleich die Beziehungen zwischen Personen, Dokumenten, Stellen und Anfragen klar sichtbar zu machen."
       },
@@ -82,19 +82,19 @@
         "alt": "Raster früher Wireframes für Crewing CRM und CES CRM: Detailseiten, Datentabellen, Filter und Formulare"
       },
       "workflows": {
-        "label": "Abläufe",
+        "label": "Workflows",
         "lead": "Verbindungen zwischen Datensätzen und Aktionen gestalten.",
         "topics": {
           "vacancies": {
-            "title": "💼 Stellen und Bewerbungen",
+            "title": "💼 Vacancies and applications",
             "body": "Eine Stelle verknüpft Position und Schiff mit Beschäftigungsdetails, Veröffentlichungsstatus und Bewerbungen. Die Oberfläche muss sowohl den Überblick über alle Recruiting-Aktivitäten als auch die Prüfung einzelner Anzeigen und Kandidaten unterstützen."
           },
           "seafarers": {
-            "title": "📑 Seeleute und Dokumente",
+            "title": "📑 Seafarers and documents",
             "body": "Ein Profil verknüpft berufliche Angaben und Verfügbarkeit mit den zugehörigen Dokumenten. Gültigkeit und Prüfung brauchen eigene Statusangaben, damit Administratoren sofort sehen, was aktuell ist, was geprüft werden muss und wo Handlungsbedarf besteht."
           },
           "services": {
-            "title": "👤 Services und Aufträge",
+            "title": "👤 Services and orders",
             "body": "Eine Serviceanfrage verknüpft ein Profil mit einer konkreten Aufgabe, deren Fortschritt und den zugehörigen Auftrags- oder Zahlungsdaten. Administratoren brauchen genug Kontext, um eine Anfrage weiterzubearbeiten, ohne die Person oder die betroffenen Datensätze aus dem Blick zu verlieren.\nÜber alle Abläufe hinweg lege ich den Fokus auf klare Hierarchie, durchsuch- und filterbare Listen, verständliche Status und passende Aktionen in jedem Datensatz. Ziel ist es, detaillierte operative Arbeit zu unterstützen und beide CRM-Umgebungen konsistent zu halten."
           }
         }
@@ -114,7 +114,7 @@
         "result": "Result"
       },
       "overview": {
-        "label": "Überblick",
+        "label": "Overview",
         "lead": "Vom Problem eines lokalen Unternehmens zur funktionierenden Website.",
         "body": "Ich habe Ju-Jutsu⁺ ausgewählt, nachdem ich die bestehende Website analysiert und Potenzial bei Kurssuche und Buchung erkannt hatte. Das Angebot der Schule ging in langen Texten unter, der Trainingsplan war schwer zu überblicken, und eine Online-Buchung gab es nicht.\n\nMeine Arbeit umfasste Konzept, Neustrukturierung der Inhalte, Planung des User Flows und die Umsetzung der Website in Base44. Dabei habe ich die Informationen, die Interessierte brauchen, direkt mit den nächsten Schritten verbunden: Kurse entdecken, passende Zeit und den richtigen Standort finden, Training buchen."
       },
@@ -132,19 +132,19 @@
         "lead": "Kurs finden. Optionen entdecken. Training buchen.",
         "topics": {
           "schedule": {
-            "title": "🗓️ Filterbarer Trainingsplan",
+            "title": "🗓️ A filterable training schedule",
             "body": "Ich habe einen strukturierten Stundenplan mit Filtern nach Kursart, Altersgruppe und Stadt eingeführt. So können Besucher die Auswahl eingrenzen und sich auf die Trainings konzentrieren, die für sie relevant sind."
           },
           "booking": {
-            "title": "🤼 Online-Buchung von Trainings",
+            "title": "🤼 Online lesson booking",
             "body": "Ich habe einen Buchungsablauf ergänzt, damit Besucher nach dem Stöbern direkt den nächsten Schritt gehen können. Die Buchung auf der Website verbindet Kurssuche und Handeln, statt alles in einem separaten Gespräch klären zu müssen."
           },
           "assistant": {
-            "title": "💬 Zweisprachige KI-Assistenz",
+            "title": "💬 Bilingual AI assistance",
             "body": "Ich habe einen KI-Assistenten integriert, der Englisch und Ukrainisch spricht – so lassen sich beim Erkunden der Website Fragen einfach im Chat stellen."
           },
           "content": {
-            "title": "🧹 Klarere Inhalte und visuelle Hierarchie",
+            "title": "🧹 Clearer content and visual hierarchy",
             "body": "Ich habe lange Beschreibungen gekürzt und die Informationen in übersichtliche Abschnitte und Karten gegliedert. Eine klarere visuelle Hierarchie hebt das Wichtigste hervor und erleichtert es, Trainingsangebote zu entdecken und relevante Infos zu finden."
           }
         }
@@ -200,7 +200,7 @@
         "result": "Result"
       },
       "overview": {
-        "label": "Überblick",
+        "label": "Overview",
         "lead": "Geschäftsziele und Customer Journey verbinden.",
         "body": "Meine Arbeit umfasste Research, Seitenstruktur, Wireframes, UI-Design, mobile Anpassung und ein wiederverwendbares UI-Kit. Die bestehenden Markenrichtlinien des Kunden habe ich auf die englischen und dänischen Layouts übertragen und das Erlebnis um drei Schritte herum aufgebaut: Leistungen entdecken, Kosten verstehen, Angebot anfragen."
       },
@@ -214,19 +214,19 @@
         "alt": "Research-Board mit Notizen aus Stakeholder-Interviews, Wettbewerbsanalyse, User Journey Map, Diagrammen der Nutzerumfrage und einer Skizze der Informationsarchitektur"
       },
       "decisions": {
-        "label": "Designentscheidungen",
+        "label": "Design Decisions",
         "lead": "Klare Preise. Gezielte Auswahl. Einfacher Kontakt.",
         "topics": {
           "pricing": {
-            "title": "💶 Preise mit Kontext",
+            "title": "💶 Pricing with context",
             "body": "Drei Preisstufen mit Beispielen pro Videoart helfen Besuchern, Optionen zu vergleichen und das voraussichtliche Budget einzuschätzen."
           },
           "inquiry": {
-            "title": "🧹 Ein klarer Weg zur Anfrage",
+            "title": "🧹 A clear path to inquiry",
             "body": "Gut sichtbare Calls to Action und ein kurzes Kontaktformular führen Besucher zur Angebotsanfrage. Die Bestätigungsseite erklärt, wie es weitergeht."
           },
           "devices": {
-            "title": "📱 Konsistenz auf allen Geräten",
+            "title": "📱 Consistency across devices",
             "body": "Mobile Layouts stellen Preise und Kontakt in den Vordergrund, und ein wiederverwendbares UI-Kit sorgt für konsistente Komponenten auf allen Seiten."
           }
         }
@@ -247,7 +247,7 @@
     "profilesNav": "Arbeitsprofile",
     "roles": {
       "independent": {
-        "title": "Freiberufliche Designerin",
+        "title": "Independent Designer",
         "period": "2024 – heute",
         "p1": "Seit 2024 arbeite ich freiberuflich mit internationalen Kunden an Projekten aus Filmproduktion, Bildung, Logistik, Sport, Wellness und Dienstleistung.",
         "p2": "Meine Erfahrung umfasst Unternehmenswebsites, conversionstarke Landingpages, Webanwendungen mit vielen Screens, CRM-Oberflächen und Dashboards.",
@@ -262,15 +262,15 @@
     "breadcrumbs": "Brotkrümelnavigation",
     "backToPage": ", zurück zur Seite",
     "me": {
-      "title": "Mehr über mich",
-      "crumb": "Mehr",
+      "title": "More about me",
+      "crumb": "More",
       "sections": {
         "about": {
           "nav": "About"
         },
         "home": {
           "nav": "Home",
-          "heading": "Meine Heimatstadt",
+          "heading": "My hometown",
           "caption": "Odessa, Ukraine",
           "more": "mehr",
           "close": "schließen",
@@ -363,7 +363,7 @@
       "openApp": "App {title} öffnen",
       "fullScreen": "{title} im Vollbild öffnen",
       "privateNote": {
-        "title": "Überblick über ein privates Projekt",
+        "title": "Private project overview",
         "text": "Werfen wir einen Blick auf einige Projektdetails."
       }
     }
