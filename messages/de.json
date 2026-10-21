@@ -49,9 +49,9 @@
     "ces": {
       "description": "Die Verwaltungsplattform von CES verbindet Recruiting-Prozesse für Crewing-Unternehmen mit der internen Verwaltung von Seeleuten, Dokumenten und Services. Mein UX/UI-Bereich umfasst beide CRM-Umgebungen – mit Fokus auf Informationsstruktur, operative Workflows und Oberflächen für miteinander verknüpfte Datensätze.",
       "facts": {
-        "role": "UI/UX-Designerin",
-        "productType": "Maritime Plattform",
-        "projectType": "Verwaltungssystem"
+        "role": "UI/UX Designer",
+        "productType": "Maritime Platform",
+        "projectType": "Administration System"
       },
       "coverAlt": "Ruhiges Meer in der Abenddämmerung mit dem weißen CES-Logo in der Mitte",
       "nav": {
@@ -103,8 +103,8 @@
     "juJutsu": {
       "description": "Website-Redesign für eine deutsche Ju-Jutsu-Schule, damit Besucher schnell das passende Training finden und online buchen können. Ich habe das Projekt in drei Tagen umgesetzt – von der Analyse der bestehenden Website bis zur funktionierenden Lösung in Base44.",
       "facts": {
-        "role": "UI/UX-Designerin\nWebsite-Entwicklung",
-        "productType": "Buchungswebsite",
+        "role": "UI/UX Designer\nWebsite Development",
+        "productType": "Booking Website",
         "platform": "Base44"
       },
       "coverAlt": "MacBook Pro mit der Buchung einer Probestunde bei Ju-Jutsu⁺: Fortschrittsanzeige, Oktoberkalender und freie Zeitfenster für den gewählten Tag vor einer Strichzeichnung einer Pagode",
@@ -188,8 +188,8 @@
     "filmBudget": {
       "description": "FilmBudget ist die Website einer dänischen Videoproduktionsfirma, die potenziellen Kunden hilft, Leistungen und Preise zu verstehen, bevor sie ein Angebot anfragen. Ich habe UX und UI für Desktop und Mobile gestaltet – mit Fokus auf transparente Preise, klare Navigation und einen unkomplizierten Anfrageprozess.",
       "facts": {
-        "role": "UI/UX-Designerin",
-        "projectType": "Marketing-Website",
+        "role": "UI/UX Designer",
+        "projectType": "Marketing Website",
         "team": "Solo"
       },
       "coverAlt": "MacBook Pro mit der FilmBudget-Startseite: die Überschrift „Get instant overview of video prices and create your own film budget online“ über einem wechselnden Reel aus Sport- und Filmaufnahmen",
@@ -348,16 +348,16 @@
     "work": {
       "aboutNav": "About",
       "facts": {
-        "year": "Jahr",
-        "role": "Rolle",
-        "productType": "Produkttyp",
-        "projectType": "Projekttyp",
-        "platform": "Plattform",
+        "year": "Year",
+        "role": "Role",
+        "productType": "Product type",
+        "projectType": "Project type",
+        "platform": "Platform",
         "team": "Team",
         "design": "Design",
         "frontend": "Frontend",
         "styling": "Styling",
-        "ai": "KI"
+        "ai": "AI"
       },
       "openLiveSite": "Website von {title} öffnen (öffnet in neuem Tab)",
       "openApp": "App {title} öffnen",

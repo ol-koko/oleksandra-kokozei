@@ -49,9 +49,9 @@
     "ces": {
       "description": "Адміністративна платформа CES поєднує процеси рекрутингу для крюїнгових компаній із внутрішнім керуванням даними моряків, документами та сервісами. Моя зона в UX/UI охоплює обидва CRM-середовища: структуру інформації, операційні сценарії та інтерфейси для роботи з повʼязаними записами.",
       "facts": {
-        "role": "UI/UX-дизайнерка",
-        "productType": "Морська платформа",
-        "projectType": "Адміністративна система"
+        "role": "UI/UX Designer",
+        "productType": "Maritime Platform",
+        "projectType": "Administration System"
       },
       "coverAlt": "Спокійне море в сутінках з білим логотипом CES у центрі",
       "nav": {
@@ -103,8 +103,8 @@
     "juJutsu": {
       "description": "Редизайн сайту німецької школи джиу-джитсу, щоб відвідувачам було легко знайти відповідне заняття й записатися онлайн. Я провела проєкт від аналізу проблем наявного сайту до робочого продукту в Base44 — за три дні.",
       "facts": {
-        "role": "UI/UX-дизайнерка\nРозробка сайту",
-        "productType": "Сайт із записом онлайн",
+        "role": "UI/UX Designer\nWebsite Development",
+        "productType": "Booking Website",
         "platform": "Base44"
       },
       "coverAlt": "MacBook Pro із записом на пробне заняття Ju-Jutsu⁺: індикатор прогресу, жовтневий календар і вільні слоти на обраний день на тлі лінійного малюнка пагоди",
@@ -188,9 +188,9 @@
     "filmBudget": {
       "description": "FilmBudget — сайт данської компанії з відеовиробництва, який допомагає потенційним клієнтам розібратися в послугах і цінах ще до запиту кошторису. Я спроєктувала UX і UI для десктопу та мобільних, зосередившись на прозорих цінах, зрозумілій навігації та простому процесі звернення.",
       "facts": {
-        "role": "UI/UX-дизайнерка",
-        "projectType": "Маркетинговий сайт",
-        "team": "Самостійно"
+        "role": "UI/UX Designer",
+        "projectType": "Marketing Website",
+        "team": "Solo"
       },
       "coverAlt": "MacBook Pro з головною сторінкою FilmBudget: заголовок «Get instant overview of video prices and create your own film budget online» поверх змінного ролика зі спортивними та кінокадрами",
       "coverCaption": "*Відтоді сайт оновили",
@@ -348,15 +348,15 @@
     "work": {
       "aboutNav": "About",
       "facts": {
-        "year": "Рік",
-        "role": "Роль",
-        "productType": "Тип продукту",
-        "projectType": "Тип проєкту",
-        "platform": "Платформа",
-        "team": "Команда",
-        "design": "Дизайн",
-        "frontend": "Фронтенд",
-        "styling": "Стилізація",
+        "year": "Year",
+        "role": "Role",
+        "productType": "Product type",
+        "projectType": "Project type",
+        "platform": "Platform",
+        "team": "Team",
+        "design": "Design",
+        "frontend": "Frontend",
+        "styling": "Styling",
         "ai": "AI"
       },
       "openLiveSite": "Відкрити сайт {title} (відкривається в новій вкладці)",
