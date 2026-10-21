@@ -1,7 +1,7 @@
 {
   "Metadata": {
-    "title": "Oleksandra Kokozei | UI/UX Designer & Design Engineer",
-    "description": "Portfolio of Oleksandra Kokozei, a UI/UX designer and design engineer based in Stuttgart, Germany.",
+    "title": "Oleksandra Kokozei | UI/UX-дизайнерка та дизайн-інженерка",
+    "description": "Портфоліо Олександри Кокозей — UI/UX-дизайнерки та дизайн-інженерки зі Штутгарта, Німеччина.",
     "pageTitle": "{title} | Oleksandra Kokozei"
   },
   "Common": {
@@ -13,14 +13,14 @@
     "experience": "Experience"
   },
   "Me": {
-    "greeting": "Hi, I’m Oleksandra",
+    "greeting": "Привіт, я Олександра",
     "location": "Stuttgart, Germany",
     "bio": {
-      "p1": "I’m a UI/UX designer who loves the space where aesthetics, logic, and technology meet. I’m naturally curious and detail-obsessed, and I enjoy turning messy ideas into clear, intuitive experiences that feel effortless to use.",
-      "p2": "I love not only designing ideas, but bringing them to life which led me to explore AI engineering and turn concepts into functional digital experiences. I learn by making, experimenting, and asking too many “what if?” questions.",
-      "p3": "At heart, I’m equal parts visual thinker, problem-solver, and curious builder with a soft spot for thoughtful details."
+      "p1": "Я UI/UX-дизайнерка, і мене найбільше захоплює простір, де зустрічаються естетика, логіка й технології. Я від природи допитлива й уважна до кожної деталі, тож люблю перетворювати хаотичні ідеї на зрозумілий та інтуїтивний досвід, яким легко користуватися.",
+      "p2": "Мені подобається не лише проєктувати ідеї, а й утілювати їх у життя — так я прийшла до AI-інженерії та почала перетворювати концепти на робочі цифрові продукти. Я вчуся на практиці: створюю, експериментую й ставлю забагато запитань «а що, як?».",
+      "p3": "У душі я водночас мислю візуально, люблю розвʼязувати складні задачі й допитливо створюю нове — і маю особливу слабкість до продуманих деталей."
     },
-    "more": "more",
+    "more": "більше",
     "portraitAlt": "Портрет Олександри Кокозей"
   },
   "Works": {
@@ -29,216 +29,216 @@
     "items": {
       "ces": {
         "title": "CES",
-        "description": "Admin platform for managing maritime services"
+        "description": "Адмінплатформа для керування морськими сервісами"
       },
       "juJutsu": {
         "title": "Ju-Jutsu⁺",
-        "description": "Martial arts website with online booking and AI assistance"
+        "description": "Сайт школи бойових мистецтв з онлайн-записом і AI-асистентом"
       },
       "blowStressAway": {
         "title": "Blow Stress Away",
-        "description": "Breath-controlled stress relief experiment powered by MediaPipe"
+        "description": "Дихальний експеримент для зняття стресу на основі MediaPipe"
       },
       "filmBudget": {
         "title": "FilmBudget",
-        "description": "Video production website with clear pricing and quote requests"
+        "description": "Сайт відеопродакшну з прозорими цінами й запитом кошторису"
       }
     }
   },
   "WorkCases": {
     "ces": {
-      "description": "CES’s administration platform connects recruitment workflows for crewing companies with the internal management of seafarer records, documents, and services. My UX/UI scope covers both CRM environments, focusing on information structure, operational workflows, and interfaces for managing interconnected records.",
+      "description": "Адміністративна платформа CES поєднує процеси рекрутингу для крюїнгових компаній із внутрішнім керуванням даними моряків, документами та сервісами. Моя зона в UX/UI охоплює обидва CRM-середовища: структуру інформації, операційні сценарії та інтерфейси для роботи з повʼязаними записами.",
       "facts": {
-        "role": "UI/UX Designer",
-        "productType": "Maritime Platform",
-        "projectType": "Administration System"
+        "role": "UI/UX-дизайнерка",
+        "productType": "Морська платформа",
+        "projectType": "Адміністративна система"
       },
-      "coverAlt": "Calm sea at dusk with the white CES logo in the center",
+      "coverAlt": "Спокійне море в сутінках з білим логотипом CES у центрі",
       "nav": {
-        "scope": "Scope",
-        "flows": "Flows"
+        "scope": "Обсяг",
+        "flows": "Процеси"
       },
       "overview": {
-        "label": "Overview",
-        "lead": "Two workspaces with distinct responsibilities.",
-        "body": "My work centers on the operational interfaces used by crewing companies and the CES team. Both environments connect to the same maritime ecosystem, but each serves a different set of daily tasks.\nCrewing managers need to publish vacancies, review applications, find suitable seafarers, and manage communication. The CES team needs to maintain seafarer records, process verification and service requests, oversee crewing companies, and moderate vacancies.\n\nThe design challenge is to give each team a focused workspace while making the relationships between people, documents, vacancies, and requests clear."
+        "label": "Огляд",
+        "lead": "Два робочі простори з різними задачами.",
+        "body": "У центрі моєї роботи — операційні інтерфейси, якими користуються крюїнгові компанії та команда CES. Обидва середовища підключені до однієї морської екосистеми, але кожне закриває свій набір щоденних задач.\nКрюїнг-менеджерам потрібно публікувати вакансії, переглядати відгуки, шукати відповідних моряків і вести комунікацію. Команді CES потрібно підтримувати записи моряків, обробляти запити на верифікацію та послуги, контролювати крюїнгові компанії й модерувати вакансії.\n\nДизайн-задача — дати кожній команді сфокусований робочий простір і водночас зробити зрозумілими звʼязки між людьми, документами, вакансіями та запитами."
       },
       "scope": {
-        "label": "Scope",
-        "lead": "From recruitment management to platform operations.",
+        "label": "Обсяг робіт",
+        "lead": "Від керування рекрутингом до операційної роботи платформи.",
         "topics": {
           "crewingCrm": {
             "title": "Crewing CRM",
-            "body": "The recruitment workspace covers vacancy management, application review, seafarer search, candidate records, and messaging. Its scope also includes company information, manager administration, recruitment statistics, and notifications.\nA key consideration is the vacancy lifecycle: distinguishing listings awaiting moderation from published, closed, and archived vacancies, while keeping applications and candidate actions accessible."
+            "body": "Робочий простір рекрутингу охоплює керування вакансіями, перегляд відгуків, пошук моряків, картки кандидатів і повідомлення. Сюди також входять дані компанії, адміністрування менеджерів, статистика рекрутингу та сповіщення.\nКлючовий момент — життєвий цикл вакансії: оголошення на модерації мають чітко відрізнятися від опублікованих, закритих і архівних, а відгуки й дії з кандидатами — залишатися під рукою."
           },
           "cesCrm": {
             "title": "CES CRM",
-            "body": "The internal workspace covers seafarer records, document verification, service requests, crewing companies, and vacancy moderation. Supporting areas include reference data such as ranks and availability, news, statistics, and activity history.\nThe seafarer profile brings together professional information, availability, the assigned manager, documents, services, and order history. It also provides access to bonus records, invoicing, and CV generation, making it a central point for multiple operational tasks."
+            "body": "Внутрішній робочий простір охоплює записи моряків, верифікацію документів, запити на послуги, крюїнгові компанії та модерацію вакансій. Допоміжні розділи — довідники (наприклад, посади й доступність), новини, статистика та історія дій.\nПрофіль моряка обʼєднує професійні дані, доступність, закріпленого менеджера, документи, послуги та історію замовлень. Звідси ж відкриваються бонуси, рахунки й генерація CV, тож профіль стає центральною точкою для багатьох операційних задач."
           }
         }
       },
       "wireframes": {
-        "caption": "Initial CRM wireframes",
-        "alt": "Grid of early wireframes for the Crewing CRM and CES CRM: record pages, data tables, filters and forms"
+        "caption": "Перші вайрфрейми CRM",
+        "alt": "Сітка ранніх вайрфреймів Crewing CRM і CES CRM: сторінки записів, таблиці даних, фільтри та форми"
       },
       "workflows": {
-        "label": "Workflows",
-        "lead": "Designing the connections between records and actions.",
+        "label": "Робочі процеси",
+        "lead": "Проєктування звʼязків між записами та діями.",
         "topics": {
           "vacancies": {
-            "title": "💼 Vacancies and applications",
-            "body": "A vacancy connects a role and vessel with employment details, publication status, and applications. The interface needs to support both an overview of recruitment activity and the review of individual listings and candidates."
+            "title": "💼 Вакансії та відгуки",
+            "body": "Вакансія повʼязує посаду й судно з умовами роботи, статусом публікації та відгуками. Інтерфейс має підтримувати і загальний огляд рекрутингу, і детальний перегляд окремих оголошень та кандидатів."
           },
           "seafarers": {
-            "title": "📑 Seafarers and documents",
-            "body": "A seafarer record connects professional details and availability with supporting documents. Document validity and verification require distinct status information so that administrators can understand what is current, what needs review, and what requires follow-up."
+            "title": "📑 Моряки та документи",
+            "body": "Запис моряка повʼязує професійні дані й доступність із підтвердними документами. Чинність і верифікація документів потребують окремих статусів, щоб адміністратори бачили, що актуальне, що треба перевірити, а що вимагає подальших дій."
           },
           "services": {
-            "title": "👤 Services and orders",
-            "body": "Service requests connect a seafarer with a specific task, its progress, and related order or payment information. Administrators need enough context to continue processing a request without losing track of the person or records involved.\nAcross these workflows, my design focus is clear hierarchy, searchable and filterable lists, understandable statuses, and relevant actions within each record. The goal is to support detailed operational work while keeping the two CRM environments consistent."
+            "title": "👤 Послуги та замовлення",
+            "body": "Запит на послугу повʼязує моряка з конкретною задачею, її прогресом і даними про замовлення чи оплату. Адміністраторам потрібно достатньо контексту, щоб продовжити обробку запиту, не втрачаючи з поля зору людину та повʼязані записи.\nУ всіх цих процесах я зосереджуюся на чіткій ієрархії, списках із пошуком і фільтрами, зрозумілих статусах і доречних діях у кожному записі. Мета — підтримати детальну операційну роботу й зберегти узгодженість обох CRM-середовищ."
           }
         }
       }
     },
     "juJutsu": {
-      "description": "Website redesign for a German jujitsu school, focused on helping visitors find a suitable class and book a session online. I took the project from identifying problems in the existing website to building a functional experience in Base44 within three days.",
+      "description": "Редизайн сайту німецької школи джиу-джитсу, щоб відвідувачам було легко знайти відповідне заняття й записатися онлайн. Я провела проєкт від аналізу проблем наявного сайту до робочого продукту в Base44 — за три дні.",
       "facts": {
-        "role": "UI/UX Designer\nWebsite Development",
-        "productType": "Booking Website",
+        "role": "UI/UX-дизайнерка\nРозробка сайту",
+        "productType": "Сайт із записом онлайн",
         "platform": "Base44"
       },
-      "coverAlt": "MacBook Pro showing the Ju-Jutsu⁺ trial lesson booking: a progress bar, an October calendar and the free time slots for the selected day, over a line drawing of a pagoda",
+      "coverAlt": "MacBook Pro із записом на пробне заняття Ju-Jutsu⁺: індикатор прогресу, жовтневий календар і вільні слоти на обраний день на тлі лінійного малюнка пагоди",
       "nav": {
-        "goal": "Goal",
-        "design": "Design",
-        "result": "Result"
+        "goal": "Мета",
+        "design": "Дизайн",
+        "result": "Результат"
       },
       "overview": {
-        "label": "Overview",
-        "lead": "From a local business problem to a working website.",
-        "body": "I selected Ju-Jutsu⁺ after reviewing its existing website and identifying opportunities to improve class discovery and booking. The school’s offering was buried in lengthy content, while the schedule was difficult to navigate and visitors could not book a lesson online.\n\nMy work covered defining the concept, restructuring content, planning the user flow, and implementing the website in Base44. I focused on connecting the information prospective students need with the actions they want to take: explore classes, find a suitable time and location, and book a session."
+        "label": "Огляд",
+        "lead": "Від проблеми місцевого бізнесу до робочого сайту.",
+        "body": "Я обрала Ju-Jutsu⁺, проаналізувавши наявний сайт і побачивши, як можна покращити пошук занять і запис. Пропозиція школи губилася в довгих текстах, розкладом було складно користуватися, а записатися на заняття онлайн було неможливо.\n\nМоя робота охопила концепцію, реструктуризацію контенту, планування користувацького сценарію та реалізацію сайту в Base44. Я зосередилася на тому, щоб поєднати інформацію, потрібну майбутнім учням, із діями, які вони хочуть виконати: переглянути заняття, знайти зручний час і місце та записатися."
       },
       "promptToWebsite": {
-        "caption": "From prompt to website",
-        "alt": "Base44 editor on a MacBook Pro: the prompt that describes the Ju-Jutsu⁺ website on the left, the generated homepage with the headline “Komm, wie du bist.” and two people training on the right"
+        "caption": "Від промпту до сайту",
+        "alt": "Редактор Base44 на MacBook Pro: ліворуч промпт з описом сайту Ju-Jutsu⁺, праворуч згенерована головна сторінка із заголовком «Komm, wie du bist.» і двома людьми на тренуванні"
       },
       "goal": {
-        "label": "Goal",
-        "lead": "Make the first step into training easier.",
-        "body": "The challenge was to turn an information-heavy website into a practical tool for choosing and booking classes. Visitors needed a clearer way to understand the school’s offering without reading through multiple sections or searching for relevant schedule details.\n\nI prioritized three tasks:\n- finding a class that matches the visitor’s needs\n- understanding the training options\n- booking online.\n\nFrom a business perspective, the aim was to support new student inquiries and reduce the need for manual coordination around schedules and bookings."
+        "label": "Мета",
+        "lead": "Полегшити перший крок до тренувань.",
+        "body": "Задача полягала в тому, щоб перетворити перевантажений інформацією сайт на практичний інструмент для вибору занять і запису. Відвідувачам був потрібен простіший спосіб зрозуміти пропозицію школи — без читання кількох розділів і пошуку потрібних деталей у розкладі.\n\nЯ визначила три пріоритетні задачі:\n- знайти заняття під свої потреби\n- розібратися у форматах тренувань\n- записатися онлайн.\n\nЗ погляду бізнесу метою було отримувати більше звернень від нових учнів і зменшити ручну координацію розкладу та записів."
       },
       "design": {
-        "label": "Design",
-        "lead": "Find a class. Explore the options. Book a session.",
+        "label": "Дизайн",
+        "lead": "Знайти заняття. Переглянути варіанти. Записатися.",
         "topics": {
           "schedule": {
-            "title": "🗓️ A filterable training schedule",
-            "body": "I introduced a structured timetable with filters for class category, age group, and city. This gives visitors a way to narrow down the available options and focus on sessions relevant to them."
+            "title": "🗓️ Розклад тренувань із фільтрами",
+            "body": "Я запровадила структурований розклад із фільтрами за типом заняття, віковою групою та містом. Так відвідувачі можуть звузити вибір і зосередитися на заняттях, які їм справді підходять."
           },
           "booking": {
-            "title": "🤼 Online lesson booking",
-            "body": "I added a booking flow to give visitors a direct next step after exploring classes. Bringing booking into the website connects class discovery with taking action, rather than leaving visitors to arrange everything through a separate conversation."
+            "title": "🤼 Онлайн-запис на заняття",
+            "body": "Я додала сценарій запису, щоб після перегляду занять відвідувачі мали зрозумілий наступний крок. Запис прямо на сайті поєднує вибір заняття з дією і не змушує домовлятися про все в окремій розмові."
           },
           "assistant": {
-            "title": "💬 Bilingual AI assistance",
-            "body": "I integrated an AI assistant with English and Ukrainian support, adding a conversational way to ask questions while exploring the website."
+            "title": "💬 Двомовний AI-асистент",
+            "body": "Я інтегрувала AI-асистента з підтримкою англійської та української, щоб під час перегляду сайту можна було просто поставити запитання в чаті."
           },
           "content": {
-            "title": "🧹 Clearer content and visual hierarchy",
-            "body": "I shortened lengthy descriptions and reorganized information into scannable sections and cards. A clearer visual hierarchy highlights key details, helping visitors explore training options and find relevant information more easily."
+            "title": "🧹 Чіткіший контент і візуальна ієрархія",
+            "body": "Я скоротила довгі описи й перебудувала інформацію в розділи та картки, які легко переглядати. Чіткіша візуальна ієрархія виділяє головне й допомагає відвідувачам легше орієнтуватися у форматах тренувань і знаходити потрібне."
           }
         }
       },
       "screens": {
         "classDiscovery": {
-          "caption": "Class Discovery",
-          "alt": "Weekly training schedule from Monday to Friday, filtered by city and course, with one card per class showing its time and location"
+          "caption": "Пошук занять",
+          "alt": "Тижневий розклад тренувань з понеділка по пʼятницю з фільтрами за містом і курсом; кожне заняття — окрема картка з часом і місцем"
         },
         "bookingFlow": {
-          "caption": "Booking Flow",
-          "alt": "Booking step “Termin wählen”: a progress bar, an October calendar and the available time slots for the selected day"
+          "caption": "Сценарій запису",
+          "alt": "Крок запису «Termin wählen»: індикатор прогресу, жовтневий календар і доступні слоти на обраний день"
         },
         "aiAssistance": {
-          "caption": "AI Assistance",
-          "alt": "Homepage hero with two people training in a dojo and the open chat window of the Ju-Jutsu⁺ AI assistant"
+          "caption": "AI-асистент",
+          "alt": "Головний екран із двома людьми, що тренуються в доджо, і відкритим вікном чату AI-асистента Ju-Jutsu⁺"
         },
         "contentStructure": {
-          "caption": "Content Structure",
-          "alt": "Class pages as cards: a photo of children training next to the course name, age group, short description and a button to book a trial lesson"
+          "caption": "Структура контенту",
+          "alt": "Сторінки занять у вигляді карток: фото дітей на тренуванні поруч із назвою курсу, віковою групою, коротким описом і кнопкою запису на пробне заняття"
         }
       },
       "result": {
-        "label": "Result",
-        "lead": "An implemented website in three days.",
-        "body": "I built and published a functional website combining a filterable training schedule, online booking, and a bilingual AI assistant. The result brings class information and booking into one experience, with a more focused structure around prospective students’ immediate needs.\n\nUsing AI-assisted development in Base44, I moved from concept to implementation within a three-day timeframe. This project demonstrates my ability to define a focused scope, prioritize useful features, and carry a website beyond static design into a working product."
+        "label": "Результат",
+        "lead": "Готовий сайт за три дні.",
+        "body": "Я створила й опублікувала робочий сайт, що поєднує розклад тренувань із фільтрами, онлайн-запис і двомовного AI-асистента. Тепер інформація про заняття та запис зібрані в одному місці, а структура зосереджена на нагальних потребах майбутніх учнів.\n\nЗавдяки розробці з допомогою AI в Base44 я пройшла шлях від концепції до реалізації за три дні. Цей проєкт показує, що я вмію визначати сфокусований обсяг робіт, обирати справді корисні функції та доводити сайт від статичного дизайну до робочого продукту."
       }
     },
     "blowStressAway": {
       "titleEmoji": "☀️",
-      "description": "A playful, MediaPipe-powered breathing experience designed to help you unwind after a demanding day. Blow away clouds representing everyday worries about work and life, making space for a moment of calm.",
+      "description": "Грайливий дихальний досвід на основі MediaPipe, що допомагає розслабитися після напруженого дня. Здувайте хмари буденних тривог про роботу й життя — і звільняйте місце для хвилини спокою.",
       "facts": {
         "design": "Figma",
         "frontend": "TypeScript\nReact\nVite",
         "styling": "Tailwind CSS",
         "ai": "Figma Make\nCursor\nOpus 4.5"
       },
-      "coverAlt": "Phone on a soft pink gradient playing Blow Stress Away: a worried girl under storm clouds and a tangle of stress, the clouds clear and the sun comes out over her",
-      "appTitle": "Blow Stress Away, a live breathing app that asks for microphone access"
+      "coverAlt": "Телефон на ніжному рожевому градієнті з грою Blow Stress Away: стривожена дівчинка під грозовими хмарами й клубком стресу, хмари розходяться, і над нею виходить сонце",
+      "appTitle": "Blow Stress Away — інтерактивний дихальний застосунок, який запитує доступ до мікрофона"
     },
     "filmBudget": {
-      "description": "FilmBudget is a website for a Danish video production company, designed to help potential clients understand services and pricing before requesting a quote. I designed the UX and UI for desktop and mobile, focusing on transparent pricing, clear navigation, and a straightforward inquiry process.",
+      "description": "FilmBudget — сайт данської компанії з відеовиробництва, який допомагає потенційним клієнтам розібратися в послугах і цінах ще до запиту кошторису. Я спроєктувала UX і UI для десктопу та мобільних, зосередившись на прозорих цінах, зрозумілій навігації та простому процесі звернення.",
       "facts": {
-        "role": "UI/UX Designer",
-        "projectType": "Marketing Website",
-        "team": "Solo"
+        "role": "UI/UX-дизайнерка",
+        "projectType": "Маркетинговий сайт",
+        "team": "Самостійно"
       },
-      "coverAlt": "MacBook Pro showing the FilmBudget homepage: the headline “Get instant overview of video prices and create your own film budget online” over a changing reel of sports and film footage",
-      "coverCaption": "*The live website has since been updated",
+      "coverAlt": "MacBook Pro з головною сторінкою FilmBudget: заголовок «Get instant overview of video prices and create your own film budget online» поверх змінного ролика зі спортивними та кінокадрами",
+      "coverCaption": "*Відтоді сайт оновили",
       "nav": {
-        "goal": "Goal",
-        "decisions": "Decision",
-        "result": "Result"
+        "goal": "Мета",
+        "decisions": "Рішення",
+        "result": "Результат"
       },
       "overview": {
-        "label": "Overview",
-        "lead": "Connecting business goals with the customer journey.",
-        "body": "My work covered research, site structure, wireframes, UI design, mobile adaptation, and a reusable UI kit. I applied the client’s existing brand guidelines across English and Danish layouts, organizing the experience around exploring services, understanding costs, and requesting a quote."
+        "label": "Огляд",
+        "lead": "Поєднати бізнес-цілі зі шляхом клієнта.",
+        "body": "Моя робота охопила дослідження, структуру сайту, вайрфрейми, UI-дизайн, мобільну адаптацію та UI-кіт для повторного використання. Я застосувала наявний брендбук клієнта до англійської й данської версій і вибудувала досвід навколо трьох кроків: переглянути послуги, зрозуміти вартість і запросити кошторис."
       },
       "goal": {
-        "label": "Goal",
-        "lead": "Helping clients make an informed first step.",
-        "body": "Stakeholder interviews and a user survey highlighted three priorities: early access to approximate prices, information that builds trust, and easy contact. I translated these insights into a content hierarchy that brings service options and pricing forward, while keeping the path to an inquiry clear."
+        "label": "Мета",
+        "lead": "Допомогти клієнтам зробити усвідомлений перший крок.",
+        "body": "Інтервʼю зі стейкхолдерами та опитування користувачів виявили три пріоритети: ранній доступ до орієнтовних цін, інформація, що викликає довіру, і простий звʼязок. Я перетворила ці інсайти на ієрархію контенту, яка виносить послуги й ціни на перший план і зберігає зрозумілий шлях до звернення."
       },
       "research": {
-        "caption": "Research & Analysis",
-        "alt": "Research board with stakeholder interview notes, a competitive analysis, a user journey map, user survey charts and an information architecture sketch"
+        "caption": "Дослідження та аналіз",
+        "alt": "Дошка досліджень: нотатки інтервʼю зі стейкхолдерами, аналіз конкурентів, мапа шляху користувача, графіки опитування та ескіз інформаційної архітектури"
       },
       "decisions": {
-        "label": "Design Decisions",
-        "lead": "Clear pricing. Focused choices. Easy contact.",
+        "label": "Дизайн-рішення",
+        "lead": "Зрозумілі ціни. Сфокусований вибір. Простий звʼязок.",
         "topics": {
           "pricing": {
-            "title": "💶 Pricing with context",
-            "body": "Three example-based pricing tiers for each video type help visitors compare options and understand the likely budget."
+            "title": "💶 Ціни з контекстом",
+            "body": "Три цінові рівні з прикладами для кожного типу відео допомагають порівняти варіанти й зрозуміти орієнтовний бюджет."
           },
           "inquiry": {
-            "title": "🧹 A clear path to inquiry",
-            "body": "Prominent calls to action and a short contact form guide visitors toward requesting a quote. The confirmation page explains what happens next."
+            "title": "🧹 Зрозумілий шлях до звернення",
+            "body": "Помітні заклики до дії та коротка контактна форма ведуть відвідувачів до запиту кошторису. Сторінка підтвердження пояснює, що буде далі."
           },
           "devices": {
-            "title": "📱 Consistency across devices",
-            "body": "Mobile layouts prioritize pricing and contact actions, while a reusable UI kit keeps components consistent across pages."
+            "title": "📱 Узгодженість на всіх пристроях",
+            "body": "Мобільні макети ставлять на перше місце ціни та контакт, а UI-кіт для повторного використання тримає компоненти узгодженими на всіх сторінках."
           }
         }
       },
       "result": {
-        "label": "Result",
-        "lead": "A complete desktop and mobile design.",
-        "body": "I delivered desktop and mobile designs, English and Danish layouts, and a reusable UI kit for developer handoff.\n\nThe scope covered service discovery, pricing, quote requests, and confirmation, alongside supporting company and editorial pages.\nI applied the client’s existing visual identity throughout and created a reusable UI kit for consistent page layouts."
+        "label": "Результат",
+        "lead": "Повний дизайн для десктопу та мобільних.",
+        "body": "Я підготувала дизайн для десктопу й мобільних, англійську та данську версії макетів і UI-кіт для передачі розробникам.\n\nПроєкт охопив перегляд послуг, ціни, запит кошторису й підтвердження, а також допоміжні сторінки про компанію та редакційні сторінки.\nЯ послідовно застосувала наявну візуальну айдентику клієнта й створила UI-кіт для узгоджених макетів сторінок."
       },
       "designFile": {
-        "caption": "Design file overview",
-        "alt": "FilmBudget design file: wireframes, desktop pages in English and Danish, mobile pages and the UI kit"
+        "caption": "Огляд дизайн-файлу",
+        "alt": "Дизайн-файл FilmBudget: вайрфрейми, десктопні сторінки англійською та данською, мобільні сторінки й UI-кіт"
       }
     }
   },
@@ -247,48 +247,48 @@
     "profilesNav": "Профілі з роботами",
     "roles": {
       "independent": {
-        "title": "Independent Designer",
-        "period": "2024 – Present",
-        "p1": "Since 2024, I’ve worked independently with international clients on projects across film production, education, logistics, sports, wellness, and service-based businesses.",
-        "p2": "My experience includes corporate websites, conversion-focused landing pages, multi-screen web applications, CRM-style interfaces, dashboards.",
-        "p3": "Depending on the project, I work across information architecture, user flows, wireframes, responsive UI, design systems, reusable components, multilingual interfaces, developer handoff, and Webflow/Framer implementation. I also collaborate directly with clients and developers, adapt existing brand systems, and use AI-assisted development to turn selected concepts into functional prototypes."
+        "title": "Незалежна дизайнерка",
+        "period": "2024 – дотепер",
+        "p1": "З 2024 року я самостійно працюю з міжнародними клієнтами над проєктами у сферах кіновиробництва, освіти, логістики, спорту, wellness і сервісного бізнесу.",
+        "p2": "Мій досвід охоплює корпоративні сайти, лендинги з фокусом на конверсію, багатоекранні вебзастосунки, CRM-інтерфейси та дашборди.",
+        "p3": "Залежно від проєкту я працюю з інформаційною архітектурою, користувацькими сценаріями, вайрфреймами, адаптивним UI, дизайн-системами, компонентами для повторного використання, багатомовними інтерфейсами, передачею дизайну розробникам і реалізацією у Webflow/Framer. Я також напряму співпрацюю з клієнтами та розробниками, адаптую наявні бренд-системи й використовую розробку з допомогою AI, щоб перетворювати вибрані концепти на робочі прототипи."
       }
     }
   },
   "Overlay": {
     "hint": "Натисніть Escape, щоб закрити.",
-    "appHint": "Press Tab to leave the app, then Escape to close it.",
+    "appHint": "Натисніть Tab, щоб вийти із застосунку, а потім Escape, щоб його закрити.",
     "sectionsNav": "Розділи",
     "breadcrumbs": "Навігаційний ланцюжок",
     "backToPage": ", назад до сторінки",
     "me": {
       "title": "Більше про мене",
-      "crumb": "More",
+      "crumb": "Більше",
       "sections": {
         "about": {
-          "nav": "About"
+          "nav": "Про мене"
         },
         "home": {
-          "nav": "Home",
-          "heading": "My hometown",
+          "nav": "Дім",
+          "heading": "Моє рідне місто",
           "caption": "Odesa, Ukraine",
-          "more": "more",
-          "close": "close",
-          "photosLabel": "hometown photos",
-          "openPhoto": "Open photo: {alt}",
+          "more": "більше",
+          "close": "закрити",
+          "photosLabel": "фото рідного міста",
+          "openPhoto": "Відкрити фото: {alt}",
           "photos": {
-            "port": "Odesa seaport cranes across the sea at sunset, seen from a table set with glasses",
-            "opera": "Hand holding an instant photo of the Odesa Opera House in front of the building itself",
-            "beach": "Pebble beach and calm sea under an orange dusk sky",
-            "street": "Evening street café in Odesa with string lights, parasols and a large tree"
+            "port": "Крани Одеського морського порту над морем на заході сонця — вигляд зі столика з келихами",
+            "opera": "Рука тримає миттєве фото Одеського оперного театру на тлі самої будівлі",
+            "beach": "Галечний пляж і спокійне море під помаранчевим вечірнім небом",
+            "street": "Вечірня вулична кавʼярня в Одесі з гірляндами, парасолями й великим деревом"
           }
         },
         "music": {
-          "nav": "Music",
-          "heading": "Music",
-          "listenOnSpotify": "Слухати «{title}» — {artist} у Spotify (відкриється в новій вкладці)",
-          "previous": "Previous song",
-          "next": "Next song",
+          "nav": "Музика",
+          "heading": "Музика",
+          "listenOnSpotify": "Слухати «{title}» — {artist} у Spotify (відкривається в новій вкладці)",
+          "previous": "Попередня пісня",
+          "next": "Наступна пісня",
           "items": {
             "wickedGame": {
               "title": "Wicked Game",
@@ -305,11 +305,11 @@
           }
         },
         "books": {
-          "nav": "Books",
-          "heading": "Books",
-          "coverAlt": "Cover of {title} by {author}",
-          "previous": "Previous book",
-          "next": "Next book",
+          "nav": "Книжки",
+          "heading": "Книжки",
+          "coverAlt": "Обкладинка книжки «{title}», {author}",
+          "previous": "Попередня книжка",
+          "next": "Наступна книжка",
           "items": {
             "goodNightMrHolmes": {
               "title": "Good Night, Mr. Holmes",
@@ -326,11 +326,11 @@
           }
         },
         "films": {
-          "nav": "Films",
-          "heading": "Films",
-          "posterAlt": "Poster of {title} ({year})",
-          "previous": "Previous film",
-          "next": "Next film",
+          "nav": "Фільми",
+          "heading": "Фільми",
+          "posterAlt": "Постер фільму «{title}» ({year})",
+          "previous": "Попередній фільм",
+          "next": "Наступний фільм",
           "items": {
             "focus": {
               "title": "Focus"
@@ -346,30 +346,30 @@
       }
     },
     "work": {
-      "aboutNav": "About",
+      "aboutNav": "Про проєкт",
       "facts": {
-        "year": "Year",
-        "role": "Role",
-        "productType": "Product type",
-        "projectType": "Project type",
-        "platform": "Platform",
-        "team": "Team",
-        "design": "Design",
-        "frontend": "Frontend",
-        "styling": "Styling",
+        "year": "Рік",
+        "role": "Роль",
+        "productType": "Тип продукту",
+        "projectType": "Тип проєкту",
+        "platform": "Платформа",
+        "team": "Команда",
+        "design": "Дизайн",
+        "frontend": "Фронтенд",
+        "styling": "Стилізація",
         "ai": "AI"
       },
-      "openLiveSite": "Open the {title} live site (opens in a new tab)",
-      "openApp": "Open the {title} app",
-      "fullScreen": "Open {title} in full screen",
+      "openLiveSite": "Відкрити сайт {title} (відкривається в новій вкладці)",
+      "openApp": "Відкрити застосунок {title}",
+      "fullScreen": "Відкрити {title} на весь екран",
       "privateNote": {
-        "title": "Private project overview",
-        "text": "Let’s explore a few project details."
+        "title": "Огляд закритого проєкту",
+        "text": "Розгляньмо кілька деталей проєкту."
       }
     }
   },
   "Lightbox": {
-    "close": "Close photo"
+    "close": "Закрити фото"
   },
   "Header": {
     "skipToContent": "Перейти до вмісту",
