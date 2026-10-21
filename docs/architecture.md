@@ -5,9 +5,11 @@
 A statically rendered Next.js App Router site. Every locale is prerendered at build time; the only request-time code is the locale proxy.
 
 ```
-Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTML
+Request ─▶ src/proxy.ts ─▶ /[locale] route ─▶ static HTML
                  │
-                 └─ `/` is rewritten to the default locale (en); `/en` redirects to `/`
+                 ├─ 1. legacy overlay query (`/?work=ces`) → clean path (308)
+                 ├─ 2. unprefixed path + saved choice or UA/DE/AT/CH visitor → `/uk…` or `/de…` (307)
+                 └─ 3. next-intl: `/` is rewritten to the default locale (en); `/en` redirects to `/`
 ```
 
 ## Directory layout
@@ -32,7 +34,7 @@ Request ─▶ src/proxy.ts (next-intl) ─▶ /[locale] route ─▶ static HTM
 ### Internationalization
 
 - `next-intl` with `localePrefix: 'as-needed'`: English lives at `/`, other locales under a prefix.
-- `localeDetection: false`: no `Accept-Language` negotiation. Geo-based detection (saved choice > Vercel geo > en) comes in a later stage and will live in the proxy.
+- `localeDetection: false` and `localeCookie: false` in next-intl: no `Accept-Language` negotiation. The proxy detects the locale itself (`src/features/i18n/localeDetection.ts`): the `NEXT_LOCALE` cookie the language switcher writes on an explicit choice, then the Vercel `x-vercel-ip-country` header (UA → uk; DE, AT, CH → de), then English. Only unprefixed paths are redirected, crawlers never are, and the legacy query redirect and detection combine into a single hop.
 - The locale is read with `next/root-params` in `request.ts` and the root layout, which keeps every page eligible for static rendering.
 - Message keys are typed from `en.json` via `AppConfig` augmentation (`src/features/i18n/global.d.ts`). A missing or misspelled key fails the typecheck.
 - `uk.json` and `de.json` mirror the English keys. Untranslated values are `"TODO"`.

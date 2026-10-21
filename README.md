@@ -61,10 +61,37 @@ src/
     overlay/          Modal overlays with sticky nav and scroll-spy
     signature/        Animated handwritten signature
   styles/             Global style modules: breakpoints, fonts
-  proxy.ts            Locale routing (next-intl middleware)
+  proxy.ts            Legacy overlay redirects, locale detection, next-intl routing
 ```
 
 See [docs/architecture.md](docs/architecture.md) for details.
+
+## Languages and locale detection
+
+English is served without a prefix (`/`, `/works/ces`); Ukrainian and German live under `/uk` and `/de`. A visitor who opens an unprefixed URL is redirected once (307, path and query kept, e.g. `/works/ces` → `/uk/works/ces`) using this order:
+
+1. **Saved choice:** the `NEXT_LOCALE` cookie, if present. `en` keeps English.
+2. **Country:** Vercel's `x-vercel-ip-country` header. `UA` → `uk`; `DE`, `AT`, `CH` → `de`.
+3. **English** for everyone else.
+
+URLs with a locale prefix are never redirected, and neither are search engine crawlers; every page lists its hreflang alternates with `x-default` pointing to the English path.
+
+### Cookie
+
+`NEXT_LOCALE` is a functional preference cookie. It is set only when the visitor picks a language in the switcher (including `en`), stores just the locale code, lasts one year, is `SameSite=Lax` and is not used for tracking, so it needs no consent banner.
+
+### Simulating a country locally
+
+There is no Vercel geo header in local development. Set `DEV_COUNTRY` to simulate one (ignored in production builds):
+
+```bash
+DEV_COUNTRY=UA npm run dev   # / redirects to /uk
+DEV_COUNTRY=DE npm run dev   # / redirects to /de
+```
+
+Against a production build (`npm run build && npm run start`), send the header instead: `curl -sI -H 'x-vercel-ip-country: AT' http://localhost:3000/me`. Clear the `NEXT_LOCALE` cookie to test detection again in a browser.
+
+Ukrainian and German copy is listed for review in [docs/translations-review.md](docs/translations-review.md).
 
 ## Performance
 
