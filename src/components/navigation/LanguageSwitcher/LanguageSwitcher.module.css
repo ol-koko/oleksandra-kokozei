@@ -14,6 +14,16 @@
   text-decoration: none;
 }
 
+/* At rest the active chip has its own background; while the indicator slides it takes over. */
 .chip[aria-current='true'] {
   background-color: var(--color-surface-subtle);
+}
+
+.track[data-sliding] .chip[aria-current='true'] {
+  background-color: transparent;
+  color: var(--color-text-disabled);
+}
+
+.track[data-sliding] .chip[data-target] {
+  color: var(--color-text-primary);
 }
