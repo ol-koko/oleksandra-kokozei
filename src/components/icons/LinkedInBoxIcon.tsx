@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react';
 
-/** `akar-icons:linkedin-box-fill`, exported from Figma (footer, 76:676). */
+/** `akar-icons:linkedin-box-fill`, exported from Figma (footer, 76:676); also used on the Experience tiles. */
 export function LinkedInBoxIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
