@@ -19,7 +19,7 @@ export function OverlayAbout({ headingId }: OverlayAboutProps) {
   return (
     <div className={styles.about}>
       <div className={styles.portrait} data-reveal>
-        <PolaroidSign image={portrait} alt={t('portraitAlt')} />
+        <PolaroidSign image={portrait} alt={t('portraitAlt')} unoptimized />
       </div>
       <AboutIntro headingLevel={2} headingId={headingId} />
     </div>

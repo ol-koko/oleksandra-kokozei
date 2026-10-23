@@ -15,7 +15,7 @@ export function HeroSection() {
   return (
     <section id="me" aria-labelledby={HEADING_ID} tabIndex={-1} className={styles.hero}>
       <div className={styles.portrait}>
-        <PolaroidSign image={portrait} alt={t('portraitAlt')} preload animateEntrance />
+        <PolaroidSign image={portrait} alt={t('portraitAlt')} preload unoptimized animateEntrance />
       </div>
 
       <div className={styles.text}>
