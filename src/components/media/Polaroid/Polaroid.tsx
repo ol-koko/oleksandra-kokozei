@@ -12,6 +12,8 @@ type PolaroidProps = {
   preload?: boolean;
   /** Rendered photo width for next/image; defaults to the 228 px photo of the 260 px frame. */
   sizes?: string;
+  /** Serves the file as it is, for a WebP already encoded at display size. */
+  unoptimized?: boolean;
   /** Stronger shadow for a photo shown on its own (lightbox). */
   elevated?: boolean;
   className?: string;
@@ -27,6 +29,7 @@ export function Polaroid({
   rotation,
   preload = false,
   sizes = '228px',
+  unoptimized = false,
   elevated = false,
   className,
 }: PolaroidProps) {
@@ -38,7 +41,13 @@ export function Polaroid({
       style={{ '--polaroid-rotation': `${rotation}deg` } as CSSProperties}
     >
       <div className={styles.photo}>
-        <LoadingImage image={image} alt={alt} sizes={sizes} preload={preload} />
+        <LoadingImage
+          image={image}
+          alt={alt}
+          sizes={sizes}
+          preload={preload}
+          unoptimized={unoptimized}
+        />
       </div>
     </div>
   );

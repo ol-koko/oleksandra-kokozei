@@ -13,6 +13,8 @@ All three CSS files are imported globally in `src/app/globals.css`.
 
 When syncing a new Figma export, merge it instead of overwriting. The repository keeps tokens that the export does not contain yet: `--size-content-max`, `--size-overlay-content`, `--size-overlay-max`, `--size-measure`, `--shadow-polaroid`, `--blur-header`, `--gradient-media-cover`, `--gradient-media-detail`. `--color-icon-strong` stays `gray-900` (#1e1e1e, as bound in Figma) even though the export maps it to `gray-1000`.
 
+Tokens nothing uses are removed from the repository: `--pink-200`, `--pink-500`, `--purple-900`, `--color-accent-book`, `--color-brand-film-budget-background` and `--color-brand-film-budget-foreground` (the Books and FilmBudget colors only fed placeholders, and the shipped blocks do not use them). A later Figma export may bring them back: drop them again when merging, or delete them in Figma.
+
 `--shadow-polaroid` is kept but no longer used: polaroids use `--shadow-sm` (blur 6), and the Figma effect is being updated to match. Remove it once Figma no longer has the 3.15 blur.
 
 One-off component geometry is not a token (see Rules). The work card logo (60 px) and the case cover logo (78 px) are local `--logo-size` custom properties in `WorkCard.module.css` and `WorkMedia.module.css`. Colors, effects, gradients and motion values stay tokens even where only one component uses them today (`--color-overlay-lightbox`, `--color-media-shimmer`, `--blur-header`, `--blur-sm`, `--gradient-media-detail`, `--motion-duration-shimmer`): they are color roles, steps of a scale, or values planned as Figma variables.

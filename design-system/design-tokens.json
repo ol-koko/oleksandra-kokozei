@@ -55,24 +55,12 @@
         "100": {
           "$type": "color",
           "$value": "#fdcbf1"
-        },
-        "200": {
-          "$type": "color",
-          "$value": "#ffc7ff"
-        },
-        "500": {
-          "$type": "color",
-          "$value": "#e6a3cc"
         }
       },
       "purple": {
         "100": {
           "$type": "color",
           "$value": "#e6dee9"
-        },
-        "900": {
-          "$type": "color",
-          "$value": "#251851"
         }
       },
       "white": {
@@ -432,24 +420,6 @@
         "shadow": {
           "$type": "color",
           "$value": "{primitive.color.gray.300}"
-        }
-      },
-      "accent": {
-        "book": {
-          "$type": "color",
-          "$value": "{primitive.color.pink.500}"
-        }
-      },
-      "brand": {
-        "film-budget": {
-          "background": {
-            "$type": "color",
-            "$value": "{primitive.color.pink.200}"
-          },
-          "foreground": {
-            "$type": "color",
-            "$value": "{primitive.color.purple.900}"
-          }
         }
       },
       "overlay": {
