@@ -3,7 +3,7 @@ import type { SectionId } from '@/content/types';
 import { moveFocus } from '@/features/focus/moveFocus';
 import { scrollBehavior } from '@/features/motion/scrollBehavior';
 
-type SectionListener = (id: SectionId) => void;
+type SectionListener = (id: string) => void;
 
 const listeners = new Set<SectionListener>();
 
@@ -27,7 +27,7 @@ export function onSectionNavigate(listener: SectionListener) {
 }
 
 /** Tells subscribers the page is heading to a section. */
-export function notifySectionNavigate(id: SectionId) {
+export function notifySectionNavigate(id: string) {
   listeners.forEach((listener) => listener(id));
 }
 
@@ -36,7 +36,7 @@ export function notifySectionNavigate(id: SectionId) {
  * moves to the section once no modal layer is open (a closing menu keeps the
  * page inert until it has closed).
  */
-export function scrollToSection(id: SectionId, { fromPointer }: { fromPointer: boolean }) {
+export function scrollToSection(id: string, { fromPointer }: { fromPointer: boolean }) {
   const section = document.getElementById(id);
   if (!section) return;
   notifySectionNavigate(id);

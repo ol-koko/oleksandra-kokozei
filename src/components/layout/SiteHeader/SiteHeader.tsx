@@ -6,7 +6,8 @@ import { Logo } from '@/components/layout/Logo/Logo';
 import { MobileMenu } from '@/components/layout/MobileMenu/MobileMenu';
 import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher/LanguageSwitcher';
 import { SectionNav } from '@/components/navigation/SectionNav/SectionNav';
-import { sectionIds } from '@/content/navigation';
+import { isStandalonePath, sectionIds } from '@/content/navigation';
+import { usePathname } from '@/features/i18n/navigation';
 import { useScrollSpy } from '@/features/scroll-spy/useScrollSpy';
 import { useSectionLinks } from '@/features/section-links/useSectionLinks';
 import styles from './SiteHeader.module.css';
@@ -18,7 +19,9 @@ import styles from './SiteHeader.module.css';
 export function SiteHeader() {
   const t = useTranslations('Header');
   const headerRef = useRef<HTMLElement>(null);
-  const activeId = useScrollSpy(sectionIds, headerRef);
+  const scrolledId = useScrollSpy(sectionIds, headerRef);
+  // A page of its own has none of the home sections, so none is active.
+  const activeId = isStandalonePath(usePathname()) ? undefined : scrolledId;
   useSectionLinks();
 
   return (

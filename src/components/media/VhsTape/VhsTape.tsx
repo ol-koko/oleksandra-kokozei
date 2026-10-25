@@ -1,9 +1,11 @@
 import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
+import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import type { ImageAsset } from '@/content/types';
 import styles from './VhsTape.module.css';
 
 type VhsTapeProps = {
-  poster: ImageAsset;
+  /** The poster; without it the sleeve is the neutral media placeholder (design system page). */
+  poster?: ImageAsset;
   /** Names the button: "Poster of <title> (<year>)". */
   alt: string;
   /** Open: the tape is out of its sleeve and the reels spin. */
@@ -44,7 +46,13 @@ const LABEL_PATH = LABEL_GLYPHS.flatMap((rows, letter) =>
  */
 export function VhsTape({ poster, alt, pressed, onToggle }: VhsTapeProps) {
   return (
-    <button type="button" className={styles.slot} aria-pressed={pressed} onClick={onToggle}>
+    <button
+      type="button"
+      className={styles.slot}
+      aria-label={poster ? undefined : alt}
+      aria-pressed={pressed}
+      onClick={onToggle}
+    >
       <span className={styles.vhs}>
         <span className={styles.tape}>
           <svg
@@ -62,7 +70,11 @@ export function VhsTape({ poster, alt, pressed, onToggle }: VhsTapeProps) {
           <span className={styles.label} />
         </span>
         <span className={styles.sleeve}>
-          <LoadingImage image={poster} alt={alt} sizes="150px" />
+          {poster ? (
+            <LoadingImage image={poster} alt={alt} sizes="150px" />
+          ) : (
+            <MediaSkeleton ready />
+          )}
         </span>
       </span>
     </button>

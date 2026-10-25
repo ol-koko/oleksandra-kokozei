@@ -1,8 +1,10 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { sectionIds } from '@/content/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+import { isStandalonePath, sectionIds } from '@/content/navigation';
 import type { SectionId } from '@/content/types';
+import { getPathname, usePathname } from '@/features/i18n/navigation';
+import type { Locale } from '@/features/i18n/routing';
 import styles from './SectionNav.module.css';
 
 type SectionNavProps = {
@@ -12,6 +14,11 @@ type SectionNavProps = {
   orientation: 'row' | 'column' | 'responsive';
   size: 'm' | 'l';
   onNavigate?: () => void;
+  /**
+   * Documentation specimen: a click picks the item here instead of scrolling
+   * to the section, and the page never moves.
+   */
+  onSelect?: (id: SectionId) => void;
   className?: string;
 };
 
@@ -22,9 +29,16 @@ export function SectionNav({
   orientation,
   size,
   onNavigate,
+  onSelect,
   className,
 }: SectionNavProps) {
   const t = useTranslations('Nav');
+  const locale = useLocale();
+  const pathname = usePathname();
+  // On a page without the sections (/design-system) the links lead to them on the home page.
+  const homePath = isStandalonePath(pathname)
+    ? getPathname({ href: '/', locale: locale as Locale })
+    : '';
   const textClass = size === 'l' ? 'text-title-l' : 'text-body-m';
 
   return (
@@ -33,10 +47,16 @@ export function SectionNav({
         {sectionIds.map((id) => (
           <li key={id}>
             <a
-              href={`#${id}`}
+              href={`${homePath}#${id}`}
               className={`nav-link ${styles.link} ${textClass}`}
               aria-current={id === activeId ? 'true' : undefined}
-              onClick={onNavigate}
+              onClick={(event) => {
+                if (onSelect) {
+                  event.preventDefault();
+                  onSelect(id);
+                }
+                onNavigate?.();
+              }}
             >
               {t(id)}
             </a>

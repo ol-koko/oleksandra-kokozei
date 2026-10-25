@@ -16,17 +16,6 @@
   align-self: stretch;
 }
 
-.more {
-  padding-block: var(--spacing-xs);
-  padding-inline: var(--spacing-lg);
-  border: none;
-  border-radius: var(--border-radius-full);
-  background: none;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  cursor: pointer;
-}
-
 /*
  * Desktop row (84:328), bottom-aligned: 384 polaroid slot + 24 + text column.
  * The text column (486 in Figma) is half the content column minus the gap,

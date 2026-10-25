@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import { PolaroidSign } from '@/components/media/PolaroidSign/PolaroidSign';
 import { OverlayTrigger } from '@/components/overlay/OverlayTrigger/OverlayTrigger';
 import { ABOUT_INTRO_ENTRANCE_END, AboutIntro } from '@/components/sections/AboutIntro/AboutIntro';
+import { textButtonClassName } from '@/components/ui/TextButton/TextButton';
 import { portrait } from '@/content/me';
 import styles from './HeroSection.module.css';
 
@@ -22,7 +23,7 @@ export function HeroSection() {
         <AboutIntro headingLevel={1} headingId={HEADING_ID} animateEntrance />
         <OverlayTrigger
           route={{ kind: 'me' }}
-          className={`hover-link ${styles.more} text-body-m animate-card`}
+          className={`${textButtonClassName} animate-card`}
           style={{ '--i': ABOUT_INTRO_ENTRANCE_END } as CSSProperties}
         >
           {t('more')}

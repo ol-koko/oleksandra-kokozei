@@ -16,6 +16,12 @@ type LanguageSwitcherProps = {
   activeId?: SectionId;
   onNavigate?: () => void;
   className?: string;
+  /**
+   * Documentation specimen: the pills behave as on the site (hover, active
+   * state, the indicator slide) but never leave the page, change the locale or
+   * save a choice. The parent owns which pill is active.
+   */
+  preview?: { locale: Locale; onChange: (locale: Locale) => void };
 };
 
 /** A left click or Enter without modifiers: the switch happens in this tab. */
@@ -49,9 +55,11 @@ export function LanguageSwitcher({
   activeId,
   onNavigate,
   className,
+  preview,
 }: LanguageSwitcherProps) {
   const t = useTranslations('Languages');
-  const currentLocale = useLocale();
+  const siteLocale = useLocale();
+  const currentLocale = preview?.locale ?? siteLocale;
   const pathname = usePathname();
   const indicatorRef = useRef<HTMLSpanElement>(null);
   /** The chip the indicator slides to; null while the active chip shows its own background. */
@@ -72,7 +80,7 @@ export function LanguageSwitcher({
       event.preventDefault();
       return;
     }
-    saveLocaleChoice(locale);
+    if (!preview) saveLocaleChoice(locale);
     const chip = event.currentTarget;
     const indicator = indicatorRef.current;
     const from = chip.closest('nav')?.querySelector<HTMLElement>('[aria-current="true"]');
@@ -84,6 +92,10 @@ export function LanguageSwitcher({
       !from ||
       reducedMotion
     ) {
+      if (preview) {
+        event.preventDefault();
+        if (locale !== currentLocale) preview.onChange(locale);
+      }
       // The anchor navigates on its own, instantly.
       onNavigate?.();
       return;
@@ -94,7 +106,7 @@ export function LanguageSwitcher({
     event.preventDefault();
     // Prefetched only now: the cookie just changed, and a prefetch made before that is dropped.
     const href = chip.href;
-    prefetchDocument(href);
+    if (!preview) prefetchDocument(href);
     placeIndicator(indicator, chip);
     setTarget(locale);
 
@@ -103,6 +115,11 @@ export function LanguageSwitcher({
       if (navigated) return;
       navigated = true;
       onNavigate?.();
+      if (preview) {
+        preview.onChange(locale);
+        setTarget(null);
+        return;
+      }
       window.location.assign(href);
     };
 
@@ -130,7 +147,9 @@ export function LanguageSwitcher({
         <span ref={indicatorRef} className="lang-switch__indicator" aria-hidden="true" />
         <ul className={styles.list}>
           {languageOrder.map((locale) => {
-            const href = `${getPathname({ locale, href: pathname })}${activeId ? `#${activeId}` : ''}`;
+            const href = preview
+              ? '#'
+              : `${getPathname({ locale, href: pathname })}${activeId ? `#${activeId}` : ''}`;
             return (
               <li key={locale}>
                 {/*

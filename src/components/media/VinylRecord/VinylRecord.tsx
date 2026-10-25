@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
+import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import type { ImageAsset } from '@/content/types';
 import styles from './VinylRecord.module.css';
 
 type VinylRecordProps = {
-  cover: ImageAsset;
+  /** The cover art; without it the sleeve and the record label are the neutral media placeholder. */
+  cover?: ImageAsset;
   /** The track on Spotify, opened in a new tab. */
   href: string;
   /** Names the link: "Listen to <title> by <artist> on Spotify (opens in a new tab)". */
@@ -32,12 +34,16 @@ export function VinylRecord({ cover, href, label, open }: VinylRecordProps) {
       <span className={styles.media}>
         <span className={styles.disc}>
           <span className={styles.spin}>
-            <Image className={styles.label} src={cover.src} alt="" width={64} height={64} />
+            {cover ? (
+              <Image className={styles.label} src={cover.src} alt="" width={64} height={64} />
+            ) : (
+              <span className={`${styles.label} ${styles.plainLabel}`} />
+            )}
           </span>
         </span>
         <span className={styles.sleeve}>
           {/* The link's aria-label names the song; the cover itself is decorative. */}
-          <LoadingImage image={cover} alt="" sizes="186px" />
+          {cover ? <LoadingImage image={cover} alt="" sizes="186px" /> : <MediaSkeleton ready />}
         </span>
       </span>
     </a>

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { LoopVideo } from '@/components/media/LoopVideo/LoopVideo';
 import { OverlayTrigger } from '@/components/overlay/OverlayTrigger/OverlayTrigger';
+import { Pill } from '@/components/ui/Pill/Pill';
 import type { Work } from '@/content/types';
 import styles from './WorkCard.module.css';
 
@@ -20,9 +21,9 @@ export function WorkCard({ work }: WorkCardProps) {
   const { cover } = work;
   const descriptionId = `work-${work.slug}-description`;
   const pill = (
-    <span className={`${styles.pill} text-body-xs`}>
+    <Pill className={styles.pill}>
       {t('pill', { title: t(`items.${work.slug}.title`), year: work.year })}
-    </span>
+    </Pill>
   );
 
   return (

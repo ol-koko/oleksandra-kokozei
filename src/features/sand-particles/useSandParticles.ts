@@ -8,8 +8,10 @@ import { SandParticles } from './sandParticles';
  * - `pointer` (hover devices): hover and keyboard focus.
  * - `pointer-autoplay`: the same, plus a sweep every 10 seconds.
  * - `in-view` (touch): one sweep the first time the text is fully in view.
+ * - `autoplay`: no pointer or focus trigger; one sweep the first time the text is fully in
+ *   view, then one every 10 seconds while it is (the design system page title).
  */
-export type SandMode = 'pointer' | 'pointer-autoplay' | 'in-view';
+export type SandMode = 'pointer' | 'pointer-autoplay' | 'in-view' | 'autoplay';
 
 /** Pause between autoplay sweeps, restarted after every play and hover. */
 const AUTOPLAY_DELAY_MS = 10_000;
@@ -43,14 +45,14 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
     if (!mode || !host || !label || !canvas) return;
 
     const target = host.closest('a') ?? host;
-    const pointer = mode !== 'in-view';
+    const pointer = mode === 'pointer' || mode === 'pointer-autoplay';
     let timer = 0;
     let fullyVisible = false;
     let hovering = false;
 
     const scheduleAutoplay = () => {
       window.clearTimeout(timer);
-      if (mode !== 'pointer-autoplay' || !fullyVisible || hovering) return;
+      if ((mode !== 'pointer-autoplay' && mode !== 'autoplay') || !fullyVisible || hovering) return;
       if (document.visibilityState !== 'visible') return;
       timer = window.setTimeout(() => engine.sweep(), AUTOPLAY_DELAY_MS);
     };
@@ -99,12 +101,13 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
         if (!entry.isIntersecting) engine.stop();
         // Observers report the ratio right at the threshold, which can land a hair below it.
         fullyVisible = entry.isIntersecting && entry.intersectionRatio >= FULLY_VISIBLE - 0.01;
-        if (mode === 'in-view') {
+        if (mode === 'in-view' || mode === 'autoplay') {
           if (fullyVisible && !playedInView.current) {
             playedInView.current = true;
             engine.sweep();
+            return;
           }
-          return;
+          if (mode === 'in-view') return;
         }
         scheduleAutoplay();
       },
