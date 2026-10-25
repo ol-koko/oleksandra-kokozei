@@ -326,12 +326,13 @@ One rule for the whole site (main page, header, footer, overlay-me, all four cas
 
 ## Footer
 
-| Key                | Rule                 | en                                | uk                                | de                                    |
-| ------------------ | -------------------- | --------------------------------- | --------------------------------- | ------------------------------------- |
-| `Footer.localTime` | Translated (de only) | <time></time>, Stuttgart, Germany | <time></time>, Stuttgart, Germany | <time></time>, Stuttgart, Deutschland |
-| `Footer.nav`       | Translated           | Footer                            | Навігація у футері                | Fußzeilennavigation                   |
-| `Footer.socialNav` | Translated           | Social profiles                   | Профілі в соцмережах              | Soziale Profile                       |
-| `Footer.copyright` | English              | © {year} Oleksandra Kokozei       | © {year} Oleksandra Kokozei       | © {year} Oleksandra Kokozei           |
+| Key                   | Rule                 | en                                | uk                                | de                                    |
+| --------------------- | -------------------- | --------------------------------- | --------------------------------- | ------------------------------------- |
+| `Footer.localTime`    | Translated (de only) | <time></time>, Stuttgart, Germany | <time></time>, Stuttgart, Germany | <time></time>, Stuttgart, Deutschland |
+| `Footer.nav`          | Translated           | Footer                            | Навігація у футері                | Fußzeilennavigation                   |
+| `Footer.socialNav`    | Translated           | Social profiles                   | Профілі в соцмережах              | Soziale Profile                       |
+| `Footer.copyright`    | English              | © {year} Oleksandra Kokozei       | © {year} Oleksandra Kokozei       | © {year} Oleksandra Kokozei           |
+| `Footer.designSystem` | English              | Design system                     | Design system                     | Design system                         |
 
 ## Links
 
@@ -344,3 +345,7 @@ One rule for the whole site (main page, header, footer, overlay-me, all four cas
 | `Links.projects.juJutsu`        | English    | Ju-Jutsu⁺            | Ju-Jutsu⁺                       | Ju-Jutsu⁺             |
 | `Links.projects.blowStressAway` | English    | Blow Stress Away     | Blow Stress Away                | Blow Stress Away      |
 | `Links.opensInNewTab`           | Translated | (opens in a new tab) | (відкривається в новій вкладці) | (öffnet in neuem Tab) |
+
+## Design system page
+
+`/design-system` is technical documentation, so its copy stays in English in every locale and does not go through next-intl: the page text lives in `src/content/designSystem.ts` and `src/content/designSystemNotes.ts`, the metadata title and description are English too (only the "| Oleksandra Kokozei" suffix comes from `Metadata.pageTitle`). The one message it adds is the footer link name and tooltip, `Footer.designSystem` (a navigation label, so English in every locale, see the Footer table above).
