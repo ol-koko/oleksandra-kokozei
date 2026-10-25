@@ -1,0 +1,113 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  min-inline-size: 0;
+}
+
+/* White tile with the hairline border; 200 high, 240 for media (Figma 796:1110). */
+.preview {
+  --preview-height: 200px; /* Figma 798:1174; one-off geometry */
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  block-size: var(--preview-height);
+  overflow: hidden;
+  border: var(--border-thin) solid var(--color-border-subtle);
+  border-radius: var(--border-radius-2xl);
+  background-color: var(--color-surface-raised);
+}
+
+.tall {
+  --preview-height: 240px;
+
+  overflow: visible;
+}
+
+.preview[data-paused] * {
+  animation-play-state: paused;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxs);
+  padding-inline: var(--spacing-md);
+}
+
+.note {
+  color: var(--color-text-secondary);
+}
+
+/* Shelf items are 280 wide and up to 300 high; the tile shows them at 80 %. */
+.media {
+  inline-size: 280px;
+  zoom: 0.8;
+}
+
+.gradient,
+.shimmer {
+  position: absolute;
+  inset: 0;
+}
+
+.gradient {
+  background: var(--gradient-media-cover);
+}
+
+.shimmer {
+  overflow: hidden;
+  background-color: var(--color-media-placeholder);
+}
+
+.signature {
+  color: var(--color-icon-strong);
+}
+
+/* The overlay's soft top and bottom edges (Overlay.module.css), on a static block. */
+.fades {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-3xl);
+  overflow: hidden;
+  inline-size: 100%;
+  block-size: 100%;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 var(--spacing-5xl),
+    #000 calc(100% - var(--spacing-5xl)),
+    transparent
+  );
+}
+
+.line {
+  color: var(--color-text-secondary);
+}
+
+.scrimStage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-overlay-backdrop);
+}
+
+/* The modal panel on the scrim, 177 × 74 (Figma 821:1520). */
+.modal {
+  --modal-width: 177px;
+  --modal-height: 74px;
+
+  position: relative;
+  inline-size: var(--modal-width);
+  block-size: var(--modal-height);
+  border-radius: var(--border-radius-2xl);
+  background-color: var(--color-surface-raised);
+}

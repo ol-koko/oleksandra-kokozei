@@ -1,0 +1,61 @@
+/* Figma 777:1527: sample, then the style name with what it is for, then its size on the right. */
+.family {
+  display: grid;
+  grid-template-columns: minmax(0, 0.33fr) minmax(0, 1fr) auto;
+  column-gap: var(--spacing-2xl);
+  align-items: center;
+  padding-block: var(--spacing-xl);
+}
+
+/* "Aa" at 32, larger than any text style (Figma 780:1537). */
+.aa {
+  font-size: var(--size-xl);
+}
+
+.weights {
+  color: var(--color-text-secondary);
+}
+
+.table {
+  display: block;
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.table tbody {
+  display: block;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.33fr) minmax(0, 1fr) auto;
+  column-gap: var(--spacing-2xl);
+  align-items: center;
+  padding-block: var(--spacing-xl);
+  border-block-end: var(--border-thin) solid var(--color-border-subtle);
+}
+
+.row > * {
+  padding: var(--spacing-none);
+  text-align: start;
+  font-weight: inherit;
+}
+
+.style {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxs);
+}
+
+.name {
+  color: var(--color-text-primary);
+}
+
+.note,
+.size {
+  color: var(--color-text-secondary);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}

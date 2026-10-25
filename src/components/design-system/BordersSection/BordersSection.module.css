@@ -1,0 +1,21 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-4xl) var(--spacing-3xl);
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* The specimen box, 58 square in Figma (765:933): white with the hairline border. */
+.box {
+  display: block;
+  inline-size: var(--size-4xl);
+  block-size: var(--size-4xl);
+  border: var(--border-thin) solid var(--color-icon-decorative);
+  border-radius: var(--radius);
+  background-color: var(--color-surface-raised);
+}

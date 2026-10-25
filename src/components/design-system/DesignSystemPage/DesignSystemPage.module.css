@@ -1,0 +1,49 @@
+/*
+ * Mobile: one column of 16 gutters; the page menu is a bar under the header.
+ * Desktop (Figma 730:1537): the 180 px menu, 24 apart from a 668 px column,
+ * both starting at the page margin (120 at 1440); the content starts 48
+ * below the title block.
+ */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6xl);
+  inline-size: 100%;
+  padding-block-end: var(--spacing-9xl);
+  padding-inline: var(--page-gutter);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6xl);
+  min-inline-size: 0;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-9xl);
+  min-inline-size: 0;
+}
+
+/* The page menu bar is sticky under the header on mobile: anchors land below both. */
+.main section {
+  scroll-margin-block-start: var(--spacing-6xl);
+}
+
+@media (min-width: 1024px) {
+  .main {
+    --menu-width: 180px; /* Figma 730:1540 */
+    --column-width: 668px; /* Figma 777:1530 */
+
+    display: grid;
+    grid-template-columns: var(--menu-width) minmax(0, var(--column-width));
+    column-gap: var(--spacing-3xl);
+    padding-block-start: var(--spacing-6xl);
+  }
+
+  .main section {
+    scroll-margin-block-start: var(--spacing-none);
+  }
+}

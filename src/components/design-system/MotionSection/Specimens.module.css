@@ -1,0 +1,83 @@
+.stage {
+  display: grid;
+  place-items: center;
+}
+
+/* Off screen or in a hidden tab: infinite animations (the shimmer) hold still. */
+.stage[data-paused] * {
+  animation-play-state: paused;
+}
+
+/* The square every animation plays on, 40 × 40 (Figma 752:2707). */
+.box {
+  position: relative;
+  display: block;
+  inline-size: var(--size-2xl);
+  block-size: var(--size-2xl);
+  overflow: hidden;
+  border: var(--border-thin) solid var(--color-icon-decorative);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface-raised);
+}
+
+/*
+ * `.reveal` is driven by the scroll position (animations.css), which a looping
+ * card cannot follow: the same `reveal-in` keyframes and easing play on time.
+ */
+.reveal {
+  animation: reveal-in var(--motion-duration-slow) var(--motion-easing-standard) both;
+}
+
+/* Hover specimens: the same properties as the :hover rules in hover.css, held by data-forced. */
+.link {
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background: none;
+  cursor: pointer;
+}
+
+.link[data-forced] {
+  color: var(--color-text-secondary);
+}
+
+.tile {
+  inline-size: var(--size-2xl);
+  block-size: var(--size-2xl);
+  padding: var(--spacing-none);
+  border: var(--border-thin) solid var(--color-icon-decorative);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface-raised);
+  cursor: pointer;
+}
+
+.tile[data-forced] {
+  transform: scale(var(--motion-scale-hover));
+}
+
+button.clip {
+  inline-size: var(--size-2xl);
+  block-size: var(--size-2xl);
+  padding: var(--spacing-none);
+  border: var(--border-thin) solid var(--color-icon-decorative);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface-raised);
+  cursor: pointer;
+}
+
+.clipped {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: var(--color-media-placeholder);
+}
+
+.clip[data-forced] > * {
+  transform: scale(var(--motion-scale-hover-media));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile[data-forced],
+  .clip[data-forced] > * {
+    transform: none;
+  }
+}

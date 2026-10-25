@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  min-inline-size: 0;
+}
+
+/* Tile: 160 high, surface/subtle, radius-lg (752:2702). The specimen sits centered. */
+.preview {
+  --preview-height: 160px; /* Figma 752:2702; one-off geometry */
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  block-size: var(--preview-height);
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-surface-subtle);
+}
+
+.code {
+  position: absolute;
+  inset-block-start: var(--spacing-xl);
+  inset-inline-end: var(--spacing-xl);
+  color: var(--color-text-muted);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding-inline: var(--spacing-sm);
+}
+
+.title {
+  color: var(--color-text-primary);
+  overflow-wrap: anywhere;
+}
+
+.note {
+  color: var(--color-text-secondary);
+}

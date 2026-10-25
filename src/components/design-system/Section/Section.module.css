@@ -1,0 +1,42 @@
+/* Figma 777:1530: sections are 80 apart, blocks inside a section 60, a title and its content 24. */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8xl);
+  min-inline-size: 0;
+  outline: none;
+}
+
+.compact {
+  gap: var(--spacing-3xl);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.title {
+  color: var(--color-text-strong);
+}
+
+.intro {
+  color: var(--color-text-primary);
+}
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);
+  min-inline-size: 0;
+  outline: none;
+}
+
+.subtitle {
+  color: var(--color-text-primary);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}

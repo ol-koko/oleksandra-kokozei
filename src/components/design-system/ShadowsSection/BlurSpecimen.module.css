@@ -1,0 +1,30 @@
+/* Figma 752:3186: a 55 px light square with the word "blur" in it, blurred by the layer. */
+.stage {
+  --layer-size: 56px;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: var(--layer-size);
+  block-size: var(--layer-size);
+  border-radius: var(--border-radius-md);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background-color: var(--color-surface-header);
+  backdrop-filter: blur(var(--blur));
+}
+
+.word {
+  position: relative;
+  z-index: 0;
+  color: var(--color-text-muted);
+}
+
+.above {
+  z-index: 2;
+}

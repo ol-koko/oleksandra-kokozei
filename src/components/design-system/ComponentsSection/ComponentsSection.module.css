@@ -1,0 +1,104 @@
+/* Cards: two columns of 322 with 24 between and 32 between rows (Figma 808:1100). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-4xl) var(--spacing-3xl);
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The mobile header's menu button: a 24 px icon, round hit area (MobileMenu). */
+.menuToggle {
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-md);
+  border: var(--border-none);
+  border-radius: var(--border-radius-full);
+  background: none;
+  color: var(--color-icon-strong);
+  cursor: pointer;
+}
+
+.divider {
+  inline-size: 100%;
+}
+
+/*
+ * The overlay's nav and breadcrumbs size themselves for a page (hidden below
+ * 768, right-aligned and sticky, padded to the page gutter). In a card they
+ * sit in the middle, as in Figma.
+ */
+.sidebar > nav {
+  display: block;
+}
+
+.sidebar ul {
+  position: static;
+  padding: var(--spacing-none);
+  list-style: none;
+  align-items: flex-end;
+  translate: none;
+}
+
+.breadcrumbs ol {
+  padding-inline: var(--spacing-none);
+}
+
+/* Tooltip label (808:1149): the same link twice, the second held in its hover state. */
+.states {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-5xl);
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding-block-start: var(--spacing-3xl);
+}
+
+.stateLabel {
+  color: var(--color-text-secondary);
+}
+
+.forced :global(.social-link) {
+  color: var(--color-icon-strong);
+}
+
+.forced :global(.social-label) {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-xl);
+}
+
+/* The tag is white on a white tile here, so it gets the hairline Figma draws (808:1368). */
+.tags > span {
+  box-shadow: inset 0 0 0 var(--border-thin) var(--color-border-subtle);
+}
+
+/* The shelf hides its arrows on desktop (it shows every item); the specimen always shows them. */
+.arrows {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4xl);
+}
+
+.arrows > button {
+  display: grid;
+}

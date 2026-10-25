@@ -1,0 +1,163 @@
+/*
+ * Desktop (Figma 730:1540): a 180 px column, items 16 apart in title-s, the
+ * sub-items indented 8. Sub-items are collapsed until the item is hovered,
+ * focused, clicked or holds the section in view; the rows animate open.
+ */
+.nav {
+  min-inline-size: 0;
+}
+
+.bar {
+  display: none;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+}
+
+.sublink {
+  padding-inline: var(--spacing-md);
+}
+
+/* The sub-list opens by growing its row from 0fr to 1fr, so no height is measured. */
+.sub {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  list-style: none;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--motion-duration-fast) var(--motion-easing-standard),
+    visibility var(--motion-duration-fast);
+}
+
+.subInner {
+  min-block-size: 0;
+  overflow: hidden;
+  /* Room for the focus ring of the links inside the clipped row. */
+  margin: calc(var(--spacing-xs) * -1);
+  padding: var(--spacing-xs);
+}
+
+.subList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-none);
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+.item[data-expanded] > .sub,
+.item:focus-within > .sub,
+.item:hover > .sub {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+.item[data-expanded],
+.item:focus-within,
+.item:hover {
+  gap: var(--spacing-xl);
+}
+
+.item:not([data-expanded]):not(:focus-within):not(:hover) {
+  gap: var(--spacing-none);
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    position: sticky;
+    inset-block-start: calc(var(--header-block-size) + var(--spacing-6xl));
+    align-self: start;
+    max-block-size: calc(100dvh - var(--header-block-size) - var(--spacing-6xl) * 2);
+    overflow-y: auto;
+    /* Room for the focus rings around the clipped links. */
+    margin: calc(var(--spacing-xs) * -1);
+    padding: var(--spacing-xs);
+  }
+}
+
+/*
+ * Below 1024: a bar under the sticky site header with the current section and a
+ * menu button; the list opens below it, full width, every sub-item shown.
+ */
+@media (max-width: 1023px) {
+  .nav {
+    position: sticky;
+    inset-block-start: var(--header-block-size);
+    z-index: 1;
+    margin-inline: calc(var(--page-gutter) * -1);
+    padding-inline: var(--page-gutter);
+    background-color: var(--color-surface-header);
+    -webkit-backdrop-filter: blur(var(--blur-header));
+    backdrop-filter: blur(var(--blur-header));
+    border-block-end: var(--border-thin) solid var(--color-border-subtle);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-block-size: var(--size-4xl);
+  }
+
+  .current {
+    color: var(--color-text-primary);
+  }
+
+  /* 24 px icon with a larger, round hit area, as the site's menu button. */
+  .toggle {
+    display: grid;
+    place-items: center;
+    margin-inline-end: calc(var(--spacing-md) * -1);
+    padding: var(--spacing-md);
+    border: var(--border-none);
+    border-radius: var(--border-radius-full);
+    background: none;
+    color: var(--color-icon-strong);
+    cursor: pointer;
+  }
+
+  .list {
+    display: none;
+    max-block-size: calc(100dvh - var(--header-block-size) - var(--size-4xl));
+    padding-block: var(--spacing-xl) var(--spacing-3xl);
+    overflow-y: auto;
+  }
+
+  .list[data-open] {
+    display: flex;
+  }
+
+  .sub {
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+
+  .item,
+  .item:not([data-expanded]):not(:focus-within):not(:hover) {
+    gap: var(--spacing-xl);
+  }
+
+  .link {
+    padding-block: var(--spacing-xs);
+  }
+}

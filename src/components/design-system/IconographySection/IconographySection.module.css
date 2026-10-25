@@ -1,0 +1,74 @@
+/* Sizes sit on a wide tile (Figma 772:1277): box, name, value, spread across it. */
+.sizes {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-5xl) var(--spacing-6xl);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-surface-subtle);
+  list-style: none;
+}
+
+.size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.sizeBox {
+  display: block;
+  margin-block-end: var(--spacing-xs);
+  border: var(--border-thin) solid var(--color-icon-decorative);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-surface-raised);
+}
+
+.sizeName {
+  color: var(--color-text-primary);
+}
+
+.sizeValue {
+  color: var(--color-text-secondary);
+}
+
+/* Icon tiles: 4 across, 16 apart; the icon centered in a gray tile, its name below (772:1304). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-4xl) var(--spacing-xl);
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sizes {
+    padding-inline: var(--spacing-xl);
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.tile {
+  --tile-height: 96px; /* Figma 772:1304; one-off geometry */
+
+  display: grid;
+  place-items: center;
+  block-size: var(--tile-height);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-icon-decorative);
+}
+
+.label {
+  color: var(--color-text-secondary);
+}
