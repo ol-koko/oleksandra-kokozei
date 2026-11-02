@@ -1,7 +1,5 @@
 /* Figma 741:2290: pills 4 apart, rows 32 swatch + 12 + 241 name + 292 usage + value. */
 .pills {
-  display: flex;
-  flex-wrap: wrap;
   gap: var(--spacing-xs);
 }
 
@@ -14,8 +12,18 @@
   cursor: pointer;
 }
 
+/* At rest the current pill has its own background; while the indicator slides it takes over (LanguageSwitcher). */
 .pill[aria-current='true'] {
   background-color: var(--color-surface-subtle);
+}
+
+.pills[data-sliding] .pill[aria-current='true'] {
+  background-color: transparent;
+  color: var(--color-text-disabled);
+}
+
+.pills[data-sliding] .pill[data-target] {
+  color: var(--color-text-primary);
 }
 
 .panel {

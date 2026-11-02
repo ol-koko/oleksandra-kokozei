@@ -8,6 +8,12 @@ import { saveLocaleChoice } from '@/features/i18n/localeCookie';
 import { getPathname, usePathname } from '@/features/i18n/navigation';
 import type { Locale } from '@/features/i18n/routing';
 import { prefetchDocument } from '@/features/navigation/prefetchDocument';
+import {
+  chipFrame,
+  placeIndicator,
+  prefersReducedMotion,
+  slideTiming,
+} from '@/features/navigation/pillSlide';
 import styles from './LanguageSwitcher.module.css';
 
 type LanguageSwitcherProps = {
@@ -27,24 +33,6 @@ type LanguageSwitcherProps = {
 /** A left click or Enter without modifiers: the switch happens in this tab. */
 function isPlainActivation(event: MouseEvent) {
   return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-}
-
-/** Puts the indicator under a chip (hover.css reads --pill-x and --pill-w). */
-function placeIndicator(indicator: HTMLElement, chip: HTMLElement) {
-  indicator.style.setProperty('--pill-x', `${chip.offsetLeft}px`);
-  indicator.style.setProperty('--pill-w', `${chip.offsetWidth}px`);
-}
-
-/** The indicator geometry under a chip, as a keyframe. */
-function chipFrame(chip: HTMLElement): Keyframe {
-  return { transform: `translateX(${chip.offsetLeft}px)`, width: `${chip.offsetWidth}px` };
-}
-
-/** A motion token duration (`250ms`, `0.25s`) in milliseconds. */
-function toMilliseconds(duration: string) {
-  const value = parseFloat(duration);
-  if (!Number.isFinite(value)) return 0;
-  return duration.trim().endsWith('ms') ? value : value * 1000;
 }
 
 /** How long past the slide the safety fallback waits before navigating anyway. */
@@ -84,7 +72,7 @@ export function LanguageSwitcher({
     const chip = event.currentTarget;
     const indicator = indicatorRef.current;
     const from = chip.closest('nav')?.querySelector<HTMLElement>('[aria-current="true"]');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = prefersReducedMotion();
     if (
       locale === currentLocale ||
       !isPlainActivation(event) ||
@@ -123,9 +111,7 @@ export function LanguageSwitcher({
       window.location.assign(href);
     };
 
-    const tokens = getComputedStyle(indicator);
-    const duration = toMilliseconds(tokens.getPropertyValue('--duration-250'));
-    const easing = tokens.getPropertyValue('--motion-easing-emphasized').trim() || 'ease-out';
+    const { duration, easing } = slideTiming(indicator);
     // Safety net: a switch never waits longer than the slide, whatever happens to it.
     window.setTimeout(navigate, duration + FALLBACK_SLACK_MS);
     // Web Animations rather than a CSS transition: the animation exists as soon as it is
