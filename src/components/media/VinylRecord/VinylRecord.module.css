@@ -134,11 +134,6 @@
   object-fit: cover;
 }
 
-/* No cover art: a plain label in the neutral placeholder color. */
-.plainLabel {
-  background-color: var(--color-media-placeholder);
-}
-
 /* Spindle hole: template color. */
 .spin::after {
   content: '';

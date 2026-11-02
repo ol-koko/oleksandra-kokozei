@@ -1,12 +1,10 @@
 import type { CSSProperties } from 'react';
 import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
-import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import type { ImageAsset } from '@/content/types';
 import styles from './Book.module.css';
 
 type BookProps = {
-  /** The cover art; without it the cover is the neutral media placeholder (design system page). */
-  cover?: ImageAsset;
+  cover: ImageAsset;
   /** Back cover color. */
   backColor: string;
   /** Names the button: "Cover of <title> by <author>". */
@@ -34,7 +32,6 @@ export function Book({ cover, backColor, alt, pressed, onToggle }: BookProps) {
       type="button"
       className={styles.slot}
       style={{ '--back': backColor } as CSSProperties}
-      aria-label={cover ? undefined : alt}
       aria-pressed={pressed}
       onClick={onToggle}
     >
@@ -52,11 +49,7 @@ export function Book({ cover, backColor, alt, pressed, onToggle }: BookProps) {
             <span key={leaf} className={`${styles.leaf} ${styles[leaf]}`} />
           ))}
           <span className={styles.cover}>
-            {cover ? (
-              <LoadingImage image={cover} alt={alt} sizes="150px" />
-            ) : (
-              <MediaSkeleton ready />
-            )}
+            <LoadingImage image={cover} alt={alt} sizes="150px" />
           </span>
         </span>
       </span>

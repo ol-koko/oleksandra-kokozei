@@ -21,6 +21,11 @@
   background-color: var(--color-surface-raised);
 }
 
+.plain {
+  border: none;
+  background-color: var(--color-surface-subtle);
+}
+
 .tall {
   --preview-height: 240px;
 
@@ -42,10 +47,32 @@
   color: var(--color-text-secondary);
 }
 
-/* Shelf items are 280 wide and up to 300 high; the tile shows them at 80 %. */
+/*
+ * Shelf items at 90 % (Figma 796:1106: the vinyl card is 252 wide, the book and
+ * poster 136 × 205), centered in the tile. A poster item is as wide as its
+ * poster, so it centers; the 300 px slot starts 36 above the poster.
+ */
 .media {
-  inline-size: 280px;
-  zoom: 0.8;
+  zoom: 0.9;
+}
+
+.record {
+  inline-size: calc(var(--spacing-10xl) * 1.55);
+}
+
+.poster {
+  --poster-width: 150px; /* Figma 417:811, 149.33 */
+  --poster-height: 224px;
+
+  position: relative;
+  inline-size: var(--poster-width);
+  block-size: var(--poster-height);
+}
+
+.poster > button {
+  position: absolute;
+  inset-block-start: calc(-1 * var(--spacing-4xl) - var(--spacing-xs));
+  inset-inline-start: 0;
 }
 
 .gradient,
@@ -67,42 +94,41 @@
   color: var(--color-icon-strong);
 }
 
-/* The overlay's soft top and bottom edges (Overlay.module.css), on a static block. */
+/* Figma 821:1508: gray with a white fade at the top and at the bottom. */
 .fades {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-  padding: var(--spacing-3xl);
-  overflow: hidden;
-  inline-size: 100%;
-  block-size: 100%;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent,
-    #000 var(--spacing-5xl),
-    #000 calc(100% - var(--spacing-5xl)),
-    transparent
-  );
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--gray-0) 50%, transparent) 80.12%,
+      var(--gray-0) 99.87%
+    ),
+    linear-gradient(
+      180deg,
+      var(--gray-0) 0.13%,
+      color-mix(in srgb, var(--gray-0) 50%, transparent) 16.87%
+    ),
+    linear-gradient(var(--color-media-placeholder), var(--color-media-placeholder));
 }
 
-.line {
-  color: var(--color-text-secondary);
-}
-
+/* Figma 821:1516: the scrim (blurred by half of blur-sm) is larger than the tile and clipped by it. */
 .scrimStage {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 .scrim {
   position: absolute;
-  inset: 0;
+  inset: -31px 0 -15px -10px;
   background-color: var(--color-overlay-backdrop);
+  backdrop-filter: blur(calc(var(--blur-sm) / 2));
 }
 
-/* The modal panel on the scrim, 177 × 74 (Figma 821:1520). */
+/* The modal panel on the scrim, 177 × 74, radius-xl (Figma 821:1520). */
 .modal {
   --modal-width: 177px;
   --modal-height: 74px;
@@ -110,6 +136,6 @@
   position: relative;
   inline-size: var(--modal-width);
   block-size: var(--modal-height);
-  border-radius: var(--border-radius-2xl);
+  border-radius: var(--border-radius-xl);
   background-color: var(--color-surface-raised);
 }

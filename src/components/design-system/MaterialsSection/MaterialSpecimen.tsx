@@ -8,6 +8,8 @@ import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import { VhsTape } from '@/components/media/VhsTape/VhsTape';
 import { VinylRecord } from '@/components/media/VinylRecord/VinylRecord';
 import type { MaterialId } from '@/content/designSystem';
+import { books } from '@/content/books';
+import { films } from '@/content/films';
 import { songs } from '@/content/songs';
 import { useSpecimenRunning, useTicker } from '@/features/design-system/useSpecimenRunning';
 import { Signature } from '@/features/signature/Signature';
@@ -25,8 +27,18 @@ type MaterialSpecimenProps = {
 /** Media tiles (Figma 796:1110) are 240 high; the rest 200. */
 const mediaIds: readonly MaterialId[] = ['music', 'book', 'film'];
 
-function MediaItem({ children }: { children: ReactNode }) {
-  return <div className={styles.media}>{children}</div>;
+/** Tiles drawn without the hairline border (Figma: gradient, shimmer, signature, fades, scrim). */
+const plainIds: readonly MaterialId[] = [
+  'gradient',
+  'shimmer',
+  'signature',
+  'edge-fades',
+  'modal-scrim',
+];
+
+/** A shelf item, shown 90 % of its size and centered in the tile. */
+function MediaItem({ kind, children }: { kind: 'record' | 'poster'; children: ReactNode }) {
+  return <div className={`${styles.media} ${styles[kind]}`}>{children}</div>;
 }
 
 /**
@@ -44,9 +56,10 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
     switch (id) {
       case 'music':
         return (
-          <MediaItem>
+          <MediaItem kind="record">
             <VinylRecord
-              href={songs[0]?.spotifyUrl ?? 'https://open.spotify.com'}
+              cover={songs[0].cover}
+              href={songs[0].spotifyUrl}
               label="Vinyl record, plays on hover (opens Spotify in a new tab)"
               open={false}
             />
@@ -54,10 +67,11 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
         );
       case 'book':
         return (
-          <MediaItem>
+          <MediaItem kind="poster">
             <Book
-              alt="Book"
-              backColor="var(--gray-300)"
+              cover={books[0].cover}
+              alt="Book cover"
+              backColor={books[0].backColor}
               pressed={pressed}
               onToggle={() => setPressed((value) => !value)}
             />
@@ -65,9 +79,10 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
         );
       case 'film':
         return (
-          <MediaItem>
+          <MediaItem kind="poster">
             <VhsTape
-              alt="Film on VHS"
+              poster={films[0].cover}
+              alt="Film poster"
               pressed={pressed}
               onToggle={() => setPressed((value) => !value)}
             />
@@ -89,13 +104,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
         );
       case 'edge-fades':
         return (
-          <div className={styles.fades} aria-hidden="true">
-            {Array.from({ length: 6 }, (_, line) => (
-              <span key={line} className={`${styles.line} text-body-s`}>
-                Content that scrolls under a soft edge
-              </span>
-            ))}
-          </div>
+          <div className={styles.fades} aria-hidden="true" />
         );
       case 'modal-scrim':
         return (
@@ -123,7 +132,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
     <figure className={styles.card}>
       <div
         ref={stage}
-        className={`${styles.preview} ${mediaIds.includes(id) ? styles.tall : ''}`}
+        className={`${styles.preview} ${mediaIds.includes(id) ? styles.tall : ''} ${plainIds.includes(id) ? styles.plain : ''}`}
         data-paused={running ? undefined : ''}
       >
         {specimen}
