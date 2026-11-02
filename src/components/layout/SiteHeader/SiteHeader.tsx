@@ -24,9 +24,10 @@ export function SiteHeader() {
   // A page of its own has none of the home sections, so none is active.
   const activeId = standalone ? undefined : scrolledId;
 
+  useSectionLinks();
+
   // A page of its own brings its own top bar (the design system page: breadcrumbs).
   if (standalone) return null;
-  useSectionLinks();
 
   return (
     <header ref={headerRef} className={styles.header}>
