@@ -7,6 +7,9 @@
 
 export const designSystemTitle = 'Design System';
 
+/** Last crumb of the breadcrumbs that replace the site header on the page. */
+export const designSystemCrumb = 'Design system';
+
 export const designSystemDomain = 'oleksandra-kokozei.com';
 
 export const designSystemSummary = 'The colors, type, space, motion, and components.';

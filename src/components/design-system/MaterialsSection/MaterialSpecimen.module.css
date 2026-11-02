@@ -10,6 +10,8 @@
   --preview-height: 200px; /* Figma 798:1174; one-off geometry */
 
   position: relative;
+  /* Nothing inside paints over the sticky bar or the menu. */
+  isolation: isolate;
   display: grid;
   place-items: center;
   block-size: var(--preview-height);

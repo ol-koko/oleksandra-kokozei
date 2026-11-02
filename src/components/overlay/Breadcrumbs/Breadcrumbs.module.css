@@ -20,6 +20,7 @@
   border: var(--border-none);
   background: none;
   font: inherit;
+  text-decoration: none;
   cursor: pointer;
 }
 

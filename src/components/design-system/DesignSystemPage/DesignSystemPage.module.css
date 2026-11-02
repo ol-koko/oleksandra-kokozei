@@ -1,4 +1,20 @@
 /*
+ * The top bar replaces the site header: same height, same blur, sticky, with the
+ * breadcrumbs in it. The page menu and the content start below it.
+ */
+.bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  min-block-size: var(--header-block-size);
+  background-color: var(--color-surface-header);
+  -webkit-backdrop-filter: blur(var(--blur-header));
+  backdrop-filter: blur(var(--blur-header));
+}
+
+/*
  * Mobile: one column of 16 gutters; the page menu is a bar under the header.
  * Desktop (Figma 730:1537): the 180 px menu, 24 apart from a 668 px column,
  * both starting at the page margin (120 at 1440); the content starts 48

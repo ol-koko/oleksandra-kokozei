@@ -25,6 +25,9 @@
 
 /* 200 high, 24 padding, radius-2xl, the content centered with 32 between items. */
 .tile {
+  /* Nothing inside paints over the sticky bar or the menu. */
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: center;

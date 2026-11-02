@@ -4,6 +4,9 @@
  * focused, clicked or holds the section in view; the rows animate open.
  */
 .nav {
+  /* Above the specimens (each tile is its own stacking context), below the top bar. */
+  position: relative;
+  z-index: 2;
   min-inline-size: 0;
 }
 
@@ -103,7 +106,6 @@
   .nav {
     position: sticky;
     inset-block-start: var(--header-block-size);
-    z-index: 1;
     margin-inline: calc(var(--page-gutter) * -1);
     padding-inline: var(--page-gutter);
     background-color: var(--color-surface-header);

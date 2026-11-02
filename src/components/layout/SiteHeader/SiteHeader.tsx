@@ -20,8 +20,12 @@ export function SiteHeader() {
   const t = useTranslations('Header');
   const headerRef = useRef<HTMLElement>(null);
   const scrolledId = useScrollSpy(sectionIds, headerRef);
+  const standalone = isStandalonePath(usePathname());
   // A page of its own has none of the home sections, so none is active.
-  const activeId = isStandalonePath(usePathname()) ? undefined : scrolledId;
+  const activeId = standalone ? undefined : scrolledId;
+
+  // A page of its own brings its own top bar (the design system page: breadcrumbs).
+  if (standalone) return null;
   useSectionLinks();
 
   return (
