@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'react';
 import { PreviewCard } from '@/components/design-system/PreviewCard/PreviewCard';
 import { Section, Subsection } from '@/components/design-system/Section/Section';
-import { TokenSample, TokenTable } from '@/components/design-system/TokenTable/TokenTable';
 import type { TokenRow } from '@/features/design-system/designSystemData';
 import styles from './BordersSection.module.css';
 
@@ -33,16 +32,34 @@ export function BordersSection({ radius, borderWidth }: BordersSectionProps) {
       </Subsection>
 
       <Subsection id="borders-width" title="Width">
-        <TokenTable
-          label="Border width tokens"
-          rows={borderWidth.map((row) => ({
-            id: row.token,
-            name: row.token,
-            note: row.note,
-            value: row.value,
-            sample: <TokenSample kind="box" token={row.token} />,
-          }))}
-        />
+        <table className={styles.widths}>
+          <caption className="visually-hidden">Border width tokens</caption>
+          <thead className="visually-hidden">
+            <tr>
+              <th scope="col">Line</th>
+              <th scope="col">Token</th>
+              <th scope="col">Used for</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {borderWidth.map((row) => (
+              <tr key={row.token} className={styles.width}>
+                <td className={styles.preview} aria-hidden="true">
+                  <span
+                    className={styles.line}
+                    style={{ '--border': `var(--${row.token})` } as CSSProperties}
+                  />
+                </td>
+                <th scope="row" className={`${styles.token} text-body-xs`}>
+                  {row.token}
+                </th>
+                <td className={`${styles.note} text-body-xs`}>{row.note}</td>
+                <td className={`${styles.value} text-body-xs`}>{row.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Subsection>
     </Section>
   );

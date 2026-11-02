@@ -35,7 +35,7 @@
 /* Icon tiles: 4 across, 16 apart; the icon centered in a gray tile, its name below (772:1304). */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 152px));
   gap: var(--spacing-3xl) var(--spacing-xl);
   padding: var(--spacing-none);
   list-style: none;
@@ -65,7 +65,14 @@
   block-size: var(--tile-height);
   border-radius: var(--border-radius-lg);
   background-color: var(--color-surface-subtle);
-  color: var(--color-icon-strong);
+  /* Figma 772:1311: the icons are drawn in gray-400. */
+  color: var(--color-icon-subtle);
+}
+
+/* Every icon at the same 24 px in the middle of its frame, whatever its own artboard (16, 24 ...). */
+.tile svg {
+  inline-size: var(--size-lg);
+  block-size: var(--size-lg);
 }
 
 .label {

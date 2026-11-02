@@ -65,8 +65,8 @@ export function TokenTable({ label, rows }: TokenTableProps) {
 }
 
 type TokenSampleProps = {
-  /** `bar`: as wide as the token (spacing). `box`: a box with that border width. `swatch`: the color. */
-  kind: 'bar' | 'box' | 'swatch';
+  /** `bar`: as wide as the token (spacing). `swatch`: the color. */
+  kind: 'bar' | 'swatch';
   /** Token name without `--`. */
   token: string;
 };

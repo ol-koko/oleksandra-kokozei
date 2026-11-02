@@ -3,6 +3,7 @@ import { Section, Subsection } from '@/components/design-system/Section/Section'
 import { ArrowDownIcon } from '@/components/icons/ArrowDownIcon';
 import { ArrowUpRightIcon } from '@/components/icons/ArrowUpRightIcon';
 import { BehanceIcon } from '@/components/icons/BehanceIcon';
+import { BrushIcon } from '@/components/icons/BrushIcon';
 import { CaretRightIcon } from '@/components/icons/CaretRightIcon';
 import { CaretRightSmallIcon } from '@/components/icons/CaretRightSmallIcon';
 import { ExpandIcon } from '@/components/icons/ExpandIcon';
@@ -31,6 +32,7 @@ const icons: Record<IconId, ComponentType<SVGProps<SVGSVGElement>>> = {
   expand: ExpandIcon,
   menu: (props) => <MenuToggleIcon open={false} {...props} />,
   close: (props) => <MenuToggleIcon open {...props} />,
+  brush: BrushIcon,
   linkedin: LinkedInBoxIcon,
   behance: BehanceIcon,
   github: GitHubIcon,

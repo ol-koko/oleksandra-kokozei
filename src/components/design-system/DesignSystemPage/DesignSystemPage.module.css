@@ -21,6 +21,9 @@
  * below the title block.
  */
 .main {
+  /* The value column of every table: one fixed width, right-aligned (Figma 777:1443, 781:1580). */
+  --table-value-width: 70px;
+
   display: flex;
   flex-direction: column;
   gap: var(--spacing-6xl);

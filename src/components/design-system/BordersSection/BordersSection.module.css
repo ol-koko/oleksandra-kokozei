@@ -19,3 +19,99 @@
   border-radius: var(--radius);
   background-color: var(--color-surface-raised);
 }
+
+/*
+ * Width (Figma 856:847): four equal columns 12 apart: the line drawn with the
+ * token (80 long, starting 10 in, round ends), the name, what it is for and the
+ * value; rows 70 high with a divider between them. All text is 14 px.
+ */
+.widths {
+  display: block;
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.widths tbody {
+  display: block;
+}
+
+.width {
+  --row-height: 70px;
+
+  display: grid;
+  grid-template-columns: 158px 158px minmax(0, 1fr) var(--table-value-width);
+  column-gap: var(--spacing-lg);
+  align-items: center;
+  min-block-size: var(--row-height);
+  border-block-end: var(--border-thin) solid var(--color-border-subtle);
+}
+
+.width:last-child {
+  border-block-end: none;
+}
+
+.width > * {
+  min-inline-size: 0;
+  padding: var(--spacing-none);
+  text-align: start;
+  font-weight: inherit;
+}
+
+.preview {
+  --line-length: 80px;
+  --line-inset: 10px;
+
+  padding-inline-start: var(--line-inset);
+}
+
+.line {
+  display: block;
+  inline-size: var(--line-length);
+  block-size: var(--border);
+  border-radius: var(--border-radius-full);
+  /* Figma 854:812: gray-500 lines. */
+  background-color: var(--color-icon-muted);
+}
+
+.token {
+  color: var(--color-text-primary);
+}
+
+.note,
+.value {
+  color: var(--color-text-secondary);
+}
+
+.value {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .width {
+    grid-template-columns: 96px minmax(0, 1fr) var(--table-value-width);
+    grid-template-areas:
+      'line token value'
+      'line note value';
+    row-gap: var(--spacing-xs);
+    padding-block: var(--spacing-lg);
+  }
+
+  .preview {
+    grid-area: line;
+  }
+
+  .token {
+    grid-area: token;
+    align-self: end;
+  }
+
+  .note {
+    grid-area: note;
+    align-self: start;
+  }
+
+  .value {
+    grid-area: value;
+  }
+}

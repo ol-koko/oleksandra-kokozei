@@ -209,6 +209,7 @@ export type IconId =
   | 'expand'
   | 'menu'
   | 'close'
+  | 'brush'
   | 'linkedin'
   | 'behance'
   | 'github';
@@ -229,6 +230,7 @@ export const iconGroups = [
       { id: 'expand', label: 'Expand' },
       { id: 'menu', label: 'Menu' },
       { id: 'close', label: 'Close' },
+      { id: 'brush', label: 'Brush' },
     ],
   },
   {

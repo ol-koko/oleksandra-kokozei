@@ -1,7 +1,7 @@
 /* Family row (Figma 780:1537): "Aa", the family and the weight count, in the same grid as the scale. */
 .family {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) 72px;
+  grid-template-columns: 200px minmax(0, 1fr) var(--table-value-width);
   column-gap: var(--spacing-3xl);
   align-items: center;
   padding-block: var(--spacing-xl);
@@ -20,7 +20,7 @@
 
 @media (max-width: 767px) {
   .family {
-    grid-template-columns: 96px minmax(0, 1fr) auto;
+    grid-template-columns: 96px minmax(0, 1fr) var(--table-value-width);
     column-gap: var(--spacing-xl);
   }
 }

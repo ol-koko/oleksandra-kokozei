@@ -6,7 +6,6 @@
  */
 .table {
   --sample-width: 200px;
-  --value-width: 72px;
 
   display: block;
   inline-size: 100%;
@@ -19,7 +18,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: var(--sample-width) minmax(0, 1fr) var(--value-width);
+  grid-template-columns: var(--sample-width) minmax(0, 1fr) var(--table-value-width);
   column-gap: var(--spacing-3xl);
   align-items: center;
   padding-block: var(--spacing-xl);
@@ -75,15 +74,6 @@
   block-size: var(--spacing-lg);
   border-radius: var(--border-radius-full);
   background-color: var(--color-media-placeholder);
-}
-
-/* Border width: a box drawn with that width. */
-.box {
-  display: block;
-  inline-size: var(--size-xl);
-  block-size: var(--size-md);
-  border-radius: var(--border-radius-sm);
-  border: var(--token-value) solid var(--color-icon-strong);
 }
 
 /* Colors: 32 square, hairline border, radius-sm (Figma 735:1674). */
