@@ -1,25 +1,43 @@
 /*
- * Figma 777:1437 / 781:1575: rows 24 apart in a grid of 200 | flexible | 70,
- * 16 above and below, a 1 px divider between rows. The value column is the
- * last one and ends at the right edge of the divider; a longer value grows to
- * the left into the gap.
+ * One grid per table, its columns shared by every row (subgrid), so a column is
+ * as wide as its widest cell. Figma 777:1437 / 781:1575: rows 24 apart,
+ * 16 above and below, a 1 px divider between rows.
+ *
+ * A table with a specimen column: sample | name over usage | value.
+ * A table without: name | usage | value.
+ * The value column is 70 px and ends at the right edge of the divider. A token
+ * name never wraps: the name column is as wide as the longest name, and only the
+ * usage shrinks and wraps. Where a plain table gets too narrow for that, the
+ * usage moves below the name.
  */
 .table {
   --sample-width: 200px;
+  --name-min: 200px; /* Figma 781:1576: the name column of a plain table */
 
-  display: block;
+  display: grid;
+  column-gap: var(--spacing-3xl);
   inline-size: 100%;
-  border-collapse: collapse;
+}
+
+.table[data-mode='sample'] {
+  /* The specimen column gives way first: the name never does. */
+  grid-template-columns:
+    minmax(0, var(--sample-width)) minmax(min-content, 1fr)
+    var(--table-value-width);
+}
+
+.table[data-mode='plain'] {
+  grid-template-columns: minmax(var(--name-min), max-content) minmax(0, 1fr) var(--table-value-width);
 }
 
 .table tbody {
-  display: block;
+  display: contents;
 }
 
 .row {
   display: grid;
-  grid-template-columns: var(--sample-width) minmax(0, 1fr) var(--table-value-width);
-  column-gap: var(--spacing-3xl);
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
   align-items: center;
   padding-block: var(--spacing-xl);
   border-block-end: var(--border-thin) solid var(--color-border-subtle);
@@ -44,11 +62,12 @@
 
 .token {
   color: var(--color-text-primary);
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 
 .note {
   color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .value {
@@ -59,18 +78,48 @@
 
 @media (max-width: 767px) {
   .table {
-    --sample-width: 96px;
-  }
+    --sample-width: 64px;
+    --name-min: 0px;
 
-  .row {
-    column-gap: var(--spacing-xl);
+    column-gap: var(--spacing-lg);
   }
 }
 
-/* Spacing: the bar is as wide as the token, 12 high. */
+/* A plain table below 480 px: the usage goes under the name, the value stays on the right. */
+@media (max-width: 479px) {
+  .table[data-mode='plain'] {
+    grid-template-columns: minmax(min-content, 1fr) var(--table-value-width);
+  }
+
+  .table[data-mode='plain'] .row {
+    row-gap: var(--spacing-xs);
+  }
+
+  .table[data-mode='plain'] .name {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .table[data-mode='plain'] .value {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .table[data-mode='plain'] .row > .note {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+/* Spacing: a share of the largest bar's width, 12 high (see TokenSample). */
+.track {
+  display: block;
+  inline-size: min(100%, var(--bar-max));
+}
+
 .bar {
   display: block;
-  inline-size: var(--token-value);
+  inline-size: calc(var(--ratio) * 100%);
   block-size: var(--spacing-lg);
   border-radius: var(--border-radius-full);
   background-color: var(--color-media-placeholder);

@@ -20,8 +20,8 @@
 
 @media (max-width: 767px) {
   .family {
-    grid-template-columns: 96px minmax(0, 1fr) var(--table-value-width);
-    column-gap: var(--spacing-xl);
+    grid-template-columns: 64px minmax(0, 1fr) var(--table-value-width);
+    column-gap: var(--spacing-lg);
   }
 }
 

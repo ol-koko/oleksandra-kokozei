@@ -29,7 +29,7 @@ export function TokenTable({ label, rows }: TokenTableProps) {
   const hasSample = rows.some((row) => row.sample !== undefined);
 
   return (
-    <table className={styles.table}>
+    <table className={styles.table} data-mode={hasSample ? 'sample' : 'plain'}>
       <caption className="visually-hidden">{label}</caption>
       <thead className="visually-hidden">
         <tr>
@@ -64,19 +64,41 @@ export function TokenTable({ label, rows }: TokenTableProps) {
   );
 }
 
-type TokenSampleProps = {
-  /** `bar`: as wide as the token (spacing). `swatch`: the color. */
-  kind: 'bar' | 'swatch';
-  /** Token name without `--`. */
-  token: string;
-};
+type TokenSampleProps =
+  | {
+      /** A bar as wide as the token (spacing). */
+      kind: 'bar';
+      /** The token's share of the largest one in the table (0 to 1). */
+      ratio: number;
+      /** The largest token's value (`120px`): the bar column's natural width. */
+      max: string;
+    }
+  | {
+      /** The color, drawn with the token. */
+      kind: 'swatch';
+      /** Token name without `--`. */
+      token: string;
+    };
 
-/** The first-column specimen of a token row, drawn with the token itself. */
-export function TokenSample({ kind, token }: TokenSampleProps) {
+/**
+ * The first-column specimen of a token row. A bar is a share of a track that is
+ * as wide as the largest bar (the value, so each bar is its token's real width)
+ * and never wider than the column: on a narrow screen every bar scales down
+ * together and the largest one fills the column.
+ */
+export function TokenSample(props: TokenSampleProps) {
+  if (props.kind === 'swatch') {
+    return (
+      <span
+        className={styles.swatch}
+        style={{ '--token-value': `var(--${props.token})` } as CSSProperties}
+      />
+    );
+  }
+
   return (
-    <span
-      className={styles[kind]}
-      style={{ '--token-value': `var(--${token})` } as CSSProperties}
-    />
+    <span className={styles.track} style={{ '--bar-max': props.max } as CSSProperties}>
+      <span className={styles.bar} style={{ '--ratio': props.ratio } as CSSProperties} />
+    </span>
   );
 }

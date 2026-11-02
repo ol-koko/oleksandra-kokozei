@@ -75,6 +75,7 @@
 
 .token {
   color: var(--color-text-primary);
+  white-space: nowrap;
 }
 
 .note,
@@ -89,7 +90,7 @@
 
 @media (max-width: 767px) {
   .width {
-    grid-template-columns: 96px minmax(0, 1fr) var(--table-value-width);
+    grid-template-columns: 64px minmax(min-content, 1fr) var(--table-value-width);
     grid-template-areas:
       'line token value'
       'line note value';
@@ -97,7 +98,11 @@
     padding-block: var(--spacing-lg);
   }
 
+  /* The line fills its narrower column instead of keeping 80 px. */
   .preview {
+    --line-length: 100%;
+    --line-inset: 0px;
+
     grid-area: line;
   }
 
@@ -109,6 +114,7 @@
   .note {
     grid-area: note;
     align-self: start;
+    overflow-wrap: anywhere;
   }
 
   .value {

@@ -4,6 +4,8 @@ import type { TokenRow } from '@/features/design-system/designSystemData';
 
 /** Spacing (Figma 752:2697): a bar as wide as each `--spacing-*` token. */
 export function SpacingSection({ rows }: { rows: readonly TokenRow[] }) {
+  const widest = Math.max(...rows.map((row) => parseFloat(row.value)));
+
   return (
     <Section id="spacing" title="Spacing" compact>
       <TokenTable
@@ -13,7 +15,9 @@ export function SpacingSection({ rows }: { rows: readonly TokenRow[] }) {
           name: row.token,
           note: row.note,
           value: row.value,
-          sample: <TokenSample kind="bar" token={row.token} />,
+          sample: (
+            <TokenSample kind="bar" ratio={parseFloat(row.value) / widest} max={`${widest}px`} />
+          ),
         }))}
       />
     </Section>
