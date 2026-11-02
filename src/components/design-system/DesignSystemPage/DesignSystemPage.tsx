@@ -46,7 +46,7 @@ export async function DesignSystemPage() {
             otherBlur={data.otherBlur}
           />
           <IconographySection sizes={data.iconSizes} />
-          <MotionSection durations={data.durations} />
+          <MotionSection durations={data.durations} specimenCss={data.specimenCss} />
           <MaterialsSection />
         </div>
       </div>

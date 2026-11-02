@@ -22,9 +22,9 @@
 
 .code {
   position: absolute;
+  z-index: 1;
   inset-block-start: var(--spacing-xl);
   inset-inline-end: var(--spacing-xl);
-  color: var(--color-text-muted);
 }
 
 .caption {

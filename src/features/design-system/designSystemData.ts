@@ -1,4 +1,4 @@
-import { colorPalettes, type ColorPaletteId } from '@/content/designSystem';
+import { animations, colorPalettes, hovers, type ColorPaletteId } from '@/content/designSystem';
 import {
   assertKnownTokens,
   blurNotes,
@@ -11,6 +11,7 @@ import {
   spacingNotes,
   typographyNotes,
 } from '@/content/designSystemNotes';
+import { cssForClass } from './cssRules';
 import { formatColor, formatDuration } from './formatToken';
 import { loadTokenSheet, type TokenSheet } from './tokenSheet';
 
@@ -19,6 +20,8 @@ export type TokenRow = {
   token: string;
   note: string;
   value: string;
+  /** The CSS the specimen's code button copies (the declaration that uses the token). */
+  css: string;
 };
 
 export type ColorRow = TokenRow & {
@@ -48,6 +51,8 @@ export type DesignSystemData = {
   blur: TokenRow[];
   iconSizes: TokenRow[];
   durations: TokenRow[];
+  /** The CSS rules of each animation and hover specimen, by specimen id (animations.css, hover.css). */
+  specimenCss: Record<string, string>;
   /** Blur tokens the Figma page has no specimen for (`blur-header`), so nothing is silently missing. */
   otherBlur: TokenRow[];
 };
@@ -59,10 +64,15 @@ function rows(
   names: string[],
   notes: Record<string, string>,
   format: (value: string) => string = (value) => value,
+  declaration: (token: string) => string = () => '',
 ): TokenRow[] {
   return names
     .filter((name) => !hiddenTokens.includes(name))
-    .map((token) => ({ token, note: notes[token] ?? '', value: format(sheet.resolve(token)) }));
+    .map((token) => {
+      const value = format(sheet.resolve(token));
+      const css = declaration(token);
+      return { token, note: notes[token] ?? '', value, css: css && `${css} /* ${value} */` };
+    });
 }
 
 /** Tokens of a group that no specimen shows. */
@@ -78,6 +88,7 @@ function palette(sheet: TokenSheet, id: ColorPaletteId): ColorRow[] {
   return sheet.names(`${id}-`).map((token) => ({
     token,
     note: '',
+    css: '',
     value: formatColor(sheet.resolve(token)),
     usedBy: sheet
       .aliasesOf(token)
@@ -108,14 +119,32 @@ export async function loadDesignSystemData(): Promise<DesignSystemData> {
   );
 
   const spacing = rows(sheet, sheet.names('spacing-'), spacingNotes);
-  const radius = rows(sheet, sheet.names('border-radius-'), radiusNotes);
+  const radius = rows(
+    sheet,
+    sheet.names('border-radius-'),
+    radiusNotes,
+    undefined,
+    (token) => `border-radius: var(--${token});`,
+  );
   const borderWidth = rows(
     sheet,
     sheet.names('border-').filter((name) => !name.startsWith('border-radius-')),
     borderWidthNotes,
   );
-  const shadows = rows(sheet, sheet.names('shadow-'), shadowNotes);
-  const blur = rows(sheet, Object.keys(blurNotes), blurNotes);
+  const shadows = rows(
+    sheet,
+    sheet.names('shadow-'),
+    shadowNotes,
+    undefined,
+    (token) => `box-shadow: var(--${token});`,
+  );
+  const blur = rows(
+    sheet,
+    Object.keys(blurNotes),
+    blurNotes,
+    undefined,
+    (token) => `backdrop-filter: blur(var(--${token}));`,
+  );
   const iconSizes = rows(sheet, Object.keys(iconSizeNotes), iconSizeNotes);
   const durations = rows(sheet, sheet.names('duration-'), durationNotes, formatDuration);
 
@@ -129,6 +158,14 @@ export async function loadDesignSystemData(): Promise<DesignSystemData> {
         throw new Error(`design system: --${row.token} does not resolve to a color`);
       }
     }
+  }
+
+  const specimenCss: Record<string, string> = {};
+  for (const { id, className } of animations) {
+    specimenCss[id] = await cssForClass('animations.css', className, sheet);
+  }
+  for (const { id, className } of hovers) {
+    specimenCss[id] = await cssForClass('hover.css', className, sheet);
   }
 
   const weights = new Set(sheet.typeStyles.map((style) => style.fontWeight));
@@ -153,6 +190,7 @@ export async function loadDesignSystemData(): Promise<DesignSystemData> {
     blur,
     iconSizes,
     durations,
+    specimenCss,
     otherBlur: rest(sheet, 'blur-', Object.keys(blurNotes)),
   };
 }

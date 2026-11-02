@@ -21,7 +21,7 @@ export function BordersSection({ radius, borderWidth }: BordersSectionProps) {
               key={row.token}
               title={row.token.replace('border-', '')}
               caption={row.note}
-              code={`--${row.token}: ${row.value}`}
+              css={row.css}
             >
               <span
                 className={styles.box}

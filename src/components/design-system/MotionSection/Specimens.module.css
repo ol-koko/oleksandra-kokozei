@@ -1,6 +1,13 @@
 .stage {
   display: grid;
   place-items: center;
+  transition: opacity var(--duration-300) var(--motion-easing-standard);
+}
+
+/* The loop (useAnimationLoop): the end state fades out, rests, and plays again from the start. */
+.stage[data-phase='fading'],
+.stage[data-phase='resting'] {
+  opacity: 0;
 }
 
 /* Off screen or in a hidden tab: infinite animations (the shimmer) hold still. */

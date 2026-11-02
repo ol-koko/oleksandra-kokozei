@@ -18,7 +18,7 @@ export function ShadowsSection({ shadows, blur, otherBlur }: ShadowsSectionProps
             key={row.token}
             title={row.token.replace('shadow-', '')}
             caption={row.note}
-            code={`--${row.token}: ${row.value}`}
+            css={row.css}
           >
             <span
               className={styles.box}
@@ -35,7 +35,7 @@ export function ShadowsSection({ shadows, blur, otherBlur }: ShadowsSectionProps
               key={row.token}
               title={row.token}
               caption={row.note}
-              code={`--${row.token}: ${row.value}`}
+              css={row.css}
             >
               <BlurSpecimen token={row.token} />
             </PreviewCard>

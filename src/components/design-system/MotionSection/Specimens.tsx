@@ -7,7 +7,7 @@ import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import type { HoverSpecimenId } from '@/content/designSystem';
 import type { Locale } from '@/features/i18n/routing';
 import {
-  useAnimationRounds,
+  useAnimationLoop,
   useSpecimenRunning,
   useTicker,
 } from '@/features/design-system/useSpecimenRunning';
@@ -17,6 +17,8 @@ type AnimationSpecimenProps = {
   id: string;
   caption: string;
   className: string;
+  /** The rule of the class in animations.css, for the code button. */
+  css: string;
 };
 
 /**
@@ -24,16 +26,21 @@ type AnimationSpecimenProps = {
  * utility class, replayed while the card is on screen. The scroll-driven
  * `.reveal` cannot loop on its own, so its keyframes play on a timer here.
  */
-export function AnimationSpecimen({ id, caption, className }: AnimationSpecimenProps) {
+export function AnimationSpecimen({ id, caption, className, css }: AnimationSpecimenProps) {
   const stage = useRef<HTMLDivElement>(null);
   const running = useSpecimenRunning(stage);
-  const round = useAnimationRounds(stage, running);
+  const { round, phase } = useAnimationLoop(stage, running);
   const isShimmer = className === 'animate-shimmer';
   const isReveal = className === 'reveal';
 
   return (
-    <PreviewCard title={id} caption={caption} code={`.${className}`}>
-      <div ref={stage} className={styles.stage} data-paused={running ? undefined : ''}>
+    <PreviewCard title={id} caption={caption} css={css}>
+      <div
+        ref={stage}
+        className={styles.stage}
+        data-phase={phase}
+        data-paused={running ? undefined : ''}
+      >
         <span
           key={round}
           className={[styles.box, isReveal ? styles.reveal : isShimmer ? '' : className]
@@ -54,6 +61,8 @@ type HoverSpecimenProps = {
   id: HoverSpecimenId;
   caption: string;
   className: string;
+  /** The rules of the class in hover.css, for the code button. */
+  css: string;
 };
 
 /**
@@ -62,7 +71,7 @@ type HoverSpecimenProps = {
  * The real pointer and keyboard focus still work. The language slide clicks the
  * other pill of the real switcher, so the indicator really slides.
  */
-export function HoverSpecimen({ id, caption, className }: HoverSpecimenProps) {
+export function HoverSpecimen({ id, caption, css }: HoverSpecimenProps) {
   const stage = useRef<HTMLDivElement>(null);
   const running = useSpecimenRunning(stage);
   const forced = useTicker(running, HOVER_MS) % 2 === 1;
@@ -76,7 +85,7 @@ export function HoverSpecimen({ id, caption, className }: HoverSpecimenProps) {
   const forcedProps = { 'data-forced': forced && running ? '' : undefined };
 
   return (
-    <PreviewCard title={id} caption={caption} code={`.${className}`}>
+    <PreviewCard title={id} caption={caption} css={css}>
       <div ref={stage} className={styles.stage}>
         {id === 'hoverColor' && (
           <button

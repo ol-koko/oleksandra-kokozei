@@ -7,19 +7,21 @@ import styles from './MotionSection.module.css';
 
 type MotionSectionProps = {
   durations: DesignSystemData['durations'];
+  /** The CSS of each animation and hover specimen, by id. */
+  specimenCss: DesignSystemData['specimenCss'];
 };
 
 /**
  * Motion (Figma 786:1625): every animation class of animations.css and every
  * hover rule of hover.css, looping on its own; then the duration scale.
  */
-export function MotionSection({ durations }: MotionSectionProps) {
+export function MotionSection({ durations, specimenCss }: MotionSectionProps) {
   return (
     <Section id="motion" title="Motion">
       <Subsection id="motion-animation" title="Animation">
         <div className={styles.grid}>
           {animations.map((animation) => (
-            <AnimationSpecimen key={animation.id} {...animation} />
+            <AnimationSpecimen key={animation.id} {...animation} css={specimenCss[animation.id] ?? ''} />
           ))}
         </div>
       </Subsection>
@@ -27,7 +29,7 @@ export function MotionSection({ durations }: MotionSectionProps) {
       <Subsection id="motion-hover" title="Hover">
         <div className={styles.grid}>
           {hovers.map((hover) => (
-            <HoverSpecimen key={hover.id} {...hover} />
+            <HoverSpecimen key={hover.id} {...hover} css={specimenCss[hover.id] ?? ''} />
           ))}
         </div>
       </Subsection>
