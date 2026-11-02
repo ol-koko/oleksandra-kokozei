@@ -45,27 +45,27 @@
 
 /* Overlay backdrop (overlay-me, overlay-works) */
 .animate-overlay {
-  animation: fade-in var(--motion-duration-fast) var(--motion-easing-standard) both;
+  animation: fade-in var(--duration-200) var(--motion-easing-standard) both;
 }
 
 /* Overlay content (overlay-me, overlay-works) */
 .animate-modal {
-  animation: scale-in var(--motion-duration-base) var(--motion-easing-emphasized) both;
+  animation: scale-in var(--duration-300) var(--motion-easing-emphasized) both;
 }
 
 /* Captions, secondary text appearing inside overlays */
 .animate-caption {
-  animation: fade-slide-up var(--motion-duration-base) var(--motion-easing-standard) both;
+  animation: fade-slide-up var(--duration-300) var(--motion-easing-standard) both;
 }
 
 /* Close buttons */
 .animate-close {
-  animation: fade-slide-down var(--motion-duration-base) var(--motion-easing-standard) both;
+  animation: fade-slide-down var(--duration-300) var(--motion-easing-standard) both;
 }
 
 /* Book / music shelf items. Stagger: set style={{ '--i': index }} on each item */
 .animate-shelf-item {
-  animation: fade-slide-up var(--motion-duration-slow) var(--motion-easing-standard) both;
+  animation: fade-slide-up var(--duration-400) var(--motion-easing-standard) both;
   animation-delay: calc(var(--i, 0) * 60ms);
 }
 
@@ -73,7 +73,7 @@
    Fill is "backwards" on purpose: the end keyframe is not kept, so after the entrance the
    element returns to its static style and its own transform (hover, rotation) applies. */
 .animate-card {
-  animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) backwards;
+  animation: rise-in var(--duration-400) var(--motion-easing-gentle) backwards;
   animation-delay: calc(var(--i, 0) * 60ms);
 }
 
@@ -81,7 +81,7 @@
    hover, keyboard focus) and remove it on animationend. Reduced motion: no movement. */
 @media (prefers-reduced-motion: no-preference) {
   .animate-nudge {
-    animation: nudge-down var(--motion-duration-slower) var(--motion-easing-gentle) 3;
+    animation: nudge-down var(--duration-500) var(--motion-easing-gentle) 3;
   }
 }
 
@@ -90,7 +90,7 @@
    placeholder. */
 @media (prefers-reduced-motion: no-preference) {
   .animate-shimmer {
-    animation: shimmer var(--motion-duration-shimmer) var(--motion-easing-gentle) infinite;
+    animation: shimmer var(--duration-1500) var(--motion-easing-gentle) infinite;
   }
 }
 
@@ -128,7 +128,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   :where([data-revealed]) {
-    animation: rise-in var(--motion-duration-slow) var(--motion-easing-gentle) backwards;
+    animation: rise-in var(--duration-400) var(--motion-easing-gentle) backwards;
     animation-delay: calc(var(--reveal-i, 0) * 60ms);
   }
 }

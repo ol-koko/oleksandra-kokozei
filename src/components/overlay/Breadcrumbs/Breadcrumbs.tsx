@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { CaretRightSmallIcon } from '@/components/icons/CaretRightSmallIcon';
 import { isPointerClick } from '@/features/focus/moveFocus';
+import { Link } from '@/features/i18n/navigation';
 import styles from './Breadcrumbs.module.css';
 
 type BreadcrumbsProps = {
@@ -8,27 +9,48 @@ type BreadcrumbsProps = {
   parentLabel: string;
   /** The overlay itself ("More", the work title). */
   current: string;
-  /** The first crumb is the mobile exit control (D10): it closes the overlay. */
-  onExit: (fromPointer: boolean) => void;
   className?: string;
-};
+} & (
+  | {
+      /** The first crumb is the mobile exit control (D10): it closes the overlay. */
+      onExit: (fromPointer: boolean) => void;
+      parentHref?: never;
+    }
+  | {
+      /** The first crumb links to a page instead ("Oleksandra Kokozei" › "Design system"). */
+      parentHref: string;
+      onExit?: never;
+    }
+);
 
 /** "Me › More" / "Works › CES" at the top of a mobile overlay (Figma 526:1043). */
-export function Breadcrumbs({ parentLabel, current, onExit, className }: BreadcrumbsProps) {
+export function Breadcrumbs({
+  parentLabel,
+  current,
+  onExit,
+  parentHref,
+  className,
+}: BreadcrumbsProps) {
   const t = useTranslations('Overlay');
 
   return (
     <nav aria-label={t('breadcrumbs')} className={className}>
       <ol className={`${styles.list} text-body-xs`}>
         <li className={styles.item}>
-          <button
-            type="button"
-            className={`nav-link ${styles.exit}`}
-            onClick={(event) => onExit(isPointerClick(event))}
-          >
-            {parentLabel}
-            <span className="visually-hidden">{t('backToPage')}</span>
-          </button>
+          {parentHref ? (
+            <Link href={parentHref} className={`nav-link ${styles.exit}`}>
+              {parentLabel}
+            </Link>
+          ) : (
+            <button
+              type="button"
+              className={`nav-link ${styles.exit}`}
+              onClick={(event) => onExit?.(isPointerClick(event))}
+            >
+              {parentLabel}
+              <span className="visually-hidden">{t('backToPage')}</span>
+            </button>
+          )}
         </li>
         <li className={styles.item}>
           <CaretRightSmallIcon className={styles.caret} />

@@ -1,0 +1,81 @@
+/* Sizes sit on a wide tile (Figma 772:1277): box, name, value, spread across it. */
+.sizes {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-5xl) var(--spacing-4xl);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-surface-subtle);
+  list-style: none;
+}
+
+.size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.sizeBox {
+  display: block;
+  border: var(--border-thin) solid var(--color-icon-decorative);
+  border-radius: var(--border-radius-xs);
+  background-color: var(--color-surface-raised);
+}
+
+.sizeName {
+  color: var(--color-text-primary);
+}
+
+.sizeValue {
+  color: var(--color-text-secondary);
+}
+
+/* Icon tiles: 4 across, 16 apart; the icon centered in a gray tile, its name below (772:1304). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 152px));
+  gap: var(--spacing-3xl) var(--spacing-xl);
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sizes {
+    padding-inline: var(--spacing-xl);
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.tile {
+  --tile-height: 96px; /* Figma 772:1304; one-off geometry */
+
+  display: grid;
+  place-items: center;
+  block-size: var(--tile-height);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-surface-subtle);
+  /* Figma 772:1311: the icons are drawn in gray-400. */
+  color: var(--color-icon-subtle);
+}
+
+/* Every icon at the same 24 px in the middle of its frame, whatever its own artboard (16, 24 ...). */
+.tile svg {
+  inline-size: var(--size-lg);
+  block-size: var(--size-lg);
+}
+
+.label {
+  padding-inline: var(--spacing-sm);
+  color: var(--color-text-secondary);
+}

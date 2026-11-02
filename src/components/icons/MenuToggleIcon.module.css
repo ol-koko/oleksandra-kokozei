@@ -11,7 +11,7 @@
 .line {
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform var(--motion-duration-base) var(--motion-easing-emphasized);
+  transition: transform var(--duration-300) var(--motion-easing-emphasized);
 }
 
 .icon[data-open='true'] .top {
@@ -24,11 +24,11 @@
 
 /* Runs whenever the icon starts rendering, e.g. each time its dialog opens. */
 .morphIn .top {
-  animation: menu-toggle-top-in var(--motion-duration-base) var(--motion-easing-emphasized);
+  animation: menu-toggle-top-in var(--duration-300) var(--motion-easing-emphasized);
 }
 
 .morphIn .bottom {
-  animation: menu-toggle-bottom-in var(--motion-duration-base) var(--motion-easing-emphasized);
+  animation: menu-toggle-bottom-in var(--duration-300) var(--motion-easing-emphasized);
 }
 
 @keyframes menu-toggle-top-in {

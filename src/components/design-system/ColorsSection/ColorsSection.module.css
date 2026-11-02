@@ -1,0 +1,38 @@
+/* Figma 741:2290: pills 4 apart, rows 32 swatch + 12 + 241 name + 292 usage + value. */
+.pills {
+  gap: var(--spacing-xs);
+}
+
+.pill {
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-lg);
+  border: var(--border-none);
+  border-radius: var(--border-radius-full);
+  background: none;
+  cursor: pointer;
+}
+
+/* At rest the current pill has its own background; while the indicator slides it takes over (LanguageSwitcher). */
+.pill[aria-current='true'] {
+  background-color: var(--color-surface-subtle);
+}
+
+.pills[data-sliding] .pill[aria-current='true'] {
+  background-color: transparent;
+  color: var(--color-text-disabled);
+}
+
+.pills[data-sliding] .pill[data-target] {
+  color: var(--color-text-primary);
+}
+
+.panel {
+  min-inline-size: 0;
+}
+
+/* Five pills fit 288 px (320 minus the gutters) only with tighter padding. */
+@media (max-width: 359px) {
+  .pill {
+    padding-inline: var(--spacing-md);
+  }
+}

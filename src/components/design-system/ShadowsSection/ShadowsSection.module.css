@@ -1,0 +1,23 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-4xl) var(--spacing-3xl);
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* The raised square in Figma is 60 × 60 (765:1167). */
+.box {
+  --specimen-size: 60px;
+
+  display: block;
+  inline-size: var(--specimen-size);
+  block-size: var(--specimen-size);
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-surface-raised);
+  box-shadow: var(--shadow);
+}

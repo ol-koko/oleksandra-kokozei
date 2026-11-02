@@ -85,7 +85,7 @@
   opacity: 0;
   transform: scale(var(--app-scale, 1));
   transform-origin: top left;
-  transition: opacity var(--motion-duration-base) var(--motion-easing-standard);
+  transition: opacity var(--duration-300) var(--motion-easing-standard);
 }
 
 .iframe[data-ready] {
@@ -109,7 +109,7 @@
   box-shadow: var(--shadow-sm);
   color: var(--color-icon-muted);
   cursor: pointer;
-  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: color var(--duration-200) var(--motion-easing-standard);
 }
 
 .fullScreen:focus-visible {
@@ -125,11 +125,11 @@
 /* ---------- Motion: opens with .animate-overlay / .animate-modal, closes in reverse ---------- */
 
 .closing .backdrop {
-  animation: app-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: app-fade-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 .closing .panel {
-  animation: app-scale-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: app-scale-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 @keyframes app-fade-in {

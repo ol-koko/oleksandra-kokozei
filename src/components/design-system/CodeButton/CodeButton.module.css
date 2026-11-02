@@ -1,0 +1,26 @@
+/* A 24 px target around the `</>` mark; the negative margin keeps the Figma position. */
+.button {
+  position: relative;
+  margin: calc(var(--spacing-xs) * -1);
+  padding: var(--spacing-xs);
+  border: var(--border-none);
+  background: none;
+  cursor: pointer;
+}
+
+/*
+ * The footer's tooltip (hover.css .social-label): centered above the mark. It
+ * shows on hover, keyboard focus and while "Copied" is up.
+ */
+button.button:focus-visible .tooltip,
+button.button[data-copied] .tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button.button:hover .tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

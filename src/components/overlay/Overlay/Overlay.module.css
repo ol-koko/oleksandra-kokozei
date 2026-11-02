@@ -110,8 +110,8 @@
       100% 100%;
     mask-repeat: no-repeat;
     transition:
-      --overlay-fade-top var(--motion-duration-base) var(--motion-easing-standard),
-      --overlay-fade-bottom var(--motion-duration-base) var(--motion-easing-standard);
+      --overlay-fade-top var(--duration-300) var(--motion-easing-standard),
+      --overlay-fade-bottom var(--duration-300) var(--motion-easing-standard);
   }
 
   .scroller[data-scrolled='true'] {
@@ -258,11 +258,11 @@
  * Close: a quicker reverse; the dialog closes once it has finished.
  */
 .closing .backdrop {
-  animation: overlay-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: overlay-fade-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 .closing .panel {
-  animation: overlay-scale-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: overlay-scale-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 /*
@@ -272,20 +272,20 @@
  */
 @media (max-width: 767px) {
   .dialog .panel {
-    animation: overlay-slide-in var(--motion-duration-slower) var(--motion-easing-emphasized) both;
+    animation: overlay-slide-in var(--duration-500) var(--motion-easing-emphasized) both;
   }
 
   .dialog .scroller {
-    animation: overlay-fade-in var(--motion-duration-base) var(--motion-easing-standard) backwards;
-    animation-delay: var(--motion-duration-fast);
+    animation: overlay-fade-in var(--duration-300) var(--motion-easing-standard) backwards;
+    animation-delay: var(--duration-200);
   }
 
   .closing .panel {
-    animation: overlay-slide-out var(--motion-duration-base) var(--motion-easing-standard) forwards;
+    animation: overlay-slide-out var(--duration-300) var(--motion-easing-standard) forwards;
   }
 
   .closing .scroller {
-    animation: overlay-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+    animation: overlay-fade-out var(--duration-200) var(--motion-easing-standard) forwards;
   }
 }
 

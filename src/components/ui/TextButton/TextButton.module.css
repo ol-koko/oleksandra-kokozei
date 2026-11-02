@@ -1,0 +1,11 @@
+/* Quiet text button (Figma 790:594): body-m, text/muted, xs/lg padding, round. */
+.button {
+  padding-block: var(--spacing-xs);
+  padding-inline: var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius-full);
+  background: none;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: pointer;
+}

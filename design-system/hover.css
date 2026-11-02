@@ -9,11 +9,11 @@
 /* ---------- Shared transition presets ---------- */
 
 .hover-color {
-  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: color var(--duration-200) var(--motion-easing-standard);
 }
 
 .hover-scale {
-  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: transform var(--duration-200) var(--motion-easing-standard);
 }
 
 /* aria-current="true" marks the active in-page link or language (not a page, not a toggle). */
@@ -24,7 +24,7 @@
 
 .nav-link {
   color: var(--color-text-inactive);
-  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: color var(--duration-200) var(--motion-easing-standard);
 }
 .nav-link[aria-current="true"] {
   color: var(--color-text-primary);
@@ -41,7 +41,7 @@
 
 /* Single links that are not part of a nav list (logo, footer email): primary -> secondary. */
 .hover-link {
-  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: color var(--duration-200) var(--motion-easing-standard);
 }
 @media (hover: hover) and (pointer: fine) {
   .hover-link:hover {
@@ -58,7 +58,7 @@
    Markup: <div class="polaroid-group"><div class="polaroid">...</div><svg signature/></div> */
 
 .polaroid-group {
-  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: transform var(--duration-200) var(--motion-easing-standard);
 }
 @media (hover: hover) and (pointer: fine) {
   .polaroid-group:has(.polaroid:hover) {
@@ -77,7 +77,7 @@
            <h3><button>...</button></h3><p>...</p></article> */
 
 .work-cover {
-  transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+  transition: transform var(--duration-200) var(--motion-easing-gentle);
 }
 @media (hover: hover) and (pointer: fine) {
   .work-card:hover .work-cover {
@@ -98,7 +98,7 @@
   background: var(--color-surface-subtle);
 }
 .experience-icon > * {
-  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: transform var(--duration-200) var(--motion-easing-standard);
 }
 @media (hover: hover) and (pointer: fine) {
   .experience-item:hover .experience-icon > * {
@@ -116,7 +116,7 @@
 .social-link {
   position: relative;
   color: var(--color-icon-decorative);
-  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: color var(--duration-200) var(--motion-easing-standard);
 }
 .social-label {
   /* Tooltip: dark bubble 2px above the icon */
@@ -137,8 +137,8 @@
   opacity: 0;
   transform: translate(-50%, var(--dimension-1));
   transition:
-    opacity var(--motion-duration-fast) var(--motion-easing-standard),
-    transform var(--motion-duration-fast) var(--motion-easing-standard);
+    opacity var(--duration-200) var(--motion-easing-standard),
+    transform var(--duration-200) var(--motion-easing-standard);
 }
 @media (hover: hover) and (pointer: fine) {
   .social-link:hover { color: var(--color-icon-strong); }
@@ -155,7 +155,7 @@
 
 /* Social tiles (Experience): 64px tiles, the whole tile grows. */
 .social-tile {
-  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: transform var(--duration-200) var(--motion-easing-standard);
 }
 @media (hover: hover) and (pointer: fine) {
   .social-tile:hover {
@@ -172,7 +172,7 @@
    at rest (no measuring, no flash on load); the indicator only appears while it slides
    ([data-sliding]), and the page navigates when the slide ends (LanguageSwitcher).
    JS sets --pill-x (offsetLeft) and --pill-w (offsetWidth) on the indicator and plays the
-   slide with the Web Animations API (--motion-duration-moderate, --motion-easing-emphasized),
+   slide with the Web Animations API (--duration-250, --motion-easing-emphasized),
    so the navigation can wait for it reliably in every engine. */
 
 .lang-switch {
@@ -196,7 +196,7 @@
 .lang-pill {
   position: relative; /* above the indicator */
   color: var(--color-text-disabled);
-  transition: color var(--motion-duration-base) var(--motion-easing-standard);
+  transition: color var(--duration-300) var(--motion-easing-standard);
 }
 .lang-pill[aria-current="true"] {
   color: var(--color-text-primary);

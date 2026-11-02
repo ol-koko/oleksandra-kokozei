@@ -92,16 +92,6 @@
   outline-offset: var(--focus-ring-offset);
 }
 
-.pill {
-  display: block;
-  padding-block: var(--spacing-xs);
-  padding-inline: var(--spacing-lg);
-  border-radius: var(--border-radius-full);
-  background-color: var(--color-surface-raised);
-  color: var(--color-text-primary);
-  white-space: nowrap;
-}
-
 .description {
   grid-row: 2;
   padding-inline: var(--spacing-md);
@@ -125,7 +115,7 @@
   .pill {
     transform-origin: calc(50cqi - var(--spacing-lg))
       calc(100% + var(--spacing-lg) - 50cqi * 253 / 486);
-    transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+    transition: transform var(--duration-200) var(--motion-easing-gentle);
   }
 
   .card:has(.button:focus-visible:not([data-pointer-focus])) .pill {

@@ -1,5 +1,6 @@
 import { hasLocale } from 'next-intl';
 import { routing, type Locale, type SupportedLocale } from '@/features/i18n/routing';
+import { designSystemPath } from './designSystem';
 import type { SectionId } from './types';
 
 /**
@@ -15,3 +16,13 @@ export const sectionIds = ['me', 'works', 'experience'] as const satisfies reado
 export const languageOrder = (
   ['uk', 'en', 'de'] as const satisfies readonly SupportedLocale[]
 ).filter((locale): locale is Locale => hasLocale(routing.locales, locale));
+
+/**
+ * Pages of their own, without the home page's sections. The header and footer
+ * nav lead from them to the home page (`/#works`), and no section is active.
+ */
+export const standalonePaths = [designSystemPath] as const;
+
+export function isStandalonePath(pathname: string) {
+  return (standalonePaths as readonly string[]).includes(pathname);
+}

@@ -27,7 +27,7 @@ type InitialSectionScrollOptions = {
 
 /**
  * Takes a freshly opened overlay to `anchorId`: once the panel's own entrance
- * has finished and a short pause (--motion-duration-fast) has passed, the
+ * has finished and a short pause (--duration-200) has passed, the
  * scroller glides there and the nav shows that section as active. A wheel,
  * touch, press or key stops it at once. With reduced motion the overlay opens
  * at the section with no glide. Focus is left alone.
@@ -94,7 +94,7 @@ export function useInitialSectionScroll({
     const panel = scroller.parentElement;
     const entrance = panel?.getAnimations() ?? [];
     const afterEntrance = () => {
-      if (!stopped) timer = setTimeout(glide, durationToken('--motion-duration-fast'));
+      if (!stopped) timer = setTimeout(glide, durationToken('--duration-200'));
     };
     Promise.all(entrance.map((animation) => animation.finished)).then(afterEntrance, afterEntrance);
 

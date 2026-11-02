@@ -16,7 +16,7 @@ No Tailwind, no UI kits, no animation libraries unless explicitly approved.
 - Exceptions: Books and Fav Songs blocks in overlay-me are replaced by ready-made code; Figma shows only placeholders for them.
 
 ## Styling rules
-- Use only token variables (--spacing-*, --color-*, --border-radius-*, --size-*, --motion-*) and typography classes (.text-body-*, .text-title-*).
+- Use only token variables (--spacing-*, --color-*, --border-radius-*, --size-*, --motion-*, --duration-*) and typography classes (.text-body-*, .text-title-*).
 - Create a new design token only for values that are reused in several places or represent a system-level design decision. One-off component geometry (a specific logo size, an inset used in one component, a single layout dimension) stays local: a custom property in that component's CSS module with a short comment, built on existing primitives where possible. Never hardcode a value that already exists as a token.
 - Use utility animation classes from animations.css; always respect prefers-reduced-motion.
 

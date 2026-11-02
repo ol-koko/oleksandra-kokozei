@@ -1,0 +1,53 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  min-inline-size: 0;
+}
+
+/*
+ * The code button's tooltip sits above the mark and may leave the tile: the
+ * card is lifted above its neighbors while it shows (but below the sticky menu).
+ */
+.card:hover,
+.card:focus-within {
+  z-index: 1;
+}
+
+/* Tile: 160 high, surface/subtle, radius-lg (752:2702). The specimen sits centered. */
+.preview {
+  --preview-height: 160px; /* Figma 752:2702; one-off geometry */
+
+  position: relative;
+  /* Nothing inside paints over the sticky bar or the menu. */
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  block-size: var(--preview-height);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-surface-subtle);
+}
+
+.code {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: var(--spacing-xl);
+  inset-inline-end: var(--spacing-xl);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding-inline: var(--spacing-sm);
+}
+
+.title {
+  color: var(--color-text-primary);
+  overflow-wrap: anywhere;
+}
+
+.note {
+  color: var(--color-text-secondary);
+}

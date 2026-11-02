@@ -51,7 +51,7 @@ export function Shelf({ entries, previousLabel, nextLabel }: ShelfProps) {
     >
       <ArrowButton
         label={previousLabel}
-        className={styles.previous}
+        direction="previous"
         disabled={atStart}
         onClick={() => scrollByItem(-1)}
       />
@@ -75,7 +75,7 @@ export function Shelf({ entries, previousLabel, nextLabel }: ShelfProps) {
 
       <ArrowButton
         label={nextLabel}
-        className={styles.next}
+        direction="next"
         disabled={atEnd}
         onClick={() => scrollByItem(1)}
       />
@@ -106,7 +106,7 @@ function BylineNames({ byline }: { byline: string }) {
 
 type ArrowButtonProps = {
   label: string;
-  className?: string;
+  direction: 'previous' | 'next';
   disabled: boolean;
   onClick: () => void;
 };
@@ -115,11 +115,11 @@ type ArrowButtonProps = {
  * Round arrow button (322:238). Disabled at the row's ends through
  * `aria-disabled`, so a focused arrow keeps focus when it reaches the end.
  */
-function ArrowButton({ label, className, disabled, onClick }: ArrowButtonProps) {
+export function ArrowButton({ label, direction, disabled, onClick }: ArrowButtonProps) {
   return (
     <button
       type="button"
-      className={`${styles.arrow} ${className}`}
+      className={`${styles.arrow} ${styles[direction]}`}
       aria-label={label}
       aria-disabled={disabled}
       onClick={disabled ? undefined : onClick}

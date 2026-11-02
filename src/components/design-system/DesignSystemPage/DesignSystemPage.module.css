@@ -1,0 +1,67 @@
+/*
+ * No sticky site header here, so nothing is reserved at the top: the offsets
+ * that follow --header-block-size (scroll padding, the menu bar, the desktop
+ * menu) start at 0.
+ */
+:global(:root:has([data-design-system])) {
+  --header-block-size: 0px;
+}
+
+/*
+ * The breadcrumbs sit at the top of the page, in the header's old place, and
+ * scroll away with the content: not sticky, no blur.
+ */
+.bar {
+  --bar-height: 96px; /* Figma 735:1626, the header this replaces */
+
+  display: flex;
+  align-items: center;
+  min-block-size: var(--bar-height);
+}
+
+.main {
+  /* The value column of every table: one fixed width, right-aligned (Figma 777:1443, 781:1580). */
+  --table-value-width: 70px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6xl);
+  inline-size: 100%;
+  padding-block-end: var(--spacing-9xl);
+  padding-inline: var(--page-gutter);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6xl);
+  min-inline-size: 0;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-9xl);
+  min-inline-size: 0;
+}
+
+/* Anchors land below the sticky menu bar on mobile (its height plus room) and level with the menu on desktop. */
+.main [id] {
+  scroll-margin-block-start: calc(var(--size-4xl) + var(--spacing-xl));
+}
+
+@media (min-width: 1024px) {
+  .main {
+    --menu-width: 180px; /* Figma 730:1540 */
+    --column-width: 668px; /* Figma 777:1530 */
+
+    display: grid;
+    grid-template-columns: var(--menu-width) minmax(0, var(--column-width));
+    column-gap: var(--spacing-3xl);
+    padding-block-start: var(--spacing-6xl);
+  }
+
+  .main [id] {
+    scroll-margin-block-start: var(--spacing-6xl);
+  }
+}

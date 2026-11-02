@@ -1,0 +1,30 @@
+/* Family row (Figma 780:1537): "Aa", the family and the weight count, in the same grid as the scale. */
+.family {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) var(--table-value-width);
+  column-gap: var(--spacing-3xl);
+  align-items: center;
+  padding-block: var(--spacing-xl);
+}
+
+/* "Aa" at 32, larger than any text style. */
+.aa {
+  font-size: var(--size-xl);
+}
+
+.weights {
+  justify-self: end;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .family {
+    grid-template-columns: 64px minmax(0, 1fr) var(--table-value-width);
+    column-gap: var(--spacing-lg);
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}

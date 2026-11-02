@@ -1,0 +1,47 @@
+/* Figma 752:3186: a 55 px light square with the word "blur" in it, blurred by the layer. */
+.stage {
+  --layer-size: 56px;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: var(--layer-size);
+  block-size: var(--layer-size);
+  border-radius: var(--border-radius-md);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background-color: var(--color-surface-header);
+  backdrop-filter: blur(var(--blur));
+}
+
+.word {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-muted);
+  transition: opacity var(--duration-400) var(--motion-easing-standard);
+}
+
+/* Under the layer: blurred by it. Above the layer: sharp. The loop crossfades the two. */
+.under {
+  z-index: 0;
+}
+
+.over {
+  z-index: 2;
+  opacity: 0;
+}
+
+.stage[data-above] .under {
+  opacity: 0;
+}
+
+.stage[data-above] .over {
+  opacity: 1;
+}

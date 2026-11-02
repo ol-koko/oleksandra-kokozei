@@ -8,15 +8,19 @@ import styles from './SandText.module.css';
 const FINE_POINTER = '(hover: hover) and (pointer: fine)';
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 
-export type SandPlacement = 'header' | 'footer';
+export type SandPlacement = 'header' | 'footer' | 'design-system';
 
 type SandTextProps = {
   text: string;
   placement: SandPlacement;
 };
 
-/** Header: hover devices only. Footer: also autoplays, and plays once in view on touch. */
+/**
+ * Header: hover devices only. Footer: also autoplays, and plays once in view on touch.
+ * Design system title: plays when it comes into view and then autoplays, on every device.
+ */
 function sandMode(placement: SandPlacement, finePointer: boolean): SandMode | null {
+  if (placement === 'design-system') return 'autoplay';
   if (placement === 'header') return finePointer ? 'pointer' : null;
   return finePointer ? 'pointer-autoplay' : 'in-view';
 }

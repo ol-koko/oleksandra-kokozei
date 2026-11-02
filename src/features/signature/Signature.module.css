@@ -11,8 +11,8 @@
 .drawn {
   /* Lottie reference: 107 frames (3.57 s at 29.97 fps), scaled to 2 s with the same speed profile. */
   --signature-draw-duration: 2s;
-  /* Waits for the polaroid's `.animate-card` entrance (`--motion-duration-slow`), then a short pause. */
-  --signature-draw-delay: calc(var(--motion-duration-slow) + var(--motion-duration-fast));
+  /* Waits for the polaroid's `.animate-card` entrance (`--duration-400`), then a short pause. */
+  --signature-draw-delay: calc(var(--duration-400) + var(--duration-200));
 
   animation: signature-draw var(--signature-draw-duration) linear var(--signature-draw-delay)
     backwards;

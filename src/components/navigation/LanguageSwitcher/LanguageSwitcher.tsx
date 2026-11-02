@@ -8,6 +8,12 @@ import { saveLocaleChoice } from '@/features/i18n/localeCookie';
 import { getPathname, usePathname } from '@/features/i18n/navigation';
 import type { Locale } from '@/features/i18n/routing';
 import { prefetchDocument } from '@/features/navigation/prefetchDocument';
+import {
+  chipFrame,
+  placeIndicator,
+  prefersReducedMotion,
+  slideTiming,
+} from '@/features/navigation/pillSlide';
 import styles from './LanguageSwitcher.module.css';
 
 type LanguageSwitcherProps = {
@@ -16,29 +22,17 @@ type LanguageSwitcherProps = {
   activeId?: SectionId;
   onNavigate?: () => void;
   className?: string;
+  /**
+   * Documentation specimen: the pills behave as on the site (hover, active
+   * state, the indicator slide) but never leave the page, change the locale or
+   * save a choice. The parent owns which pill is active.
+   */
+  preview?: { locale: Locale; onChange: (locale: Locale) => void };
 };
 
 /** A left click or Enter without modifiers: the switch happens in this tab. */
 function isPlainActivation(event: MouseEvent) {
   return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-}
-
-/** Puts the indicator under a chip (hover.css reads --pill-x and --pill-w). */
-function placeIndicator(indicator: HTMLElement, chip: HTMLElement) {
-  indicator.style.setProperty('--pill-x', `${chip.offsetLeft}px`);
-  indicator.style.setProperty('--pill-w', `${chip.offsetWidth}px`);
-}
-
-/** The indicator geometry under a chip, as a keyframe. */
-function chipFrame(chip: HTMLElement): Keyframe {
-  return { transform: `translateX(${chip.offsetLeft}px)`, width: `${chip.offsetWidth}px` };
-}
-
-/** A motion token duration (`250ms`, `0.25s`) in milliseconds. */
-function toMilliseconds(duration: string) {
-  const value = parseFloat(duration);
-  if (!Number.isFinite(value)) return 0;
-  return duration.trim().endsWith('ms') ? value : value * 1000;
 }
 
 /** How long past the slide the safety fallback waits before navigating anyway. */
@@ -49,9 +43,11 @@ export function LanguageSwitcher({
   activeId,
   onNavigate,
   className,
+  preview,
 }: LanguageSwitcherProps) {
   const t = useTranslations('Languages');
-  const currentLocale = useLocale();
+  const siteLocale = useLocale();
+  const currentLocale = preview?.locale ?? siteLocale;
   const pathname = usePathname();
   const indicatorRef = useRef<HTMLSpanElement>(null);
   /** The chip the indicator slides to; null while the active chip shows its own background. */
@@ -72,11 +68,11 @@ export function LanguageSwitcher({
       event.preventDefault();
       return;
     }
-    saveLocaleChoice(locale);
+    if (!preview) saveLocaleChoice(locale);
     const chip = event.currentTarget;
     const indicator = indicatorRef.current;
     const from = chip.closest('nav')?.querySelector<HTMLElement>('[aria-current="true"]');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = prefersReducedMotion();
     if (
       locale === currentLocale ||
       !isPlainActivation(event) ||
@@ -84,6 +80,10 @@ export function LanguageSwitcher({
       !from ||
       reducedMotion
     ) {
+      if (preview) {
+        event.preventDefault();
+        if (locale !== currentLocale) preview.onChange(locale);
+      }
       // The anchor navigates on its own, instantly.
       onNavigate?.();
       return;
@@ -94,7 +94,7 @@ export function LanguageSwitcher({
     event.preventDefault();
     // Prefetched only now: the cookie just changed, and a prefetch made before that is dropped.
     const href = chip.href;
-    prefetchDocument(href);
+    if (!preview) prefetchDocument(href);
     placeIndicator(indicator, chip);
     setTarget(locale);
 
@@ -103,12 +103,15 @@ export function LanguageSwitcher({
       if (navigated) return;
       navigated = true;
       onNavigate?.();
+      if (preview) {
+        preview.onChange(locale);
+        setTarget(null);
+        return;
+      }
       window.location.assign(href);
     };
 
-    const tokens = getComputedStyle(indicator);
-    const duration = toMilliseconds(tokens.getPropertyValue('--motion-duration-moderate'));
-    const easing = tokens.getPropertyValue('--motion-easing-emphasized').trim() || 'ease-out';
+    const { duration, easing } = slideTiming(indicator);
     // Safety net: a switch never waits longer than the slide, whatever happens to it.
     window.setTimeout(navigate, duration + FALLBACK_SLACK_MS);
     // Web Animations rather than a CSS transition: the animation exists as soon as it is
@@ -130,7 +133,9 @@ export function LanguageSwitcher({
         <span ref={indicatorRef} className="lang-switch__indicator" aria-hidden="true" />
         <ul className={styles.list}>
           {languageOrder.map((locale) => {
-            const href = `${getPathname({ locale, href: pathname })}${activeId ? `#${activeId}` : ''}`;
+            const href = preview
+              ? '#'
+              : `${getPathname({ locale, href: pathname })}${activeId ? `#${activeId}` : ''}`;
             return (
               <li key={locale}>
                 {/*

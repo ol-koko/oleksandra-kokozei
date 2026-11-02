@@ -23,7 +23,7 @@
   overflow: hidden;
   border-radius: var(--border-radius-2xl);
   box-shadow: var(--shadow-sm);
-  transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+  transition: transform var(--duration-200) var(--motion-easing-gentle);
 }
 
 /*

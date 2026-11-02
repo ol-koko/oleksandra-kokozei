@@ -1,6 +1,8 @@
 .footer {
   padding-block: var(--spacing-4xl);
   padding-inline: var(--page-gutter);
+  /* The logo's sand canvas is wider than the text; while it plays it must not widen the page. */
+  overflow-x: clip;
 }
 
 /* The top rule, then the content (Figma: 40 below the line on mobile, 56 on desktop). */
@@ -27,6 +29,30 @@
 
 .localTime {
   color: var(--color-text-inactive);
+}
+
+.designSystem {
+  display: block;
+}
+
+/*
+ * The tooltip of the first icon in the column starts at the icon instead of
+ * centering on it: "Design system" is wider than the icon and the link sits at
+ * the page margin, so a centered label would run off the screen on mobile.
+ */
+a.designSystem :global(.social-label) {
+  left: 0;
+  transform: translate(0, var(--dimension-1));
+}
+
+a.designSystem:focus-visible :global(.social-label) {
+  transform: translate(0, 0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.designSystem:hover :global(.social-label) {
+    transform: translate(0, 0);
+  }
 }
 
 .email {

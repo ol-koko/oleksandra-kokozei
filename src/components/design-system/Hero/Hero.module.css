@@ -1,0 +1,27 @@
+/* Figma 730:1615: title and domain 12 apart, then the summary 16 below. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  outline: none;
+  /* The sand canvas is wider than the text; while it plays it must not widen the page. */
+  overflow-x: clip;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.heading {
+  color: var(--color-text-primary);
+}
+
+.domain {
+  color: var(--color-text-muted);
+}
+
+.summary {
+  color: var(--color-text-primary);
+}
