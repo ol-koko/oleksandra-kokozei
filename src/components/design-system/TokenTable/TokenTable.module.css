@@ -1,8 +1,8 @@
 /*
- * Figma 777:1437 / 781:1575: rows 24 apart in a grid of 200 | flexible | 72,
+ * Figma 777:1437 / 781:1575: rows 24 apart in a grid of 200 | flexible | 70,
  * 16 above and below, a 1 px divider between rows. The value column is the
- * last one and ends at the right edge of the divider; a longer value (an
- * 8-digit hex) grows to the left into the gap.
+ * last one and ends at the right edge of the divider; a longer value grows to
+ * the left into the gap.
  */
 .table {
   --sample-width: 200px;

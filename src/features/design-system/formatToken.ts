@@ -3,15 +3,15 @@ const ALPHA_COLOR = /^rgb\(\s*(\d+)\s+(\d+)\s+(\d+)\s*\/\s*([\d.]+)\s*\)$/;
 const hex = (channel: number) => channel.toString(16).padStart(2, '0').toUpperCase();
 
 /**
- * A color token's literal as hex, like Figma shows it: `#FFFFFF`, and a color
- * with alpha as 8 digits, `#FFFFFFCC` (the last two are the alpha).
+ * A color token's literal as 6-digit hex, like Figma shows it: `#FFFFFF`. A
+ * color with alpha shows its color only (white-80 is `#FFFFFF`): the opacity is
+ * in the token's name, and the swatch is drawn with the real transparency.
  */
 export function formatColor(value: string): string {
   const alpha = value.match(ALPHA_COLOR);
   if (alpha) {
-    const [, red, green, blue, opacity] = alpha;
-    const channels = [red, green, blue].map((channel) => hex(Number(channel)));
-    return `#${channels.join('')}${hex(Math.round(Number(opacity) * 255))}`;
+    const [, red, green, blue] = alpha;
+    return `#${[red, green, blue].map((channel) => hex(Number(channel))).join('')}`;
   }
   return value.startsWith('#') ? value.toUpperCase() : value;
 }
