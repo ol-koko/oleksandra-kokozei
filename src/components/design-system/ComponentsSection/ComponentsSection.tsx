@@ -125,19 +125,9 @@ function BreadcrumbsSpecimen() {
   );
 }
 
+/** One social link: its tooltip shows on hover and keyboard focus only, as in the footer. */
 function TooltipLabelSpecimen() {
-  return (
-    <div className={styles.states}>
-      <div className={styles.state}>
-        <SocialLinks label="Tooltip at rest" order={['linkedin']} />
-        <span className={`${styles.stateLabel} text-body-xs`}>At rest</span>
-      </div>
-      <div className={`${styles.state} ${styles.forced}`}>
-        <SocialLinks label="Tooltip on hover" order={['linkedin']} />
-        <span className={`${styles.stateLabel} text-body-xs`}>On hover</span>
-      </div>
-    </div>
-  );
+  return <SocialLinks label="Tooltip label" order={['linkedin']} />;
 }
 
 function TagSpecimen() {

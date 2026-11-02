@@ -1,8 +1,18 @@
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
   min-inline-size: 0;
+}
+
+/*
+ * The code button's tooltip sits above the mark and may leave the tile: the
+ * card is lifted above its neighbors while it shows (but below the sticky menu).
+ */
+.card:hover,
+.card:focus-within {
+  z-index: 1;
 }
 
 /* Tile: 160 high, surface/subtle, radius-lg (752:2702). The specimen sits centered. */
@@ -15,7 +25,6 @@
   display: grid;
   place-items: center;
   block-size: var(--preview-height);
-  overflow: hidden;
   border-radius: var(--border-radius-lg);
   background-color: var(--color-surface-subtle);
 }

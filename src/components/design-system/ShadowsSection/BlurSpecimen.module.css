@@ -20,11 +20,28 @@
 }
 
 .word {
-  position: relative;
-  z-index: 0;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
   color: var(--color-text-muted);
+  transition: opacity var(--duration-400) var(--motion-easing-standard);
 }
 
-.above {
+/* Under the layer: blurred by it. Above the layer: sharp. The loop crossfades the two. */
+.under {
+  z-index: 0;
+}
+
+.over {
   z-index: 2;
+  opacity: 0;
+}
+
+.stage[data-above] .under {
+  opacity: 0;
+}
+
+.stage[data-above] .over {
+  opacity: 1;
 }

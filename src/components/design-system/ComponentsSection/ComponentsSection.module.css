@@ -52,34 +52,6 @@
   padding-inline: var(--spacing-none);
 }
 
-/* Tooltip label (808:1149): the same link twice, the second held in its hover state. */
-.states {
-  display: flex;
-  align-items: flex-end;
-  gap: var(--spacing-5xl);
-}
-
-.state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding-block-start: var(--spacing-3xl);
-}
-
-.stateLabel {
-  color: var(--color-text-secondary);
-}
-
-.forced :global(.social-link) {
-  color: var(--color-icon-strong);
-}
-
-.forced :global(.social-label) {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
 .tags {
   display: flex;
   flex-wrap: wrap;
