@@ -1,7 +1,8 @@
 'use client';
 
-import { useId, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
+import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import { Section } from '@/components/design-system/Section/Section';
+import { TokenSample, TokenTable } from '@/components/design-system/TokenTable/TokenTable';
 import { colorPalettes, type ColorPaletteId } from '@/content/designSystem';
 import type { ColorRow } from '@/features/design-system/designSystemData';
 import styles from './ColorsSection.module.css';
@@ -64,36 +65,16 @@ export function ColorsSection({ palettes }: ColorsSectionProps) {
         tabIndex={0}
         className={styles.panel}
       >
-        <table className={styles.table}>
-          <caption className="visually-hidden">{`${active} colors`}</caption>
-          <thead className="visually-hidden">
-            <tr>
-              <th scope="col">Swatch</th>
-              <th scope="col">Token</th>
-              <th scope="col">Used by</th>
-              <th scope="col">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {palettes[active].map((row) => (
-              <tr key={row.token} className={styles.row}>
-                <td aria-hidden="true">
-                  <span
-                    className={styles.swatch}
-                    style={{ '--swatch': `var(--${row.token})` } as CSSProperties}
-                  />
-                </td>
-                <th scope="row" className={`${styles.name} text-body-xs`}>
-                  {row.token}
-                </th>
-                <td className={`${styles.usage} text-body-xs`}>
-                  {row.usedBy.length > 0 ? row.usedBy.join(', ') : 'Not used by a semantic token'}
-                </td>
-                <td className={`${styles.value} text-body-xs`}>{row.value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <TokenTable
+          label={`${active} colors`}
+          rows={palettes[active].map((row) => ({
+            id: row.token,
+            name: row.token,
+            note: row.usedBy.length > 0 ? row.usedBy.join(', ') : 'Not used by a semantic token',
+            value: row.value,
+            sample: <TokenSample kind="swatch" token={row.token} />,
+          }))}
+        />
       </div>
     </Section>
   );

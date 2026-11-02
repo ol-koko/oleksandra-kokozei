@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { PreviewCard } from '@/components/design-system/PreviewCard/PreviewCard';
 import { Section, Subsection } from '@/components/design-system/Section/Section';
-import { TokenTable } from '@/components/design-system/TokenTable/TokenTable';
+import { TokenSample, TokenTable } from '@/components/design-system/TokenTable/TokenTable';
 import type { TokenRow } from '@/features/design-system/designSystemData';
 import styles from './BordersSection.module.css';
 
@@ -32,8 +32,17 @@ export function BordersSection({ radius, borderWidth }: BordersSectionProps) {
         </div>
       </Subsection>
 
-      <Subsection title="Border width">
-        <TokenTable label="Border width tokens" rows={borderWidth} variant="border" />
+      <Subsection id="borders-width" title="Width">
+        <TokenTable
+          label="Border width tokens"
+          rows={borderWidth.map((row) => ({
+            id: row.token,
+            name: row.token,
+            note: row.note,
+            value: row.value,
+            sample: <TokenSample kind="box" token={row.token} />,
+          }))}
+        />
       </Subsection>
     </Section>
   );

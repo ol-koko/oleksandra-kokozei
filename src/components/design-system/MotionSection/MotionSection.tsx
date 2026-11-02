@@ -7,14 +7,13 @@ import styles from './MotionSection.module.css';
 
 type MotionSectionProps = {
   durations: DesignSystemData['durations'];
-  otherMotion: DesignSystemData['other']['motion'];
 };
 
 /**
  * Motion (Figma 786:1625): every animation class of animations.css and every
  * hover rule of hover.css, looping on its own; then the duration scale.
  */
-export function MotionSection({ durations, otherMotion }: MotionSectionProps) {
+export function MotionSection({ durations }: MotionSectionProps) {
   return (
     <Section id="motion" title="Motion">
       <Subsection id="motion-animation" title="Animation">
@@ -34,10 +33,15 @@ export function MotionSection({ durations, otherMotion }: MotionSectionProps) {
       </Subsection>
 
       <Subsection id="motion-duration" title="Duration scale">
-        <TokenTable label="Duration tokens" rows={durations} noteLabel="Used for" />
-        {otherMotion.length > 0 && (
-          <TokenTable label="Other motion tokens" rows={otherMotion} />
-        )}
+        <TokenTable
+          label="Duration tokens"
+          rows={durations.map((row) => ({
+            id: row.token,
+            name: row.token,
+            note: row.note,
+            value: row.value,
+          }))}
+        />
       </Subsection>
     </Section>
   );

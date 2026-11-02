@@ -43,11 +43,11 @@ export async function DesignSystemPage() {
           <ShadowsSection
             shadows={data.shadows}
             blur={data.blur}
-            otherBlur={data.other.blur}
+            otherBlur={data.otherBlur}
           />
-          <IconographySection sizes={data.iconSizes} otherSizes={data.other.size} />
-          <MotionSection durations={data.durations} otherMotion={data.other.motion} />
-          <MaterialsSection otherGradients={data.other.gradient} />
+          <IconographySection sizes={data.iconSizes} />
+          <MotionSection durations={data.durations} />
+          <MaterialsSection />
         </div>
       </div>
       </main>

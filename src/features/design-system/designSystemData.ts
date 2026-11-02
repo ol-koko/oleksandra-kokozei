@@ -47,9 +47,9 @@ export type DesignSystemData = {
   shadows: TokenRow[];
   blur: TokenRow[];
   iconSizes: TokenRow[];
-  durations: (TokenRow & { alias: string })[];
-  /** Tokens the Figma page has no specimen for, per group, so nothing is silently missing. */
-  other: Record<'size' | 'blur' | 'motion' | 'gradient', TokenRow[]>;
+  durations: TokenRow[];
+  /** Blur tokens the Figma page has no specimen for (`blur-header`), so nothing is silently missing. */
+  otherBlur: TokenRow[];
 };
 
 const isColorValue = (value: string) => value.startsWith('#') || value.startsWith('rgb');
@@ -117,12 +117,7 @@ export async function loadDesignSystemData(): Promise<DesignSystemData> {
   const shadows = rows(sheet, sheet.names('shadow-'), shadowNotes);
   const blur = rows(sheet, Object.keys(blurNotes), blurNotes);
   const iconSizes = rows(sheet, Object.keys(iconSizeNotes), iconSizeNotes);
-  const durations = sheet.names('duration-').map((token) => ({
-    token,
-    note: durationNotes[token] ?? '',
-    value: formatDuration(sheet.resolve(token)),
-    alias: sheet.aliasesOf(token)[0] ?? '',
-  }));
+  const durations = rows(sheet, sheet.names('duration-'), durationNotes, formatDuration);
 
   const palettes = Object.fromEntries(
     colorPalettes.map((id) => [id, palette(sheet, id)]),
@@ -158,14 +153,6 @@ export async function loadDesignSystemData(): Promise<DesignSystemData> {
     blur,
     iconSizes,
     durations,
-    other: {
-      size: rest(sheet, 'size-', Object.keys(iconSizeNotes)),
-      blur: rest(sheet, 'blur-', Object.keys(blurNotes)),
-      motion: [
-        ...rest(sheet, 'ease-', []),
-        ...rest(sheet, 'motion-', []),
-      ].map((row) => ({ ...row, note: '' })),
-      gradient: rest(sheet, 'gradient-', ['gradient-media-cover']),
-    },
+    otherBlur: rest(sheet, 'blur-', Object.keys(blurNotes)),
   };
 }

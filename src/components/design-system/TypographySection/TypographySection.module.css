@@ -1,59 +1,28 @@
-/* Figma 777:1527: sample, then the style name with what it is for, then its size on the right. */
+/* Family row (Figma 780:1537): "Aa", the family and the weight count, in the same grid as the scale. */
 .family {
   display: grid;
-  grid-template-columns: minmax(0, 0.33fr) minmax(0, 1fr) auto;
-  column-gap: var(--spacing-2xl);
+  grid-template-columns: 200px minmax(0, 1fr) 72px;
+  column-gap: var(--spacing-3xl);
   align-items: center;
   padding-block: var(--spacing-xl);
 }
 
-/* "Aa" at 32, larger than any text style (Figma 780:1537). */
+/* "Aa" at 32, larger than any text style. */
 .aa {
   font-size: var(--size-xl);
 }
 
 .weights {
+  justify-self: end;
   color: var(--color-text-secondary);
+  white-space: nowrap;
 }
 
-.table {
-  display: block;
-  inline-size: 100%;
-  border-collapse: collapse;
-}
-
-.table tbody {
-  display: block;
-}
-
-.row {
-  display: grid;
-  grid-template-columns: minmax(0, 0.33fr) minmax(0, 1fr) auto;
-  column-gap: var(--spacing-2xl);
-  align-items: center;
-  padding-block: var(--spacing-xl);
-  border-block-end: var(--border-thin) solid var(--color-border-subtle);
-}
-
-.row > * {
-  padding: var(--spacing-none);
-  text-align: start;
-  font-weight: inherit;
-}
-
-.style {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xxs);
-}
-
-.name {
-  color: var(--color-text-primary);
-}
-
-.note,
-.size {
-  color: var(--color-text-secondary);
+@media (max-width: 767px) {
+  .family {
+    grid-template-columns: 96px minmax(0, 1fr) auto;
+    column-gap: var(--spacing-xl);
+  }
 }
 
 .uppercase {

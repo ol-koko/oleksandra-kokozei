@@ -50,7 +50,14 @@ export const designSystemNav = [
     ],
   },
   { id: 'spacing', label: 'Spacing' },
-  { id: 'borders', label: 'Borders', children: [{ id: 'borders-radius', label: 'Radius' }] },
+  {
+    id: 'borders',
+    label: 'Borders',
+    children: [
+      { id: 'borders-radius', label: 'Radius' },
+      { id: 'borders-width', label: 'Width' },
+    ],
+  },
   { id: 'shadows', label: 'Shadows', children: [{ id: 'shadows-blur', label: 'Blur' }] },
   {
     id: 'iconography',

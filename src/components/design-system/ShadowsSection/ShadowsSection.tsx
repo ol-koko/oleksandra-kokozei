@@ -6,9 +6,7 @@ import type { DesignSystemData } from '@/features/design-system/designSystemData
 import { BlurSpecimen } from './BlurSpecimen';
 import styles from './ShadowsSection.module.css';
 
-type ShadowsSectionProps = Pick<DesignSystemData, 'shadows' | 'blur'> & {
-  otherBlur: DesignSystemData['other']['blur'];
-};
+type ShadowsSectionProps = Pick<DesignSystemData, 'shadows' | 'blur' | 'otherBlur'>;
 
 /** Shadows and Blur (Figma 777:1529). */
 export function ShadowsSection({ shadows, blur, otherBlur }: ShadowsSectionProps) {
@@ -43,7 +41,17 @@ export function ShadowsSection({ shadows, blur, otherBlur }: ShadowsSectionProps
             </PreviewCard>
           ))}
         </div>
-        {otherBlur.length > 0 && <TokenTable label="Other blur tokens" rows={otherBlur} />}
+        {otherBlur.length > 0 && (
+          <TokenTable
+            label="Other blur tokens"
+            rows={otherBlur.map((row) => ({
+              id: row.token,
+              name: row.token,
+              note: row.note,
+              value: row.value,
+            }))}
+          />
+        )}
       </Subsection>
     </Section>
   );

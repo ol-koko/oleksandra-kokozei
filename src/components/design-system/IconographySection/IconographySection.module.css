@@ -4,7 +4,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--spacing-xl);
-  padding: var(--spacing-5xl) var(--spacing-6xl);
+  padding: var(--spacing-5xl) var(--spacing-4xl);
   border-radius: var(--border-radius-lg);
   background-color: var(--color-surface-subtle);
   list-style: none;
@@ -14,14 +14,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
 }
 
 .sizeBox {
   display: block;
-  margin-block-end: var(--spacing-xs);
   border: var(--border-thin) solid var(--color-icon-decorative);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-xs);
   background-color: var(--color-surface-raised);
 }
 
@@ -37,7 +36,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--spacing-4xl) var(--spacing-xl);
+  gap: var(--spacing-3xl) var(--spacing-xl);
   padding: var(--spacing-none);
   list-style: none;
 }
@@ -55,7 +54,7 @@
 .item {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .tile {
@@ -66,9 +65,10 @@
   block-size: var(--tile-height);
   border-radius: var(--border-radius-lg);
   background-color: var(--color-surface-subtle);
-  color: var(--color-icon-decorative);
+  color: var(--color-icon-strong);
 }
 
 .label {
+  padding-inline: var(--spacing-sm);
   color: var(--color-text-secondary);
 }

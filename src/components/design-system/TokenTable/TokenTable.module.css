@@ -1,31 +1,49 @@
 /*
- * A real table, so the columns line up across rows (Figma 748:2337: bar 0–120,
- * name at 140, note at 294, value at the end).
+ * Figma 777:1437 / 781:1575: rows 24 apart in a grid of 200 | flexible | 72,
+ * 16 above and below, a 1 px divider between rows. The value column is the
+ * last one and ends at the right edge of the divider; a longer value (an
+ * 8-digit hex) grows to the left into the gap.
  */
 .table {
+  --sample-width: 200px;
+  --value-width: 72px;
+
+  display: block;
   inline-size: 100%;
   border-collapse: collapse;
 }
 
-.row > * {
-  padding-block: var(--spacing-xl) var(--spacing-lg);
-  padding-inline: var(--spacing-none) var(--spacing-2xl);
+.table tbody {
+  display: block;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--sample-width) minmax(0, 1fr) var(--value-width);
+  column-gap: var(--spacing-3xl);
+  align-items: center;
+  padding-block: var(--spacing-xl);
   border-block-end: var(--border-thin) solid var(--color-border-subtle);
+}
+
+.row:last-child {
+  border-block-end: none;
+}
+
+.row > * {
+  min-inline-size: 0;
+  padding: var(--spacing-none);
   text-align: start;
   font-weight: inherit;
-  vertical-align: middle;
 }
 
-.row:first-child > * {
-  padding-block-start: var(--spacing-none);
-}
-
-.preview {
-  inline-size: calc(var(--spacing-10xl) + var(--spacing-2xl));
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
 .token {
-  inline-size: 30%;
   color: var(--color-text-primary);
   overflow-wrap: anywhere;
 }
@@ -34,11 +52,20 @@
   color: var(--color-text-secondary);
 }
 
-.row > .value {
-  padding-inline-end: var(--spacing-none);
+.value {
+  justify-self: end;
   color: var(--color-text-secondary);
-  text-align: end;
   white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .table {
+    --sample-width: 96px;
+  }
+
+  .row {
+    column-gap: var(--spacing-xl);
+  }
 }
 
 /* Spacing: the bar is as wide as the token, 12 high. */
@@ -51,7 +78,7 @@
 }
 
 /* Border width: a box drawn with that width. */
-.line {
+.box {
   display: block;
   inline-size: var(--size-xl);
   block-size: var(--size-md);
@@ -59,8 +86,12 @@
   border: var(--token-value) solid var(--color-icon-strong);
 }
 
-@media (max-width: 767px) {
-  .token {
-    inline-size: auto;
-  }
+/* Colors: 32 square, hairline border, radius-sm (Figma 735:1674). */
+.swatch {
+  display: block;
+  inline-size: var(--size-xl);
+  block-size: var(--size-xl);
+  border: var(--border-thin) solid var(--color-border-subtle);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--token-value);
 }

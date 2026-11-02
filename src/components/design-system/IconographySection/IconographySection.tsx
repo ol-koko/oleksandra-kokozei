@@ -1,6 +1,5 @@
 import type { ComponentType, SVGProps } from 'react';
 import { Section, Subsection } from '@/components/design-system/Section/Section';
-import { TokenTable } from '@/components/design-system/TokenTable/TokenTable';
 import { ArrowDownIcon } from '@/components/icons/ArrowDownIcon';
 import { ArrowUpRightIcon } from '@/components/icons/ArrowUpRightIcon';
 import { BehanceIcon } from '@/components/icons/BehanceIcon';
@@ -19,7 +18,6 @@ import styles from './IconographySection.module.css';
 
 type IconographySectionProps = {
   sizes: DesignSystemData['iconSizes'];
-  otherSizes: DesignSystemData['other']['size'];
 };
 
 const icons: Record<IconId, ComponentType<SVGProps<SVGSVGElement>>> = {
@@ -39,7 +37,7 @@ const icons: Record<IconId, ComponentType<SVGProps<SVGSVGElement>>> = {
 };
 
 /** Iconography (Figma 803:590): the icon sizes, then every icon component of the site. */
-export function IconographySection({ sizes, otherSizes }: IconographySectionProps) {
+export function IconographySection({ sizes }: IconographySectionProps) {
   return (
     <Section id="iconography" title="Iconography">
       <Subsection id="iconography-size" title="Size">
@@ -56,7 +54,6 @@ export function IconographySection({ sizes, otherSizes }: IconographySectionProp
             </li>
           ))}
         </ul>
-        {otherSizes.length > 0 && <TokenTable label="Other size tokens" rows={otherSizes} />}
       </Subsection>
 
       {iconGroups.map((group) => (
@@ -69,7 +66,7 @@ export function IconographySection({ sizes, otherSizes }: IconographySectionProp
                   <span className={styles.tile}>
                     <Icon />
                   </span>
-                  <span className={`${styles.label} text-body-s`}>{icon.label}</span>
+                  <span className={`${styles.label} text-body-m`}>{icon.label}</span>
                 </li>
               );
             })}

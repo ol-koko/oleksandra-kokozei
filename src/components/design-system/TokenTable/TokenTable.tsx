@@ -1,65 +1,82 @@
-import type { CSSProperties } from 'react';
-import type { TokenRow } from '@/features/design-system/designSystemData';
+import type { CSSProperties, ReactNode } from 'react';
 import styles from './TokenTable.module.css';
+
+export type TokenTableRow = {
+  id: string;
+  /** The token or style name (16 px). */
+  name: string;
+  /** What it is for (14 px). */
+  note?: string;
+  /** The literal value, right-aligned at the end of the row (16 px). */
+  value: string;
+  /** A first column with the specimen (swatch, bar, text sample); without it the name comes first. */
+  sample?: ReactNode;
+};
 
 type TokenTableProps = {
   /** Names the table for screen readers. */
   label: string;
-  rows: readonly TokenRow[];
-  /**
-   * `bars`: a bar as wide as the token (spacing). `border`: a box with that
-   * border width. `plain`: name, note, value only.
-   */
-  variant?: 'bars' | 'border' | 'plain';
-  /** Header for the note column. */
-  noteLabel?: string;
+  rows: readonly TokenTableRow[];
 };
 
-/** Token rows as a table (Figma 748:2337, 781:1574): the preview, the token name, what it is for, its value. */
-export function TokenTable({ label, rows, variant = 'plain', noteLabel = 'Usage' }: TokenTableProps) {
-  const hasPreview = variant !== 'plain';
+/**
+ * The one table of the page (Figma 777:1527, 781:1574): every row is a 200 px
+ * first column, a flexible name column (the name over what it is for) and a 72 px
+ * value column that ends at the right edge of the row divider. Colors, typography,
+ * spacing, border width, blur and durations all use it.
+ */
+export function TokenTable({ label, rows }: TokenTableProps) {
+  const hasSample = rows.some((row) => row.sample !== undefined);
 
   return (
-    <table className={`${styles.table} ${styles[variant]}`}>
+    <table className={styles.table}>
       <caption className="visually-hidden">{label}</caption>
       <thead className="visually-hidden">
         <tr>
-          {hasPreview && <th scope="col">Preview</th>}
+          {hasSample && <th scope="col">Sample</th>}
           <th scope="col">Token</th>
-          <th scope="col">{noteLabel}</th>
+          {!hasSample && <th scope="col">Used for</th>}
           <th scope="col">Value</th>
         </tr>
       </thead>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.token} className={styles.row}>
-            {hasPreview && (
-              <td className={styles.preview} aria-hidden="true">
-                {variant === 'bars' ? (
-                  <span
-                    className={styles.bar}
-                    style={{ '--token-value': `var(--${row.token})` } as CSSProperties}
-                  />
-                ) : (
-                  <span
-                    className={styles.line}
-                    style={{ '--token-value': `var(--${row.token})` } as CSSProperties}
-                  />
-                )}
+          <tr key={row.id} className={styles.row}>
+            {hasSample && (
+              <td className={styles.sample} aria-hidden="true">
+                {row.sample}
               </td>
             )}
-            <th scope="row" className={`${styles.token} text-body-m`}>
-              {row.token}
+            <th scope="row" className={styles.name}>
+              <span className={`${styles.token} text-body-m`}>{row.name}</span>
+              {hasSample && row.note && (
+                <span className={`${styles.note} text-body-xs`}>{row.note}</span>
+              )}
             </th>
-            <td className={`${styles.note} ${variant === 'plain' ? 'text-body-xs' : 'text-body-m'}`}>
-              {row.note}
-            </td>
-            <td className={`${styles.value} ${variant === 'plain' ? 'text-body-xs' : 'text-body-m'}`}>
-              {row.value}
-            </td>
+            {!hasSample && (
+              <td className={`${styles.note} text-body-xs`}>{row.note}</td>
+            )}
+            <td className={`${styles.value} text-body-m`}>{row.value}</td>
           </tr>
         ))}
       </tbody>
     </table>
+  );
+}
+
+type TokenSampleProps = {
+  /** `bar`: as wide as the token (spacing). `box`: a box with that border width. `swatch`: the color. */
+  kind: 'bar' | 'box' | 'swatch';
+  /** Token name without `--`. */
+  token: string;
+};
+
+/** The first-column specimen of a token row, drawn with the token itself. */
+export function TokenSample({ kind, token }: TokenSampleProps) {
+  return (
+    <span
+      className={styles[kind]}
+      style={{ '--token-value': `var(--${token})` } as CSSProperties}
+    />
   );
 }
