@@ -100,22 +100,22 @@
 }
 
 .dialog[open] .panel {
-  animation: menu-panel-in var(--motion-duration-slower) var(--motion-easing-emphasized);
+  animation: menu-panel-in var(--duration-500) var(--motion-easing-emphasized);
 }
 
 .dialog[open] .nav li,
 .dialog[open] .languages {
-  animation: menu-item-in var(--motion-duration-base) var(--motion-easing-standard) backwards;
-  animation-delay: calc(var(--motion-duration-fast) + var(--menu-item-index, 0) * 60ms);
+  animation: menu-item-in var(--duration-300) var(--motion-easing-standard) backwards;
+  animation-delay: calc(var(--duration-200) + var(--menu-item-index, 0) * 60ms);
 }
 
 .dialog.closing .panel {
-  animation: menu-panel-out var(--motion-duration-base) var(--motion-easing-standard) forwards;
+  animation: menu-panel-out var(--duration-300) var(--motion-easing-standard) forwards;
 }
 
 .dialog.closing .nav li,
 .dialog.closing .languages {
-  animation: menu-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: menu-fade-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 @keyframes menu-panel-in {

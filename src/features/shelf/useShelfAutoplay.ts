@@ -11,7 +11,7 @@ const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 const VISIBLE_RATIO = 0.66;
 
 /** Pause before the centered item plays once the shelf is in view. */
-const START_DELAY_TOKEN = '--motion-duration-slower';
+const START_DELAY_TOKEN = '--duration-500';
 
 /** Attribute that carries an item's id, on each item of the scroller. */
 const SHELF_ITEM_ATTRIBUTE = 'data-shelf-id';

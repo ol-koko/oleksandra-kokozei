@@ -115,7 +115,7 @@
   .pill {
     transform-origin: calc(50cqi - var(--spacing-lg))
       calc(100% + var(--spacing-lg) - 50cqi * 253 / 486);
-    transition: transform var(--motion-duration-fast) var(--motion-easing-gentle);
+    transition: transform var(--duration-200) var(--motion-easing-gentle);
   }
 
   .card:has(.button:focus-visible:not([data-pointer-focus])) .pill {

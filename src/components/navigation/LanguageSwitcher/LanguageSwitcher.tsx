@@ -124,7 +124,7 @@ export function LanguageSwitcher({
     };
 
     const tokens = getComputedStyle(indicator);
-    const duration = toMilliseconds(tokens.getPropertyValue('--motion-duration-moderate'));
+    const duration = toMilliseconds(tokens.getPropertyValue('--duration-250'));
     const easing = tokens.getPropertyValue('--motion-easing-emphasized').trim() || 'ease-out';
     // Safety net: a switch never waits longer than the slide, whatever happens to it.
     window.setTimeout(navigate, duration + FALLBACK_SLACK_MS);

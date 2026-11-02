@@ -51,7 +51,7 @@
 
 /* Folding away: the extra photos fade out in place, about as long as the glide back up. */
 .leaving {
-  animation: hometown-fade-out var(--motion-duration-slower) var(--motion-easing-standard) forwards;
+  animation: hometown-fade-out var(--duration-500) var(--motion-easing-standard) forwards;
 }
 
 @keyframes hometown-fade-out {

@@ -828,32 +828,6 @@
       }
     },
     "motion": {
-      "duration": {
-        "fast": {
-          "$type": "duration",
-          "$value": "{primitive.duration.duration-200}"
-        },
-        "moderate": {
-          "$type": "duration",
-          "$value": "{primitive.duration.duration-250}"
-        },
-        "base": {
-          "$type": "duration",
-          "$value": "{primitive.duration.duration-300}"
-        },
-        "slow": {
-          "$type": "duration",
-          "$value": "{primitive.duration.duration-400}"
-        },
-        "slower": {
-          "$type": "duration",
-          "$value": "{primitive.duration.duration-500}"
-        },
-        "shimmer": {
-          "$type": "duration",
-          "$value": "{primitive.duration.duration-1500}"
-        }
-      },
       "easing": {
         "standard": {
           "$type": "cubicBezier",

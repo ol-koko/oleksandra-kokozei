@@ -50,7 +50,7 @@
   display: flex;
   margin-inline-start: auto;
   color: var(--color-icon-subtle);
-  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: color var(--duration-200) var(--motion-easing-standard);
 }
 
 @media (hover: hover) and (pointer: fine) {

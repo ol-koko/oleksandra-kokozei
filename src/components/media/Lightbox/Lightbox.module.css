@@ -105,15 +105,15 @@
 
 /* Open: .animate-overlay fades the backdrop in, .animate-modal scales the photo in. Close: a quicker reverse. */
 .closing .backdrop {
-  animation: lightbox-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: lightbox-fade-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 .closing .frame {
-  animation: lightbox-scale-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: lightbox-scale-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 .closing .topBar {
-  animation: lightbox-fade-out var(--motion-duration-fast) var(--motion-easing-standard) forwards;
+  animation: lightbox-fade-out var(--duration-200) var(--motion-easing-standard) forwards;
 }
 
 @keyframes lightbox-fade-in {

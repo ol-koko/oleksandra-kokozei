@@ -25,7 +25,7 @@
  * card cannot follow: the same `reveal-in` keyframes and easing play on time.
  */
 .reveal {
-  animation: reveal-in var(--motion-duration-slow) var(--motion-easing-standard) both;
+  animation: reveal-in var(--duration-400) var(--motion-easing-standard) both;
 }
 
 /* Hover specimens: the same properties as the :hover rules in hover.css, held by data-forced. */

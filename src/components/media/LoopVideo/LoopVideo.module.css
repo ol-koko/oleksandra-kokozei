@@ -10,7 +10,7 @@
   block-size: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity var(--motion-duration-base) var(--motion-easing-standard);
+  transition: opacity var(--duration-300) var(--motion-easing-standard);
 }
 
 .video[data-ready] {

@@ -44,8 +44,8 @@
   list-style: none;
   visibility: hidden;
   transition:
-    grid-template-rows var(--motion-duration-fast) var(--motion-easing-standard),
-    visibility var(--motion-duration-fast);
+    grid-template-rows var(--duration-200) var(--motion-easing-standard),
+    visibility var(--duration-200);
 }
 
 .subInner {
