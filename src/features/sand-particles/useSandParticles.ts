@@ -57,7 +57,14 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
       timer = window.setTimeout(() => engine.sweep(), AUTOPLAY_DELAY_MS);
     };
 
-    const engine = new SandParticles(host, label, canvas, { onIdle: scheduleAutoplay });
+    /** A play has ended by itself at least once: the autoplay chain (idle, then the timer) is running. */
+    let completed = false;
+    const engine = new SandParticles(host, label, canvas, {
+      onIdle: () => {
+        completed = true;
+        scheduleAutoplay();
+      },
+    });
 
     const onPointerEnter = (event: PointerEvent) => {
       if (event.pointerType === 'touch') return;
@@ -115,7 +122,13 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
     );
     visibility.observe(host);
 
-    const resize = new ResizeObserver(() => engine.invalidate());
+    // A resize stops a play in progress without an idle callback, which would end the autoplay
+    // chain: start the opening sweep again, or the timer again.
+    const resize = new ResizeObserver(() => {
+      engine.invalidate();
+      if (mode === 'autoplay' && !completed && fullyVisible) engine.sweep();
+      else scheduleAutoplay();
+    });
     resize.observe(host);
 
     return () => {
