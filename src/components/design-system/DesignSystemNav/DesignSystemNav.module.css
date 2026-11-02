@@ -99,8 +99,9 @@
 }
 
 /*
- * Below 1024: a bar under the sticky site header with the current section and a
- * menu button; the list opens below it, full width, every sub-item shown.
+ * Below 1024: the only sticky element, pinned to the very top once the
+ * breadcrumbs have scrolled away, solid white with a bottom border: the current
+ * section and a menu button; the list opens below it, full width.
  */
 @media (max-width: 1023px) {
   .nav {
@@ -108,9 +109,7 @@
     inset-block-start: var(--header-block-size);
     margin-inline: calc(var(--page-gutter) * -1);
     padding-inline: var(--page-gutter);
-    background-color: var(--color-surface-header);
-    -webkit-backdrop-filter: blur(var(--blur-header));
-    backdrop-filter: blur(var(--blur-header));
+    background-color: var(--color-background-page);
     border-block-end: var(--border-thin) solid var(--color-border-subtle);
   }
 

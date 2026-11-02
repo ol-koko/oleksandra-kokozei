@@ -1,25 +1,24 @@
 /*
- * The top bar replaces the site header: same height, same blur, sticky, with the
- * breadcrumbs in it. The page menu and the content start below it.
+ * No sticky site header here, so nothing is reserved at the top: the offsets
+ * that follow --header-block-size (scroll padding, the menu bar, the desktop
+ * menu) start at 0.
  */
-.bar {
-  position: sticky;
-  inset-block-start: 0;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  min-block-size: var(--header-block-size);
-  background-color: var(--color-surface-header);
-  -webkit-backdrop-filter: blur(var(--blur-header));
-  backdrop-filter: blur(var(--blur-header));
+:global(:root:has([data-design-system])) {
+  --header-block-size: 0px;
 }
 
 /*
- * Mobile: one column of 16 gutters; the page menu is a bar under the header.
- * Desktop (Figma 730:1537): the 180 px menu, 24 apart from a 668 px column,
- * both starting at the page margin (120 at 1440); the content starts 48
- * below the title block.
+ * The breadcrumbs sit at the top of the page, in the header's old place, and
+ * scroll away with the content: not sticky, no blur.
  */
+.bar {
+  --bar-height: 96px; /* Figma 735:1626, the header this replaces */
+
+  display: flex;
+  align-items: center;
+  min-block-size: var(--bar-height);
+}
+
 .main {
   /* The value column of every table: one fixed width, right-aligned (Figma 777:1443, 781:1580). */
   --table-value-width: 70px;
@@ -46,9 +45,9 @@
   min-inline-size: 0;
 }
 
-/* The page menu bar is sticky under the header on mobile: anchors land below both. */
-.main section {
-  scroll-margin-block-start: var(--spacing-6xl);
+/* Anchors land below the sticky menu bar on mobile (its height plus room) and level with the menu on desktop. */
+.main [id] {
+  scroll-margin-block-start: calc(var(--size-4xl) + var(--spacing-xl));
 }
 
 @media (min-width: 1024px) {
@@ -62,7 +61,7 @@
     padding-block-start: var(--spacing-6xl);
   }
 
-  .main section {
-    scroll-margin-block-start: var(--spacing-none);
+  .main [id] {
+    scroll-margin-block-start: var(--spacing-6xl);
   }
 }

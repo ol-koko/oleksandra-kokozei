@@ -1,6 +1,8 @@
 .footer {
   padding-block: var(--spacing-4xl);
   padding-inline: var(--page-gutter);
+  /* The logo's sand canvas is wider than the text; while it plays it must not widen the page. */
+  overflow-x: clip;
 }
 
 /* The top rule, then the content (Figma: 40 below the line on mobile, 56 on desktop). */

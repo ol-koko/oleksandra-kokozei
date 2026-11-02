@@ -4,6 +4,8 @@
   flex-direction: column;
   gap: var(--spacing-xl);
   outline: none;
+  /* The sand canvas is wider than the text; while it plays it must not widen the page. */
+  overflow-x: clip;
 }
 
 .title {

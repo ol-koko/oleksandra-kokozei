@@ -26,11 +26,11 @@ export async function DesignSystemPage() {
 
   return (
     <>
-      {/* In the header's place (Figma 730:1626 is replaced by the breadcrumbs). */}
+      {/* In the header's place (Figma 730:1626 is replaced by the breadcrumbs); not sticky. */}
       <div className={styles.bar}>
         <Breadcrumbs parentLabel={t('name')} parentHref="/" current={designSystemCrumb} />
       </div>
-      <main id="content" className={styles.main}>
+      <main id="content" className={styles.main} data-design-system="">
       <DesignSystemNav />
       <div className={styles.column}>
         <Hero />

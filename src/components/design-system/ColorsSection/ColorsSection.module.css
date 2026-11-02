@@ -29,3 +29,10 @@
 .panel {
   min-inline-size: 0;
 }
+
+/* Five pills fit 288 px (320 minus the gutters) only with tighter padding. */
+@media (max-width: 359px) {
+  .pill {
+    padding-inline: var(--spacing-md);
+  }
+}
