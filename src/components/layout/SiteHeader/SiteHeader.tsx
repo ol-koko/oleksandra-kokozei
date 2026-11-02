@@ -13,21 +13,26 @@ import { useSectionLinks } from '@/features/section-links/useSectionLinks';
 import styles from './SiteHeader.module.css';
 
 /**
+ * The site header, except on a page of its own (the design system page brings
+ * its own top bar, the breadcrumbs). The choice is a component that renders or
+ * does not, never a hook that runs or does not: `SiteHeaderBar` owns every
+ * other hook, so the hook order of each component is the same on every route.
+ */
+export function SiteHeader() {
+  const standalone = isStandalonePath(usePathname());
+  if (standalone) return null;
+  return <SiteHeaderBar />;
+}
+
+/**
  * Sticky page header. Desktop (≥ 1024): logo, section nav, language chips.
  * Below 1024: logo and the mobile menu button.
  */
-export function SiteHeader() {
+function SiteHeaderBar() {
   const t = useTranslations('Header');
   const headerRef = useRef<HTMLElement>(null);
-  const scrolledId = useScrollSpy(sectionIds, headerRef);
-  const standalone = isStandalonePath(usePathname());
-  // A page of its own has none of the home sections, so none is active.
-  const activeId = standalone ? undefined : scrolledId;
-
+  const activeId = useScrollSpy(sectionIds, headerRef);
   useSectionLinks();
-
-  // A page of its own brings its own top bar (the design system page: breadcrumbs).
-  if (standalone) return null;
 
   return (
     <header ref={headerRef} className={styles.header}>
