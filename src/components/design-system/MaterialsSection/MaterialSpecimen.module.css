@@ -49,7 +49,7 @@
 
 /*
  * Shelf items at 90 % (Figma 796:1106: the vinyl card is 252 wide, the book and
- * poster 136 × 205), centered in the tile. A poster item is as wide as its
+ * poster 136 × 205). A poster item is as wide as its
  * poster, so it centers; the 300 px slot starts 36 above the poster.
  */
 .media {
@@ -57,7 +57,15 @@
 }
 
 .record {
-  inline-size: calc(var(--spacing-10xl) * 1.55);
+  --record-width: calc(var(--spacing-10xl) * 1.55);
+
+  /*
+   * The record slides out to the right, so the rest state sits left of center and
+   * the open one is centered: the open width is 1.47 × the sleeve (VinylRecord:
+   * inset 0.03 + slide 0.5 + disc 0.94), and the sleeve is as wide as this box.
+   */
+  inline-size: var(--record-width);
+  translate: calc(var(--record-width) * (1 - 1.47) / 2) 0;
 }
 
 .poster {
@@ -67,6 +75,18 @@
   position: relative;
   inline-size: var(--poster-width);
   block-size: var(--poster-height);
+}
+
+/*
+ * The tape slides out to the right. From 1024 its sleeve starts at the item's
+ * edge, so the film shifts to center the open state, which is as wide as the
+ * poster is high (a 2:3 poster plus half its width). Below 1024 VhsTape centers
+ * the open state by itself.
+ */
+@media (min-width: 1024px) {
+  .film {
+    translate: calc((var(--poster-width) - var(--poster-height)) / 2) 0;
+  }
 }
 
 .poster > button {

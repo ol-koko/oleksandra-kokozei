@@ -2,7 +2,7 @@ import styles from './Divider.module.css';
 
 type DividerProps = {
   className?: string;
-  /** In an overlay: fades in with the content after it, never on its own (useOverlayReveal). */
+  /** In an overlay: fades in with the content after it, never on its own (useReveal). */
   revealWithNext?: boolean;
 };
 

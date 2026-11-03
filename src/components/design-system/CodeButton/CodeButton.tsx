@@ -34,8 +34,9 @@ async function copyText(text: string) {
 
 /**
  * The `</>` mark of a specimen card (Figma 752:2705) as a button: it copies the
- * specimen's CSS. It hovers like the site's links (nav-link), and "Copied"
- * shows in the footer's tooltip pattern and is announced by a live region.
+ * specimen's CSS. It hovers like the site's links (nav-link). "Copy CSS" is a
+ * tooltip for pointer hover and keyboard focus only; "Copied" shows after a copy
+ * on every device and is announced by a live region.
  */
 export function CodeButton({ css, label }: CodeButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -60,8 +61,12 @@ export function CodeButton({ css, label }: CodeButtonProps) {
         onClick={copy}
       >
         <span aria-hidden="true">{'</>'}</span>
-        <span className={`social-label ${styles.tooltip}`} aria-hidden="true">
-          {copied ? 'Copied' : 'Copy CSS'}
+        {/* Two bubbles, so the hint never appears while "Copied" fades out after a tap. */}
+        <span className={`social-label ${styles.hint}`} aria-hidden="true">
+          Copy CSS
+        </span>
+        <span className={`social-label ${styles.done}`} aria-hidden="true">
+          Copied
         </span>
       </button>
       <span className="visually-hidden" role="status" aria-live="polite">

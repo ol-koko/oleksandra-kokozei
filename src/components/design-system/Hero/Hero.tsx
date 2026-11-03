@@ -15,14 +15,14 @@ export function Hero() {
   return (
     <section id="overview" tabIndex={-1} aria-labelledby="overview-title" className={styles.hero}>
       <div className={styles.title}>
-        <h1 id="overview-title" className={`${styles.heading} text-title-l`}>
+        <h1 data-reveal id="overview-title" className={`${styles.heading} text-title-l`}>
           {designSystemTitle}
         </h1>
-        <p className={`${styles.domain} text-title-s`}>
+        <p data-reveal className={`${styles.domain} text-title-s`}>
           <SandText text={designSystemDomain} placement="design-system" />
         </p>
       </div>
-      <p className={`${styles.summary} text-body-l`}>{designSystemSummary}</p>
+      <p data-reveal className={`${styles.summary} text-body-l`}>{designSystemSummary}</p>
     </section>
   );
 }

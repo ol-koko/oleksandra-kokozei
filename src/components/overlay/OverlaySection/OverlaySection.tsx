@@ -20,7 +20,7 @@ type OverlaySectionProps = {
  * move focus to the section.
  *
  * The header and the body's items fade up as they come into view
- * (`data-reveal`, see useOverlayReveal); the section itself never moves,
+ * (`data-reveal`, see useReveal); the section itself never moves,
  * because the nav measures it.
  */
 export function OverlaySection({ section }: OverlaySectionProps) {
