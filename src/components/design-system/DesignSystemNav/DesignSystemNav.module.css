@@ -152,7 +152,7 @@
     inset-block-start: calc(100% + var(--border-thin));
     inset-inline: 0;
     display: none;
-    /* Set from the script to the space below the bar; the fallback assumes the bar is stuck at the top. */
+    /* Set from the script to the space below the panel's top edge; the fallback assumes the bar is stuck at the top. */
     max-block-size: var(--menu-max-block-size, calc(100dvh - var(--size-4xl)));
     padding: var(--spacing-xl) var(--page-gutter) var(--spacing-3xl);
     overflow-y: auto;

@@ -28,7 +28,6 @@ export function DesignSystemNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const listId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
   const closeMenu = useCallback((restoreFocus: boolean) => {
@@ -47,15 +46,15 @@ export function DesignSystemNav() {
 
   /*
    * The open panel never exceeds the screen: its height is what is left below
-   * the bar wherever the page is scrolled to, and the list scrolls inside.
+   * its top edge wherever the page is scrolled to, and the list scrolls inside.
    */
   useEffect(() => {
     if (!menuOpen) return;
     const fit = () => {
-      const bar = barRef.current;
       const list = listRef.current;
-      if (!bar || !list) return;
-      list.style.setProperty('--menu-max-block-size', `${window.innerHeight - bar.getBoundingClientRect().bottom}px`);
+      if (!list) return;
+      const space = window.innerHeight - list.getBoundingClientRect().top;
+      list.style.setProperty('--menu-max-block-size', `${space}px`);
     };
     fit();
     window.addEventListener('resize', fit);
@@ -64,7 +63,7 @@ export function DesignSystemNav() {
 
   return (
     <nav aria-label="Design system" className={styles.nav} data-reveal>
-      <div ref={barRef} className={styles.bar}>
+      <div className={styles.bar}>
         <span className={`${styles.current} text-body-m`}>
           {labels.get(activeId ?? '') ?? designSystemNav[0].label}
         </span>
