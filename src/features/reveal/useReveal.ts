@@ -16,10 +16,13 @@ function byDocumentOrder(a: Element, b: Element) {
 }
 
 /**
- * Time-based reveal for the overlay content, like the Hero entrance: every
- * `[data-reveal]` element in the scroller fades up once per open. The first
- * screen comes in after the panel's own entrance; the rest as each element
- * enters the scroller (the bottom fade, --spacing-5xl, does not count).
+ * Time-based reveal, like the Hero entrance: every `[data-reveal]` element in
+ * the container fades up once. In an overlay (`root: 'scroller'`, the default)
+ * the container is the scroller: the first screen comes in after the panel's
+ * own entrance, once per open. On a page (`root: 'viewport'`) the container
+ * is the page content and the window is the viewport: the first screen comes
+ * in on load. The rest come in as each element enters (the bottom edge,
+ * --spacing-5xl, does not count).
  * Elements that come into view together rise one after another. A
  * `[data-reveal-row]` reveals as one: when any of its items comes in, all
  * do, so items hidden sideways in a scrolling row (mobile shelves) are
@@ -27,16 +30,22 @@ function byDocumentOrder(a: Element, b: Element) {
  * is never observed: it rises just before the first element after it, so it
  * is never on screen alone.
  *
- * Script arms the scroller (`data-reveal-armed`), which hides the elements
+ * Script arms the container (`data-reveal-armed`), which hides the elements
  * until they are revealed (animations.css), so without script, and with
  * reduced motion, the content shows as is. Call it after the effect that
  * opens the dialog: the panel's entrance exists to wait for, and arming
  * still lands before the open dialog's first paint.
  */
-export function useOverlayReveal(scrollerRef: RefObject<HTMLElement | null>) {
+export function useReveal(
+  scrollerRef: RefObject<HTMLElement | null>,
+  { root = 'scroller' }: { root?: 'scroller' | 'viewport' } = {},
+) {
   useEffect(() => {
     const scroller = scrollerRef.current;
-    if (!scroller || window.matchMedia(REDUCED_MOTION).matches) return;
+    if (!scroller) return;
+    // A page may be hidden from the server render until script takes over (animations.css).
+    scroller.removeAttribute('data-reveal-pending');
+    if (window.matchMedia(REDUCED_MOTION).matches) return;
 
     scroller.setAttribute('data-reveal-armed', '');
     let observer: IntersectionObserver | undefined;
@@ -72,7 +81,7 @@ export function useOverlayReveal(scrollerRef: RefObject<HTMLElement | null>) {
             self.unobserve(element);
           }
         },
-        { root: scroller, rootMargin: `0px 0px -${edge} 0px` },
+        { root: root === 'scroller' ? scroller : null, rootMargin: `0px 0px -${edge} 0px` },
       );
       for (const element of scroller.querySelectorAll(`[data-reveal]:not(${WITH_NEXT})`)) {
         observer.observe(element);
@@ -80,7 +89,7 @@ export function useOverlayReveal(scrollerRef: RefObject<HTMLElement | null>) {
     };
 
     // Only the panel's entrance counts, as for the initial section scroll.
-    const entrance = scroller.parentElement?.getAnimations() ?? [];
+    const entrance = root === 'scroller' ? (scroller.parentElement?.getAnimations() ?? []) : [];
     Promise.all(entrance.map((animation) => animation.finished)).then(start, start);
 
     return () => {
@@ -88,5 +97,5 @@ export function useOverlayReveal(scrollerRef: RefObject<HTMLElement | null>) {
       observer?.disconnect();
       scroller.removeAttribute('data-reveal-armed');
     };
-  }, [scrollerRef]);
+  }, [scrollerRef, root]);
 }

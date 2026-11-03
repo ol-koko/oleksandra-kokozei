@@ -63,7 +63,7 @@ export function DesignSystemNav() {
   }, [menuOpen]);
 
   return (
-    <nav aria-label="Design system" className={styles.nav}>
+    <nav aria-label="Design system" className={styles.nav} data-reveal>
       <div ref={barRef} className={styles.bar}>
         <span className={`${styles.current} text-body-m`}>
           {labels.get(activeId ?? '') ?? designSystemNav[0].label}

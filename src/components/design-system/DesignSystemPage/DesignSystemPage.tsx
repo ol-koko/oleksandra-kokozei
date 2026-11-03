@@ -8,6 +8,7 @@ import { IconographySection } from '@/components/design-system/IconographySectio
 import { MaterialsSection } from '@/components/design-system/MaterialsSection/MaterialsSection';
 import { MotionSection } from '@/components/design-system/MotionSection/MotionSection';
 import { ShadowsSection } from '@/components/design-system/ShadowsSection/ShadowsSection';
+import { PageReveal } from '@/components/design-system/PageReveal/PageReveal';
 import { SpacingSection } from '@/components/design-system/SpacingSection/SpacingSection';
 import { TypographySection } from '@/components/design-system/TypographySection/TypographySection';
 import { Breadcrumbs } from '@/components/overlay/Breadcrumbs/Breadcrumbs';
@@ -25,9 +26,9 @@ export async function DesignSystemPage() {
   const t = await getTranslations('Common');
 
   return (
-    <>
+    <PageReveal>
       {/* In the header's place (Figma 730:1626 is replaced by the breadcrumbs); not sticky. */}
-      <div className={styles.bar}>
+      <div className={styles.bar} data-reveal>
         <Breadcrumbs parentLabel={t('name')} parentHref="/" current={designSystemCrumb} />
       </div>
       <main id="content" className={styles.main} data-design-system="">
@@ -51,6 +52,6 @@ export async function DesignSystemPage() {
         </div>
       </div>
       </main>
-    </>
+    </PageReveal>
   );
 }

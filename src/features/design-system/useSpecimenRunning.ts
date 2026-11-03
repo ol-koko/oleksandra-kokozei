@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore, type RefObject } from 'react';
 import { useInView } from '@/features/media/useInView';
+import { onRevealed } from '@/features/reveal/onRevealed';
 import { useMediaQuery } from '@/features/motion/useMediaQuery';
 
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
@@ -20,6 +21,19 @@ function useTabVisible() {
   );
 }
 
+/** Whether the section around `ref` has appeared (page reveal); `true` when nothing waits for it. */
+function useRevealed(ref: RefObject<HTMLElement | null>): boolean {
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    return onRevealed(element, () => setRevealed(true));
+  }, [ref]);
+
+  return revealed;
+}
+
 /**
  * Whether a looping specimen should be running: it is on screen, the tab is
  * visible and the visitor has not asked for reduced motion. Loops and canvas
@@ -27,9 +41,10 @@ function useTabVisible() {
  */
 export function useSpecimenRunning(ref: RefObject<HTMLElement | null>): boolean {
   const { inView } = useInView(ref);
+  const revealed = useRevealed(ref);
   const tabVisible = useTabVisible();
   const reducedMotion = useMediaQuery(REDUCED_MOTION);
-  return inView && tabVisible && !reducedMotion;
+  return inView && revealed && tabVisible && !reducedMotion;
 }
 
 /**
@@ -123,18 +138,18 @@ export function useOpenCycle(active: boolean, openMs: number, closedMs: number):
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (!active) {
-      setOpen(false);
-      return;
-    }
+    if (!active) return;
     let timer: number;
     const step = (next: boolean) => {
       setOpen(next);
       timer = window.setTimeout(() => step(!next), next ? openMs : closedMs);
     };
     timer = window.setTimeout(() => step(true), closedMs / 2);
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+      setOpen(false);
+    };
   }, [active, openMs, closedMs]);
 
-  return open;
+  return active && open;
 }

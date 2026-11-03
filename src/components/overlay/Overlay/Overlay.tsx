@@ -24,7 +24,7 @@ import { sectionScrollTop } from '@/features/overlay/sectionScrollTop';
 import { useInitialSectionScroll } from '@/features/overlay/useInitialSectionScroll';
 import { useOverlayScrollSpy } from '@/features/overlay/useOverlayScrollSpy';
 import { useOverlayView } from '@/features/overlay/useOverlayView';
-import { useOverlayReveal } from '@/features/overlay/useOverlayReveal';
+import { useReveal } from '@/features/reveal/useReveal';
 import { useScrollEdges } from '@/features/overlay/useScrollEdges';
 import { lockScroll, unlockScroll } from '@/features/scroll-lock/scrollLock';
 import { scrollToSection, sectionLinkTarget } from '@/features/section-links/sectionLinks';
@@ -94,7 +94,7 @@ export function Overlay({ route, open, onClosed, footer }: OverlayProps) {
   }, []);
 
   // After the open effect: reveals wait for the panel's entrance.
-  useOverlayReveal(scrollerRef);
+  useReveal(scrollerRef);
 
   useInitialSectionScroll({
     scrollerRef,

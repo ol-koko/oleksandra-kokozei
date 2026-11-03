@@ -24,7 +24,7 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section id={id} tabIndex={-1} aria-labelledby={`${id}-title`} className={`${styles.section} ${compact ? styles.compact : ''}`}>
+    <section id={id} data-reveal tabIndex={-1} aria-labelledby={`${id}-title`} className={`${styles.section} ${compact ? styles.compact : ''}`}>
       <header className={styles.header}>
         <h2 id={`${id}-title`} className={`${styles.title} text-title-l`}>
           {title}
