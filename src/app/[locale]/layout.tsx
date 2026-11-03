@@ -75,7 +75,9 @@ export default async function LocaleLayout({ children, modal }: LocaleLayoutProp
   const t = await getTranslations('Header');
 
   return (
-    <html lang={locale} className={figtree.variable}>
+    // `data-scroll-behavior` lets Next.js scroll instantly to the top on page changes
+    // while CSS smooth scrolling stays for in-page links.
+    <html lang={locale} className={figtree.variable} data-scroll-behavior="smooth">
       {/*
        * Browser extensions add attributes to <body> before React hydrates
        * (ColorZilla: `cz-shortcut-listen`), which React reports as a hydration
