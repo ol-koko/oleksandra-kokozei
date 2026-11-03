@@ -9,11 +9,12 @@ import { SandParticles } from './sandParticles';
  * - `pointer` (hover devices): hover and keyboard focus.
  * - `pointer-autoplay`: the same, plus a sweep every 10 seconds.
  * - `in-view` (touch): one sweep the first time the text is fully in view.
- * - `in-view-tap` (touch): `in-view`, and a tap on the text plays the sweep again, like a hover.
+ * - `autoplay-tap` (touch): `autoplay`, and a tap plays the sweep at once, like a hover. The tap
+ *   counts on the closest `[data-sand-tap]`, so the target can be larger than the line of text.
  * - `autoplay`: no pointer or focus trigger; one sweep the first time the text is fully in
  *   view, then one every 10 seconds while it is (the design system page title).
  */
-export type SandMode = 'pointer' | 'pointer-autoplay' | 'in-view' | 'in-view-tap' | 'autoplay';
+export type SandMode = 'pointer' | 'pointer-autoplay' | 'in-view' | 'autoplay-tap' | 'autoplay';
 
 /** Pause between autoplay sweeps, restarted after every play and hover. */
 const AUTOPLAY_DELAY_MS = 10_000;
@@ -35,14 +36,16 @@ function startSand(
 ) {
   const target = host.closest('a') ?? host;
   const pointer = mode === 'pointer' || mode === 'pointer-autoplay';
-  const tap = mode === 'in-view-tap';
+  const tap = mode === 'autoplay-tap';
+  const tapTarget = host.closest('[data-sand-tap]') ?? host;
+  const autoplay = mode === 'pointer-autoplay' || mode === 'autoplay' || tap;
   let timer = 0;
   let fullyVisible = false;
   let hovering = false;
 
   const scheduleAutoplay = () => {
     window.clearTimeout(timer);
-    if ((mode !== 'pointer-autoplay' && mode !== 'autoplay') || !fullyVisible || hovering) return;
+    if (!autoplay || !fullyVisible || hovering) return;
     if (document.visibilityState !== 'visible') return;
     timer = window.setTimeout(() => engine.sweep(), AUTOPLAY_DELAY_MS);
   };
@@ -90,10 +93,12 @@ function startSand(
     target.addEventListener('pointerleave', onPointerLeave);
     target.addEventListener('focus', onFocus);
   }
-  const onTap = (event: PointerEvent) => {
-    if (event.pointerType === 'touch') engine.sweep();
+  // A click, not pointerdown: a finger that starts scrolling over the tile is not a tap.
+  const onTap = () => {
+    window.clearTimeout(timer);
+    engine.sweep();
   };
-  if (tap) target.addEventListener('pointerdown', onTap);
+  if (tap) tapTarget.addEventListener('click', onTap);
   document.addEventListener('visibilitychange', onVisibilityChange);
 
   const visibility = new IntersectionObserver(
@@ -102,13 +107,13 @@ function startSand(
       if (!entry.isIntersecting) engine.stop();
       // Observers report the ratio right at the threshold, which can land a hair below it.
       fullyVisible = entry.isIntersecting && entry.intersectionRatio >= FULLY_VISIBLE - 0.01;
-      if (mode === 'in-view' || mode === 'in-view-tap' || mode === 'autoplay') {
+      if (mode === 'in-view' || mode === 'autoplay' || tap) {
         if (fullyVisible && !playedInView.current) {
           playedInView.current = true;
           engine.sweep();
           return;
         }
-        if (mode === 'in-view' || mode === 'in-view-tap') return;
+        if (mode === 'in-view') return;
       }
       scheduleAutoplay();
     },
@@ -120,7 +125,7 @@ function startSand(
   // chain: start the opening sweep again, or the timer again.
   const resize = new ResizeObserver(() => {
     engine.invalidate();
-    if (mode === 'autoplay' && !completed && fullyVisible) engine.sweep();
+    if ((mode === 'autoplay' || tap) && !completed && fullyVisible) engine.sweep();
     else scheduleAutoplay();
   });
   resize.observe(host);
@@ -133,7 +138,7 @@ function startSand(
       target.removeEventListener('pointerleave', onPointerLeave);
       target.removeEventListener('focus', onFocus);
     }
-    target.removeEventListener('pointerdown', onTap);
+    tapTarget.removeEventListener('click', onTap);
     document.removeEventListener('visibilitychange', onVisibilityChange);
     visibility.disconnect();
     resize.disconnect();
