@@ -37,8 +37,10 @@ const plainIds: readonly MaterialId[] = [
 ];
 
 /** A shelf item, shown 90 % of its size and centered in the tile. */
-function MediaItem({ kind, children }: { kind: 'record' | 'poster'; children: ReactNode }) {
-  return <div className={`${styles.media} ${styles[kind]}`}>{children}</div>;
+function MediaItem({ kind, children }: { kind: 'record' | 'poster' | 'film'; children: ReactNode }) {
+  // A film is a poster that is shifted so its open state is centered.
+  const classes = kind === 'film' ? `${styles.poster} ${styles.film}` : styles[kind];
+  return <div className={`${styles.media} ${classes}`}>{children}</div>;
 }
 
 /**
@@ -79,7 +81,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
         );
       case 'film':
         return (
-          <MediaItem kind="poster">
+          <MediaItem kind="film">
             <VhsTape
               poster={films[0].cover}
               alt="Film poster"
