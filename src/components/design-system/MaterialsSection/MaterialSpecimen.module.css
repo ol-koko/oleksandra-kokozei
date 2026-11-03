@@ -57,16 +57,15 @@
 }
 
 .record {
-  /*
-   * The record slides out to the right, so at rest it sits left of center and the
-   * fully open state is centered: half of (open width 1.47 × 186 px minus the
-   * record's own width) measured at the item's 90 % zoom, so the offset is
-   * divided by the zoom.
-   */
-  --open-shift: calc(-39.3px / 0.9);
+  --record-width: calc(var(--spacing-10xl) * 1.55);
 
-  translate: var(--open-shift) 0;
-  inline-size: calc(var(--spacing-10xl) * 1.55);
+  /*
+   * The record slides out to the right, so the rest state sits left of center and
+   * the open one is centered: the open width is 1.47 × the sleeve (VinylRecord:
+   * inset 0.03 + slide 0.5 + disc 0.94), and the sleeve is as wide as this box.
+   */
+  inline-size: var(--record-width);
+  translate: calc(var(--record-width) * (1 - 1.47) / 2) 0;
 }
 
 .poster {
@@ -79,13 +78,14 @@
 }
 
 /*
- * The VHS tape slides out to the right. From 1024 up its sleeve starts at the
- * item's edge, so the open state (poster + tape) is 33.3 px right of center
- * (at the 90 % zoom); below 1024 the tape already centers itself when open.
+ * The tape slides out to the right. From 1024 its sleeve starts at the item's
+ * edge, so the film shifts to center the open state, which is as wide as the
+ * poster is high (a 2:3 poster plus half its width). Below 1024 VhsTape centers
+ * the open state by itself.
  */
 @media (min-width: 1024px) {
   .film {
-    translate: calc(-33.3px / 0.9) 0;
+    translate: calc((var(--poster-width) - var(--poster-height)) / 2) 0;
   }
 }
 
