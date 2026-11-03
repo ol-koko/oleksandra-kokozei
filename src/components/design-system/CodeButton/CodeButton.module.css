@@ -9,17 +9,23 @@
 }
 
 /*
- * The footer's tooltip (hover.css .social-label): centered above the mark. It
- * shows on hover, keyboard focus and while "Copied" is up.
+ * The footer's tooltip (hover.css .social-label), centered above the mark.
+ * "Copy CSS" exists only for keyboard focus and devices that really hover, so a
+ * tap on touch never leaves it behind; "Copied" shows while data-copied is set.
  */
-button.button:focus-visible .tooltip,
-button.button[data-copied] .tooltip {
+button.button:focus-visible .hint,
+button.button[data-copied] .done {
   opacity: 1;
   transform: translate(-50%, 0);
 }
 
+/* Copied wins over the hint while both could show. */
+button.button[data-copied] .hint {
+  opacity: 0;
+}
+
 @media (hover: hover) and (pointer: fine) {
-  button.button:hover .tooltip {
+  button.button:hover:not([data-copied]) .hint {
     opacity: 1;
     transform: translate(-50%, 0);
   }
