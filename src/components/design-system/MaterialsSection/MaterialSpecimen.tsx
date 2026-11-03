@@ -130,7 +130,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
       case 'sand-particles':
         return (
           <span className="text-title-s">
-            <SandText text="Oleksandra Kokozei" placement="footer" />
+            <SandText text="Oleksandra Kokozei" placement="specimen" />
           </span>
         );
       case 'component':

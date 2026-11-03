@@ -8,7 +8,7 @@ import styles from './SandText.module.css';
 const FINE_POINTER = '(hover: hover) and (pointer: fine)';
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 
-export type SandPlacement = 'header' | 'footer' | 'design-system';
+export type SandPlacement = 'header' | 'footer' | 'design-system' | 'specimen';
 
 type SandTextProps = {
   text: string;
@@ -21,6 +21,8 @@ type SandTextProps = {
  */
 function sandMode(placement: SandPlacement, finePointer: boolean): SandMode | null {
   if (placement === 'design-system') return 'autoplay';
+  // The Materials specimen: as the footer, and a tap plays it on touch.
+  if (placement === 'specimen') return finePointer ? 'pointer-autoplay' : 'in-view-tap';
   if (placement === 'header') return finePointer ? 'pointer' : null;
   return finePointer ? 'pointer-autoplay' : 'in-view';
 }

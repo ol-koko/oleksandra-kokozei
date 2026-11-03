@@ -8,10 +8,11 @@ import { SandParticles } from './sandParticles';
  * - `pointer` (hover devices): hover and keyboard focus.
  * - `pointer-autoplay`: the same, plus a sweep every 10 seconds.
  * - `in-view` (touch): one sweep the first time the text is fully in view.
+ * - `in-view-tap` (touch): `in-view`, and a tap on the text plays the sweep again, like a hover.
  * - `autoplay`: no pointer or focus trigger; one sweep the first time the text is fully in
  *   view, then one every 10 seconds while it is (the design system page title).
  */
-export type SandMode = 'pointer' | 'pointer-autoplay' | 'in-view' | 'autoplay';
+export type SandMode = 'pointer' | 'pointer-autoplay' | 'in-view' | 'in-view-tap' | 'autoplay';
 
 /** Pause between autoplay sweeps, restarted after every play and hover. */
 const AUTOPLAY_DELAY_MS = 10_000;
@@ -46,6 +47,7 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
 
     const target = host.closest('a') ?? host;
     const pointer = mode === 'pointer' || mode === 'pointer-autoplay';
+    const tap = mode === 'in-view-tap';
     let timer = 0;
     let fullyVisible = false;
     let hovering = false;
@@ -100,6 +102,10 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
       target.addEventListener('pointerleave', onPointerLeave);
       target.addEventListener('focus', onFocus);
     }
+    const onTap = (event: PointerEvent) => {
+      if (event.pointerType === 'touch') engine.sweep();
+    };
+    if (tap) target.addEventListener('pointerdown', onTap);
     document.addEventListener('visibilitychange', onVisibilityChange);
 
     const visibility = new IntersectionObserver(
@@ -108,13 +114,13 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
         if (!entry.isIntersecting) engine.stop();
         // Observers report the ratio right at the threshold, which can land a hair below it.
         fullyVisible = entry.isIntersecting && entry.intersectionRatio >= FULLY_VISIBLE - 0.01;
-        if (mode === 'in-view' || mode === 'autoplay') {
+        if (mode === 'in-view' || mode === 'in-view-tap' || mode === 'autoplay') {
           if (fullyVisible && !playedInView.current) {
             playedInView.current = true;
             engine.sweep();
             return;
           }
-          if (mode === 'in-view') return;
+          if (mode === 'in-view' || mode === 'in-view-tap') return;
         }
         scheduleAutoplay();
       },
@@ -139,6 +145,7 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
         target.removeEventListener('pointerleave', onPointerLeave);
         target.removeEventListener('focus', onFocus);
       }
+      target.removeEventListener('pointerdown', onTap);
       document.removeEventListener('visibilitychange', onVisibilityChange);
       visibility.disconnect();
       resize.disconnect();
