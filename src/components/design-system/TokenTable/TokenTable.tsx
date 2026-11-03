@@ -41,7 +41,7 @@ export function TokenTable({ label, rows }: TokenTableProps) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.id} className={styles.row}>
+          <tr key={row.id} className={styles.row} data-reveal>
             {hasSample && (
               <td className={styles.sample} aria-hidden="true">
                 {row.sample}

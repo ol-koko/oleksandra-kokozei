@@ -144,7 +144,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
   })();
 
   return (
-    <figure className={styles.card}>
+    <figure className={styles.card} data-reveal>
       <div
         ref={stage}
         className={`${styles.preview} ${mediaIds.includes(id) ? styles.tall : ''} ${plainIds.includes(id) ? styles.plain : ''}`}

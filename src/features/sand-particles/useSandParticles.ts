@@ -165,7 +165,7 @@ export function useSandParticles(refs: SandRefs, mode: SandMode | null, text: st
     const canvas = refs.canvas.current;
     if (!mode || !host || !label || !canvas) return;
 
-    // On the design system page the effect starts once its section has appeared.
+    // On the design system page the effect starts once its own block has appeared.
     let teardown: (() => void) | undefined;
     const cancelWait = onRevealed(host, () => {
       teardown = startSand({ host, label, canvas }, mode, playedInView);

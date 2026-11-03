@@ -19,7 +19,7 @@ type PreviewCardProps = {
  */
 export function PreviewCard({ title, caption, css, children, className }: PreviewCardProps) {
   return (
-    <figure className={`${styles.card} ${className ?? ''}`}>
+    <figure className={`${styles.card} ${className ?? ''}`} data-reveal>
       <div className={styles.preview}>
         <span className={styles.code}>
           <CodeButton css={css} label={title} />

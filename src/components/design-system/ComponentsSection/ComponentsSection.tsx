@@ -172,7 +172,7 @@ export function ComponentsSection() {
         <Subsection key={group.id} id={group.id} title={group.title}>
           <div className={styles.grid}>
             {group.items.map((item) => (
-              <div key={item} className={item === 'divider' ? styles.wide : undefined}>
+              <div key={item} className={item === 'divider' ? styles.wide : undefined} data-reveal>
                 <ComponentCard label={componentLabels[item]}>{specimens[item]}</ComponentCard>
               </div>
             ))}

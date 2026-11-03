@@ -24,8 +24,8 @@ export function Section({
   children,
 }: SectionProps) {
   return (
-    <section id={id} data-reveal tabIndex={-1} aria-labelledby={`${id}-title`} className={`${styles.section} ${compact ? styles.compact : ''}`}>
-      <header className={styles.header}>
+    <section id={id} tabIndex={-1} aria-labelledby={`${id}-title`} className={`${styles.section} ${compact ? styles.compact : ''}`}>
+      <header className={styles.header} data-reveal>
         <h2 id={`${id}-title`} className={`${styles.title} text-title-l`}>
           {title}
         </h2>
@@ -68,7 +68,7 @@ export function Subsection({
 
   return (
     <div id={id} tabIndex={id ? -1 : undefined} role="group" aria-labelledby={titleId} className={styles.subsection}>
-      <Heading id={titleId} className={`${styles.subtitle} ${muted ? styles.muted : ''} text-title-s`}>
+      <Heading id={titleId} data-reveal className={`${styles.subtitle} ${muted ? styles.muted : ''} text-title-s`}>
         {title}
       </Heading>
       {children}

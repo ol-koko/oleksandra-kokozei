@@ -7,8 +7,14 @@ const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 /** At most this many steps of stagger, so a batch never keeps the last element waiting long. */
 const MAX_STAGGER = 6;
 
+/** On a page a batch is a whole screen of rows and tiles, which should still arrive one by one. */
+const MAX_PAGE_STAGGER = 12;
+
 /** Elements that never reveal on their own, only together with what follows them (dividers). */
 const WITH_NEXT = '[data-reveal="with-next"]';
+
+/** What the observer watches. */
+const OBSERVED = `[data-reveal]:not(${WITH_NEXT})`;
 
 /** Sorts elements into document order. */
 function byDocumentOrder(a: Element, b: Element) {
@@ -28,7 +34,8 @@ function byDocumentOrder(a: Element, b: Element) {
  * do, so items hidden sideways in a scrolling row (mobile shelves) are
  * already there when swiped to. A `[data-reveal="with-next"]` (a divider)
  * is never observed: it rises just before the first element after it, so it
- * is never on screen alone.
+ * is never on screen alone. Elements mounted later (another palette in a
+ * table) reveal the same way, or they would stay hidden.
  *
  * Script arms the container (`data-reveal-armed`), which hides the elements
  * until they are revealed (animations.css), so without script, and with
@@ -42,13 +49,12 @@ export function useReveal(
 ) {
   useEffect(() => {
     const scroller = scrollerRef.current;
-    if (!scroller) return;
-    // A page may be hidden from the server render until script takes over (animations.css).
-    scroller.removeAttribute('data-reveal-pending');
-    if (window.matchMedia(REDUCED_MOTION).matches) return;
+    if (!scroller || window.matchMedia(REDUCED_MOTION).matches) return;
 
     scroller.setAttribute('data-reveal-armed', '');
+    const maxStagger = root === 'viewport' ? MAX_PAGE_STAGGER : MAX_STAGGER;
     let observer: IntersectionObserver | undefined;
+    let mounted: MutationObserver | undefined;
     let cancelled = false;
 
     const start = () => {
@@ -76,16 +82,24 @@ export function useReveal(
           // A batch rises in reading order.
           let step = 0;
           for (const element of [...batch].sort(byDocumentOrder)) {
-            element.style.setProperty('--reveal-i', String(Math.min(step++, MAX_STAGGER)));
+            element.style.setProperty('--reveal-i', String(Math.min(step++, maxStagger)));
             element.setAttribute('data-revealed', '');
             self.unobserve(element);
           }
         },
         { root: root === 'scroller' ? scroller : null, rootMargin: `0px 0px -${edge} 0px` },
       );
-      for (const element of scroller.querySelectorAll(`[data-reveal]:not(${WITH_NEXT})`)) {
+      for (const element of scroller.querySelectorAll(OBSERVED)) {
         observer.observe(element);
       }
+      mounted = new MutationObserver((records) => {
+        for (const node of records.flatMap((record) => [...record.addedNodes])) {
+          if (!(node instanceof Element)) continue;
+          if (node.matches(OBSERVED)) observer?.observe(node);
+          for (const element of node.querySelectorAll(OBSERVED)) observer?.observe(element);
+        }
+      });
+      mounted.observe(scroller, { childList: true, subtree: true });
     };
 
     // Only the panel's entrance counts, as for the initial section scroll.
@@ -95,6 +109,7 @@ export function useReveal(
     return () => {
       cancelled = true;
       observer?.disconnect();
+      mounted?.disconnect();
       scroller.removeAttribute('data-reveal-armed');
     };
   }, [scrollerRef, root]);
