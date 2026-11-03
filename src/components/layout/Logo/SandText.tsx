@@ -21,8 +21,8 @@ type SandTextProps = {
  */
 function sandMode(placement: SandPlacement, finePointer: boolean): SandMode | null {
   if (placement === 'design-system') return 'autoplay';
-  // The Materials specimen: as the footer, and a tap plays it on touch.
-  if (placement === 'specimen') return finePointer ? 'pointer-autoplay' : 'in-view-tap';
+  // The Materials specimen: as the footer on hover devices; on touch it autoplays and a tap plays it.
+  if (placement === 'specimen') return finePointer ? 'pointer-autoplay' : 'autoplay-tap';
   if (placement === 'header') return finePointer ? 'pointer' : null;
   return finePointer ? 'pointer-autoplay' : 'in-view';
 }

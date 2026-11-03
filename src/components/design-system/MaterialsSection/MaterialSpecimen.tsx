@@ -148,6 +148,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
         ref={stage}
         className={`${styles.preview} ${mediaIds.includes(id) ? styles.tall : ''} ${plainIds.includes(id) ? styles.plain : ''}`}
         data-paused={running ? undefined : ''}
+        data-sand-tap={id === 'sand-particles' ? '' : undefined}
       >
         {specimen}
       </div>
