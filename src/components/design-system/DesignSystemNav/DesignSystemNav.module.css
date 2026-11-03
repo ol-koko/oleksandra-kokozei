@@ -141,13 +141,24 @@
     cursor: pointer;
   }
 
+  /*
+   * The open panel floats over the page below the bar instead of pushing the
+   * content down, so closing it moves nothing and a link's scroll target does
+   * not change underneath the scroll.
+   */
   .list {
+    position: absolute;
+    /* Below the bar's bottom border. */
+    inset-block-start: calc(100% + var(--border-thin));
+    inset-inline: 0;
     display: none;
     /* Set from the script to the space below the bar; the fallback assumes the bar is stuck at the top. */
     max-block-size: var(--menu-max-block-size, calc(100dvh - var(--size-4xl)));
-    overscroll-behavior: contain;
-    padding-block: var(--spacing-xl) var(--spacing-3xl);
+    padding: var(--spacing-xl) var(--page-gutter) var(--spacing-3xl);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    background-color: var(--color-background-page);
+    border-block-end: var(--border-thin) solid var(--color-border-subtle);
   }
 
   .list[data-open] {
