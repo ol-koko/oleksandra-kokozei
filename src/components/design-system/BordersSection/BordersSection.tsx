@@ -44,7 +44,7 @@ export function BordersSection({ radius, borderWidth }: BordersSectionProps) {
           </thead>
           <tbody>
             {borderWidth.map((row) => (
-              <tr key={row.token} className={styles.width}>
+              <tr key={row.token} className={styles.width} data-reveal>
                 <td className={styles.preview} aria-hidden="true">
                   <span
                     className={styles.line}

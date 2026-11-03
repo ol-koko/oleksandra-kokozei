@@ -51,7 +51,7 @@ export function TypographySection({ typography }: TypographySectionProps) {
       ]}
     >
       <Subsection id="typography-family" title="Family">
-        <div className={styles.family}>
+        <div className={styles.family} data-reveal>
           <span className={`${styles.aa} text-title-l`} aria-hidden="true">
             Aa
           </span>

@@ -126,11 +126,11 @@
   opacity: 0;
 }
 
-/* A page hides its first screen already in the server render (data-reveal-pending), so nothing
-   flashes before script arms it; script removes the attribute. Only where script runs and
-   motion is allowed, so without script and with reduced motion the content shows as is. */
+/* A page hides its blocks already in the server render (data-reveal-page), so nothing flashes
+   before script arms it. Only where script runs and motion is allowed, so without script and
+   with reduced motion the content shows as is. */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  [data-reveal-pending] [data-reveal]:not([data-revealed]) {
+  [data-reveal-page] [data-reveal]:not([data-revealed]) {
     opacity: 0;
   }
 }

@@ -45,7 +45,7 @@ export function IconographySection({ sizes }: IconographySectionProps) {
       <Subsection id="iconography-size" title="Size">
         <ul className={styles.sizes}>
           {sizes.map((row) => (
-            <li key={row.token} className={styles.size}>
+            <li key={row.token} className={styles.size} data-reveal>
               <span
                 className={styles.sizeBox}
                 style={{ inlineSize: `var(--${row.token})`, blockSize: `var(--${row.token})` }}
@@ -64,7 +64,7 @@ export function IconographySection({ sizes }: IconographySectionProps) {
             {group.icons.map((icon) => {
               const Icon = icons[icon.id];
               return (
-                <li key={icon.id} className={styles.item}>
+                <li key={icon.id} className={styles.item} data-reveal>
                   <span className={styles.tile}>
                     <Icon />
                   </span>

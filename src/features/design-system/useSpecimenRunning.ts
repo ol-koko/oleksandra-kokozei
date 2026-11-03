@@ -21,7 +21,7 @@ function useTabVisible() {
   );
 }
 
-/** Whether the section around `ref` has appeared (page reveal); `true` when nothing waits for it. */
+/** Whether the tile around `ref` has appeared (page reveal); `true` when nothing waits for it. */
 function useRevealed(ref: RefObject<HTMLElement | null>): boolean {
   const [revealed, setRevealed] = useState(false);
 
