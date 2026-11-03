@@ -143,7 +143,9 @@
 
   .list {
     display: none;
-    max-block-size: calc(100dvh - var(--header-block-size) - var(--size-4xl));
+    /* Set from the script to the space below the bar; the fallback assumes the bar is stuck at the top. */
+    max-block-size: var(--menu-max-block-size, calc(100dvh - var(--size-4xl)));
+    overscroll-behavior: contain;
     padding-block: var(--spacing-xl) var(--spacing-3xl);
     overflow-y: auto;
   }
