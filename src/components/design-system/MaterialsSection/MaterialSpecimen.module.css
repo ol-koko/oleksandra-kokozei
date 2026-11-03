@@ -49,7 +49,7 @@
 
 /*
  * Shelf items at 90 % (Figma 796:1106: the vinyl card is 252 wide, the book and
- * poster 136 × 205), centered in the tile. A poster item is as wide as its
+ * poster 136 × 205). A poster item is as wide as its
  * poster, so it centers; the 300 px slot starts 36 above the poster.
  */
 .media {

@@ -44,7 +44,7 @@ const plainIds: readonly MaterialId[] = [
   'modal-scrim',
 ];
 
-/** A shelf item, shown 90 % of its size and centered in the tile. */
+/** A shelf item, shown 90 % of its size; its open state is centered in the tile. */
 function MediaItem({ kind, children }: { kind: 'record' | 'poster' | 'film'; children: ReactNode }) {
   // A film is a poster that is shifted so its open state is centered.
   const classes = kind === 'film' ? `${styles.poster} ${styles.film}` : styles[kind];
@@ -53,8 +53,9 @@ function MediaItem({ kind, children }: { kind: 'record' | 'poster' | 'film'; chi
 
 /**
  * One material of the Materials section. Media show without cover art, in the
- * neutral placeholder color, and open on hover as on the site; shimmer,
- * signature and sand particles loop while on screen.
+ * neutral placeholder color, and open on hover as on the site (on touch they
+ * open and close by themselves while on screen); shimmer, signature and sand
+ * particles loop while on screen.
  */
 export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) {
   const stage = useRef<HTMLDivElement>(null);
