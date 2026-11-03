@@ -7,13 +7,21 @@ import { Book } from '@/components/media/Book/Book';
 import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import { VhsTape } from '@/components/media/VhsTape/VhsTape';
 import { VinylRecord } from '@/components/media/VinylRecord/VinylRecord';
+import { useMediaQuery } from '@/features/motion/useMediaQuery';
 import type { MaterialId } from '@/content/designSystem';
 import { books } from '@/content/books';
 import { films } from '@/content/films';
 import { songs } from '@/content/songs';
-import { useSpecimenRunning, useTicker } from '@/features/design-system/useSpecimenRunning';
+import { useOpenCycle, useSpecimenRunning, useTicker } from '@/features/design-system/useSpecimenRunning';
 import { Signature } from '@/features/signature/Signature';
 import styles from './MaterialSpecimen.module.css';
+
+/** Touch: how long a media item stays open (slide, hold) and closed, in a loop. */
+const OPEN_MS = 3200;
+const CLOSED_MS = 1800;
+
+/** Devices that really hover open the media on hover; the others loop it. */
+const HOVER = '(hover: hover) and (pointer: fine)';
 
 /** The signature is drawn again this often while it is on screen. */
 const SIGNATURE_LOOP_MS = 5000;
@@ -52,7 +60,11 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
   const stage = useRef<HTMLDivElement>(null);
   const running = useSpecimenRunning(stage);
   const signatureRound = useTicker(running, SIGNATURE_LOOP_MS);
-  const [pressed, setPressed] = useState(false);
+  const [tapped, setTapped] = useState(false);
+  const canHover = useMediaQuery(HOVER);
+  const autoOpen = useOpenCycle(running && !canHover && mediaIds.includes(id), OPEN_MS, CLOSED_MS);
+  // A tap keeps the item open, as a press does on the site; the loop opens it by itself.
+  const pressed = tapped || autoOpen;
 
   const specimen = (() => {
     switch (id) {
@@ -63,7 +75,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
               cover={songs[0].cover}
               href={songs[0].spotifyUrl}
               label="Vinyl record, plays on hover (opens Spotify in a new tab)"
-              open={false}
+              open={autoOpen}
             />
           </MediaItem>
         );
@@ -75,7 +87,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
               alt="Book cover"
               backColor={books[0].backColor}
               pressed={pressed}
-              onToggle={() => setPressed((value) => !value)}
+              onToggle={() => setTapped((value) => !value)}
             />
           </MediaItem>
         );
@@ -86,7 +98,7 @@ export function MaterialSpecimen({ id, title, caption }: MaterialSpecimenProps) 
               poster={films[0].cover}
               alt="Film poster"
               pressed={pressed}
-              onToggle={() => setPressed((value) => !value)}
+              onToggle={() => setTapped((value) => !value)}
             />
           </MediaItem>
         );

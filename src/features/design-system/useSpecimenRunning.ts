@@ -113,3 +113,28 @@ export function useTicker(running: boolean, period: number): number {
 
   return tick;
 }
+
+/**
+ * Opens and closes a specimen in turn while `active` (open, hold, close, pause,
+ * repeat), for touch devices that cannot hover. The open time includes the
+ * slide (--shelf-media-duration); inactive it stays closed.
+ */
+export function useOpenCycle(active: boolean, openMs: number, closedMs: number): boolean {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!active) {
+      setOpen(false);
+      return;
+    }
+    let timer: number;
+    const step = (next: boolean) => {
+      setOpen(next);
+      timer = window.setTimeout(() => step(!next), next ? openMs : closedMs);
+    };
+    timer = window.setTimeout(() => step(true), closedMs / 2);
+    return () => window.clearTimeout(timer);
+  }, [active, openMs, closedMs]);
+
+  return open;
+}
