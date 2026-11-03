@@ -26,7 +26,6 @@
 .item {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
 }
 
 .link {
@@ -38,16 +37,23 @@
   padding-inline: var(--spacing-md);
 }
 
-/* The sub-list opens by growing its row from 0fr to 1fr, so no height is measured. */
+/*
+ * The sub-list opens by growing its row from 0fr to 1fr, so no height is
+ * measured, while the sub-items fade in. The gap to the item above lives in the
+ * row's padding (inside the clipped box), so it grows with the row and the items
+ * below move continuously, without a jump. Reduced motion: instant.
+ */
 .sub {
   display: grid;
   grid-template-rows: 0fr;
   margin: var(--spacing-none);
   padding: var(--spacing-none);
   list-style: none;
+  opacity: 0;
   visibility: hidden;
   transition:
     grid-template-rows var(--duration-200) var(--motion-easing-standard),
+    opacity var(--duration-200) var(--motion-easing-standard),
     visibility var(--duration-200);
 }
 
@@ -64,7 +70,8 @@
   flex-direction: column;
   gap: var(--spacing-xl);
   margin: var(--spacing-none);
-  padding: var(--spacing-none);
+  /* The gap between the item and its first sub-item. */
+  padding: var(--spacing-xl) var(--spacing-none) var(--spacing-none);
   list-style: none;
 }
 
@@ -72,17 +79,14 @@
 .item:focus-within > .sub,
 .item:hover > .sub {
   grid-template-rows: 1fr;
+  opacity: 1;
   visibility: visible;
 }
 
-.item[data-expanded],
-.item:focus-within,
-.item:hover {
-  gap: var(--spacing-xl);
-}
-
-.item:not([data-expanded]):not(:focus-within):not(:hover) {
-  gap: var(--spacing-none);
+@media (prefers-reduced-motion: reduce) {
+  .sub {
+    transition: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -150,12 +154,8 @@
 
   .sub {
     grid-template-rows: 1fr;
+    opacity: 1;
     visibility: visible;
-  }
-
-  .item,
-  .item:not([data-expanded]):not(:focus-within):not(:hover) {
-    gap: var(--spacing-xl);
   }
 
   .link {
