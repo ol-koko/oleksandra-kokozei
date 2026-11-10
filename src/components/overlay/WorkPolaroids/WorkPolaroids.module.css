@@ -1,0 +1,96 @@
+/*
+ * Geometry is local to the component and comes from Figma as data
+ * (src/content/workCases.ts). Each item is placed by the center of its
+ * rotated frame. Mobile: 220 px polaroids in a column, every photo showing.
+ * Caption 16 below (909:4183).
+ */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.stage {
+  /* Height of the two-photo column, local to this block. */
+  --polaroids-column-height: 650px;
+
+  position: relative;
+  block-size: var(--polaroids-column-height);
+}
+
+.photos {
+  --polaroid-width: 220px;
+
+  position: absolute;
+  inset: 0;
+  padding: var(--spacing-none);
+  list-style: none;
+}
+
+.item {
+  position: absolute;
+  inset-block-start: var(--mobile-y);
+  inset-inline-start: calc(50% + var(--mobile-x));
+  translate: -50% -50%;
+}
+
+.photoButton {
+  display: block;
+  padding: var(--spacing-none);
+  border: var(--border-none);
+  background: none;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .photoButton {
+    cursor: zoom-in;
+  }
+}
+
+/* The ring follows the rotated frame instead of the button's upright box. */
+.photoButton:focus-visible {
+  outline: none;
+}
+
+.photoButton:focus-visible:not([data-pointer-focus]) {
+  transform: scale(var(--motion-scale-hover));
+}
+
+.photoButton:focus-visible:not([data-pointer-focus]) .frame {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoButton:focus-visible:not([data-pointer-focus]) {
+    transform: none;
+  }
+}
+
+.caption {
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* Desktop collage: 260 px polaroids in a centered 577 × 418 area (909:4182). */
+@media (min-width: 1024px) {
+  .stage {
+    --polaroids-area-width: 577px;
+    --polaroids-area-height: 418px;
+
+    align-self: center;
+    inline-size: var(--polaroids-area-width);
+    block-size: var(--polaroids-area-height);
+  }
+
+  .photos {
+    --polaroid-width: 260px;
+  }
+
+  .item {
+    z-index: var(--desktop-z);
+    inset-block-start: var(--desktop-y);
+    inset-inline-start: var(--desktop-x);
+  }
+}

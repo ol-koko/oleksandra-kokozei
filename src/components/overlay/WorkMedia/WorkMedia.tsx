@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
 import { LoopVideo } from '@/components/media/LoopVideo/LoopVideo';
 import { WandScene } from '@/components/media/WandScene/WandScene';
@@ -14,13 +15,15 @@ type WorkMediaProps = {
   alt: string;
   /** Images only: loads at once, as the cover is in view when the overlay opens. Photos further down load lazily. */
   eager?: boolean;
+  /** Videos only: the frame takes the video's own ratio, for recordings the standard frame would crop. */
+  ownRatio?: boolean;
 };
 
 /**
  * A rounded case study image or looping video: the cover and every photo
  * (894 × 435 on desktop, 358 × 186 on mobile).
  */
-export function WorkMedia({ media, logo, alt, eager = false }: WorkMediaProps) {
+export function WorkMedia({ media, logo, alt, eager = false, ownRatio = false }: WorkMediaProps) {
   const logoImage = logo && (
     <Image
       className={styles.logo}
@@ -42,7 +45,15 @@ export function WorkMedia({ media, logo, alt, eager = false }: WorkMediaProps) {
 
   if ('webm' in media) {
     return (
-      <div className={styles.frame} data-reveal>
+      <div
+        className={ownRatio ? `${styles.frame} ${styles.ownRatio}` : styles.frame}
+        style={
+          ownRatio
+            ? ({ '--media-ratio': `${media.width} / ${media.height}` } as CSSProperties)
+            : undefined
+        }
+        data-reveal
+      >
         <LoopVideo video={media} label={alt} />
         {logoImage}
       </div>

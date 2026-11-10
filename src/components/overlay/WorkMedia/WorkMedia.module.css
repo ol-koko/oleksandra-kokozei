@@ -31,3 +31,8 @@
     aspect-ratio: 894 / 435;
   }
 }
+
+/* After the rule above, so it wins at every width: --media-ratio is set from the video's size. */
+.ownRatio {
+  aspect-ratio: var(--media-ratio);
+}
