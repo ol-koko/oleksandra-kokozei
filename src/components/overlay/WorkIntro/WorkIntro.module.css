@@ -33,8 +33,6 @@
 
 .top {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
 }
 
 .icon {
@@ -45,10 +43,16 @@
   border-radius: var(--border-radius-2xl);
 }
 
-/* Stays at the end of the row when there is no icon (Blow Stress Away). */
+/* The live-site link shares the title's row in every case, at the end and centered with it. */
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+}
+
 .link {
   display: flex;
-  margin-inline-start: auto;
   color: var(--color-icon-subtle);
   transition: color var(--duration-200) var(--motion-easing-standard);
 }
@@ -93,9 +97,7 @@
 }
 
 @media (min-width: 768px) {
-  /* Positioned: holds the link row when there is no icon (below). */
   .intro {
-    position: relative;
     gap: var(--spacing-5xl);
   }
 
@@ -107,28 +109,5 @@
   .more {
     gap: var(--spacing-9xl);
     margin-block-start: var(--spacing-5xl);
-  }
-
-  /*
-   * Desktop: the link ends the icon row, at the right edge of the content
-   * column and level with the top of the header. An owner correction of
-   * 439:441, which puts it above the section nav. It stays in the row, so it
-   * rises with the row and never moves after the entrance.
-   */
-
-  /* The live-app arrow sits 24 lower than the live-site link (655:1299); an offset, not layout. */
-  .appLink {
-    position: relative;
-    inset-block-start: var(--spacing-3xl);
-  }
-
-  /*
-   * Without an icon the row holds only the link: out of flow at the column's
-   * top right, so there is no gap above the title (600:280).
-   */
-  .linkOnly {
-    position: absolute;
-    inset-block-start: var(--spacing-none);
-    inset-inline-end: var(--spacing-none);
   }
 }
