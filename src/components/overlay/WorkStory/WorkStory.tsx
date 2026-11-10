@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Emoji, splitLeadingEmoji } from '@/components/ui/Emoji/Emoji';
+import { projectSites } from '@/content/links';
 import type { WorkStoryBlock } from '@/content/types';
 import styles from './WorkStory.module.css';
 
@@ -39,7 +40,10 @@ export function WorkStory({ block, headingLevel, headingId }: WorkStoryProps) {
           {block.topics.map((topic) => (
             <div key={topic} className={styles.topic} data-reveal>
               <TopicHeading className="text-body-m">
-                <TopicTitle text={t(`${topic}.title`)} />
+                <TopicTitle
+                  text={t(`${topic}.title`)}
+                  href={projectSites.find((site) => site.id === block.topicLinks?.[topic])?.href}
+                />
               </TopicHeading>
               <StoryBody text={t(`${topic}.body`)} />
             </div>
@@ -50,10 +54,11 @@ export function WorkStory({ block, headingLevel, headingId }: WorkStoryProps) {
   );
 }
 
-/** A topic title; a leading emoji is decorative, so the title is read once. */
-function TopicTitle({ text }: { text: string }) {
+/** A topic title; a leading emoji is decorative, so the title is read once. With `href`, it links out in a new tab. */
+function TopicTitle({ text, href }: { text: string; href?: string }) {
+  const tLinks = useTranslations('Links');
   const title = splitLeadingEmoji(text);
-  return (
+  const content = (
     <>
       {title.emoji && (
         <>
@@ -62,6 +67,18 @@ function TopicTitle({ text }: { text: string }) {
       )}
       {title.text}
     </>
+  );
+  if (!href) return content;
+  return (
+    <a
+      className={`hover-link ${styles.topicLink}`}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${title.text} ${tLinks('opensInNewTab')}`}
+    >
+      {content}
+    </a>
   );
 }
 

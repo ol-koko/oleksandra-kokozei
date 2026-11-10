@@ -39,11 +39,8 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
     <div className={styles.intro}>
       <div className={styles.header}>
         <div className={styles.identity}>
-          <div
-            className={workCase.icon ? styles.top : `${styles.top} ${styles.linkOnly}`}
-            data-reveal
-          >
-            {workCase.icon && (
+          {workCase.icon && (
+            <div className={styles.top} data-reveal>
               <Image
                 className={styles.icon}
                 src={workCase.icon.src}
@@ -52,27 +49,29 @@ export function WorkIntro({ slug, workCase, headingId }: WorkIntroProps) {
                 height={workCase.icon.height}
                 loading="eager"
               />
-            )}
-            {liveSite && (
-              <WorkLiveLink
-                slug={slug}
-                href={liveSite.href}
-                title={title}
-                app={workCase.liveApp !== undefined}
-                className={workCase.liveApp ? `${styles.link} ${styles.appLink}` : styles.link}
-              />
-            )}
-          </div>
+            </div>
+          )}
 
           <div className={styles.text}>
-            <h2 id={headingId} className="text-title-l" data-reveal>
-              {workCase.titleEmoji && (
-                <>
-                  <Emoji symbol={tCases(workCase.titleEmoji)} />{' '}
-                </>
+            <div className={styles.titleRow} data-reveal>
+              <h2 id={headingId} className="text-title-l">
+                {workCase.titleEmoji && (
+                  <>
+                    <Emoji symbol={tCases(workCase.titleEmoji)} />{' '}
+                  </>
+                )}
+                {title}
+              </h2>
+              {liveSite && (
+                <WorkLiveLink
+                  slug={slug}
+                  href={liveSite.href}
+                  title={title}
+                  app={workCase.liveApp !== undefined}
+                  className={styles.link}
+                />
               )}
-              {title}
-            </h2>
+            </div>
             <p className={`${styles.description} text-body-l`} data-reveal>
               {tCases(workCase.description)}
             </p>

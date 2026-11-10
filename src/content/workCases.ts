@@ -3,6 +3,9 @@ import type { WorkCase, WorkSlug } from './types';
 /** Covers at 2× the 894 × 435 frame: exported from Figma, or encoded from the screen recording. */
 const DETAIL = { width: 1788, height: 870 } as const;
 
+/** Screen recordings kept at their own 1900 × 1080 ratio: the standard frame would crop them. */
+const RECORDING = { width: 1710, height: 972 } as const;
+
 /**
  * Case studies, keyed by work. A work opens its overlay only when it is
  * published (`works.ts`) and has an entry here. Copy lives in messages
@@ -241,6 +244,111 @@ export const workCases = {
               src: '/media/works/film-budget/design-file-overview.webp',
               width: 2602,
               height: 1412,
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  /** Desktop 903:3796; there is no mobile frame, so mobile follows the CES mobile patterns. */
+  ollivanders: {
+    titleEmoji: 'ollivanders.titleEmoji',
+    description: 'ollivanders.description',
+    cover: {
+      media: {
+        scene: 'ollivanders',
+        still: { src: '/media/works/ollivanders/still-cover.webp', ...DETAIL },
+      },
+      alt: 'ollivanders.coverAlt',
+    },
+    facts: [
+      { id: 'design', value: 'ollivanders.facts.design' },
+      { id: 'frontend', value: 'ollivanders.facts.frontend' },
+      { id: 'tracking', value: 'ollivanders.facts.tracking' },
+      { id: 'ai', value: 'ollivanders.facts.ai' },
+    ],
+    liveSite: 'ollivanders',
+    liveApp: { title: 'ollivanders.appTitle', frame: 'desktop' },
+    about: [],
+    sections: [
+      {
+        id: 'idea',
+        nav: 'ollivanders.nav.idea',
+        blocks: [
+          { kind: 'story', copy: 'ollivanders.idea' },
+          {
+            kind: 'polaroids',
+            caption: 'ollivanders.photos.caption',
+            /** Frame centers from 909:4182 (577 × 418); the left photo lies on top. */
+            photos: [
+              {
+                image: {
+                  src: '/media/works/ollivanders/elbenwald-trying.webp',
+                  width: 684,
+                  height: 906,
+                },
+                alt: 'ollivanders.photos.trying',
+                rotation: 1.86,
+                desktop: { x: 165.14, y: 202.13, z: 2 },
+                mobile: { x: -5.8, y: 168 },
+              },
+              {
+                image: {
+                  src: '/media/works/ollivanders/elbenwald-wands.webp',
+                  width: 684,
+                  height: 906,
+                },
+                alt: 'ollivanders.photos.wands',
+                rotation: -8.95,
+                desktop: { x: 430.17, y: 202.17, z: 1 },
+                mobile: { x: 4, y: 472 },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'magic',
+        nav: 'ollivanders.nav.magic',
+        blocks: [{ kind: 'story', copy: 'ollivanders.magic' }],
+      },
+      {
+        id: 'build',
+        nav: 'ollivanders.nav.build',
+        blocks: [
+          { kind: 'story', copy: 'ollivanders.build' },
+          {
+            kind: 'video',
+            copy: 'ollivanders.wandReveal',
+            video: {
+              webm: '/media/works/ollivanders/wand-reveal.webm',
+              mp4: '/media/works/ollivanders/wand-reveal.mp4',
+              ...RECORDING,
+            },
+          },
+        ],
+      },
+      {
+        id: 'explore',
+        nav: 'ollivanders.nav.explore',
+        blocks: [
+          {
+            kind: 'topics',
+            copy: 'ollivanders.explore',
+            topics: ['ollivanders.explore.topics.shop', 'ollivanders.explore.topics.sorting'],
+            topicLinks: {
+              'ollivanders.explore.topics.shop': 'ollivanders',
+              'ollivanders.explore.topics.sorting': 'ollivandersSorting',
+            },
+          },
+          {
+            kind: 'video',
+            copy: 'ollivanders.sortingPreview',
+            video: {
+              webm: '/media/works/ollivanders/sorting-preview.webm',
+              mp4: '/media/works/ollivanders/sorting-preview.mp4',
+              ...RECORDING,
             },
           },
         ],

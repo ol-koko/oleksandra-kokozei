@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { WorkPhoto } from '@/components/overlay/WorkPhoto/WorkPhoto';
 import { WorkPhotoGrid } from '@/components/overlay/WorkPhotoGrid/WorkPhotoGrid';
+import { WorkPolaroids } from '@/components/overlay/WorkPolaroids/WorkPolaroids';
 import { WorkStory } from '@/components/overlay/WorkStory/WorkStory';
 import type { WorkBlock } from '@/content/types';
 import styles from './WorkBlocks.module.css';
@@ -13,7 +14,7 @@ type WorkBlocksProps = {
   headingId?: string;
 };
 
-/** Case study blocks in reading order: text blocks, captioned photos and photo grids. */
+/** Case study blocks in reading order: text blocks, captioned photos and videos, grids and Polaroids. */
 export function WorkBlocks({ blocks, headingLevel, headingId }: WorkBlocksProps) {
   const t = useTranslations('WorkCases');
 
@@ -27,6 +28,16 @@ export function WorkBlocks({ blocks, headingLevel, headingId }: WorkBlocksProps)
             alt={t(`${block.copy}.alt`)}
             caption={t(`${block.copy}.caption`)}
           />
+        ) : block.kind === 'video' ? (
+          <WorkPhoto
+            key={block.copy}
+            media={block.video}
+            alt={t(`${block.copy}.alt`)}
+            caption={t(`${block.copy}.caption`)}
+            ownRatio
+          />
+        ) : block.kind === 'polaroids' ? (
+          <WorkPolaroids key={block.caption} block={block} />
         ) : block.kind === 'photo-grid' ? (
           <WorkPhotoGrid key={block.photos[0]?.copy ?? index} photos={block.photos} />
         ) : (

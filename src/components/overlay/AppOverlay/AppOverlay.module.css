@@ -92,6 +92,26 @@
   opacity: 1;
 }
 
+/*
+ * Landscape frame: the app fills the panel at its native size, so it lays out
+ * as on a desktop screen, below a strip for the full-screen button (16 + 40 + 16).
+ */
+.landscape .stage {
+  padding-block: calc(var(--spacing-xl) * 2 + var(--size-2xl)) var(--spacing-3xl);
+  padding-inline: var(--spacing-3xl);
+}
+
+.landscape .screen {
+  inline-size: 100%;
+  aspect-ratio: auto;
+}
+
+.landscape .iframe {
+  inline-size: 100%;
+  block-size: 100%;
+  transform: none;
+}
+
 /* 40 round button, 24 from the panel's top right corner. */
 .fullScreen {
   position: absolute;
@@ -110,6 +130,11 @@
   color: var(--color-icon-muted);
   cursor: pointer;
   transition: color var(--duration-200) var(--motion-easing-standard);
+}
+
+/* In the landscape strip: 16 from the top. */
+.landscape .fullScreen {
+  inset-block-start: var(--spacing-xl);
 }
 
 .fullScreen:focus-visible {

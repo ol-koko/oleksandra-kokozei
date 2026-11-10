@@ -42,6 +42,10 @@
       "filmBudget": {
         "title": "FilmBudget",
         "description": "Video production website with clear pricing and quote requests"
+      },
+      "ollivanders": {
+        "title": "Ollivanders Wand Shop",
+        "description": "Browser game where a wand chooses you through hand tracking or touch"
       }
     }
   },
@@ -240,6 +244,66 @@
         "caption": "Design file overview",
         "alt": "FilmBudget design file: wireframes, desktop pages in English and Danish, mobile pages and the UI kit"
       }
+    },
+    "ollivanders": {
+      "titleEmoji": "🪄",
+      "description": "An interactive fan experience inspired by Ollivanders, where hand gestures or touch bring the wand-choosing ritual to life. I designed and built the browser-based game, combining MediaPipe hand tracking, animated reactions, and sound to make each attempt feel unpredictable.",
+      "facts": {
+        "design": "Figma",
+        "frontend": "HTML\nCSS\nJavaScript",
+        "tracking": "MediaPipe",
+        "ai": "Claude\nOpus 5.5"
+      },
+      "coverAlt": "Snowy night street with the Ollivanders wand shop glowing in the middle, a signpost to Hogwarts on the right and snow falling",
+      "appTitle": "Ollivanders Wand Shop, a live game that can use your camera and plays sound",
+      "nav": {
+        "idea": "Idea",
+        "magic": "Magic",
+        "build": "Build",
+        "explore": "Explore"
+      },
+      "idea": {
+        "label": "Idea",
+        "lead": "What if a wand could choose you through your screen?",
+        "body": "While exploring Munich, I stumbled upon Elbenwald, a pop culture store filled with collectibles from beloved fictional worlds. Its display of Harry Potter wands sparked a question: what if you could experience the moment a wand chooses you?\n\nI turned that idea into an interactive browser experience, recreating the anticipation and surprise of a visit to Ollivanders."
+      },
+      "photos": {
+        "caption": "Elbenwald · Munich, Germany",
+        "trying": "A hand holding a golden wand in front of a wall of wands in open boxes at the Elbenwald store",
+        "wands": "Rows of wands in open black boxes at the Elbenwald store in Munich"
+      },
+      "magic": {
+        "label": "Magic",
+        "lead": "Your movement becomes part of the story.",
+        "body": "Players cast with a hand gesture tracked through their camera, or by moving a finger or mouse across the screen. The game considers the speed, size, and fluidity of each movement when matching the player with a wand.\n\nUnsuccessful attempts become playful moments: a wand might crack, the lights go out, or bubbles fill the room. Varied reactions and an unpredictable number of attempts keep the discovery alive until a wand chooses its wizard."
+      },
+      "build": {
+        "label": "Build",
+        "lead": "Bringing the interaction to life in the browser.",
+        "body": "I designed and built the experience using HTML, CSS, and JavaScript, with Canvas animations and Web Audio effects responding to the action. MediaPipe tracks hand movements through the camera, while touch and mouse controls offer another way to play without camera access.\n\nI connected movement, visual feedback, and sound into one sequence, from the first gesture to the final wand reveal."
+      },
+      "wandReveal": {
+        "caption": "Wand Reveal",
+        "alt": "Screen recording of the game: from the snowy street into the shop, where a wand box appears, a gesture draws a glowing trail and a card reveals the chosen wand"
+      },
+      "explore": {
+        "label": "Explore",
+        "lead": "Two rituals within one magical world.",
+        "topics": {
+          "shop": {
+            "title": "🪄 Ollivanders Wand Shop",
+            "body": "Enter the shop, try your first spell, and discover which wand chooses you. Each attempt combines your movements with unexpected reactions, ending with a reveal of your wand and its characteristics."
+          },
+          "sorting": {
+            "title": "🎩 The Sorting Ceremony",
+            "body": "The next chapter brings the Sorting Hat into the experience. I built an interactive ceremony that leads players through a series of questions before revealing their Hogwarts house, extending the same attention to atmosphere, anticipation, and personal discovery."
+          }
+        }
+      },
+      "sortingPreview": {
+        "caption": "Sorting Preview",
+        "alt": "Screen recording of the Sorting Ceremony: Hogwarts at night, then the Sorting Hat asks questions in the Great Hall and a card reveals Gryffindor"
+      }
     }
   },
   "Experience": {
@@ -357,11 +421,13 @@
         "design": "Design",
         "frontend": "Frontend",
         "styling": "Styling",
+        "tracking": "Tracking",
         "ai": "AI"
       },
       "openLiveSite": "Open the {title} live site (opens in a new tab)",
       "openApp": "Open the {title} app",
       "fullScreen": "Open {title} in full screen",
+      "openPhoto": "Open photo: {alt}",
       "privateNote": {
         "title": "Private project overview",
         "text": "Let’s explore a few project details."
@@ -409,7 +475,9 @@
     "projects": {
       "filmBudget": "Film Budget",
       "juJutsu": "Ju-Jutsu⁺",
-      "blowStressAway": "Blow Stress Away"
+      "blowStressAway": "Blow Stress Away",
+      "ollivanders": "Ollivanders Wand Shop",
+      "ollivandersSorting": "The Sorting Ceremony"
     },
     "opensInNewTab": "(opens in a new tab)"
   }

@@ -42,6 +42,10 @@
       "filmBudget": {
         "title": "FilmBudget",
         "description": "Website einer Videoproduktion mit klaren Preisen und Angebotsanfrage"
+      },
+      "ollivanders": {
+        "title": "Ollivanders Wand Shop",
+        "description": "Browsergame, in dem ein Zauberstab Sie per Hand-Tracking oder Touch auswählt"
       }
     }
   },
@@ -240,6 +244,66 @@
         "caption": "Überblick über die Designdatei",
         "alt": "FilmBudget-Designdatei: Wireframes, Desktop-Seiten auf Englisch und Dänisch, mobile Seiten und das UI-Kit"
       }
+    },
+    "ollivanders": {
+      "titleEmoji": "🪄",
+      "description": "Ein interaktives Fan-Erlebnis rund um Ollivanders, bei dem Handgesten oder Touch das Ritual der Zauberstabwahl zum Leben erwecken. Ich habe das Browsergame gestaltet und gebaut und dabei MediaPipe-Hand-Tracking, animierte Reaktionen und Sound so verbunden, dass jeder Versuch unvorhersehbar bleibt.",
+      "facts": {
+        "design": "Figma",
+        "frontend": "HTML\nCSS\nJavaScript",
+        "tracking": "MediaPipe",
+        "ai": "Claude\nOpus 5.5"
+      },
+      "coverAlt": "Verschneite Straße bei Nacht mit dem leuchtenden Zauberstabladen Ollivanders in der Mitte, rechts ein Wegweiser nach Hogwarts, dazu fallender Schnee",
+      "appTitle": "Ollivanders Wand Shop, ein Live-Spiel, das Ihre Kamera nutzen kann und Ton abspielt",
+      "nav": {
+        "idea": "Idea",
+        "magic": "Magic",
+        "build": "Build",
+        "explore": "Explore"
+      },
+      "idea": {
+        "label": "Idea",
+        "lead": "Was wäre, wenn ein Zauberstab Sie durch den Bildschirm auswählen könnte?",
+        "body": "Bei einem Streifzug durch München stieß ich auf Elbenwald, einen Popkultur-Laden voller Sammlerstücke aus beliebten fiktiven Welten. Die Auslage mit Harry-Potter-Zauberstäben brachte mich auf eine Frage: Wie wäre es, den Moment zu erleben, in dem ein Zauberstab Sie auswählt?\n\nAus dieser Idee wurde ein interaktives Browser-Erlebnis, das die Vorfreude und die Überraschung eines Besuchs bei Ollivanders nachempfindet."
+      },
+      "photos": {
+        "caption": "Elbenwald · München, Deutschland",
+        "trying": "Eine Hand hält im Elbenwald-Laden einen goldenen Zauberstab vor einer Wand mit Zauberstäben in offenen Schachteln",
+        "wands": "Reihen von Zauberstäben in offenen schwarzen Schachteln im Elbenwald-Laden in München"
+      },
+      "magic": {
+        "label": "Magic",
+        "lead": "Ihre Bewegung wird Teil der Geschichte.",
+        "body": "Gespielt wird mit einer Handgeste, die die Kamera erfasst, oder indem man Finger oder Maus über den Bildschirm bewegt. Das Spiel berücksichtigt Tempo, Größe und Flüssigkeit jeder Bewegung, um den passenden Zauberstab zu finden.\n\nFehlversuche werden zu verspielten Momenten: Ein Zauberstab kann zerspringen, das Licht geht aus oder Seifenblasen füllen den Raum. Abwechslungsreiche Reaktionen und eine unvorhersehbare Zahl an Versuchen halten die Entdeckung lebendig, bis ein Zauberstab seinen Zauberer gefunden hat."
+      },
+      "build": {
+        "label": "Build",
+        "lead": "Die Interaktion im Browser zum Leben erwecken.",
+        "body": "Ich habe das Erlebnis mit HTML, CSS und JavaScript gestaltet und gebaut, mit Canvas-Animationen und Web-Audio-Effekten, die auf das Geschehen reagieren. MediaPipe verfolgt die Handbewegungen über die Kamera, während Touch- und Maussteuerung eine Möglichkeit bieten, ohne Kamerazugriff zu spielen.\n\nBewegung, visuelles Feedback und Sound habe ich zu einem durchgehenden Ablauf verbunden – von der ersten Geste bis zur finalen Enthüllung des Zauberstabs."
+      },
+      "wandReveal": {
+        "caption": "Enthüllung des Zauberstabs",
+        "alt": "Bildschirmaufnahme des Spiels: von der verschneiten Straße in den Laden, wo eine Zauberstabschachtel erscheint, eine Geste eine leuchtende Spur zeichnet und eine Karte den gewählten Zauberstab zeigt"
+      },
+      "explore": {
+        "label": "Explore",
+        "lead": "Zwei Rituale in einer magischen Welt.",
+        "topics": {
+          "shop": {
+            "title": "🪄 Ollivanders Wand Shop",
+            "body": "Betreten Sie den Laden, wirken Sie Ihren ersten Zauber und finden Sie heraus, welcher Zauberstab Sie auswählt. Jeder Versuch verbindet Ihre Bewegungen mit unerwarteten Reaktionen und endet mit der Enthüllung Ihres Zauberstabs und seiner Eigenschaften."
+          },
+          "sorting": {
+            "title": "🎩 The Sorting Ceremony",
+            "body": "Das nächste Kapitel bringt den Sprechenden Hut ins Spiel. Ich habe eine interaktive Zeremonie gebaut, die die Spielenden durch eine Reihe von Fragen führt, bevor ihr Hogwarts-Haus enthüllt wird – mit derselben Sorgfalt für Atmosphäre, Vorfreude und persönliche Entdeckung."
+          }
+        }
+      },
+      "sortingPreview": {
+        "caption": "Vorschau auf die Zeremonie",
+        "alt": "Bildschirmaufnahme der Auswahlzeremonie: Hogwarts bei Nacht, dann stellt der Sprechende Hut in der Großen Halle Fragen und eine Karte zeigt Gryffindor"
+      }
     }
   },
   "Experience": {
@@ -357,11 +421,13 @@
         "design": "Design",
         "frontend": "Frontend",
         "styling": "Styling",
+        "tracking": "Tracking",
         "ai": "AI"
       },
       "openLiveSite": "Website von {title} öffnen (öffnet in neuem Tab)",
       "openApp": "App {title} öffnen",
       "fullScreen": "{title} im Vollbild öffnen",
+      "openPhoto": "Foto öffnen: {alt}",
       "privateNote": {
         "title": "Private project overview",
         "text": "Werfen wir einen Blick auf einige Projektdetails."
@@ -409,7 +475,9 @@
     "projects": {
       "filmBudget": "Film Budget",
       "juJutsu": "Ju-Jutsu⁺",
-      "blowStressAway": "Blow Stress Away"
+      "blowStressAway": "Blow Stress Away",
+      "ollivanders": "Ollivanders Wand Shop",
+      "ollivandersSorting": "The Sorting Ceremony"
     },
     "opensInNewTab": "(öffnet in neuem Tab)"
   }

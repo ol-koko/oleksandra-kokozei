@@ -36,6 +36,11 @@
   color: var(--color-text-primary);
 }
 
+/* A topic title that links out: color change only (.hover-link), like other text links. */
+.topicLink {
+  text-decoration: none;
+}
+
 /* Paragraph runs are one empty line apart (24 = one line of body-s). */
 .body {
   display: flex;
