@@ -427,7 +427,6 @@
       "openLiveSite": "Open the {title} live site (opens in a new tab)",
       "openApp": "Open the {title} app",
       "fullScreen": "Open {title} in full screen",
-      "closeApp": "Close {title}",
       "openPhoto": "Open photo: {alt}",
       "privateNote": {
         "title": "Private project overview",

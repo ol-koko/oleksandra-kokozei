@@ -3,12 +3,11 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import { ExpandIcon } from '@/components/icons/ExpandIcon';
-import { MenuToggleIcon } from '@/components/icons/MenuToggleIcon';
 import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import { projectSites } from '@/content/links';
 import type { WorkSlug } from '@/content/types';
 import { getWorkCase } from '@/content/workCases';
-import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
+import { moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
 import { finiteAnimations } from '@/features/motion/finiteAnimations';
 import { appOpenedFromPointer, closeApp } from '@/features/overlay/overlayRoute';
@@ -45,9 +44,9 @@ type AppOverlayProps = {
  * A work's live app in a second overlay above its case, desktop only. Same
  * size and motion as the work overlays: the app in a phone-shaped iframe on
  * the cover gradient, or in a landscape frame sized to the overlay, a skeleton
- * until it has loaded, and a full-screen button. The landscape frame also has
- * a close button, in a strip above the app: the app has controls of its own in
- * that corner and takes the keyboard. The iframe mounts with the overlay, so the app
+ * until it has loaded, and a full-screen button. In the landscape frame the
+ * button sits in a strip above the app, which has controls of its own in that
+ * corner. The iframe mounts with the overlay, so the app
  * loads only once it is opened.
  *
  * Esc, a click on the backdrop and browser Back close it through the URL
@@ -211,17 +210,6 @@ export function AppOverlay({ slug, open, onClosed }: AppOverlayProps) {
             onClick={enterFullScreen}
           >
             <ExpandIcon />
-          </button>
-        )}
-
-        {landscape && (
-          <button
-            type="button"
-            className={styles.close}
-            aria-label={t('work.closeApp', { title })}
-            onClick={(event) => requestClose(isPointerClick(event))}
-          >
-            <MenuToggleIcon open />
           </button>
         )}
       </div>

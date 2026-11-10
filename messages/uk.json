@@ -427,7 +427,6 @@
       "openLiveSite": "Відкрити сайт {title} (відкривається в новій вкладці)",
       "openApp": "Відкрити застосунок {title}",
       "fullScreen": "Відкрити {title} на весь екран",
-      "closeApp": "Закрити {title}",
       "openPhoto": "Відкрити фото: {alt}",
       "privateNote": {
         "title": "Private project overview",

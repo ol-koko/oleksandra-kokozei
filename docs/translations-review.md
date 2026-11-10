@@ -346,7 +346,6 @@ One rule for the whole site (main page, header, footer, overlay-me, all five cas
 | `Overlay.work.openLiveSite`      | Translated | Open the {title} live site (opens in a new tab) | Відкрити сайт {title} (відкривається в новій вкладці) | Website von {title} öffnen (öffnet in neuem Tab)  |
 | `Overlay.work.openApp`           | Translated | Open the {title} app                            | Відкрити застосунок {title}                           | App {title} öffnen                                |
 | `Overlay.work.fullScreen`        | Translated | Open {title} in full screen                     | Відкрити {title} на весь екран                        | {title} im Vollbild öffnen                        |
-| `Overlay.work.closeApp`          | Translated | Close {title}                                   | Закрити {title}                                       | {title} schließen                                 |
 | `Overlay.work.openPhoto`         | Translated | Open photo: {alt}                               | Відкрити фото: {alt}                                  | Foto öffnen: {alt}                                |
 | `Overlay.work.privateNote.title` | English    | Private project overview                        | Private project overview                              | Private project overview                          |
 | `Overlay.work.privateNote.text`  | Translated | Let’s explore a few project details.            | Розгляньмо кілька деталей проєкту.                    | Werfen wir einen Blick auf einige Projektdetails. |
