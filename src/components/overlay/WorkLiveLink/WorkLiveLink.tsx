@@ -8,10 +8,8 @@ import type { WorkSlug } from '@/content/types';
 import { isPointerClick } from '@/features/focus/moveFocus';
 import { useRouter } from '@/features/i18n/navigation';
 import { useMediaQuery } from '@/features/motion/useMediaQuery';
+import { liveAppQuery } from '@/features/overlay/liveApp';
 import { overlayPath, rememberAppOpener } from '@/features/overlay/overlayRoute';
-
-/** Where the app overlay opens. Keep in sync with the desktop overlay in Overlay.module.css. */
-const DESKTOP_QUERY = '(min-width: 768px)';
 
 type WorkLiveLinkProps = {
   slug: WorkSlug;
@@ -30,7 +28,7 @@ type WorkLiveLinkProps = {
 export function WorkLiveLink({ slug, href, title, app, className }: WorkLiveLinkProps) {
   const t = useTranslations('Overlay.work');
   const router = useRouter();
-  const desktop = useMediaQuery(DESKTOP_QUERY);
+  const desktop = useMediaQuery(liveAppQuery(slug));
   const inOverlay = app && desktop;
 
   const onClick = (event: MouseEvent<HTMLAnchorElement>) => {

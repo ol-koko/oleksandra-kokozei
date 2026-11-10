@@ -269,7 +269,7 @@ export const workCases = {
       { id: 'ai', value: 'ollivanders.facts.ai' },
     ],
     liveSite: 'ollivanders',
-    liveApp: { title: 'ollivanders.appTitle' },
+    liveApp: { title: 'ollivanders.appTitle', frame: 'desktop' },
     about: [],
     sections: [
       {

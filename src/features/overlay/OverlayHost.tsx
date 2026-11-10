@@ -6,11 +6,9 @@ import { Overlay } from '@/components/overlay/Overlay/Overlay';
 import type { OverlayRoute } from '@/content/types';
 import { usePathname } from '@/features/i18n/navigation';
 import { useMediaQuery } from '@/features/motion/useMediaQuery';
+import { liveAppQuery } from './liveApp';
 import { isSameOverlay, markOpenedEntry, overlayKey, parseOverlayPath } from './overlayRoute';
 import { useOverlayDocumentTitle } from './useOverlayDocumentTitle';
-
-/** The app overlay is desktop only; on mobile the live app opens in a new tab. */
-const DESKTOP_QUERY = '(min-width: 768px)';
 
 type OverlayHostProps = {
   /** The server-rendered site footer, repeated at the end of the mobile overlay. */
@@ -23,13 +21,14 @@ type OverlayHostProps = {
  * `@modal` slot: when the path goes away (Back, Esc, backdrop, breadcrumb),
  * the overlay stays mounted until its closing motion has finished. On
  * desktop, `/works/<slug>/app` also opens the work's live app in a second
- * overlay above the case.
+ * overlay above the case; below its width (`liveAppQuery`) the app opens in
+ * a new tab and no iframe mounts.
  */
 export function OverlayHost({ footer }: OverlayHostProps) {
   const pathname = usePathname();
   const location = parseOverlayPath(pathname);
   const route = location?.route ?? null;
-  const desktop = useMediaQuery(DESKTOP_QUERY);
+  const desktop = useMediaQuery(liveAppQuery(route?.kind === 'work' ? route.slug : undefined));
   const app = desktop && location?.app === true;
   const [shown, setShown] = useState<OverlayRoute | null>(route);
   const [appShown, setAppShown] = useState(app);

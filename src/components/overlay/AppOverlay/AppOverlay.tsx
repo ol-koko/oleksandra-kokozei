@@ -3,11 +3,12 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import { ExpandIcon } from '@/components/icons/ExpandIcon';
+import { MenuToggleIcon } from '@/components/icons/MenuToggleIcon';
 import { MediaSkeleton } from '@/components/media/MediaSkeleton/MediaSkeleton';
 import { projectSites } from '@/content/links';
 import type { WorkSlug } from '@/content/types';
 import { getWorkCase } from '@/content/workCases';
-import { moveFocus } from '@/features/focus/moveFocus';
+import { isPointerClick, moveFocus } from '@/features/focus/moveFocus';
 import { trapTab } from '@/features/focus/trapTab';
 import { finiteAnimations } from '@/features/motion/finiteAnimations';
 import { appOpenedFromPointer, closeApp } from '@/features/overlay/overlayRoute';
@@ -19,6 +20,14 @@ import styles from './AppOverlay.module.css';
  * another origin, so it still cannot reach this page.
  */
 const SANDBOX = 'allow-scripts allow-same-origin';
+
+/**
+ * A game in the desktop frame also saves its result card (`allow-downloads`)
+ * and links to the author's site in a new tab, as an ordinary page
+ * (`allow-popups`, `allow-popups-to-escape-sandbox`). Links inside the game
+ * navigate the frame itself and need nothing more.
+ */
+const DESKTOP_SANDBOX = `${SANDBOX} allow-downloads allow-popups allow-popups-to-escape-sandbox`;
 
 /** The app's own screen height in CSS px (it lays out a 390 × 844 phone screen). */
 const APP_HEIGHT = 844;
@@ -35,8 +44,10 @@ type AppOverlayProps = {
 /**
  * A work's live app in a second overlay above its case, desktop only. Same
  * size and motion as the work overlays: the app in a phone-shaped iframe on
- * the cover gradient, a skeleton until it has loaded,
- * and a full-screen button. The iframe mounts with the overlay, so the app
+ * the cover gradient, or in a landscape frame sized to the overlay, a skeleton
+ * until it has loaded, and a full-screen button. The landscape frame also has
+ * a close button, in a strip above the app: the app has controls of its own in
+ * that corner and takes the keyboard. The iframe mounts with the overlay, so the app
  * loads only once it is opened.
  *
  * Esc, a click on the backdrop and browser Back close it through the URL
@@ -68,6 +79,7 @@ export function AppOverlay({ slug, open, onClosed }: AppOverlayProps) {
   const site = projectSites.find((item) => item.id === workCase?.liveSite);
   const title = tWorks(`items.${slug}.title`);
   const appTitle = workCase?.liveApp ? tCases(workCase.liveApp.title) : title;
+  const landscape = workCase?.liveApp?.frame === 'desktop';
 
   // Open on mount, above the case overlay. Focus goes to the panel, so Esc works at once.
   useEffect(() => {
@@ -83,13 +95,13 @@ export function AppOverlay({ slug, open, onClosed }: AppOverlayProps) {
   // The iframe keeps the app's native 390 × 844 and is scaled to the screen height.
   useEffect(() => {
     const screen = screenRef.current;
-    if (!screen) return;
+    if (!screen || landscape) return;
     const observer = new ResizeObserver(() => {
       screen.style.setProperty('--app-scale', String(screen.clientHeight / APP_HEIGHT));
     });
     observer.observe(screen);
     return () => observer.disconnect();
-  }, []);
+  }, [landscape]);
 
   // Closing: wait for the closing motion, then close the dialog and return focus to the link.
   useEffect(() => {
@@ -165,7 +177,11 @@ export function AppOverlay({ slug, open, onClosed }: AppOverlayProps) {
     >
       <div ref={backdropRef} className={`${styles.backdrop} animate-overlay`} aria-hidden="true" />
 
-      <div ref={panelRef} className={`${styles.panel} animate-modal`} tabIndex={-1}>
+      <div
+        ref={panelRef}
+        className={`${styles.panel} ${landscape ? styles.landscape : ''} animate-modal`}
+        tabIndex={-1}
+      >
         <div className={styles.stage}>
           <p id={hintId} className="visually-hidden">
             {t('appHint')}
@@ -180,8 +196,8 @@ export function AppOverlay({ slug, open, onClosed }: AppOverlayProps) {
               src={site.href}
               title={appTitle}
               loading="lazy"
-              allow="microphone"
-              sandbox={SANDBOX}
+              allow={landscape ? 'camera; autoplay; fullscreen' : 'microphone'}
+              sandbox={landscape ? DESKTOP_SANDBOX : SANDBOX}
               onLoad={() => setReady(true)}
             />
           </div>
@@ -195,6 +211,17 @@ export function AppOverlay({ slug, open, onClosed }: AppOverlayProps) {
             onClick={enterFullScreen}
           >
             <ExpandIcon />
+          </button>
+        )}
+
+        {landscape && (
+          <button
+            type="button"
+            className={styles.close}
+            aria-label={t('work.closeApp', { title })}
+            onClick={(event) => requestClose(isPointerClick(event))}
+          >
+            <MenuToggleIcon open />
           </button>
         )}
       </div>

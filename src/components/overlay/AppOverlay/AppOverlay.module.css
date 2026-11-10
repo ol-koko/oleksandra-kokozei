@@ -92,8 +92,29 @@
   opacity: 1;
 }
 
-/* 40 round button, 24 from the panel's top right corner. */
-.fullScreen {
+/*
+ * Landscape frame: the app fills the panel at its native size, so it lays out
+ * as on a desktop screen, below a strip for the two buttons (16 + 40 + 16).
+ */
+.landscape .stage {
+  padding-block: calc(var(--spacing-xl) * 2 + var(--size-2xl)) var(--spacing-3xl);
+  padding-inline: var(--spacing-3xl);
+}
+
+.landscape .screen {
+  inline-size: 100%;
+  aspect-ratio: auto;
+}
+
+.landscape .iframe {
+  inline-size: 100%;
+  block-size: 100%;
+  transform: none;
+}
+
+/* 40 round buttons, 24 from the panel's top right corner. */
+.fullScreen,
+.close {
   position: absolute;
   inset-block-start: var(--spacing-3xl);
   inset-inline-end: var(--spacing-3xl);
@@ -112,12 +133,24 @@
   transition: color var(--duration-200) var(--motion-easing-standard);
 }
 
-.fullScreen:focus-visible {
+/* In the landscape strip: full screen sits to the left of close, 16 from the top. */
+.landscape .fullScreen,
+.landscape .close {
+  inset-block-start: var(--spacing-xl);
+}
+
+.landscape .fullScreen {
+  inset-inline-end: calc(var(--spacing-3xl) + var(--size-2xl) + var(--spacing-md));
+}
+
+.fullScreen:focus-visible,
+.close:focus-visible {
   color: var(--color-icon-strong);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .fullScreen:hover {
+  .fullScreen:hover,
+  .close:hover {
     color: var(--color-icon-strong);
   }
 }

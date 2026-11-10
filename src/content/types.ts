@@ -259,7 +259,11 @@ export type WorkCase = {
    * The live site is an app: on desktop the header link opens it in an overlay
    * above the case, in an iframe titled `title`; on mobile it opens in a new tab.
    */
-  liveApp?: { title: WorkCopyKey };
+  liveApp?: {
+    title: WorkCopyKey;
+    /** How the app is shown: a phone screen (the default), or a landscape desktop frame. */
+    frame?: 'phone' | 'desktop';
+  };
   /** Shows the "Private project overview" card, which leads to the About blocks. */
   privateNote?: boolean;
   about: readonly WorkBlock[];
