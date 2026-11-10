@@ -1,10 +1,20 @@
 import type { Work, WorkSlug } from './types';
 
 /**
- * Works grid, in Figma order (2:2, 57:518). Cover videos are 1280 px wide,
- * about 2.6× the 486 px card, with backdrops baked in. Logos are layers on top.
+ * Works grid, in Figma order (2:2, 57:518), with Ollivanders first. Cover
+ * videos are 1280 px wide, about 2.6× the 486 px card, with backdrops baked
+ * in. Logos are layers on top.
  */
 export const works = [
+  {
+    slug: 'ollivanders',
+    year: 2026,
+    published: true,
+    cover: {
+      scene: 'ollivanders',
+      still: { src: '/media/works/ollivanders/still-card.webp', width: 972, height: 506 },
+    },
+  },
   {
     slug: 'ces',
     year: 2026,
