@@ -67,6 +67,26 @@
   color: var(--color-icon-strong);
 }
 
+/*
+ * Mobile: a 44 px tap target around the 24 px icon. Negative margins keep the
+ * row at the title's height and the icon on the column's right edge; a long
+ * title wraps beside the link (flex: none).
+ */
+@media (max-width: 767px) {
+  .link {
+    /* Touch target size, local to this link; no size token at 44. */
+    --link-tap-size: var(--dimension-11);
+
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--link-tap-size);
+    block-size: var(--link-tap-size);
+    margin-block: calc((var(--size-lg) - var(--link-tap-size)) / 2);
+    margin-inline-end: calc((var(--size-lg) - var(--link-tap-size)) / 2);
+  }
+}
+
 /* Title → description: 18 on mobile in Figma (520:891), snapped to 16; 16 on desktop. */
 .text {
   display: flex;
