@@ -23,4 +23,5 @@ export const workUrlSlugs = {
   juJutsu: 'ju-jutsu',
   blowStressAway: 'blow-stress-away',
   filmBudget: 'film-budget',
+  ollivanders: 'ollivanders',
 } as const satisfies Record<WorkSlug, string>;

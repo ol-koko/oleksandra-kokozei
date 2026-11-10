@@ -5,7 +5,8 @@ import type messages from '../../messages/en.json';
 export type SocialLinkId = 'linkedin' | 'behance' | 'github';
 
 /** Identifiers for live project sites. Display labels live in messages (`Links.projects.*`). */
-export type ProjectSiteId = 'filmBudget' | 'juJutsu' | 'blowStressAway';
+export type ProjectSiteId =
+  'filmBudget' | 'juJutsu' | 'blowStressAway' | 'ollivanders' | 'ollivandersSorting';
 
 /** Page sections. Each id is the anchor of a `<section>` on the main page. */
 export type SectionId = 'me' | 'works' | 'experience';
@@ -33,8 +34,17 @@ export type VideoAsset = {
   height: number;
 };
 
+/** A live animated scene (WandScene), with a still shown until it is ready and with reduced motion. */
+export type SceneAsset = {
+  scene: 'ollivanders';
+  still: ImageAsset;
+};
+
+/** Anything a case study media frame can show. */
+export type WorkMediaAsset = ImageAsset | VideoAsset | SceneAsset;
+
 /** Works on the main page. Title and description live in messages (`Works.items.*`). */
-export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget';
+export type WorkSlug = 'ces' | 'juJutsu' | 'blowStressAway' | 'filmBudget' | 'ollivanders';
 
 /** Card cover: a looping video, with the backdrop baked in. */
 export type WorkCover = {
@@ -144,6 +154,8 @@ export type WorkStoryBlock =
       kind: 'topics';
       copy: WorkCopyGroup<'label'> & WorkCopyGroup<'lead'>;
       topics: readonly (WorkCopyGroup<'title'> & WorkCopyGroup<'body'>)[];
+      /** Topics whose title links to an external site, in a new tab. */
+      topicLinks?: Partial<Record<WorkCopyGroup<'title'> & WorkCopyGroup<'body'>, ProjectSiteId>>;
     };
 
 /** A captioned photo of a case study. Alt text and caption live in `<copy>.alt` and `<copy>.caption`. */
@@ -159,7 +171,37 @@ export type WorkPhotoGridBlock = {
   photos: readonly Omit<WorkPhotoBlock, 'kind'>[];
 };
 
-export type WorkBlock = WorkStoryBlock | WorkPhotoBlock | WorkPhotoGridBlock;
+/**
+ * A captioned looping video in a frame of its own ratio, for recordings a
+ * standard frame would crop. Alt text and caption live in `<copy>.alt` and `<copy>.caption`.
+ */
+export type WorkVideoBlock = {
+  kind: 'video';
+  copy: WorkCopyGroup<'alt'> & WorkCopyGroup<'caption'>;
+  video: VideoAsset;
+};
+
+/** One photo of a case study Polaroid collage. Geometry comes from Figma, as on the hometown photos. */
+export type WorkPolaroid = {
+  image: ImageAsset;
+  alt: WorkCopyKey;
+  /** Rotation in degrees, the same on desktop and mobile. */
+  rotation: number;
+  /** Collage: `x` from the area's left edge; `z` is the stacking order. */
+  desktop: PhotoPlacement & { z: number };
+  /** Column: `x` from the column's center, so it holds below 390. */
+  mobile: PhotoPlacement;
+};
+
+/** Rotated Polaroids with one caption; each opens in the lightbox. */
+export type WorkPolaroidsBlock = {
+  kind: 'polaroids';
+  caption: WorkCopyKey;
+  photos: readonly WorkPolaroid[];
+};
+
+export type WorkBlock =
+  WorkStoryBlock | WorkPhotoBlock | WorkPhotoGridBlock | WorkVideoBlock | WorkPolaroidsBlock;
 
 /**
  * Facts in the case header. Labels live in `Overlay.work.facts.*`; the year
@@ -177,6 +219,7 @@ export type WorkFact =
         | 'design'
         | 'frontend'
         | 'styling'
+        | 'tracking'
         | 'ai';
       value: WorkCopyKey;
     };
@@ -195,7 +238,7 @@ export type WorkCaseSection = {
  */
 /** The cover under the header: a still or a looping video, with an optional caption below. */
 export type WorkMediaCover = {
-  media: ImageAsset | VideoAsset;
+  media: WorkMediaAsset;
   /** Logo drawn centered above the media instead of baked in, as on the work cards. Decorative: `alt` names it. */
   logo?: ImageAsset;
   alt: WorkCopyKey;

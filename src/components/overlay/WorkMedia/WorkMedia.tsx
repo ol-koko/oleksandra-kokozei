@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import { LoadingImage } from '@/components/media/LoadingImage/LoadingImage';
 import { LoopVideo } from '@/components/media/LoopVideo/LoopVideo';
-import type { ImageAsset, VideoAsset } from '@/content/types';
+import { WandScene } from '@/components/media/WandScene/WandScene';
+import type { ImageAsset, WorkMediaAsset } from '@/content/types';
 import styles from './WorkMedia.module.css';
 
+const COVER_SIZES = '(min-width: 1200px) 894px, (min-width: 768px) 75vw, calc(100vw - 32px)';
+
 type WorkMediaProps = {
-  media: ImageAsset | VideoAsset;
+  media: WorkMediaAsset;
   /** Drawn centered above the media (the CES cover). Decorative: `alt` names it. */
   logo?: ImageAsset;
   alt: string;
@@ -29,6 +32,14 @@ export function WorkMedia({ media, logo, alt, eager = false }: WorkMediaProps) {
     />
   );
 
+  if ('scene' in media) {
+    return (
+      <div className={styles.frame} data-reveal role="img" aria-label={alt}>
+        <WandScene still={media.still} sizes={COVER_SIZES} eager={eager} />
+      </div>
+    );
+  }
+
   if ('webm' in media) {
     return (
       <div className={styles.frame} data-reveal>
@@ -40,13 +51,7 @@ export function WorkMedia({ media, logo, alt, eager = false }: WorkMediaProps) {
 
   return (
     <div className={styles.frame} data-reveal>
-      <LoadingImage
-        image={media}
-        alt={alt}
-        eager={eager}
-        unoptimized
-        sizes="(min-width: 1200px) 894px, (min-width: 768px) 75vw, calc(100vw - 32px)"
-      />
+      <LoadingImage image={media} alt={alt} eager={eager} unoptimized sizes={COVER_SIZES} />
       {logoImage}
     </div>
   );

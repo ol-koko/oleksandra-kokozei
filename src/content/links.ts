@@ -17,4 +17,6 @@ export const projectSites = [
   { id: 'filmBudget', href: 'https://www.filmbudget.dk/en/' },
   { id: 'juJutsu', href: 'https://jujutsu-plus.base44.app/' },
   { id: 'blowStressAway', href: 'https://blow-stress-away.oleksandra-kokozei.com' },
+  { id: 'ollivanders', href: 'https://olivanders-wand-shop.vercel.app/' },
+  { id: 'ollivandersSorting', href: 'https://olivanders-wand-shop.vercel.app/sorting' },
 ] as const satisfies readonly ExternalLink<ProjectSiteId>[];

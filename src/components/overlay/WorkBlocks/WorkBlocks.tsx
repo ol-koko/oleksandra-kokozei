@@ -27,7 +27,8 @@ export function WorkBlocks({ blocks, headingLevel, headingId }: WorkBlocksProps)
             alt={t(`${block.copy}.alt`)}
             caption={t(`${block.copy}.caption`)}
           />
-        ) : block.kind === 'photo-grid' ? (
+        ) : block.kind === 'polaroids' || block.kind === 'video' ? null : block.kind ===
+          'photo-grid' ? (
           <WorkPhotoGrid key={block.photos[0]?.copy ?? index} photos={block.photos} />
         ) : (
           <WorkStory
