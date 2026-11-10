@@ -56,6 +56,14 @@ html {
   scroll-padding-block-start: var(--header-block-size);
 }
 
+/*
+ * A full-screen element is sized to the root, so the reserved scrollbar space
+ * would leave a strip beside it (the embedded apps). Nothing behind it shows.
+ */
+:root:has(:fullscreen) {
+  scrollbar-gutter: auto;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
